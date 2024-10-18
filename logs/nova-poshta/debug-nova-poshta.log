@@ -1,0 +1,27 @@
+[error] [2024-08-21 10:04:06am] Counterparty doesn't exists
+[error] [2024-08-21 10:04:53am] Counterparty doesn't exists
+[error] [2024-08-22 11:18:09am] cURL error 28: Operation timed out after 30001 milliseconds with 0 bytes received
+[error] [2024-08-23 01:15:27pm] Error with create invoice
+[error] [2024-08-23 01:16:23pm] ContactRecipient does not exists
+[error] [2024-08-23 01:19:46pm] ContactRecipient does not exists
+[error] [2024-08-23 01:28:27pm] Description empty
+[error] [2024-08-23 01:29:33pm] Description empty
+[error] [2024-08-23 02:34:33pm] CityRecipient not selected
+[error] [2024-08-23 02:36:42pm] CityRecipient not selected
+[error] [2024-08-23 02:38:50pm] CityRecipient not selected
+[error] [2024-08-23 02:39:39pm] CityRecipient not selected
+[error] [2024-08-23 02:43:27pm] CityRecipient not selected
+[error] [2024-08-23 02:44:19pm] CityRecipient not selected
+[error] [2024-08-23 02:44:35pm] CityRecipient not selected
+[error] [2024-08-26 07:50:54am] cURL error 28: Operation timed out after 30001 milliseconds with 162899 bytes received
+[error] [2024-08-26 07:58:38am] cURL error 28: Operation timed out after 30001 milliseconds with 195658 bytes received
+[error] [2024-08-26 07:58:51am] cURL error 28: Operation timed out after 30000 milliseconds with 130138 bytes received
+[error] [2024-08-26 08:02:01am] cURL error 28: Operation timed out after 30001 milliseconds with 228426 bytes received
+[error] [2024-08-26 11:30:15am] cURL error 28: Operation timed out after 30001 milliseconds with 15499 bytes received
+[error] [2024-08-26 01:39:31pm] cURL error 28: Operation timed out after 30001 milliseconds with 0 bytes received
+[error] [2024-08-26 01:40:09pm] cURL error 28: Operation timed out after 30001 milliseconds with 15500 bytes received
+[error] [2024-08-27 07:49:49am] cURL error 28: Operation timed out after 30001 milliseconds with 48252 bytes received
+[error] [2024-08-28 06:08:41am] FirstName has invalid characters
+[error] [2024-08-28 06:08:41am] Recipient not selected
+[error] [2024-08-28 06:09:00am] FirstName has invalid characters
+[error] [2024-08-28 06:09:00am] Recipient not selected
