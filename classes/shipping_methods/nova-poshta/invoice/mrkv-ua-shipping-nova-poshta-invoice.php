@@ -125,12 +125,12 @@ if (!class_exists('MRKV_UA_SHIPPING_NOVA_POSHTA_INVOICE'))
 				}
 				else
 				{
-					$recipient = $mrkv_recipient_object->get_recipient_address_ref($recipient, $city_ref, $this->order);
+					$recipient_address = $mrkv_recipient_object->get_recipient_address_ref($recipient, $city_ref, $this->order);
 				}
 
 				if(!$recipient_address)
 				{
-					$recipient = $mrkv_recipient_object->get_recipient_warehouse_ref($this->order->get_billing_address_1(), $city_ref);
+					$recipient_address = $mrkv_recipient_object->get_recipient_warehouse_ref($this->order->get_billing_address_1(), $city_ref);
 				}
 			}
 
