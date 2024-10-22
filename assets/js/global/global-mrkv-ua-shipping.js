@@ -30,6 +30,8 @@ jQuery(window).on('load', function()
 
 		var description_shipping = jQuery('form[data-ship="' + current_ship + '"] textarea[name="mrkv_ua_ship_invoice_shipment_description"]').val();
 
+		jQuery('input[name="mrkv_ua_ship_invoice_money_transfer"]').prop( "checked", false );
+
 		jQuery.ajax({
             type: 'POST',
             url: mrkv_ua_ship_helper.ajax_url,
@@ -50,7 +52,7 @@ jQuery(window).on('load', function()
 	            		}
 	            		else if(index == 'mrkv_ua_ship_invoice_money_transfer')
 	            		{
-	            			jQuery('[data-ship="' + data.mrkv_ua_ship_key + '"] form [name=' + index + ']').attr('checked', 'checked');
+	            			jQuery('[data-ship="' + data.mrkv_ua_ship_key + '"] form [name=' + index + ']').prop( "checked", true );
 	            		}
 	            		else if(index == 'mrkv_ua_ship_invoice_payer_delivery')
 	            		{
@@ -144,6 +146,7 @@ jQuery(window).on('load', function()
 	jQuery('.mrkv_ua_ship_close, .close-error-mrkv-ua-ship').click(function()
 	{
 		jQuery(this).closest('.mrkv_ua_ship_modal').fadeOut(300);
+		jQuery('input[name="mrkv_ua_ship_invoice_money_transfer"]').prop( "checked", false );
 	});
 	jQuery('#mrkv_ua_ship_create_invoice .mrkv_ua_ship_close').click(function()
 	{

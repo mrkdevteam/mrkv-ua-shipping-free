@@ -722,6 +722,14 @@ if (!class_exists('MRKV_UA_SHIPPING_NOVA_POSHTA_INVOICE'))
 				$recipient_phone = substr( $recipient_phone, 1 );
 			}
 
+			if (strlen($recipient_phone) > 9) {
+		        $recipient_phone = substr($recipient_phone, -9);
+		    }
+
+		    if (strlen($recipient_phone) === 9) {
+		        $recipient_phone = '0' . $recipient_phone;
+		    }
+
 			return $recipient_phone;
 		}
 	}

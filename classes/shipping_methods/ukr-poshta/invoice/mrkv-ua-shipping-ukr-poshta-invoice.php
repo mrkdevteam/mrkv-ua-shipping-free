@@ -291,6 +291,14 @@ if (!class_exists('MRKV_UA_SHIPPING_UKR_POSHTA_INVOICE'))
 				$recipient_phone = substr( $recipient_phone, 1 );
 			}
 
+			if (strlen($recipient_phone) > 9) {
+		        $recipient_phone = substr($recipient_phone, -9);
+		    }
+
+		    if (strlen($recipient_phone) === 9) {
+		        $recipient_phone = '0' . $recipient_phone;
+		    }
+
 			$address_id = $this->order->get_meta($current_shipping_method . '_address_ref');
 
 			if(!$address_id)

@@ -144,7 +144,15 @@ if (!class_exists('MRKV_UA_SHIPPING_METHODS_AJAX'))
     					$len = strlen( '8' );
     					if ( substr( $phone, 0, $len ) === '8' ){
     						$phone = substr( $phone, 1 );
-    					}	
+    					}
+
+    					if (strlen($phone) > 9) {
+					        $phone = substr($phone, -9);
+					    }
+
+					    if (strlen($phone) === 9) {
+					        $phone = '0' . $phone;
+					    }	
 
 			            $args['mrkv_ua_ship_invoice_patronymic'] = $patronomic;
 			            $args['mrkv_ua_ship_invoice_phone'] = $phone;
