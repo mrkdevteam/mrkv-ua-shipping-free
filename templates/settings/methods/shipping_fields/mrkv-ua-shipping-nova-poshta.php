@@ -192,8 +192,8 @@
 						$data = isset(MRKV_SHIPPING_SETTINGS['shipment']['payment']) ? MRKV_SHIPPING_SETTINGS['shipment']['payment'] : '';
 						echo $mrkv_global_option_generator->get_input_radio(__('Cash', 'mrkv-ua-shipping'), MRKV_OPTION_OBJECT_NAME . '[shipment][payment]', 'Cash', $data, MRKV_OPTION_OBJECT_NAME . '_shipment_payment_cash', 'Cash');
 
-						$label = __('Cashless', 'mrkv-ua-shipping') . '<span class="mrkv-up-ship-tooltip"><img src="' . MRKV_UA_SHIPPING_ASSETS_URL . '/images/global/info-icon.svg' .'" ><div class="mrkv-up-ship-tooltip__data">' . __('Cashless payment for the sender is available only if the contract is signed.', 'mrkv-ua-shipping') . '</div></span>';
-						echo $mrkv_global_option_generator->get_input_radio($label, MRKV_OPTION_OBJECT_NAME . '[shipment][payment]', 'Cashless', $data, MRKV_OPTION_OBJECT_NAME . '_shipment_payment_cashless', 'Cash');
+						$label = __('NonCash', 'mrkv-ua-shipping') . '<span class="mrkv-up-ship-tooltip"><img src="' . MRKV_UA_SHIPPING_ASSETS_URL . '/images/global/info-icon.svg' .'" ><div class="mrkv-up-ship-tooltip__data">' . __('Cashless payment for the sender is available only if the contract is signed.', 'mrkv-ua-shipping') . '</div></span>';
+						echo $mrkv_global_option_generator->get_input_radio($label, MRKV_OPTION_OBJECT_NAME . '[shipment][payment]', 'NonCash', $data, MRKV_OPTION_OBJECT_NAME . '_shipment_payment_cashless', 'Cash');
 					?>
 				</div>
 			</div>
