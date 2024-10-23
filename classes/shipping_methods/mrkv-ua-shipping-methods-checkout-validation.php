@@ -119,11 +119,16 @@ if (!class_exists('MRKV_UA_SHIPPING_METHODS_CHECKOUT_VALIDATION'))
 			if($this->has_mrkv_ua_ship)
 			{
 				# Disable all fields
-		        unset($fields[$this->type_shipping][$this->type_shipping . '_address_1']);
-		        unset($fields[$this->type_shipping][$this->type_shipping . '_address_2']);
-		        unset($fields[$this->type_shipping][$this->type_shipping . '_city']);
-		        unset($fields[$this->type_shipping][$this->type_shipping . '_state']);
-		        unset($fields[$this->type_shipping][$this->type_shipping . '_postcode']);
+		        unset($fields['billing']['billing_address_1']);
+		        unset($fields['billing']['billing_address_2']);
+		        unset($fields['billing']['billing_city']);
+		        unset($fields['billing']['billing_state']);
+		        unset($fields['billing']['billing_postcode']);
+		        unset($fields['shipping']['shipping_address_1']);
+				unset($fields['shipping']['shipping_address_2']);
+				unset($fields['shipping']['shipping_city']);
+				unset($fields['shipping']['shipping_state']);
+				unset($fields['shipping']['shipping_postcode']);
 			}
 
 			# Return fields
