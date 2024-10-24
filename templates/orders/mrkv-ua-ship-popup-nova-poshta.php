@@ -74,8 +74,8 @@
 					elseif($data == 'D')
 					{
 						$full_address .= isset($mrk_ua_ship_nova_settings['sender']['street']['name']) ? $mrk_ua_ship_nova_settings['sender']['street']['name'] . ' ' : '';
-						$full_address .= isset($mrk_ua_ship_nova_settings['sender']['street']['house']) ? $mrk_ua_ship_nova_settings['sender']['street']['house'] . ', ' . __('flat/office', 'mrkv-ua-shipping') . ' ' : '';
-						$full_address .= isset($mrk_ua_ship_nova_settings['sender']['street']['flat']) ? $mrk_ua_ship_nova_settings['sender']['street']['flat'] . ' ' : '';
+						$full_address .= isset($mrk_ua_ship_nova_settings['sender']['street']['house']) ? $mrk_ua_ship_nova_settings['sender']['street']['house'] . ', ' : '';
+						$full_address .= isset($mrk_ua_ship_nova_settings['sender']['street']['flat']) ? __('flat/office', 'mrkv-ua-shipping') . ' ' . $mrk_ua_ship_nova_settings['sender']['street']['flat'] . ' ' : '';
 						$data_error = isset($mrk_ua_ship_nova_settings['sender']['address']['ref']) ? $mrk_ua_ship_nova_settings['sender']['address']['ref'] : '';
 
 						if(!$data_error)

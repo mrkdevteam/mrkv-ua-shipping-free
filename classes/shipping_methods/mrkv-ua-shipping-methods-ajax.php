@@ -192,7 +192,7 @@ if (!class_exists('MRKV_UA_SHIPPING_METHODS_AJAX'))
 
 			            $post_pay_cost = '';
 
-			            if($order->get_payment_method() == 'cod'){
+			            if($order->get_payment_method() == 'cod' && $payer_delivery != 'Sender'){
 			            	$post_pay_cost = $order->get_total();
 			            	$args['mrkv_ua_ship_invoice_money_transfer'] = true;
 			            }

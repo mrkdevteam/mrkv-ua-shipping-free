@@ -4,7 +4,7 @@ Tags: Nova Poshta, нова пошта, новая почта, доставка
 Requires at least: 5.0
 Tested up to: 6.6
 Requires PHP: 7.0
-Stable tag: 1.0.4
+Stable tag: 1.0.5
 License: GPLv2
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -152,6 +152,10 @@ https://youtu.be/47-VrH_QJAE
 
 
 == Changelog ==
+
+= 1.0.5 =
+* [fix] виправили отримання НП address_ref
+* [fix] виправили контроль оплати
 
 = 1.0.4 =
 * [fix] виправили обов'язкові поля shipping

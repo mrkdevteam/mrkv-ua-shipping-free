@@ -638,14 +638,37 @@ if (!class_exists('MRKV_UA_SHIPPING_NOVA_POSHTA_INVOICE'))
 				}
 				else
 				{
-					$sender_address_ref = (isset($this->settings_shipping['sender']['address']['ref']) && $this->settings_shipping['sender']['address']['ref']) 
-						? $this->settings_shipping['sender']['address']['ref'] : '';
+					$sender_address_ref = $this->get_sender_address_ref_inline();
 				}
 
 				return $sender_address_ref;
 			}
 
 			return '';
+		}
+
+		private function get_sender_address_ref_inline()
+		{
+			require_once MRKV_UA_SHIPPING_PLUGIN_PATH . 'classes/shipping_methods/nova-poshta/api/mrkv-ua-shipping-sender-nova-poshta.php';
+			$mrkv_sender_object_nova_poshta = new MRKV_UA_SHIPPING_SENDER_NOVA_POSHTA($this->shipping_api);
+
+			$sender_street_ref = (isset($this->settings_shipping['sender']['street']['ref']) && $this->settings_shipping['sender']['street']['ref']) 
+						? $this->settings_shipping['sender']['street']['ref'] : '';
+			$sender_building_number = (isset($this->settings_shipping['sender']['street']['house']) && $this->settings_shipping['sender']['street']['house']) 
+						? $this->settings_shipping['sender']['street']['house'] : '';
+			$sender_flat = (isset($this->settings_shipping['sender']['street']['flat']) && $this->settings_shipping['sender']['street']['flat']) 
+						? $this->settings_shipping['sender']['street']['flat'] : '';
+
+	        # Send request
+	        $ref = $mrkv_sender_object_nova_poshta->get_sender_address_ref($sender_street_ref, $sender_building_number, $sender_flat);
+	        $ref = str_replace('"', "", $ref);
+
+	        if($ref)
+	        {
+	        	return $ref;
+	        }
+
+	        return '';
 		}
 
 		private function get_recipient_first_name()
