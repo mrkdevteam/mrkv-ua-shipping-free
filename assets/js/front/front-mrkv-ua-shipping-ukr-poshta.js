@@ -113,8 +113,11 @@ jQuery(window).on('load', function()
  			jQuery(this).data('select2').$dropdown.find(':input.select2-search__field').attr('placeholder', '');
  		});
 
+ 		var isWarehouseDataLoadedUP = true;
+
  		jQuery('#mrkv_ua_shipping_ukr-poshta_city').on('select2:select', function (e) {
  			let current_option = e.params.data;
+ 			isWarehouseDataLoadedUP = false;
  			jQuery(this).val(current_option.id);
 
 	    	jQuery('#mrkv_ua_shipping_ukr-poshta_city_ref').val(current_option.ref);
@@ -151,7 +154,8 @@ jQuery(window).on('load', function()
                			jQuery('#mrkv_ua_shipping_ukr-poshta_warehouse').val(first_element).trigger('change');
 	               	}
 
-	               	jQuery('#mrkv_ua_shipping_ukr-poshta_warehouse').removeClass('mrkv-ua-shipping-loading'); 
+	               	jQuery('#mrkv_ua_shipping_ukr-poshta_warehouse').removeClass('mrkv-ua-shipping-loading');
+	               	isWarehouseDataLoadedUP = true; 
 	            }
 	        });
 		});
@@ -160,6 +164,12 @@ jQuery(window).on('load', function()
  	if(jQuery('#mrkv_ua_shipping_ukr-poshta_warehouse').length != 0)
  	{
  		jQuery('#mrkv_ua_shipping_ukr-poshta_warehouse').selectWoo();
+
+ 		jQuery('#mrkv_ua_shipping_ukr-poshta_warehouse').on('select2:opening', function(e) {
+	        if (!isWarehouseDataLoadedUP) {
+	            e.preventDefault();
+	        }
+	    });
 
  		let mrkv_ua_ship_warehouse = jQuery('#mrkv_ua_shipping_ukr-poshta_city_ref').val();
  		let mrkv_ua_ship_choosen_warehouse = jQuery('#mrkv_ua_shipping_ukr-poshta_warehouse_ref').val();

@@ -113,8 +113,11 @@ jQuery(window).on('load', function()
  			jQuery(this).data('select2').$dropdown.find(':input.select2-search__field').attr('placeholder', '');
  		});
 
+ 		var isWarehouseDataLoaded = true;
+
  		jQuery('#mrkv_ua_shipping_nova-poshta_city').on('select2:select', function (e) {
  			let current_option = e.params.data;
+ 			isWarehouseDataLoaded = false;
  			jQuery(this).val(current_option.id);
 	    	jQuery('#mrkv_ua_shipping_nova-poshta_city_ref').val(current_option.ref);
 	    	jQuery('#mrkv_ua_shipping_nova-poshta_area_name').val(current_option.area);
@@ -168,6 +171,7 @@ jQuery(window).on('load', function()
 	               	}
 
 	               	jQuery('#mrkv_ua_shipping_nova-poshta_warehouse').removeClass('mrkv-ua-shipping-loading');
+	               	isWarehouseDataLoaded = true;
 	            }
 	        });
 		});
@@ -176,6 +180,12 @@ jQuery(window).on('load', function()
  	if(jQuery('#mrkv_ua_shipping_nova-poshta_warehouse').length != 0)
  	{
  		jQuery('#mrkv_ua_shipping_nova-poshta_warehouse').selectWoo();
+
+ 		jQuery('#mrkv_ua_shipping_nova-poshta_warehouse').on('select2:opening', function(e) {
+	        if (!isWarehouseDataLoaded) {
+	            e.preventDefault();
+	        }
+	    });
 
  		let mrkv_ua_ship_warehouse = jQuery('#mrkv_ua_shipping_nova-poshta_city_ref').val();
  		let mrkv_ua_ship_choosen_warehouse = jQuery('#mrkv_ua_shipping_nova-poshta_warehouse_number').val();
@@ -246,8 +256,11 @@ jQuery(window).on('load', function()
  			jQuery(this).data('select2').$dropdown.find(':input.select2-search__field').attr('placeholder', '');
  		});
 
+ 		var isPoshtamatDataLoaded = true;
+
  		jQuery('#mrkv_ua_shipping_nova-poshta_poshtamat_city').on('select2:select', function (e) {
  			let current_option = e.params.data;
+ 			isPoshtamatDataLoaded = false;
  			jQuery(this).val(current_option.id);
 
     		jQuery('#mrkv_ua_shipping_nova-poshta_poshtamat_city_ref').val(current_option.ref);
@@ -301,6 +314,7 @@ jQuery(window).on('load', function()
 	               	}
 
 	               	jQuery('#mrkv_ua_shipping_nova-poshta_poshtamat_name').removeClass('mrkv-ua-shipping-loading');
+	               	isPoshtamatDataLoaded = true;
 	            }
 	        });
 		});
@@ -309,6 +323,12 @@ jQuery(window).on('load', function()
  	if(jQuery('#mrkv_ua_shipping_nova-poshta_poshtamat_name').length != 0)
  	{
  		jQuery('#mrkv_ua_shipping_nova-poshta_poshtamat_name').selectWoo();
+
+ 		jQuery('#mrkv_ua_shipping_nova-poshta_poshtamat_name').on('select2:opening', function(e) {
+	        if (!isPoshtamatDataLoaded) {
+	            e.preventDefault();
+	        }
+	    });
 
  		let mrkv_ua_ship_poshtamat = jQuery('#mrkv_ua_shipping_nova-poshta_poshtamat_city_ref').val();
  		let mrkv_ua_ship_choosen_poshtamat = jQuery('#mrkv_ua_shipping_nova-poshta_poshtamat_number').val();

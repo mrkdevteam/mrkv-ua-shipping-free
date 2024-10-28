@@ -162,6 +162,11 @@ if (!class_exists('MRKV_UA_SHIPPING_METHODS_CHECKOUT'))
 						        				$args['label'] = esc_html__( $args['label'], 'mrkv-ua-shipping' );
 						        			}
 
+						        			if(isset($args['placeholder']) && function_exists( 'pll_translate_string' ))
+						        			{
+						        				$args['placeholder'] = esc_html__( $args['placeholder'], 'mrkv-ua-shipping' );
+						        			}
+
 						        			if(isset($args['options']) && !empty($args['options']) && function_exists( 'pll_translate_string' ))
 						        			{
 						        				foreach($args['options'] as $key_option => $value_option)
