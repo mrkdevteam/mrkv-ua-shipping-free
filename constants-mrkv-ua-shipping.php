@@ -174,7 +174,7 @@ define('MRKV_UA_SHIPPING_LIST', array(
 						'autocomplete' => 'on',
 						'required' => true,
 						'label' => __('Street', 'mrkv-ua-shipping'),
-						'placeholder' => __('Enter three or more letters of the city name', 'mrkv-ua-shipping'),
+						'placeholder' => __('Enter three or more letters of the street name', 'mrkv-ua-shipping'),
 						'replace' => '_address_1'
 					),
 					'_street_ref' => array(
@@ -191,7 +191,7 @@ define('MRKV_UA_SHIPPING_LIST', array(
 					),
 					'_flat' => array(
 						'type' => 'text',
-						'required' => true,
+						'required' => false,
 						'label' => __('Flat', 'mrkv-ua-shipping'),
 						'placeholder' => __('Number of flat', 'mrkv-ua-shipping'),
 						'replace' => '_flat',

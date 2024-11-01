@@ -30,8 +30,8 @@ if (!class_exists('MRKV_UA_SHIPPING_ADMIN_ASSETS'))
 	    	if(($pagenow == 'admin.php' || $pagenow == 'post.php') && ('shop_order' === $typenow || (isset($_GET['page']) && $_GET['page'] == 'wc-orders')) || (isset($_GET['post_type']) && $_GET['post_type'] == 'shop_order'))
 	    	{
 	    		wp_enqueue_style('global-mrkv-ua-shipping', MRKV_UA_SHIPPING_ASSETS_URL . '/css/global/global-mrkv-ua-shipping.css', array(), MRKV_UA_SHIPPING_PLUGIN_VERSION);
-	    		wp_register_script('admin-mrkv-ua-select2-js', MRKV_UA_SHIPPING_ASSETS_URL.'/js/global/select2.min.js', array('jquery'), MRKV_UA_SHIPPING_PLUGIN_VERSION);
-            	wp_enqueue_script('admin-mrkv-ua-select2-js', MRKV_UA_SHIPPING_ASSETS_URL.'/js/global/select2.min.js', array('jquery'), MRKV_UA_SHIPPING_PLUGIN_VERSION);
+	    		wp_register_script('admin-mrkv-ua-select2-js', MRKV_UA_SHIPPING_ASSETS_URL.'/js/global/select2.min.js', array('jquery'), MRKV_UA_SHIPPING_PLUGIN_VERSION, true);
+            	wp_enqueue_script('admin-mrkv-ua-select2-js', MRKV_UA_SHIPPING_ASSETS_URL.'/js/global/select2.min.js', array('jquery'), MRKV_UA_SHIPPING_PLUGIN_VERSION, true);
 	    		wp_enqueue_script('global-mrkv-ua-shipping', MRKV_UA_SHIPPING_ASSETS_URL . '/js/global/global-mrkv-ua-shipping.js', array('jquery', 'jquery-ui-autocomplete', 'admin-mrkv-ua-select2-js'), MRKV_UA_SHIPPING_PLUGIN_VERSION, true);
 
     			wp_localize_script('global-mrkv-ua-shipping', 'mrkv_ua_ship_helper', [
@@ -123,8 +123,8 @@ if (!class_exists('MRKV_UA_SHIPPING_ADMIN_ASSETS'))
 	    	if($method_page && $slug_shipping)
 	    	{
 	    		wp_enqueue_style('admin-mrkv-ua-select2', MRKV_UA_SHIPPING_ASSETS_URL.'/css/global/select2.min.css', array(), MRKV_UA_SHIPPING_PLUGIN_VERSION);
-            	wp_register_script('admin-mrkv-ua-select2-js', MRKV_UA_SHIPPING_ASSETS_URL.'/js/global/select2.min.js', array('jquery'), MRKV_UA_SHIPPING_PLUGIN_VERSION);
-            	 wp_enqueue_script('admin-mrkv-ua-select2-js', MRKV_UA_SHIPPING_ASSETS_URL.'/js/global/select2.min.js', array('jquery'), MRKV_UA_SHIPPING_PLUGIN_VERSION);
+            	wp_register_script('admin-mrkv-ua-select2-js', MRKV_UA_SHIPPING_ASSETS_URL.'/js/global/select2.min.js', array('jquery'), MRKV_UA_SHIPPING_PLUGIN_VERSION, true);
+            	 wp_enqueue_script('admin-mrkv-ua-select2-js', MRKV_UA_SHIPPING_ASSETS_URL.'/js/global/select2.min.js', array('jquery'), MRKV_UA_SHIPPING_PLUGIN_VERSION, true);
 
 	    		wp_enqueue_script('admin-mrkv-ua-shipping-' . $slug_shipping, MRKV_UA_SHIPPING_ASSETS_URL . '/js/admin/admin-mrkv-ua-shipping-' . $slug_shipping . '.js', array('jquery', 'jquery-ui-autocomplete', 'admin-mrkv-ua-select2-js'), MRKV_UA_SHIPPING_PLUGIN_VERSION, true);
 

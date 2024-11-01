@@ -163,7 +163,7 @@ jQuery(window).on('load', function()
 
  	if(jQuery('#mrkv_ua_shipping_ukr-poshta_warehouse').length != 0)
  	{
- 		jQuery('#mrkv_ua_shipping_ukr-poshta_warehouse').selectWoo();
+ 		jQuery('#mrkv_ua_shipping_ukr-poshta_warehouse').select2();
 
  		jQuery('#mrkv_ua_shipping_ukr-poshta_warehouse').on('select2:opening', function(e) {
 	        if (!isWarehouseDataLoadedUP) {
@@ -302,7 +302,7 @@ jQuery(window).on('load', function()
 
  	if(jQuery('#mrkv_ua_shipping_ukr-poshta_address_street').length != 0)
  	{
- 		jQuery('#mrkv_ua_shipping_ukr-poshta_address_street').selectWoo();
+ 		jQuery('#mrkv_ua_shipping_ukr-poshta_address_street').select2();
 
  		jQuery('body').on('change', '#mrkv_ua_shipping_ukr-poshta_address_street', function() {
 		    let option_selected = jQuery(this).find('option:selected');
@@ -344,7 +344,7 @@ jQuery(window).on('load', function()
 
  	if(jQuery('#mrkv_ua_shipping_ukr-poshta_address_house').length != 0)
  	{
- 		jQuery('#mrkv_ua_shipping_ukr-poshta_address_house').selectWoo();
+ 		jQuery('#mrkv_ua_shipping_ukr-poshta_address_house').select2();
 
  		jQuery('body').on('change', '#mrkv_ua_shipping_ukr-poshta_address_house', function() {
 		    let option_selected = jQuery(this).find('option:selected');

@@ -172,6 +172,12 @@ if (!class_exists('MRKV_UA_SHIPPING_AJAX_NOVA'))
 	        	$areas = array();
 	        	$skip_weight = isset($_POST['warehouse_type']) ? true : false;
 
+	        	$areas[] = array(
+        			'value' => '',
+        			'label' => __('Choose the warehouse', 'mrkv-ua-shipping'),
+        			'number' => ''
+        		);
+
 	        	if($skip_weight)
 	        	{
 	        		$weight = 0;

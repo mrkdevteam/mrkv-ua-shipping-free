@@ -137,8 +137,8 @@ if (!class_exists('MRKV_UA_SHIPPING_METHODS_CHECKOUT'))
 					foreach($shipping['methods'] as $method => $method_data)
 					{
 						?>
-					    	<div id="<?php echo $method; ?>_fields" class="<?php echo $method; ?>-fields mrkv_ua_shipping_checkout_fields">
-					        	<div id="<?php echo $method; ?>-shipping-info">
+					    	<div id="<?php echo esc_html($method); ?>_fields" class="<?php echo esc_html($method); ?>-fields mrkv_ua_shipping_checkout_fields">
+					        	<div id="<?php echo esc_html($method); ?>-shipping-info">
 					        		<?php 
 						        		foreach(MRKV_UA_SHIPPING_LIST[$key]['method'][$method]['checkout_fields'] as $id => $args)
 						        		{

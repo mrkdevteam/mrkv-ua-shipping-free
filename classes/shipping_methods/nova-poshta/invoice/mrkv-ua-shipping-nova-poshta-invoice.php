@@ -105,6 +105,12 @@ if (!class_exists('MRKV_UA_SHIPPING_NOVA_POSHTA_INVOICE'))
 			if($current_shipping_method == 'mrkv_ua_shipping_nova-poshta_address')
 			{
 				$recipient_address = $this->order->get_meta($current_shipping_method . '_address_ref');
+
+				if(!$recipient_address)
+				{
+					$city_ref = $this->order->get_meta($current_shipping_method . '_city_ref') ? $this->order->get_meta($current_shipping_method . '_city_ref') : $this->order->get_meta('np_city_ref');
+					$recipient_address = $mrkv_recipient_object->get_recipient_address_ref($recipient, $city_ref, $this->order, true);
+				}
 			}
 			elseif($current_shipping_method == 'mrkv_ua_shipping_nova-poshta_poshtamat')
 			{

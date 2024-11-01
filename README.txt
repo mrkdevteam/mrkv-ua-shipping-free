@@ -4,7 +4,7 @@ Tags: Nova Poshta, нова пошта, новая почта, доставка
 Requires at least: 5.0
 Tested up to: 6.6
 Requires PHP: 7.0
-Stable tag: 1.0.7
+Stable tag: 1.0.8
 License: GPLv2
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -152,6 +152,12 @@ https://youtu.be/47-VrH_QJAE
 
 
 == Changelog ==
+
+= 1.0.8 =
+* [new] зробили поле квартира НП не обов'язковим
+* [fix] виправили переклад placeholder street
+* [fix] виправили сумістність із floating field labels
+* [fix] виправили завантаження відділень
 
 = 1.0.7 =
 * [fix] виправили переклад placeholder checkout

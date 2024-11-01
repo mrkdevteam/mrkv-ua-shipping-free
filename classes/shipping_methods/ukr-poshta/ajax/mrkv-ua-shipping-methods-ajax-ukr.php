@@ -194,7 +194,7 @@ if (!class_exists('MRKV_UA_SHIPPING_AJAX_UKR'))
 
 	        if(isset($obj['id']))
        		{
-       			echo $obj['id'];
+       			echo esc_html($obj['id']);
        		}
 
        		wp_die();
@@ -224,7 +224,7 @@ if (!class_exists('MRKV_UA_SHIPPING_AJAX_UKR'))
 
 	        if(isset($obj['id']))
        		{
-       			echo $obj['id'];
+       			echo esc_html($obj['id']);
        		}
 
        		wp_die();

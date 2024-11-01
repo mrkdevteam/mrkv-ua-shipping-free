@@ -104,9 +104,14 @@ if (!class_exists('MRKV_UA_SHIPPING_METHODS_CHECKOUT_VALIDATION'))
 		    			continue;
 		    		}
 
+		    		if(isset($field_val['required']) && !$field_val['required'])
+		    		{
+		    			continue;
+		    		}
+
 		    		if(isset($field_val['label']))
 		    		{
-		    			wc_add_notice(__('Field', 'mrkv-ua-shipping') . ' ' . $field_val['label'] . ' ' . __('is required', 'mrkv-ua-shipping'), 'error');
+		    			wc_add_notice(__('Field', 'mrkv-ua-shipping') . ' ' . __($field_val['label'], 'mrkv-ua-shipping') . ' ' . __('is required', 'mrkv-ua-shipping'), 'error');
 		    		}
 		    	}
 		    }

@@ -77,7 +77,7 @@ if (!class_exists('MRKV_UA_SHIPPING_RECIPIENT_NOVA_POSHTA'))
 	        }
 	    }
 
-	    public function get_recipient_address_ref($recipient_ref, $city_ref, $order)
+	    public function get_recipient_address_ref($recipient_ref, $city_ref, $order, $is_new_shipping = false)
 	    {
 	    	$args = array(
 	            "apiKey" => $this->nova_poshta_api->get_api_key(),
@@ -85,9 +85,9 @@ if (!class_exists('MRKV_UA_SHIPPING_RECIPIENT_NOVA_POSHTA'))
 	            "calledMethod" => "save",
 	            "methodProperties" => array(
 	                "CounterpartyRef" => $recipient_ref,
-	                "StreetRef" => $this->get_recipient_street_ref( $city_ref, $order ),
-	                "BuildingNumber" => $this->get_recipient_building_number($order),
-	                "Flat" => $this->get_recipient_flat_number( $order ),
+	                "StreetRef" => $this->get_recipient_street_ref( $city_ref, $order, $is_new_shipping),
+	                "BuildingNumber" => $this->get_recipient_building_number($order, $is_new_shipping),
+	                "Flat" => $this->get_recipient_flat_number( $order, $is_new_shipping ),
 	                "Note" => ""
 	            )
 	        );
@@ -114,9 +114,14 @@ if (!class_exists('MRKV_UA_SHIPPING_RECIPIENT_NOVA_POSHTA'))
 	        }
 	    }
 
-	    private function get_recipient_flat_number($order)
+	    private function get_recipient_flat_number($order, $is_new_shipping)
 	    {
 	        $order_data = $order->get_data();
+
+	        if($is_new_shipping)
+	        {
+	        	return $order->get_meta('mrkv_ua_shipping_nova-poshta_address_flat');
+	        }
 
 	        if ( isset( $order_data['shipping']['address_2'] ) &&  !empty( $order_data['shipping']['address_2'] ) ) 
 	        {
@@ -132,9 +137,14 @@ if (!class_exists('MRKV_UA_SHIPPING_RECIPIENT_NOVA_POSHTA'))
 	        }
 	    }
 
-	    private function get_recipient_building_number($order)
+	    private function get_recipient_building_number($order, $is_new_shipping)
 	    {
 	        $order_data = $order->get_data();
+
+	        if($is_new_shipping)
+	        {
+	        	return $order->get_billing_address_2();
+	        }
 
 	        if ( isset( $order_data['shipping']['address_1'] ) && !empty( $order_data['shipping']['address_1'] ) ) 
 	        {
@@ -155,8 +165,13 @@ if (!class_exists('MRKV_UA_SHIPPING_RECIPIENT_NOVA_POSHTA'))
 	        return substr( $street_house, $pos_comma + 1 );
 	    }
 
-	    private function get_recipient_street_ref($city_ref, $order)
+	    private function get_recipient_street_ref($city_ref, $order, $is_new_shipping)
 	    {
+	    	if($is_new_shipping)
+	    	{
+	    		return $order->get_meta('mrkv_ua_shipping_nova-poshta_address_street_ref');
+	    	}
+
 	        $args = array(
 	            "apiKey" => $this->nova_poshta_api->get_api_key(),
 	            "modelName" => "Address",

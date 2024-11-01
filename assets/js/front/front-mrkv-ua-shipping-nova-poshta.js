@@ -179,7 +179,7 @@ jQuery(window).on('load', function()
 
  	if(jQuery('#mrkv_ua_shipping_nova-poshta_warehouse').length != 0)
  	{
- 		jQuery('#mrkv_ua_shipping_nova-poshta_warehouse').selectWoo();
+ 		jQuery('#mrkv_ua_shipping_nova-poshta_warehouse').select2();
 
  		jQuery('#mrkv_ua_shipping_nova-poshta_warehouse').on('select2:opening', function(e) {
 	        if (!isWarehouseDataLoaded) {
@@ -322,7 +322,7 @@ jQuery(window).on('load', function()
 
  	if(jQuery('#mrkv_ua_shipping_nova-poshta_poshtamat_name').length != 0)
  	{
- 		jQuery('#mrkv_ua_shipping_nova-poshta_poshtamat_name').selectWoo();
+ 		jQuery('#mrkv_ua_shipping_nova-poshta_poshtamat_name').select2();
 
  		jQuery('#mrkv_ua_shipping_nova-poshta_poshtamat_name').on('select2:opening', function(e) {
 	        if (!isPoshtamatDataLoaded) {
