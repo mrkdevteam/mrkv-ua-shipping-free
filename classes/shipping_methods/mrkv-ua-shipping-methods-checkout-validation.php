@@ -97,7 +97,8 @@ if (!class_exists('MRKV_UA_SHIPPING_METHODS_CHECKOUT_VALIDATION'))
 
 		    foreach(MRKV_UA_SHIPPING_LIST[$this->current_shipping_global]['method'][$this->current_shipping]['checkout_fields'] as $field_id => $field_val)
 		    {
-		    	if(!isset($_POST[$this->current_shipping . $field_id]) || $_POST[$this->current_shipping . $field_id] == '')
+		    	if(!isset($_POST[$this->current_shipping . $field_id]) || $_POST[$this->current_shipping . $field_id] == ''
+		    		|| (isset($field_val['options']) && $_POST[$this->current_shipping . $field_id] == __($field_val['options'][''], 'mrkv-ua-shipping')))
 		    	{
 		    		if(isset($field_val['exclude']) && $field_val['exclude'] && isset($_POST[$this->current_shipping . $field_id . '_enabled']) && $_POST[$this->current_shipping . $field_id . '_enabled'] == 'off')
 		    		{

@@ -535,7 +535,7 @@ if (!class_exists('MRKV_UA_SHIPPING_NOVA_POSHTA_INVOICE'))
 			for ($i=0; $i < $seats_amount; $i++) 
 			{ 
 				$option_seats[] = array (
-					"volumetricVolume" => (int) $cargo_length * (int) $cargo_width * (int) $cargo_height,
+					"volumetricVolume" => ((int) $cargo_length * (int) $cargo_width * (int) $cargo_height) / 4000,
 					"volumetricLength" => $cargo_length,
 					"volumetricWidth" => $cargo_width,
 					"volumetricHeight" => $cargo_height,

@@ -3,7 +3,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Morkva UA Shipping\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-10-31 07:43+0000\n"
+"POT-Creation-Date: 2024-11-04 08:49+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: \n"
@@ -133,7 +133,7 @@ msgstr ""
 msgid "Auto-creation of a shipment"
 msgstr ""
 
-#: classes/shipping_methods/nova-poshta/invoice/mrkv-ua-shipping-nova-poshta-invoice.php:196
+#: classes/shipping_methods/nova-poshta/invoice/mrkv-ua-shipping-nova-poshta-invoice.php:202
 #: classes/shipping_methods/ukr-poshta/invoice/mrkv-ua-shipping-ukr-poshta-invoice.php:123
 msgid "Automatic created invoice"
 msgstr ""
@@ -228,7 +228,7 @@ msgstr ""
 msgid "Checkout settings"
 msgstr ""
 
-#: classes/shipping_methods/nova-poshta/checkout/mrkv-ua-shipping-checkout.php:60
+#: classes/shipping_methods/nova-poshta/checkout/mrkv-ua-shipping-checkout.php:67
 msgid "Cherkasy"
 msgstr ""
 
@@ -236,7 +236,7 @@ msgstr ""
 msgid "Cherkasy, Cherkasy district"
 msgstr ""
 
-#: classes/shipping_methods/nova-poshta/checkout/mrkv-ua-shipping-checkout.php:62
+#: classes/shipping_methods/nova-poshta/checkout/mrkv-ua-shipping-checkout.php:69
 msgid "Chernihiv"
 msgstr ""
 
@@ -244,7 +244,7 @@ msgstr ""
 msgid "Chernihiv, Chernihiv district"
 msgstr ""
 
-#: classes/shipping_methods/nova-poshta/checkout/mrkv-ua-shipping-checkout.php:61
+#: classes/shipping_methods/nova-poshta/checkout/mrkv-ua-shipping-checkout.php:68
 msgid "Chernivtsi"
 msgstr ""
 
@@ -294,6 +294,7 @@ msgid "Choose the street"
 msgstr ""
 
 #: constants-mrkv-ua-shipping.php:72 constants-mrkv-ua-shipping.php:263
+#: classes/shipping_methods/nova-poshta/ajax/mrkv-ua-shipping-methods-ajax-nova.php:187
 msgid "Choose the warehouse"
 msgstr ""
 
@@ -437,7 +438,7 @@ msgstr ""
 msgid "district"
 msgstr ""
 
-#: classes/shipping_methods/nova-poshta/checkout/mrkv-ua-shipping-checkout.php:42
+#: classes/shipping_methods/nova-poshta/checkout/mrkv-ua-shipping-checkout.php:49
 msgid "Dnipro"
 msgstr ""
 
@@ -532,6 +533,10 @@ msgstr ""
 msgid "Enable Price for Delivery"
 msgstr ""
 
+#: classes/shipping_methods/nova-poshta/woocommerce/mrkv-ua-shipping-method-nova-poshta.php:110
+msgid "Enable Search by warehouse number"
+msgstr ""
+
 #: templates/settings/methods/shipping_fields/mrkv-ua-shipping-nova-poshta.php:403
 #: templates/settings/methods/shipping_fields/mrkv-ua-shipping-ukr-poshta.php:696
 msgid "Enable to receive request error logs"
@@ -579,7 +584,7 @@ msgstr ""
 msgid "Enter the first 2-3 letters and wait for the data to load"
 msgstr ""
 
-#: classes/shipping_methods/nova-poshta/checkout/mrkv-ua-shipping-checkout.php:37
+#: classes/shipping_methods/nova-poshta/checkout/mrkv-ua-shipping-checkout.php:44
 #: classes/shipping_methods/ukr-poshta/checkout/mrkv-ua-shipping-checkout.php:26
 msgid "Enter the first 3 letters"
 msgstr ""
@@ -691,13 +696,13 @@ msgstr ""
 msgid "Enter three or more letters of the street name"
 msgstr ""
 
-#: classes/shipping_methods/nova-poshta/invoice/mrkv-ua-shipping-nova-poshta-invoice.php:219
+#: classes/shipping_methods/nova-poshta/invoice/mrkv-ua-shipping-nova-poshta-invoice.php:225
 #: classes/shipping_methods/ukr-poshta/invoice/mrkv-ua-shipping-ukr-poshta-invoice.php:147
 msgid "Error create invoice"
 msgstr ""
 
-#: classes/shipping_methods/nova-poshta/invoice/mrkv-ua-shipping-nova-poshta-invoice.php:215
-#: classes/shipping_methods/nova-poshta/invoice/mrkv-ua-shipping-nova-poshta-invoice.php:216
+#: classes/shipping_methods/nova-poshta/invoice/mrkv-ua-shipping-nova-poshta-invoice.php:221
+#: classes/shipping_methods/nova-poshta/invoice/mrkv-ua-shipping-nova-poshta-invoice.php:222
 #: classes/shipping_methods/ukr-poshta/invoice/mrkv-ua-shipping-ukr-poshta-invoice.php:142
 msgid "Error with create invoice"
 msgstr ""
@@ -707,11 +712,11 @@ msgid "Error with Recipient Ref"
 msgstr ""
 
 #: classes/shipping_methods/nova-poshta/api/mrkv-ua-shipping-recipient-nova-poshta.php:110
-#: classes/shipping_methods/nova-poshta/api/mrkv-ua-shipping-recipient-nova-poshta.php:185
+#: classes/shipping_methods/nova-poshta/api/mrkv-ua-shipping-recipient-nova-poshta.php:200
 msgid "Error with Recipient Street Ref"
 msgstr ""
 
-#: classes/shipping_methods/nova-poshta/api/mrkv-ua-shipping-recipient-nova-poshta.php:247
+#: classes/shipping_methods/nova-poshta/api/mrkv-ua-shipping-recipient-nova-poshta.php:262
 msgid "Error with Recipient Warehouse Ref"
 msgstr ""
 
@@ -725,7 +730,7 @@ msgstr ""
 msgid "EXPRESS"
 msgstr ""
 
-#: classes/shipping_methods/mrkv-ua-shipping-methods-checkout-validation.php:109
+#: classes/shipping_methods/mrkv-ua-shipping-methods-checkout-validation.php:115
 msgid "Field"
 msgstr ""
 
@@ -935,7 +940,7 @@ msgstr ""
 msgid "Invoice action"
 msgstr ""
 
-#: classes/shipping_methods/nova-poshta/invoice/mrkv-ua-shipping-nova-poshta-invoice.php:184
+#: classes/shipping_methods/nova-poshta/invoice/mrkv-ua-shipping-nova-poshta-invoice.php:190
 #: classes/shipping_methods/ukr-poshta/invoice/mrkv-ua-shipping-ukr-poshta-invoice.php:111
 msgid "Invoice created"
 msgstr ""
@@ -953,7 +958,7 @@ msgstr ""
 msgid "Invoice removed"
 msgstr ""
 
-#: classes/shipping_methods/mrkv-ua-shipping-methods-checkout-validation.php:109
+#: classes/shipping_methods/mrkv-ua-shipping-methods-checkout-validation.php:115
 msgid "is required"
 msgstr ""
 
@@ -962,7 +967,7 @@ msgid ""
 "It is calculated automatically according to the dimensions in the settings."
 msgstr ""
 
-#: classes/shipping_methods/nova-poshta/checkout/mrkv-ua-shipping-checkout.php:45
+#: classes/shipping_methods/nova-poshta/checkout/mrkv-ua-shipping-checkout.php:52
 msgid "Ivano-Frankivsk"
 msgstr ""
 
@@ -970,7 +975,7 @@ msgstr ""
 msgid "Ivano-Frankivsk, Ivano-Frankivsk district"
 msgstr ""
 
-#: classes/shipping_methods/nova-poshta/checkout/mrkv-ua-shipping-checkout.php:57
+#: classes/shipping_methods/nova-poshta/checkout/mrkv-ua-shipping-checkout.php:64
 msgid "Kharkiv"
 msgstr ""
 
@@ -978,7 +983,7 @@ msgstr ""
 msgid "Kharkiv, Kharkiv district"
 msgstr ""
 
-#: classes/shipping_methods/nova-poshta/checkout/mrkv-ua-shipping-checkout.php:58
+#: classes/shipping_methods/nova-poshta/checkout/mrkv-ua-shipping-checkout.php:65
 msgid "Kherson"
 msgstr ""
 
@@ -986,7 +991,7 @@ msgstr ""
 msgid "Kherson, Kherson district"
 msgstr ""
 
-#: classes/shipping_methods/nova-poshta/checkout/mrkv-ua-shipping-checkout.php:59
+#: classes/shipping_methods/nova-poshta/checkout/mrkv-ua-shipping-checkout.php:66
 msgid "Khmelnytskyi"
 msgstr ""
 
@@ -994,7 +999,7 @@ msgstr ""
 msgid "Khmelnytskyi, Khmelnytsky district"
 msgstr ""
 
-#: classes/shipping_methods/nova-poshta/checkout/mrkv-ua-shipping-checkout.php:47
+#: classes/shipping_methods/nova-poshta/checkout/mrkv-ua-shipping-checkout.php:54
 msgid "Kropyvnytskyi"
 msgstr ""
 
@@ -1002,7 +1007,7 @@ msgstr ""
 msgid "Kropyvnytskyi, Kropyvnytskyi district"
 msgstr ""
 
-#: classes/shipping_methods/nova-poshta/checkout/mrkv-ua-shipping-checkout.php:46
+#: classes/shipping_methods/nova-poshta/checkout/mrkv-ua-shipping-checkout.php:53
 msgid "Kyiv"
 msgstr ""
 
@@ -1060,7 +1065,7 @@ msgstr ""
 msgid "Log"
 msgstr ""
 
-#: classes/shipping_methods/nova-poshta/checkout/mrkv-ua-shipping-checkout.php:48
+#: classes/shipping_methods/nova-poshta/checkout/mrkv-ua-shipping-checkout.php:55
 msgid "Lutsk"
 msgstr ""
 
@@ -1068,7 +1073,7 @@ msgstr ""
 msgid "Lutsk, Lutsk district"
 msgstr ""
 
-#: classes/shipping_methods/nova-poshta/checkout/mrkv-ua-shipping-checkout.php:49
+#: classes/shipping_methods/nova-poshta/checkout/mrkv-ua-shipping-checkout.php:56
 msgid "Lviv"
 msgstr ""
 
@@ -1080,7 +1085,7 @@ msgstr ""
 msgid "Make the middle name field mandatory"
 msgstr ""
 
-#: classes/shipping_methods/nova-poshta/invoice/mrkv-ua-shipping-nova-poshta-invoice.php:192
+#: classes/shipping_methods/nova-poshta/invoice/mrkv-ua-shipping-nova-poshta-invoice.php:198
 #: classes/shipping_methods/ukr-poshta/invoice/mrkv-ua-shipping-ukr-poshta-invoice.php:119
 msgid "Manually created invoice"
 msgstr ""
@@ -1126,7 +1131,7 @@ msgstr ""
 msgid "My shipments"
 msgstr ""
 
-#: classes/shipping_methods/nova-poshta/checkout/mrkv-ua-shipping-checkout.php:50
+#: classes/shipping_methods/nova-poshta/checkout/mrkv-ua-shipping-checkout.php:57
 msgid "Mykolaiv"
 msgstr ""
 
@@ -1148,8 +1153,8 @@ msgstr ""
 
 #: classes/shipping_methods/nova-poshta/ajax/mrkv-ua-shipping-methods-ajax-nova.php:76
 #: classes/shipping_methods/nova-poshta/ajax/mrkv-ua-shipping-methods-ajax-nova.php:126
-#: classes/shipping_methods/nova-poshta/ajax/mrkv-ua-shipping-methods-ajax-nova.php:248
-#: classes/shipping_methods/nova-poshta/ajax/mrkv-ua-shipping-methods-ajax-nova.php:299
+#: classes/shipping_methods/nova-poshta/ajax/mrkv-ua-shipping-methods-ajax-nova.php:264
+#: classes/shipping_methods/nova-poshta/ajax/mrkv-ua-shipping-methods-ajax-nova.php:315
 #: classes/shipping_methods/ukr-poshta/ajax/mrkv-ua-shipping-methods-ajax-ukr.php:69
 #: classes/shipping_methods/ukr-poshta/ajax/mrkv-ua-shipping-methods-ajax-ukr.php:105
 #: classes/shipping_methods/ukr-poshta/ajax/mrkv-ua-shipping-methods-ajax-ukr.php:141
@@ -1200,7 +1205,7 @@ msgstr ""
 msgid "Number of seats"
 msgstr ""
 
-#: classes/shipping_methods/nova-poshta/checkout/mrkv-ua-shipping-checkout.php:51
+#: classes/shipping_methods/nova-poshta/checkout/mrkv-ua-shipping-checkout.php:58
 msgid "Odesa"
 msgstr ""
 
@@ -1259,7 +1264,7 @@ msgstr ""
 msgid "Order number"
 msgstr ""
 
-#: classes/shipping_methods/nova-poshta/checkout/mrkv-ua-shipping-checkout.php:38
+#: classes/shipping_methods/nova-poshta/checkout/mrkv-ua-shipping-checkout.php:45
 msgid ""
 "Order products don't match weight and dimensions criteria, try another method"
 msgstr ""
@@ -1328,9 +1333,9 @@ msgstr ""
 #: classes/shipping_methods/mrkv-ua-shipping-methods-ajax.php:276
 #: classes/shipping_methods/mrkv-ua-shipping-methods-ajax.php:291
 #: classes/shipping_methods/mrkv-ua-shipping-methods-ajax.php:306
-#: classes/shipping_methods/nova-poshta/invoice/mrkv-ua-shipping-nova-poshta-invoice.php:576
-#: classes/shipping_methods/nova-poshta/invoice/mrkv-ua-shipping-nova-poshta-invoice.php:591
-#: classes/shipping_methods/nova-poshta/invoice/mrkv-ua-shipping-nova-poshta-invoice.php:606
+#: classes/shipping_methods/nova-poshta/invoice/mrkv-ua-shipping-nova-poshta-invoice.php:582
+#: classes/shipping_methods/nova-poshta/invoice/mrkv-ua-shipping-nova-poshta-invoice.php:597
+#: classes/shipping_methods/nova-poshta/invoice/mrkv-ua-shipping-nova-poshta-invoice.php:612
 #: classes/shipping_methods/ukr-poshta/invoice/mrkv-ua-shipping-ukr-poshta-invoice.php:522
 #: classes/shipping_methods/ukr-poshta/invoice/mrkv-ua-shipping-ukr-poshta-invoice.php:537
 #: classes/shipping_methods/ukr-poshta/invoice/mrkv-ua-shipping-ukr-poshta-invoice.php:552
@@ -1347,7 +1352,11 @@ msgstr ""
 msgid "Phone"
 msgstr ""
 
-#: classes/shipping_methods/nova-poshta/checkout/mrkv-ua-shipping-checkout.php:52
+#: classes/shipping_methods/nova-poshta/checkout/mrkv-ua-shipping-checkout.php:41
+msgid "Please enter warehouse number"
+msgstr ""
+
+#: classes/shipping_methods/nova-poshta/checkout/mrkv-ua-shipping-checkout.php:59
 msgid "Poltava"
 msgstr ""
 
@@ -1478,7 +1487,7 @@ msgstr ""
 msgid "Return to the sender in 14 calendar days"
 msgstr ""
 
-#: classes/shipping_methods/nova-poshta/checkout/mrkv-ua-shipping-checkout.php:53
+#: classes/shipping_methods/nova-poshta/checkout/mrkv-ua-shipping-checkout.php:60
 msgid "Rivne"
 msgstr ""
 
@@ -1660,7 +1669,7 @@ msgstr ""
 msgid "Street"
 msgstr ""
 
-#: classes/shipping_methods/nova-poshta/checkout/mrkv-ua-shipping-checkout.php:54
+#: classes/shipping_methods/nova-poshta/checkout/mrkv-ua-shipping-checkout.php:61
 msgid "Sumy"
 msgstr ""
 
@@ -1676,7 +1685,7 @@ msgstr ""
 msgid "Telegram"
 msgstr ""
 
-#: classes/shipping_methods/nova-poshta/checkout/mrkv-ua-shipping-checkout.php:55
+#: classes/shipping_methods/nova-poshta/checkout/mrkv-ua-shipping-checkout.php:62
 msgid "Ternopil"
 msgstr ""
 
@@ -1750,6 +1759,10 @@ msgstr ""
 msgid ""
 "The value entered here will be used to calculate the cost of all shipments. "
 "The weight must be specified in grams."
+msgstr ""
+
+#: classes/shipping_methods/nova-poshta/woocommerce/mrkv-ua-shipping-method-nova-poshta.php:111
+msgid "The warehouse is searched after entering the number"
 msgstr ""
 
 #: templates/settings/methods/shipping_fields/mrkv-ua-shipping-nova-poshta.php:255
@@ -1834,7 +1847,7 @@ msgstr ""
 msgid "Use the list of invoices to get the status, print your orders"
 msgstr ""
 
-#: classes/shipping_methods/nova-poshta/checkout/mrkv-ua-shipping-checkout.php:56
+#: classes/shipping_methods/nova-poshta/checkout/mrkv-ua-shipping-checkout.php:63
 msgid "Uzhhorod"
 msgstr ""
 
@@ -1848,7 +1861,7 @@ msgid ""
 "buttons are pressed"
 msgstr ""
 
-#: classes/shipping_methods/nova-poshta/checkout/mrkv-ua-shipping-checkout.php:41
+#: classes/shipping_methods/nova-poshta/checkout/mrkv-ua-shipping-checkout.php:48
 msgid "Vinnytsia"
 msgstr ""
 
@@ -1895,7 +1908,7 @@ msgid ""
 "automatically. Get 10% off when creating shipments with our plugin."
 msgstr ""
 
-#: classes/shipping_methods/nova-poshta/checkout/mrkv-ua-shipping-checkout.php:44
+#: classes/shipping_methods/nova-poshta/checkout/mrkv-ua-shipping-checkout.php:51
 msgid "Zaporizhzhia"
 msgstr ""
 
@@ -1903,7 +1916,7 @@ msgstr ""
 msgid "Zaporizhzhia, Zaporizhzhya district"
 msgstr ""
 
-#: classes/shipping_methods/nova-poshta/checkout/mrkv-ua-shipping-checkout.php:43
+#: classes/shipping_methods/nova-poshta/checkout/mrkv-ua-shipping-checkout.php:50
 msgid "Zhytomyr"
 msgstr ""
 

@@ -142,6 +142,7 @@ if (!class_exists('MRKV_UA_SHIPPING_AJAX_NOVA'))
 			$key_search = isset($_POST['name']) ? $_POST['name'] : '';
 			$city_ref = isset($_POST['ref']) ? $_POST['ref'] : '';
 			$warehouse_type = isset($_POST['warehouse_type']) ? $_POST['warehouse_type'] : '';
+			$search_by = isset($_POST['search_by']) ? $_POST['search_by'] : '';
 			$exclude_post = '';
 			
 			if($warehouse_type == 'none'){
@@ -154,10 +155,19 @@ if (!class_exists('MRKV_UA_SHIPPING_AJAX_NOVA'))
 	            'modelName' => 'AddressGeneral',
 	            'calledMethod' => 'getWarehouses',
             	'methodProperties' => array(
-            		'FindByString' => '%' . $key_search .'%',
             		'CityRef' => $city_ref,
             	)
 	        );
+
+	        if($search_by)
+	        {
+	        	$args['methodProperties']['FindByString'] = '';
+	        	$args['methodProperties']['WarehouseId'] = $key_search;
+	        }
+	        else
+	        {
+	        	$args['methodProperties']['FindByString'] = '%' . $key_search .'%';
+	        }
 
 	        if($warehouse_type)
 	        {

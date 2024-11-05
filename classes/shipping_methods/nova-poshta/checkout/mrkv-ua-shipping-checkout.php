@@ -2,6 +2,7 @@
 $nova_poshtomat_exclude = '';
 $nova_poshtomat_middlename_exclude = 'no';
 $nova_poshtomat_middlename_required = 'no';
+$nova_poshta_search_by_number = 'no';
 
 if(isset($this->active_shipping['nova-poshta']['methods']['mrkv_ua_shipping_nova-poshta']))
 {
@@ -11,6 +12,10 @@ if(isset($this->active_shipping['nova-poshta']['methods']['mrkv_ua_shipping_nova
 	if(isset($shipping_settings['exclude_poshtomat']) && $shipping_settings['exclude_poshtomat'] == 'yes')
     {
         $nova_poshtomat_exclude = 'none';
+    }
+    if(isset($shipping_settings['search_by_number']) && $shipping_settings['search_by_number'] == 'yes')
+    {
+        $nova_poshta_search_by_number = 'yes';
     }
 }
 if(isset($this->active_shipping['nova-poshta']['methods']['mrkv_ua_shipping_nova-poshta_address']))
@@ -32,6 +37,8 @@ if(isset($this->active_shipping['nova-poshta']['methods']['mrkv_ua_shipping_nova
 
 $args['nova_middlename_exclude'] = $nova_poshtomat_middlename_exclude;
 $args['nova_middlename_required'] = $nova_poshtomat_middlename_required;
+$args['nova_search_by_number'] = $nova_poshta_search_by_number;
+$args['enter_search_text'] = __('Please enter warehouse number', 'mrkv-ua-shipping');
 $args['nova_warehouse_type'] = $nova_poshtomat_exclude;
 $args['nova_poshtamat_type'] = 'f9316480-5f2d-425d-bc2c-ac7cd29decf0';
 $args['city_placeholder'] = __('Enter the first 3 letters', 'mrkv-ua-shipping');
