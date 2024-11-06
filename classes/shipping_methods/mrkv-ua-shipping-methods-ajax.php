@@ -76,12 +76,12 @@ if (!class_exists('MRKV_UA_SHIPPING_METHODS_AJAX'))
 					if($order_data)
 					{
 						$first_name = !empty( $order_data['shipping']['first_name'] )
-				            ? esc_html( $order_data['shipping']['first_name'] )
-				            : esc_html( $order_data['billing']['first_name'] );
+				            ? html_entity_decode(esc_html( $order_data['shipping']['first_name'] ))
+				            : html_entity_decode(esc_html( $order_data['billing']['first_name'] ));
 
 			            $last_name = !empty( $order_data['shipping']['last_name'] )
-				            ? esc_html( $order_data['shipping']['last_name'] )
-				            : esc_html( $order_data['billing']['last_name'] );
+				            ? html_entity_decode(esc_html( $order_data['shipping']['last_name'] ))
+				            : html_entity_decode(esc_html( $order_data['billing']['last_name'] ));
 
 			            $args = array(
 							'mrkv_ua_ship_invoice_first_name' => $first_name,
@@ -126,7 +126,7 @@ if (!class_exists('MRKV_UA_SHIPPING_METHODS_AJAX'))
 
 			            $args['mrkv_ua_ship_invoice_address'] = $address_to;
 
-			            $patronomic = $order->get_meta($current_shipping . '_patronymic');
+			            $patronomic = html_entity_decode($order->get_meta($current_shipping . '_patronymic'));
 			            $phone = ! empty( $order_data['shipping']['phone'] )
 			                ? str_replace( array('+', ' ', '(' , ')', '-'), '', esc_html( $order_data['shipping']['phone'] ) )
 			                : str_replace( array('+', ' ', '(' , ')', '-'), '', esc_html( $order_data['billing']['phone'] ) );

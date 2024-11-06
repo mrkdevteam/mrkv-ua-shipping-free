@@ -134,6 +134,16 @@ if (!class_exists('MRKV_UA_SHIPPING_METHODS_CHECKOUT'))
 			{
 				if(current_filter() == $shipping['position'])
 				{
+					global $wp_filter;
+				    
+				    $saved_filters = isset($wp_filter['woocommerce_form_field_hidden']) && isset($wp_filter['woocommerce_form_field_hidden']->callbacks)
+		            ? $wp_filter['woocommerce_form_field_hidden']->callbacks
+		            : null;
+
+			        if ($saved_filters) {
+			            remove_all_filters('woocommerce_form_field_hidden');
+			        }
+
 					foreach($shipping['methods'] as $method => $method_data)
 					{
 						?>
@@ -182,6 +192,10 @@ if (!class_exists('MRKV_UA_SHIPPING_METHODS_CHECKOUT'))
 							</div>
 					    <?php
 					}
+
+					if ($saved_filters && isset($wp_filter['woocommerce_form_field_hidden'])) {
+			            $wp_filter['woocommerce_form_field_hidden']->callbacks = $saved_filters;
+			        }
 				}
 			}
 		}

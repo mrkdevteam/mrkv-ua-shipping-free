@@ -688,7 +688,7 @@ if (!class_exists('MRKV_UA_SHIPPING_NOVA_POSHTA_INVOICE'))
 			{
 				$recipient_first_name = ( $this->order->get_shipping_first_name() ) ? $this->order->get_shipping_first_name() : $this->order->get_billing_first_name();
 				$recipient_first_name = str_replace("ʼ", "'", $recipient_first_name);
-				return $recipient_first_name;	
+				return html_entity_decode($recipient_first_name);	
 			}
 		}
 
@@ -703,7 +703,7 @@ if (!class_exists('MRKV_UA_SHIPPING_NOVA_POSHTA_INVOICE'))
 			{
 				$recipient_last_name = ( $this->order->get_shipping_last_name() ) ? $this->order->get_shipping_last_name() : $this->order->get_billing_last_name();
 				$recipient_last_name = str_replace("ʼ", "'", $recipient_last_name);
-				return $recipient_last_name;	
+				return html_entity_decode($recipient_last_name);	
 			}
 		}
 
@@ -718,7 +718,7 @@ if (!class_exists('MRKV_UA_SHIPPING_NOVA_POSHTA_INVOICE'))
 			{
 				$recipient_middle_name = $this->order->get_meta($current_shipping_method . '_patronymic');
 				$recipient_middle_name = str_replace("ʼ", "'", $recipient_middle_name);
-				return $recipient_middle_name;	
+				return html_entity_decode($recipient_middle_name);	
 			}
 		}
 
