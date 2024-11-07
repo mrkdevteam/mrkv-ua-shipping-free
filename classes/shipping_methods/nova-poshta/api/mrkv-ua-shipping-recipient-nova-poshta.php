@@ -40,9 +40,9 @@ if (!class_exists('MRKV_UA_SHIPPING_RECIPIENT_NOVA_POSHTA'))
 	            "modelName" => "Counterparty",
             	"calledMethod" => "save",
 	            "methodProperties" => array(
-	                "FirstName" => $recipient_first_name,
-		            "MiddleName" => $recipient_middle_name,
-		            "LastName" => $recipient_last_name,
+	                "FirstName" => stripslashes($recipient_first_name),
+		            "MiddleName" => stripslashes($recipient_middle_name),
+		            "LastName" => stripslashes($recipient_last_name),
 		            "Phone" => $recipient_phone,
 		            "Email" => "",
 		            "CounterpartyType" => "PrivatePerson",
