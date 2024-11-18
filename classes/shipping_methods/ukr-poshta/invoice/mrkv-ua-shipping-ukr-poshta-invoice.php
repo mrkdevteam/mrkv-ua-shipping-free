@@ -309,9 +309,9 @@ if (!class_exists('MRKV_UA_SHIPPING_UKR_POSHTA_INVOICE'))
 			# Send request
 	        $obj = $this->shipping_api->send_post_request_curl('ecom/0.0.1/clients', 'POST', array(
 				"type"			=> 'INDIVIDUAL',
-	    	    "firstName"		=> html_entity_decode($recipient_first_name),
-	    	    "middleName"	=> html_entity_decode($recipient_middle_name),
-	    	    "lastName"		=> html_entity_decode($recipient_last_name),
+	    	    "firstName"		=> html_entity_decode($recipient_first_name, ENT_QUOTES, 'UTF-8'),
+	    	    "middleName"	=> html_entity_decode($recipient_middle_name, ENT_QUOTES, 'UTF-8'),
+	    	    "lastName"		=> html_entity_decode($recipient_last_name, ENT_QUOTES, 'UTF-8'),
 	    	    "addressId"		=> $address_id,
 	    	    "phoneNumber"	=> $recipient_phone,
 	    	    "checkOnDeliveryAllowed" => true,

@@ -237,7 +237,12 @@ define('MRKV_UA_SHIPPING_LIST', array(
 						'label' => __('Patronymic', 'mrkv-ua-shipping'),
 						'placeholder' => __('Enter the patronymic', 'mrkv-ua-shipping'),
 						'replace' => '_patronymic',
-						'order_edit' => true
+						'order_edit' => true,
+						'exclude' => true,
+					),
+					'_patronymic_enabled' => array(
+						'type' => 'hidden',
+						'autocomplete' => 'on'
 					),
 					'_city' => array(
 						'type' => 'select',

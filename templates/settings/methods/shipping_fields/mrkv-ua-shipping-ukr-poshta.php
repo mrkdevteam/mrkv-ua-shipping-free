@@ -681,6 +681,26 @@
 			</div>
 		</div>
 	</div>
+	<div class="admin_ua_ship_morkva_settings_row">
+		<div class="col-mrkv-5">
+			<div class="admin_ua_ship_morkva_settings_line">
+				<?php
+					$data = isset(MRKV_SHIPPING_SETTINGS['checkout']['middlename']['enabled']) ? MRKV_SHIPPING_SETTINGS['checkout']['middlename']['enabled'] : '';
+					echo $mrkv_global_option_generator->get_input_checkbox(__('Enable patronymic (Warehouse)', 'mrkv-ua-shipping'), MRKV_OPTION_OBJECT_NAME . '[checkout][middlename][enabled]', $data, MRKV_OPTION_OBJECT_NAME . '_checkout_middlename_enabled', );
+				?>
+				<?php echo '<p class="mrkv-ua-ship-description">' . __('Remove the patronymic field from the checkout page', 'mrkv-ua-shipping') . '</p>'; ?>
+			</div>
+		</div>
+		<div class="col-mrkv-5">
+			<div class="admin_ua_ship_morkva_settings_line">
+				<?php
+					$data = isset(MRKV_SHIPPING_SETTINGS['checkout']['middlename']['required']) ? MRKV_SHIPPING_SETTINGS['checkout']['middlename']['required'] : '';
+					echo $mrkv_global_option_generator->get_input_checkbox(__('Patronymic is required (Warehouse)', 'mrkv-ua-shipping'), MRKV_OPTION_OBJECT_NAME . '[checkout][middlename][required]', $data, MRKV_OPTION_OBJECT_NAME . '_checkout_middlename_required', );
+				?>
+				<?php echo '<p class="mrkv-ua-ship-description">' . __('The patronymic is required if the sender is an individual. For sole proprietors and LLCs, this field is not required when creating a waybill.', 'mrkv-ua-shipping') . '</p>'; ?>
+			</div>
+		</div>
+	</div>
 </section>
 <section id="log_settings" class="mrkv_up_ship_shipping_tab_block">
 	<h2><img src="<?php echo MRKV_UA_SHIPPING_ASSETS_URL . '/images/global/clipboard-list-icon.svg'; ?>" alt="Debug Log" title="Debug Log"><?php echo __('Debug Log', 'mrkv-ua-shipping'); ?></h2>

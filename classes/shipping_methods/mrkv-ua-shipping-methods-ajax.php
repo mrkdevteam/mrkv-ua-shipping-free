@@ -45,6 +45,61 @@ if (!class_exists('MRKV_UA_SHIPPING_METHODS_AJAX'))
 
 			add_action( 'wp_ajax_mrkv_ua_ship_remove_all_invoices', array($this, 'mrkv_ua_ship_remove_all_invoices_func') );
 			add_action( 'wp_ajax_nopriv_mrkv_ua_ship_remove_all_invoices', array($this, 'mrkv_ua_ship_remove_all_invoices_func') );
+
+			add_action( 'wp_ajax_mrkv_update_shipping_method', array($this, 'mrkv_update_shipping_method_func') );
+			add_action( 'wp_ajax_nopriv_mrkv_update_shipping_method', array($this, 'mrkv_update_shipping_method_func') );
+		}
+
+		/**
+		 * Method change
+		 * */
+		public function mrkv_update_shipping_method_func()
+		{
+			if (isset($_POST['order_id']) && isset($_POST['shipping_method']) && isset($_POST['shipping_method_name'])) 
+			{
+	        	$order_id = absint($_POST['order_id']);
+			    $shipping_method = sanitize_text_field($_POST['shipping_method']);
+			    $shipping_method_name = sanitize_text_field($_POST['shipping_method_name']);
+			    $order = wc_get_order($order_id);
+
+			    if($order)
+			    {
+			    	$shipping_methods = $order->get_items('shipping');
+
+			    	if (!empty($shipping_methods)) 
+			    	{
+			    		foreach ($shipping_methods as $item_id => $shipping_item) 
+					    {
+					        $shipping_item->set_method_id($shipping_method);
+					        $shipping_item->set_method_title($shipping_method_name);
+					        $shipping_item->save();
+					    }
+			    	}
+			    	else
+			    	{
+			    		$shipping_rate = new WC_Shipping_Rate(
+				            $shipping_method,
+				            $shipping_method_name,
+				            0,
+				            [],
+				            $shipping_method
+				        );
+
+				        $shipping_item = new WC_Order_Item_Shipping();
+				        $shipping_item->set_props([
+				            'method_title' => $shipping_rate->get_label(),
+				            'method_id'    => $shipping_rate->get_method_id(),
+				            'total'        => wc_format_decimal($shipping_rate->get_cost())
+				        ]);
+				        $order->add_item($shipping_item);
+			    	}
+
+					$order->calculate_totals();
+    				$order->save();
+			    }
+		    }
+
+		    wp_die();
 		}
 
 		/**
@@ -76,12 +131,12 @@ if (!class_exists('MRKV_UA_SHIPPING_METHODS_AJAX'))
 					if($order_data)
 					{
 						$first_name = !empty( $order_data['shipping']['first_name'] )
-				            ? html_entity_decode(esc_html( $order_data['shipping']['first_name'] ))
-				            : html_entity_decode(esc_html( $order_data['billing']['first_name'] ));
+				            ? html_entity_decode(esc_html( $order_data['shipping']['first_name'] ), ENT_QUOTES, 'UTF-8')
+				            : html_entity_decode(esc_html( $order_data['billing']['first_name'] ), ENT_QUOTES, 'UTF-8');
 
 			            $last_name = !empty( $order_data['shipping']['last_name'] )
-				            ? html_entity_decode(esc_html( $order_data['shipping']['last_name'] ))
-				            : html_entity_decode(esc_html( $order_data['billing']['last_name'] ));
+				            ? html_entity_decode(esc_html( $order_data['shipping']['last_name'] ), ENT_QUOTES, 'UTF-8')
+				            : html_entity_decode(esc_html( $order_data['billing']['last_name'] ), ENT_QUOTES, 'UTF-8');
 
 			            $args = array(
 							'mrkv_ua_ship_invoice_first_name' => $first_name,

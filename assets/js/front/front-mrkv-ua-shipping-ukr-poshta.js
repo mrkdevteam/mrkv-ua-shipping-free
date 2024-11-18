@@ -455,6 +455,19 @@ jQuery(window).on('load', function()
 	    }
  	}
 
+ 	if(jQuery('#mrkv_ua_shipping_ukr-poshta_patronymic_field').length != 0)
+ 	{
+ 		if(mrkv_ua_ship_helper.up_middlename_exclude == 'yes')
+ 		{
+ 			jQuery('#mrkv_ua_shipping_ukr-poshta_patronymic_field').hide();
+ 		}
+ 		if(mrkv_ua_ship_helper.up_middlename_required == 'no')
+ 		{
+ 			jQuery('#mrkv_ua_shipping_ukr-poshta_patronymic_enabled').val('off');
+ 			jQuery('label[for="mrkv_ua_shipping_ukr-poshta_patronymic"] abbr').hide();
+ 		}
+ 	}
+
  	function mrkvUaShipUpdateCartUkr()
  	{
  		jQuery('body').trigger('update_checkout', { update_shipping_method: true });

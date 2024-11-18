@@ -78,6 +78,80 @@ if (!class_exists('MRKV_UA_SHIPPING_WOO_ORDER'))
 		            {
 		            	add_meta_box('mrkv_ua_shipping_data_box', MRKV_UA_SHIPPING_LIST[$key]['name'], array( $this, 'mrkv_ua_shipping_add_plugin_meta_box' ), $screen, 'side', 'core');
 		            }
+		            else
+		            {
+		            	add_meta_box('mrkv_ua_shipping_data_box', __('MRKV UA Shipping', 'mrkv-ua-shipping'), array( $this, 'mrkv_ua_shipping_changer_add_plugin_meta_box' ), $screen, 'side', 'core');
+		            }
+	            }
+	        }
+		}
+
+		public function mrkv_ua_shipping_changer_add_plugin_meta_box()
+		{
+			if (isset($_GET["post"]) || isset($_GET["id"])) 
+	        {
+            
+	            $order_id = '';
+	            if(isset($_GET["post"])){
+	                $order_id = $_GET["post"];    
+	            }
+	            else{
+	                $order_id = $_GET["id"];
+	            }
+
+	            $order = wc_get_order($order_id);
+
+	            if($order)
+	            {
+	            	$available_methods = WC()->shipping->load_shipping_methods();
+	            	?>
+	            		<h3><?php echo esc_html__('Change shipping method', 'mrkv-ua-shipping'); ?></h3>
+	            		<div class="mrkv-ua-shipping-line-choose-method">
+	            			<select name="mrkv_shipping_method" id="mrkv_ua_shipping_method">
+		            			<option value=""><?php echo esc_html__('Choose method', 'mrkv-ua-shipping'); ?></option>
+		            			<?php 
+		            				foreach ($available_methods as $method_id => $method) 
+		            				{
+		            					if(str_contains($method_id, 'mrkv_ua_shipping'))
+		            					{
+		            						echo '<option value="' . esc_attr($method_id) . '" ' . selected($current_shipping_method, $method_id, false) . '>';
+									        echo esc_html($method->get_method_title());
+									        echo '</option>';
+		            					}
+		            				}
+		            			?>
+		            		</select>
+		            		<div class="mrkv-ua-shupping-change-method button"><?php echo esc_html__('Change method', 'mrkv-ua-shipping'); ?></div>
+	            		</div>
+	            		<script>
+	            			jQuery(document).ready(function($) {
+	            				jQuery('.mrkv-ua-shupping-change-method').on('click', function() 
+	            				{
+	            					var shippingMethod = jQuery('#mrkv_ua_shipping_method').val();
+	            					var shippingMethodName = jQuery('#mrkv_ua_shipping_method option:selected').text();
+                					var orderId = '<?php echo $order_id; ?>';
+
+                					if(shippingMethod)
+                					{
+                						jQuery.ajax({
+					                    url: '<?php echo admin_url( "admin-ajax.php" ) ?>',
+					                    method: 'POST',
+					                    data: {
+					                        action: 'mrkv_update_shipping_method',
+					                        order_id: orderId,
+					                        shipping_method: shippingMethod,
+					                        shipping_method_name: shippingMethodName,
+					                    },
+					                    success: function(response) 
+					                    {
+					                        location.reload();
+					                    }
+					                });
+                					}
+            					});
+	            			});
+	            		</script>
+	            	<?php
 	            }
 	        }
 		}

@@ -1,5 +1,6 @@
 jQuery(window).on('load', function() 
 {
+	jQuery('#mrkv_ua_shipping_method').select2();
 	// Get the modal
 	var mrkv_ua_ship_create_invoice = document.getElementById("mrkv_ua_ship_create_invoice");
 
@@ -13,6 +14,8 @@ jQuery(window).on('load', function()
 
 		jQuery('#mrkv_ua_ship_create_invoice').attr('data-method', current_shipping_method);
 		jQuery('body').css('overflow', 'hidden');
+		jQuery('#adminmenu').css('overflow-y', 'scroll');
+		jQuery('#adminmenu').css('height', '100vh');
 		jQuery('.mrkv_ua_shipping_order_id').text(current_order_id);
 		jQuery('.mrkv_ua_ship_create_invoice__changed[data-ship="' + current_ship + '"]').addClass('active');
 
@@ -152,10 +155,14 @@ jQuery(window).on('load', function()
 	{
 		jQuery('.mrkv_ua_ship_create_invoice__changed').removeClass('active');
 	    jQuery('body').css('overflow', 'auto');
+	    jQuery('#adminmenu').css('overflow-y', 'initial');
+		jQuery('#adminmenu').css('height', 'auto');
 	    jQuery('.mrkv_ua_ship_create_invoice__changed from').show();
 	});
 	jQuery('.close-all-mrkv-ua-ship').click(function(){
 		jQuery('body').css('overflow', 'auto');
+		jQuery('#adminmenu').css('overflow-y', 'initial');
+		jQuery('#adminmenu').css('height', 'auto');
 		jQuery('.mrkv_ua_ship_modal').fadeOut(300);
 		jQuery('.mrkv_ua_ship_create_invoice__changed from').show();
 	});

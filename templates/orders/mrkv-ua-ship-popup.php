@@ -67,8 +67,7 @@
             </div>
         </div>
         <div class="mrkv_ua_ship_create_invoice__footer">
-            <a class="close-error-mrkv-ua-ship"><?php echo __('Edit on form', 'mrkv-ua-shipping'); ?></a>
-            <a class="open-order-mrkv-ua-ship" href=""><?php echo __('Open order editing', 'mrkv-ua-shipping'); ?></a>
+            <a class="close-error-mrkv-ua-ship"><?php echo __('Turn back', 'mrkv-ua-shipping'); ?></a>
         </div>
     </div>
 </div>
@@ -88,8 +87,7 @@
             </div>
         </div>
         <div class="mrkv_ua_ship_create_invoice__footer">
-            <a class="close-all-mrkv-ua-ship"><?php echo __('Stay on the page', 'mrkv-ua-shipping'); ?></a>
-            <a class="open-order-mrkv-ua-ship" href=""><?php echo __('Open order editing', 'mrkv-ua-shipping'); ?></a>
+            <a class="close-error-mrkv-ua-ship"><?php echo __('Turn back', 'mrkv-ua-shipping'); ?></a>
         </div>
     </div>
 </div>

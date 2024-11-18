@@ -490,7 +490,7 @@ jQuery(window).on('load', function()
 
  	if(jQuery('#mrkv_ua_shipping_nova-poshta_address_street').length != 0)
  	{
- 		jQuery('#mrkv_ua_shipping_nova-poshta_address_street').autocomplete({
+ 		var auto_np_args = {
 			source: function (request, response) {
 
 				var city_ref = jQuery('#mrkv_ua_shipping_nova-poshta_address_city_ref').val();
@@ -526,7 +526,20 @@ jQuery(window).on('load', function()
 
 		        return false;
 		    }
-		});
+		};
+		
+		// Check if jQuery UI Autocomplete is available
+        if (typeof jQuery.ui === 'undefined' || typeof jQuery.ui.autocomplete === 'undefined') {
+            // If the .autocomplete function does not exist, load jQuery UI from CDN
+            var script = document.createElement('script');
+            script.src = 'https://code.jquery.com/ui/1.12.1/jquery-ui.min.js'; // URL for jQuery UI
+            script.onload = function() {
+                jQuery('#mrkv_ua_shipping_nova-poshta_address_street').autocomplete(auto_np_args);
+            };
+            document.head.appendChild(script); // Append the script tag to the head
+        } else {
+            jQuery('#mrkv_ua_shipping_nova-poshta_address_street').autocomplete(auto_np_args);
+        }
  	}
 
  	if(jQuery('#mrkv_ua_shipping_nova-poshta_address_house').length != 0)

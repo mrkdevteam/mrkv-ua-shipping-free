@@ -1,4 +1,27 @@
 <?php
+$up_warehouse_middlename_exclude = 'no';
+$up_warehouse_middlename_required = 'no';
+
+if(isset($this->active_shipping['ukr-poshta']['methods']['mrkv_ua_shipping_ukr-poshta']))
+{
+	if(isset($this->active_shipping['ukr-poshta']['settings']))
+	{
+		if(!isset($this->active_shipping['ukr-poshta']['settings']['checkout']['middlename']['enabled']) || $this->active_shipping['ukr-poshta']['settings']['checkout']['middlename']['enabled'] != 'on')
+		{
+			$nova_poshtomat_middlename_exclude = 'yes';
+		}
+		else{
+			if(isset($this->active_shipping['ukr-poshta']['settings']['checkout']['middlename']['required']) && $this->active_shipping['ukr-poshta']['settings']['checkout']['middlename']['required'] == 'on')
+			{
+				$nova_poshtomat_middlename_required = 'yes';
+			}
+		}
+	}
+}
+
+$args['up_middlename_exclude'] = $up_warehouse_middlename_exclude;
+$args['up_middlename_required'] = $up_warehouse_middlename_required;
+
 $args['ukr_city_area'] = array(
 	array('label' => __('Vinnytsia, Vinnytsia district', 'mrkv-ua-shipping'), 'value' => '1057'),
 	array('label' => __('Dnipro, Dniprovskyi district', 'mrkv-ua-shipping'), 'value' => '3641'),
