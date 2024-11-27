@@ -305,7 +305,10 @@ if (!class_exists('MRKV_UA_SHIPPING_METHODS_AJAX'))
 
 			            if(isset($_POST['description']))
 			            {
-			            	$args['mrkv_ua_ship_invoice_shipment_description'] = $this->convert_description($order, $_POST['description']);
+			            	$description_converted = $this->convert_description($order, $_POST['description']);
+			            	$description_converted = preg_replace('/["\/.;]+/', '', $description_converted);
+			            	$description_converted = str_replace('pcs', '', $description_converted);
+			            	$args['mrkv_ua_ship_invoice_shipment_description'] = $description_converted;
 			            }
 
 			            echo json_encode($args);

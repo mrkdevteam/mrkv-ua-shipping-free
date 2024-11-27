@@ -8,12 +8,12 @@ if(isset($this->active_shipping['ukr-poshta']['methods']['mrkv_ua_shipping_ukr-p
 	{
 		if(!isset($this->active_shipping['ukr-poshta']['settings']['checkout']['middlename']['enabled']) || $this->active_shipping['ukr-poshta']['settings']['checkout']['middlename']['enabled'] != 'on')
 		{
-			$nova_poshtomat_middlename_exclude = 'yes';
+			$up_warehouse_middlename_exclude = 'yes';
 		}
 		else{
 			if(isset($this->active_shipping['ukr-poshta']['settings']['checkout']['middlename']['required']) && $this->active_shipping['ukr-poshta']['settings']['checkout']['middlename']['required'] == 'on')
 			{
-				$nova_poshtomat_middlename_required = 'yes';
+				$up_warehouse_middlename_required = 'yes';
 			}
 		}
 	}
