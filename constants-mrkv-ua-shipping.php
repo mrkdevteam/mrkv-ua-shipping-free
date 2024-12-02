@@ -71,7 +71,7 @@ define('MRKV_UA_SHIPPING_LIST', array(
 						'autocomplete' => 'on',
 						'options' => array('' => __('Choose the warehouse', 'mrkv-ua-shipping')),
 						'required' => true,
-						'label' => __('Warehouse', 'mrkv-ua-shipping'),
+						'label' => __('Warehouse/poshtomat', 'mrkv-ua-shipping'),
 						'replace' => '_address_1'
 					),
 					'_warehouse_ref' => array(

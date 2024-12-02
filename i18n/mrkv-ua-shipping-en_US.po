@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Morkva UA Shipping\n"
 "POT-Creation-Date: 2024-10-01 09:03+0300\n"
-"PO-Revision-Date: 2024-11-15 11:28+0000\n"
+"PO-Revision-Date: 2024-11-28 10:38+0000\n"
 "Last-Translator: \n"
 "Language-Team: English (United States)\n"
 "Language: en_US\n"
@@ -82,7 +82,7 @@ msgstr ""
 "both manually and automatically. Using API 2.0 and connects directly to the "
 "Nova Poshta server for fast and secure user experience."
 
-#: classes/shipping_methods/mrkv-ua-shipping-methods-ajax.php:477
+#: classes/shipping_methods/mrkv-ua-shipping-methods-ajax.php:480
 msgid "Added invoice number"
 msgstr "Added invoice number"
 
@@ -514,7 +514,7 @@ msgstr "Email text"
 msgid "Empty data"
 msgstr "Empty data"
 
-#: classes/shipping_methods/mrkv-ua-shipping-methods-ajax.php:412
+#: classes/shipping_methods/mrkv-ua-shipping-methods-ajax.php:415
 msgid "Empty order data"
 msgstr "Empty order data"
 
@@ -989,7 +989,7 @@ msgstr "Invoice number"
 msgid "invoice number"
 msgstr "invoice number"
 
-#: classes/shipping_methods/mrkv-ua-shipping-methods-ajax.php:493
+#: classes/shipping_methods/mrkv-ua-shipping-methods-ajax.php:496
 msgid "Invoice removed"
 msgstr "Invoice removed"
 
@@ -1370,9 +1370,9 @@ msgstr "Payment control"
 msgid "Payment type (Sender-related)"
 msgstr "Payment type (Sender-related)"
 
-#: classes/shipping_methods/mrkv-ua-shipping-methods-ajax.php:331
-#: classes/shipping_methods/mrkv-ua-shipping-methods-ajax.php:346
-#: classes/shipping_methods/mrkv-ua-shipping-methods-ajax.php:361
+#: classes/shipping_methods/mrkv-ua-shipping-methods-ajax.php:334
+#: classes/shipping_methods/mrkv-ua-shipping-methods-ajax.php:349
+#: classes/shipping_methods/mrkv-ua-shipping-methods-ajax.php:364
 #: classes/shipping_methods/nova-poshta/invoice/mrkv-ua-shipping-nova-poshta-invoice.php:582
 #: classes/shipping_methods/nova-poshta/invoice/mrkv-ua-shipping-nova-poshta-invoice.php:597
 #: classes/shipping_methods/nova-poshta/invoice/mrkv-ua-shipping-nova-poshta-invoice.php:612
@@ -1943,7 +1943,7 @@ msgstr "Vinnytsia, Vinnytsia district"
 msgid "Volumetric weight"
 msgstr "Volumetric weight"
 
-#: constants-mrkv-ua-shipping.php:74 constants-mrkv-ua-shipping.php:270
+#: constants-mrkv-ua-shipping.php:270
 #: templates/settings/methods/shipping_fields/mrkv-ua-shipping-nova-poshta.php:90
 msgid "Warehouse"
 msgstr "Warehouse"
@@ -1951,6 +1951,10 @@ msgstr "Warehouse"
 #: templates/orders/mrkv-ua-ship-popup-nova-poshta.php:70
 msgid "Warehouse Ref Incorrect"
 msgstr "Warehouse Ref Incorrect"
+
+#: constants-mrkv-ua-shipping.php:74
+msgid "Warehouse/poshtomat"
+msgstr "Warehouse/poshtomat"
 
 #: templates/orders/mrkv-ua-ship-popup-ukr-poshta.php:191
 #: templates/settings/methods/shipping_fields/mrkv-ua-shipping-ukr-poshta.php:335

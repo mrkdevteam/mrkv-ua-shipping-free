@@ -3,7 +3,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Morkva UA Shipping\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-11-15 11:28+0000\n"
+"POT-Creation-Date: 2024-11-28 10:38+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: \n"
@@ -70,7 +70,7 @@ msgid ""
 "Nova Poshta server for fast and secure user experience."
 msgstr ""
 
-#: classes/shipping_methods/mrkv-ua-shipping-methods-ajax.php:477
+#: classes/shipping_methods/mrkv-ua-shipping-methods-ajax.php:480
 msgid "Added invoice number"
 msgstr ""
 
@@ -498,7 +498,7 @@ msgstr ""
 msgid "Empty data"
 msgstr ""
 
-#: classes/shipping_methods/mrkv-ua-shipping-methods-ajax.php:412
+#: classes/shipping_methods/mrkv-ua-shipping-methods-ajax.php:415
 msgid "Empty order data"
 msgstr ""
 
@@ -966,7 +966,7 @@ msgstr ""
 msgid "invoice number"
 msgstr ""
 
-#: classes/shipping_methods/mrkv-ua-shipping-methods-ajax.php:493
+#: classes/shipping_methods/mrkv-ua-shipping-methods-ajax.php:496
 msgid "Invoice removed"
 msgstr ""
 
@@ -1343,9 +1343,9 @@ msgstr ""
 msgid "Payment type (Sender-related)"
 msgstr ""
 
-#: classes/shipping_methods/mrkv-ua-shipping-methods-ajax.php:331
-#: classes/shipping_methods/mrkv-ua-shipping-methods-ajax.php:346
-#: classes/shipping_methods/mrkv-ua-shipping-methods-ajax.php:361
+#: classes/shipping_methods/mrkv-ua-shipping-methods-ajax.php:334
+#: classes/shipping_methods/mrkv-ua-shipping-methods-ajax.php:349
+#: classes/shipping_methods/mrkv-ua-shipping-methods-ajax.php:364
 #: classes/shipping_methods/nova-poshta/invoice/mrkv-ua-shipping-nova-poshta-invoice.php:582
 #: classes/shipping_methods/nova-poshta/invoice/mrkv-ua-shipping-nova-poshta-invoice.php:597
 #: classes/shipping_methods/nova-poshta/invoice/mrkv-ua-shipping-nova-poshta-invoice.php:612
@@ -1894,13 +1894,17 @@ msgstr ""
 msgid "Volumetric weight"
 msgstr ""
 
-#: constants-mrkv-ua-shipping.php:74 constants-mrkv-ua-shipping.php:270
+#: constants-mrkv-ua-shipping.php:270
 #: templates/settings/methods/shipping_fields/mrkv-ua-shipping-nova-poshta.php:90
 msgid "Warehouse"
 msgstr ""
 
 #: templates/orders/mrkv-ua-ship-popup-nova-poshta.php:70
 msgid "Warehouse Ref Incorrect"
+msgstr ""
+
+#: constants-mrkv-ua-shipping.php:74
+msgid "Warehouse/poshtomat"
 msgstr ""
 
 #: templates/orders/mrkv-ua-ship-popup-ukr-poshta.php:191

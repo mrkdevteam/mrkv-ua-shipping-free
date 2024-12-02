@@ -241,7 +241,7 @@
 					<?php echo __('Number of seats', 'mrkv-ua-shipping'); ?>
 				</label>
 				<?php 
-					echo $mrkv_global_option_generator->get_input_number('', 'mrkv_ua_ship_invoice_shipment_seats', 1, $shipping_slug_option . '_mrkv_ua_ship_invoice_shipment_seats' , '', '', '');
+					echo $mrkv_global_option_generator->get_input_number('', 'mrkv_ua_ship_invoice_shipment_seats', 1, $shipping_slug_option . '_mrkv_ua_ship_invoice_shipment_seats' , '', '', '', '', '1.00');
 				?>
 			</div>
 		</div>

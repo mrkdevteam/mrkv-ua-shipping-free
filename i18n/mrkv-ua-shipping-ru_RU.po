@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: Morkva UA Shipping\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2024-10-01 09:00+0300\n"
-"PO-Revision-Date: 2024-11-15 11:47+0000\n"
+"PO-Revision-Date: 2024-11-28 10:40+0000\n"
 "Last-Translator: \n"
 "Language-Team: Russian\n"
 "Language: ru_RU\n"
@@ -84,7 +84,7 @@ msgstr ""
 "та керуйте накладними, як вручну так і автоматично. Використовує АРІ 2.0 "
 "Нової Пошти для швидкої та безпечної роботи."
 
-#: classes/shipping_methods/mrkv-ua-shipping-methods-ajax.php:477
+#: classes/shipping_methods/mrkv-ua-shipping-methods-ajax.php:480
 msgid "Added invoice number"
 msgstr "Додано номер ТТН"
 
@@ -518,7 +518,7 @@ msgstr "Текст листа"
 msgid "Empty data"
 msgstr "Відсутні дані"
 
-#: classes/shipping_methods/mrkv-ua-shipping-methods-ajax.php:412
+#: classes/shipping_methods/mrkv-ua-shipping-methods-ajax.php:415
 msgid "Empty order data"
 msgstr "Відсутні дані замовлення"
 
@@ -995,7 +995,7 @@ msgstr "Номер ТТН"
 msgid "invoice number"
 msgstr "номер ТТН"
 
-#: classes/shipping_methods/mrkv-ua-shipping-methods-ajax.php:493
+#: classes/shipping_methods/mrkv-ua-shipping-methods-ajax.php:496
 msgid "Invoice removed"
 msgstr "ТТН видалено"
 
@@ -1374,9 +1374,9 @@ msgstr "Контроль оплати"
 msgid "Payment type (Sender-related)"
 msgstr "Тип платежу (для відправника)"
 
-#: classes/shipping_methods/mrkv-ua-shipping-methods-ajax.php:331
-#: classes/shipping_methods/mrkv-ua-shipping-methods-ajax.php:346
-#: classes/shipping_methods/mrkv-ua-shipping-methods-ajax.php:361
+#: classes/shipping_methods/mrkv-ua-shipping-methods-ajax.php:334
+#: classes/shipping_methods/mrkv-ua-shipping-methods-ajax.php:349
+#: classes/shipping_methods/mrkv-ua-shipping-methods-ajax.php:364
 #: classes/shipping_methods/nova-poshta/invoice/mrkv-ua-shipping-nova-poshta-invoice.php:582
 #: classes/shipping_methods/nova-poshta/invoice/mrkv-ua-shipping-nova-poshta-invoice.php:597
 #: classes/shipping_methods/nova-poshta/invoice/mrkv-ua-shipping-nova-poshta-invoice.php:612
@@ -1945,7 +1945,7 @@ msgstr "Вінниця, Вінницький район"
 msgid "Volumetric weight"
 msgstr "Обʼємна вага"
 
-#: constants-mrkv-ua-shipping.php:74 constants-mrkv-ua-shipping.php:270
+#: constants-mrkv-ua-shipping.php:270
 #: templates/settings/methods/shipping_fields/mrkv-ua-shipping-nova-poshta.php:90
 msgid "Warehouse"
 msgstr "Відділення"
@@ -1953,6 +1953,10 @@ msgstr "Відділення"
 #: templates/orders/mrkv-ua-ship-popup-nova-poshta.php:70
 msgid "Warehouse Ref Incorrect"
 msgstr "Ref відділення не вірний"
+
+#: constants-mrkv-ua-shipping.php:74
+msgid "Warehouse/poshtomat"
+msgstr "Відділення/поштомат"
 
 #: templates/orders/mrkv-ua-ship-popup-ukr-poshta.php:191
 #: templates/settings/methods/shipping_fields/mrkv-ua-shipping-ukr-poshta.php:335
