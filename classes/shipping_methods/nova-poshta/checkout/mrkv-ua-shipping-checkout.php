@@ -3,6 +3,7 @@ $nova_poshtomat_exclude = '';
 $nova_poshtomat_middlename_exclude = 'no';
 $nova_poshtomat_middlename_required = 'no';
 $nova_poshta_search_by_number = 'no';
+$nova_warehouse_text = '';
 
 if(isset($this->active_shipping['nova-poshta']['methods']['mrkv_ua_shipping_nova-poshta']))
 {
@@ -12,6 +13,7 @@ if(isset($this->active_shipping['nova-poshta']['methods']['mrkv_ua_shipping_nova
 	if(isset($shipping_settings['exclude_poshtomat']) && $shipping_settings['exclude_poshtomat'] == 'yes')
     {
         $nova_poshtomat_exclude = 'none';
+        $nova_warehouse_text = __('Warehouse', 'mrkv-ua-shipping');
     }
     if(isset($shipping_settings['search_by_number']) && $shipping_settings['search_by_number'] == 'yes')
     {
@@ -40,6 +42,7 @@ $args['nova_middlename_required'] = $nova_poshtomat_middlename_required;
 $args['nova_search_by_number'] = $nova_poshta_search_by_number;
 $args['enter_search_text'] = __('Please enter warehouse number', 'mrkv-ua-shipping');
 $args['nova_warehouse_type'] = $nova_poshtomat_exclude;
+$args['nova_warehouse_text'] = $nova_warehouse_text;
 $args['nova_poshtamat_type'] = 'f9316480-5f2d-425d-bc2c-ac7cd29decf0';
 $args['city_placeholder'] = __('Enter the first 3 letters', 'mrkv-ua-shipping');
 $args['city_text_weight'] = __('Order products don\'t match weight and dimensions criteria, try another method', 'mrkv-ua-shipping');

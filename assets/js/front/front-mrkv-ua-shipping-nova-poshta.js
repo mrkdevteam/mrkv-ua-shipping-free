@@ -604,6 +604,10 @@ jQuery(window).on('load', function()
  			jQuery('#mrkv_ua_shipping_nova-poshta_address_patronymic_enabled').val('off');
  			jQuery('label[for="mrkv_ua_shipping_nova-poshta_address_patronymic"] abbr').hide();
  		}
+ 		if(mrkv_ua_ship_helper.nova_warehouse_text != '')
+ 		{
+ 			jQuery('label[for="mrkv_ua_shipping_nova-poshta_warehouse"]').text(mrkv_ua_ship_helper.nova_warehouse_text);
+ 		}
  	}
 
  	function mrkvUaShipUpdateCart()

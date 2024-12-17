@@ -174,7 +174,7 @@ define('MRKV_UA_SHIPPING_LIST', array(
 						'autocomplete' => 'on',
 						'required' => true,
 						'label' => __('Street', 'mrkv-ua-shipping'),
-						'placeholder' => __('Enter three or more letters of the street name', 'mrkv-ua-shipping'),
+						'placeholder' => __('Enter the street...', 'mrkv-ua-shipping'),
 						'replace' => '_address_1'
 					),
 					'_street_ref' => array(

@@ -152,7 +152,9 @@ if (!class_exists('MRKV_UA_SHIPPING_METHODS_CHECKOUT'))
 					        		<?php 
 						        		foreach(MRKV_UA_SHIPPING_LIST[$key]['method'][$method]['checkout_fields'] as $id => $args)
 						        		{
-						        			if(is_user_logged_in())
+						        			$is_enabled_address_data = (isset($shipping['settings']['checkout']['hide_saving_data']) && $shipping['settings']['checkout']['hide_saving_data'] == 'on') ? true : false;
+
+						        			if(is_user_logged_in() && $is_enabled_address_data)
 						        			{
 						        				$default_value = get_user_meta( get_current_user_id(), $method . $id , true  );
 						        			}
