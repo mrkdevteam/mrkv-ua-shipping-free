@@ -55,11 +55,17 @@ if (!class_exists('MRKV_UA_SHIPPING_METHODS_AJAX'))
 		 * */
 		public function mrkv_update_shipping_method_func()
 		{
-			if (isset($_POST['order_id']) && isset($_POST['shipping_method']) && isset($_POST['shipping_method_name'])) 
+			if (!isset($_POST['nonce']) || !wp_verify_nonce(sanitize_text_field( wp_unslash($_POST['nonce'])), 'mrkv_ua_ship_nonce')) {
+		        wp_send_json_error(__('Invalid nonce.', 'mrkv-ua-shipping'), 403);
+		        wp_die();
+		    }
+
+		    $order_id = isset($_POST['order_id']) ? absint($_POST['order_id']) : '';
+		    $shipping_method = isset($_POST['shipping_method']) ? sanitize_text_field($_POST['shipping_method']) : '';
+		    $shipping_method_name = isset($_POST['shipping_method_name']) ? sanitize_text_field($_POST['shipping_method_name']) : '';
+
+			if ($order_id && $shipping_method && $shipping_method_name) 
 			{
-	        	$order_id = absint($_POST['order_id']);
-			    $shipping_method = sanitize_text_field($_POST['shipping_method']);
-			    $shipping_method_name = sanitize_text_field($_POST['shipping_method_name']);
 			    $order = wc_get_order($order_id);
 
 			    if($order)
@@ -107,9 +113,21 @@ if (!class_exists('MRKV_UA_SHIPPING_METHODS_AJAX'))
 		 * */
 		public function mrkv_ua_ship_clear_log_func()
 		{
-			if(isset($_POST['shipping']))
+			if (!isset($_POST['nonce']) || !wp_verify_nonce(sanitize_text_field( wp_unslash($_POST['nonce'])), 'mrkv_ua_ship_nonce')) {
+		        wp_send_json_error(__('Invalid nonce.', 'mrkv-ua-shipping'), 403);
+		        wp_die();
+		    }
+
+		    $current_ship_key = isset($_POST['current_ship_key']) ? sanitize_text_field($_POST['current_ship_key']) : '';
+
+			if($current_ship_key)
 			{
-				file_put_contents(MRKV_UA_SHIPPING_PLUGIN_PATH . 'logs/' . $_POST['shipping'] . '/debug-' . $_POST['shipping'] . '.log', '');
+				# Validate shipping key
+        		$allowed_keys = array_keys(MRKV_UA_SHIPPING_LIST);
+
+        		if (in_array($current_ship_key, $allowed_keys, true)) {
+		            file_put_contents(MRKV_UA_SHIPPING_PLUGIN_PATH . 'logs/' . $current_ship_key . '/debug-' . $current_ship_key . '.log', '');
+		        }
 			}
 
 			wp_die();
@@ -120,9 +138,17 @@ if (!class_exists('MRKV_UA_SHIPPING_METHODS_AJAX'))
 		 * */
 		public function mrkv_ua_ship_get_order_data_func()
 		{
-			if(isset($_POST['order_id']))
+			if (!isset($_POST['nonce']) || !wp_verify_nonce(sanitize_text_field( wp_unslash($_POST['nonce'])), 'mrkv_ua_ship_nonce')) {
+		        wp_send_json_error(__('Invalid nonce.', 'mrkv-ua-shipping'), 403);
+		        wp_die();
+		    }
+
+		    $order_id = isset($_POST['order_id']) ? intval($_POST['order_id']) : '';
+		    $description_checked = isset($_POST['description']) ? sanitize_text_field($_POST['description']) : '';
+
+			if($order_id)
 			{
-				$order = wc_get_order($_POST['order_id']);
+				$order = wc_get_order($order_id);
 
 				if($order)
 				{
@@ -303,15 +329,15 @@ if (!class_exists('MRKV_UA_SHIPPING_METHODS_AJAX'))
 			            $args['mrkv_ua_ship_invoice_shipment_width'] = $width;
 			            $args['mrkv_ua_ship_invoice_shipment_height'] = $height;
 
-			            if(isset($_POST['description']))
+			            if($description_checked)
 			            {
-			            	$description_converted = $this->convert_description($order, $_POST['description']);
+			            	$description_converted = $this->convert_description($order, $description_checked);
 			            	$description_converted = preg_replace('/["\/.;]+/', '', $description_converted);
 			            	$description_converted = str_replace('pcs', '', $description_converted);
 			            	$args['mrkv_ua_ship_invoice_shipment_description'] = $description_converted;
 			            }
 
-			            echo json_encode($args);
+			            echo wp_json_encode($args);
 					}
 				}
 			}
@@ -387,28 +413,42 @@ if (!class_exists('MRKV_UA_SHIPPING_METHODS_AJAX'))
 
 		public function mrkv_ua_ship_create_invoice_func()
 		{
+			if (!isset($_POST['nonce']) || !wp_verify_nonce(sanitize_text_field( wp_unslash($_POST['nonce'])), 'mrkv_ua_ship_nonce')) {
+		        wp_send_json_error(__('Invalid nonce.', 'mrkv-ua-shipping'), 403);
+		        wp_die();
+		    }
+
 			$message_error = '';
-			$order_id = isset($_POST['order_id']) ? $_POST['order_id'] : '';
-			$current_ship_key = isset($_POST['current_ship_key']) ? $_POST['current_ship_key'] : '';
+			$order_id = isset($_POST['order_id']) ? intval($_POST['order_id']) : '';
+			$current_ship_key = isset($_POST['current_ship_key']) ? sanitize_text_field($_POST['current_ship_key']) : '';
 
 			# Check data
 			if($order_id && $current_ship_key)
 			{
-				# Get order object
-				$order = wc_get_order($order_id);
+				# Validate shipping key
+        		$allowed_keys = array_keys(MRKV_UA_SHIPPING_LIST);
 
-				require_once MRKV_UA_SHIPPING_PLUGIN_PATH . 'classes/shipping_methods/' . $current_ship_key . '/api/mrkv-ua-shipping-api-' . $current_ship_key . '.php';
-				$api_class = MRKV_UA_SHIPPING_LIST[$current_ship_key]['api_class'];
-				$settings_shipping = get_option($current_ship_key . '_m_ua_settings');
-				$mrkv_object_shipping = new $api_class($settings_shipping);
+        		if (in_array($current_ship_key, $allowed_keys, true)) 
+        		{
+        			# Get order object
+					$order = wc_get_order($order_id);
 
-				require_once MRKV_UA_SHIPPING_PLUGIN_PATH . 'classes/shipping_methods/' . $current_ship_key . '/invoice/mrkv-ua-shipping-' . $current_ship_key . '-invoice.php';
-				$invoice_class = MRKV_UA_SHIPPING_LIST[$current_ship_key]['invoice_class'];
-				$mrkv_object_invoice = new $invoice_class($order, $_POST, $mrkv_object_shipping, $settings_shipping);
+					if($order)
+					{
+						require_once MRKV_UA_SHIPPING_PLUGIN_PATH . 'classes/shipping_methods/' . $current_ship_key . '/api/mrkv-ua-shipping-api-' . $current_ship_key . '.php';
+						$api_class = MRKV_UA_SHIPPING_LIST[$current_ship_key]['api_class'];
+						$settings_shipping = get_option($current_ship_key . '_m_ua_settings');
+						$mrkv_object_shipping = new $api_class($settings_shipping);
 
-				$result = $mrkv_object_invoice->mrkv_ua_ship_create_invoice();
+						require_once MRKV_UA_SHIPPING_PLUGIN_PATH . 'classes/shipping_methods/' . $current_ship_key . '/invoice/mrkv-ua-shipping-' . $current_ship_key . '-invoice.php';
+						$invoice_class = MRKV_UA_SHIPPING_LIST[$current_ship_key]['invoice_class'];
+						$mrkv_object_invoice = new $invoice_class($order, $_POST, $mrkv_object_shipping, $settings_shipping);
 
-				echo json_encode($result);
+						$result = $mrkv_object_invoice->mrkv_ua_ship_create_invoice();
+
+						echo wp_json_encode($result);
+					}
+        		}
 			}
 			else
 			{
@@ -420,51 +460,66 @@ if (!class_exists('MRKV_UA_SHIPPING_METHODS_AJAX'))
 
 		public function mrkv_ua_ship_update_order_data_func()
 		{
-			if(isset($_POST['mrkv_order_id']))
+			if (!isset($_POST['nonce']) || !wp_verify_nonce(sanitize_text_field( wp_unslash($_POST['nonce'])), 'mrkv_ua_ship_nonce')) {
+		        wp_send_json_error(__('Invalid nonce.', 'mrkv-ua-shipping'), 403);
+		        wp_die();
+		    }
+
+		    $order_id = isset($_POST['mrkv_order_id']) ? intval($_POST['mrkv_order_id']) : '';
+
+			if($order_id)
 			{
 				# Get order object
-				$order = wc_get_order($_POST['mrkv_order_id']);
-				$key = $_POST['mrkv_current_shipping_key'];
-				$current_shipping = $_POST['mrkv_current_shipping'];
+				$order = wc_get_order($order_id);
+				$key = isset($_POST['mrkv_current_shipping_key']) ? sanitize_text_field($_POST['mrkv_current_shipping_key']) : '';
+				$current_shipping = isset($_POST['mrkv_current_shipping']) ? sanitize_text_field($_POST['mrkv_current_shipping']) : '';
 
-				foreach(MRKV_UA_SHIPPING_LIST[$key]['method'][$current_shipping]['checkout_fields'] as $field_id => $field_val)
-    			{
-    				if(isset($_POST[$current_shipping . $field_id]) && isset($field_val['replace']))
-    				{
-    					if($field_val['replace'] == '_city'){
-    						# Add billing city name to Thank you page
-				            $order->set_billing_city( $_POST[$current_shipping . $field_id] );
-				            # Add shipping city name to Thankyou page
-				            $order->set_shipping_city( $_POST[$current_shipping . $field_id] );
-    					}
-    					elseif($field_val['replace'] == '_state')
-    					{
-    						$order->set_billing_state(esc_attr($_POST[$current_shipping . $field_id]) );
-          					$order->set_shipping_state( esc_attr($_POST[$current_shipping . $field_id]) );
-    					}
-    					elseif($field_val['replace'] == '_address_1')
-    					{
-    						$order->set_billing_address_1(esc_attr($_POST[$current_shipping . $field_id]) );
-          					$order->set_shipping_address_1( esc_attr($_POST[$current_shipping . $field_id]) );
-    					}
-    					elseif($field_val['replace'] == '_postcode')
-    					{
-    						$order->set_billing_postcode(esc_attr($_POST[$current_shipping . $field_id]) );
-          					$order->set_shipping_postcode( esc_attr($_POST[$current_shipping . $field_id]) );
-    					}
-    					elseif($field_val['replace'] == '_address_2')
-    					{
-    						$order->set_billing_address_2(esc_attr($_POST[$current_shipping . $field_id]) );
-          					$order->set_shipping_address_2( esc_attr($_POST[$current_shipping . $field_id]) );
-    					}
-    					else
-    					{
-    						$order->update_meta_data( $current_shipping . $field_id, esc_attr($_POST[$current_shipping . $field_id]) );
-    					}
-    				}
-    			}
-    			
-    			$order->save();
+				# Validate shipping key
+        		$allowed_keys = array_keys(MRKV_UA_SHIPPING_LIST);
+
+        		if (in_array($current_ship_key, $allowed_keys, true)) 
+        		{
+        			foreach(MRKV_UA_SHIPPING_LIST[$key]['method'][$current_shipping]['checkout_fields'] as $field_id => $field_val)
+	    			{
+	    				$mrkv_ua_ship_field_inner = isset($_POST[$current_shipping . $field_id]) ? sanitize_text_field($_POST[$current_shipping . $field_id]) : '';
+
+	    				if($mrkv_ua_ship_field_inner && isset($field_val['replace']))
+	    				{
+	    					if($field_val['replace'] == '_city'){
+	    						# Add billing city name to Thank you page
+					            $order->set_billing_city( $mrkv_ua_ship_field_inner );
+					            # Add shipping city name to Thankyou page
+					            $order->set_shipping_city( $mrkv_ua_ship_field_inner );
+	    					}
+	    					elseif($field_val['replace'] == '_state')
+	    					{
+	    						$order->set_billing_state(esc_attr($mrkv_ua_ship_field_inner) );
+	          					$order->set_shipping_state( esc_attr($mrkv_ua_ship_field_inner) );
+	    					}
+	    					elseif($field_val['replace'] == '_address_1')
+	    					{
+	    						$order->set_billing_address_1(esc_attr($mrkv_ua_ship_field_inner) );
+	          					$order->set_shipping_address_1( esc_attr($mrkv_ua_ship_field_inner) );
+	    					}
+	    					elseif($field_val['replace'] == '_postcode')
+	    					{
+	    						$order->set_billing_postcode(esc_attr($mrkv_ua_ship_field_inner) );
+	          					$order->set_shipping_postcode( esc_attr($mrkv_ua_ship_field_inner) );
+	    					}
+	    					elseif($field_val['replace'] == '_address_2')
+	    					{
+	    						$order->set_billing_address_2(esc_attr($mrkv_ua_ship_field_inner) );
+	          					$order->set_shipping_address_2( esc_attr($mrkv_ua_ship_field_inner) );
+	    					}
+	    					else
+	    					{
+	    						$order->update_meta_data( $current_shipping . $field_id, esc_attr($mrkv_ua_ship_field_inner) );
+	    					}
+	    				}
+	    			}
+	    			
+	    			$order->save();
+        		}
 			}
 
 			wp_die();
@@ -472,12 +527,20 @@ if (!class_exists('MRKV_UA_SHIPPING_METHODS_AJAX'))
 
 		public function mrkv_ua_ship_update_invoice_data_func()
 		{
-			if(isset($_POST['order_id']) && isset($_POST['invoice']))
+			if (!isset($_POST['nonce']) || !wp_verify_nonce(sanitize_text_field( wp_unslash($_POST['nonce'])), 'mrkv_ua_ship_nonce')) {
+		        wp_send_json_error(__('Invalid nonce.', 'mrkv-ua-shipping'), 403);
+		        wp_die();
+		    }
+
+		    $order_id = isset($_POST['order_id']) ? intval($_POST['order_id']) : '';
+		    $invoice_data = isset($_POST['invoice']) ? sanitize_text_field($_POST['invoice']) : '';
+
+			if($order_id && $invoice_data)
 			{
 				# Get order object
-				$order = wc_get_order($_POST['order_id']);
-				$order->update_meta_data('mrkv_ua_ship_invoice_number', $_POST['invoice']);
-				$order->add_order_note(__('Added invoice number','mrkv-ua-shipping') . ': ' . $_POST['invoice'], $is_customer_note = 0, $added_by_user = false);
+				$order = wc_get_order($order_id);
+				$order->update_meta_data('mrkv_ua_ship_invoice_number', $invoice_data);
+				$order->add_order_note(__('Added invoice number','mrkv-ua-shipping') . ': ' . $invoice_data, $is_customer_note = 0, $added_by_user = false);
 	        	$order->save();
 			}
 
@@ -486,10 +549,52 @@ if (!class_exists('MRKV_UA_SHIPPING_METHODS_AJAX'))
 		
 		public function mrkv_ua_ship_remove_invoice_data_func()
 		{
-			if(isset($_POST['order_id']))
+			if (!isset($_POST['nonce']) || !wp_verify_nonce(sanitize_text_field( wp_unslash($_POST['nonce'])), 'mrkv_ua_ship_nonce')) {
+		        wp_send_json_error(__('Invalid nonce.', 'mrkv-ua-shipping'), 403);
+		        wp_die();
+		    }
+
+		    $order_id = isset($_POST['order_id']) ? intval($_POST['order_id']) : '';
+
+			if($order_id)
 			{
 				# Get order object
-				$order = wc_get_order($_POST['order_id']);
+				$order = wc_get_order($order_id);
+
+				$keys_shipping = array_keys(MRKV_UA_SHIPPING_LIST);
+	    		$key = '';
+	    		$current_shipping = '';
+
+		    	foreach($order->get_shipping_methods() as $shipping)
+	            {
+	            	foreach($keys_shipping as $key_ship)
+					{
+
+						if(str_contains($shipping->get_method_id(), $key_ship))
+						{
+							$key = $key_ship;
+							$current_shipping = $shipping->get_method_id();
+						}
+						if(in_array($shipping->get_method_id(), MRKV_UA_SHIPPING_LIST[$key_ship]['old_slugs']))
+						{
+							$key = $key_ship;
+							$current_shipping = array_search($shipping->get_method_id(), MRKV_UA_SHIPPING_LIST[$key_ship]['old_slugs']);
+						}
+					}
+	            }
+
+				if($order->get_meta('mrkv_ua_ship_invoice_ref') && $key == 'nova-poshta')
+				{
+					require_once MRKV_UA_SHIPPING_PLUGIN_PATH . 'classes/shipping_methods/nova-poshta/api/mrkv-ua-shipping-api-nova-poshta.php';
+					$api_class = MRKV_UA_SHIPPING_LIST['nova-poshta']['api_class'];
+					$settings_shipping = get_option('nova-poshta_m_ua_settings');
+					$mrkv_object_shipping = new $api_class($settings_shipping);
+
+					# Remove TTN
+					$mrkv_object_shipping->remove_invoice_data_platform(array($order->get_meta('mrkv_ua_ship_invoice_ref')));
+				}
+
+				$order->delete_meta_data('mrkv_ua_ship_invoice_ref');
 				$order->delete_meta_data('mrkv_ua_ship_invoice_number');
 				$order->delete_meta_data('novaposhta_ttn');
 				$order->delete_meta_data('ukrposhta_ttn');
@@ -502,18 +607,66 @@ if (!class_exists('MRKV_UA_SHIPPING_METHODS_AJAX'))
 
 		public function mrkv_ua_ship_remove_all_invoices_func()
 		{
-			if(isset($_POST['orders']))
+			if (!isset($_POST['nonce']) || !wp_verify_nonce(sanitize_text_field( wp_unslash($_POST['nonce'])), 'mrkv_ua_ship_nonce')) {
+		        wp_send_json_error(__('Invalid nonce.', 'mrkv-ua-shipping'), 403);
+		        wp_die();
+		    }
+
+		    $orders_raw = isset($_POST['orders']) ? sanitize_text_field($_POST['orders']) : '';
+
+			if($orders_raw)
 			{
-				$orders_id = explode(",", $_POST['orders']);
+				$orders_id = explode(",", $orders_raw);
+
+				$removed_refs = array();
+				$keys_shipping = array_keys(MRKV_UA_SHIPPING_LIST);
+	    		$key = '';
+	    		$current_shipping = '';
+
+		    	foreach($order->get_shipping_methods() as $shipping)
+	            {
+	            	foreach($keys_shipping as $key_ship)
+					{
+
+						if(str_contains($shipping->get_method_id(), $key_ship))
+						{
+							$key = $key_ship;
+							$current_shipping = $shipping->get_method_id();
+						}
+						if(in_array($shipping->get_method_id(), MRKV_UA_SHIPPING_LIST[$key_ship]['old_slugs']))
+						{
+							$key = $key_ship;
+							$current_shipping = array_search($shipping->get_method_id(), MRKV_UA_SHIPPING_LIST[$key_ship]['old_slugs']);
+						}
+					}
+	            }
 
 				foreach($orders_id as $order_id)
 				{
 					# Get order object
 					$order = wc_get_order($order_id);
+
+					if($order->get_meta('mrkv_ua_ship_invoice_ref')  && $key == 'nova-poshta')
+					{
+						$removed_refs[] = $order->get_meta('mrkv_ua_ship_invoice_ref');
+					}
+
+					$order->delete_meta_data('mrkv_ua_ship_invoice_ref');
 					$order->delete_meta_data('mrkv_ua_ship_invoice_number');
 					$order->delete_meta_data('novaposhta_ttn');
 					$order->delete_meta_data('ukrposhta_ttn');
 		        	$order->save();
+				}
+
+				if(!empty($removed_refs))
+				{
+					require_once MRKV_UA_SHIPPING_PLUGIN_PATH . 'classes/shipping_methods/nova-poshta/api/mrkv-ua-shipping-api-nova-poshta.php';
+					$api_class = MRKV_UA_SHIPPING_LIST['nova-poshta']['api_class'];
+					$settings_shipping = get_option('nova-poshta_m_ua_settings');
+					$mrkv_object_shipping = new $api_class($settings_shipping);
+
+					# Remove TTN
+					$mrkv_object_shipping->remove_invoice_data_platform($removed_refs);
 				}
 			}
 

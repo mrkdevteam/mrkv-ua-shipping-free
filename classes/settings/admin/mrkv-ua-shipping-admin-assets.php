@@ -36,6 +36,7 @@ if (!class_exists('MRKV_UA_SHIPPING_ADMIN_ASSETS'))
 
     			wp_localize_script('global-mrkv-ua-shipping', 'mrkv_ua_ship_helper', [
 	            	'ajax_url' => admin_url( "admin-ajax.php" ),
+	            	'nonce'    => wp_create_nonce('mrkv_ua_ship_nonce')
 	        	]);
 
 	        	if(isset($_GET['action']) && $_GET['action'] == 'edit' && (isset($_GET['id']) || isset($_GET['post'])))
@@ -76,6 +77,7 @@ if (!class_exists('MRKV_UA_SHIPPING_ADMIN_ASSETS'))
 
 		    			wp_localize_script('global-mrkv-ua-shipping' . $key, 'mrkv_ua_ship_helper', [
 			            	'ajax_url' => admin_url( "admin-ajax.php" ),
+			            	'nonce'    => wp_create_nonce('mrkv_ua_ship_nonce')
 			        	]);
 		            }
 	        	}
@@ -117,6 +119,7 @@ if (!class_exists('MRKV_UA_SHIPPING_ADMIN_ASSETS'))
 
 	        wp_localize_script('admin-mrkv-ua-shipping', 'mrkv_ua_ship_helper', [
 	            	'ajax_url' => admin_url( "admin-ajax.php" ),
+	            	'nonce'    => wp_create_nonce('mrkv_ua_ship_nonce')
 	        	]);
 
 	        # Check page
@@ -130,6 +133,7 @@ if (!class_exists('MRKV_UA_SHIPPING_ADMIN_ASSETS'))
 
     			wp_localize_script('admin-mrkv-ua-shipping-' . $slug_shipping, 'mrkv_ua_ship_helper', [
 	            	'ajax_url' => admin_url( "admin-ajax.php" ),
+	            	'nonce'    => wp_create_nonce('mrkv_ua_ship_nonce')
 	        	]);
 	    	}
 	    }

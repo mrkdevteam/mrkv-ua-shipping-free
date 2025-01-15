@@ -84,10 +84,10 @@ if (!class_exists('MRKV_UA_SHIPPING_API_UKR_POSHTA'))
 
 	        if(!empty($params))
 	        {
-	        	$args['body'] = \json_encode( $params );
+	        	$args['body'] = \wp_json_encode( $params );
 	        	
 	        	# Save to log
-				$this->debug_log->add_data_request(\json_encode( $params ));
+				$this->debug_log->add_data_request(\wp_json_encode( $params ));
 	        }
 
 	        if($method == 'POST')
@@ -143,7 +143,7 @@ if (!class_exists('MRKV_UA_SHIPPING_API_UKR_POSHTA'))
 	        }
 
 	        # Save to log
-			$this->debug_log->add_data_request(\json_encode( $params ));
+			$this->debug_log->add_data_request(\wp_json_encode( $params ));
 
 		    $authorization = "Authorization: Bearer " . $this->get_production_bearer_ecom($api_token_type);
 
@@ -157,7 +157,7 @@ if (!class_exists('MRKV_UA_SHIPPING_API_UKR_POSHTA'))
 
 		    if($method == 'POST')
 		    {
-		    	curl_setopt($ch, CURLOPT_POSTFIELDS, \json_encode( $params ));
+		    	curl_setopt($ch, CURLOPT_POSTFIELDS, \wp_json_encode( $params ));
 		    }
 		    else
 		    {

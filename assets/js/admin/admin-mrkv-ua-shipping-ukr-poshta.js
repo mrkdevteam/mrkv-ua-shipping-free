@@ -43,7 +43,8 @@ jQuery(window).on('load', function()
                 url: mrkv_ua_ship_helper.ajax_url,
                 data: {
                     action: 'mrkv_ua_ship_ukr_poshta_warehouse_id',
-                    warehouse_name: warehouse_name
+                    warehouse_name: warehouse_name,
+                    nonce: mrkv_ua_ship_helper.nonce,
                 },
                 success: function (data) {
                     if(data)
@@ -70,6 +71,7 @@ jQuery(window).on('load', function()
             data: {
                 action: 'mrkv_ua_ship_clear_log',
                 shipping: 'ukr-poshta',
+                nonce: mrkv_ua_ship_helper.nonce,
             }, 
             success: function( data ) {
                 jQuery('.mrkv_log_file_content').text('');

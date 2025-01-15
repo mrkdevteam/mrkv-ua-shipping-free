@@ -18,14 +18,14 @@ if (!class_exists('MRKV_UA_SHIPPING_WOO_ORDER'))
 		 * */
 		function __construct()
 		{
-			add_action('add_meta_boxes', array( $this, 'mrkv_ua_ship_add_meta_boxes' ));
+			add_action('add_meta_boxes', array( $this, 'mrkv_ua_ship_add_meta_boxes' ), 10, 2);
 
 			add_action( 'woocommerce_admin_order_data_after_billing_address', array( $this, 'mrkv_ua_ship_order_editable_billing' ) );
 			add_action( 'woocommerce_admin_order_data_after_shipping_address', array( $this, 'mrkv_ua_ship_order_editable_billing' ) );
 			add_action( 'woocommerce_process_shop_order_meta', array( $this, 'mrkv_ua_ship_save_admin_order_billing' ) );
 		}
 
-		public function mrkv_ua_ship_add_meta_boxes()
+		public function mrkv_ua_ship_add_meta_boxes($post_type, $post)
 		{
 			# Check hpos
 	        if(class_exists( CustomOrdersTableController::class )){
@@ -37,17 +37,10 @@ if (!class_exists('MRKV_UA_SHIPPING_WOO_ORDER'))
 	            $screen = 'shop_order';
 	        }
 
-	        if (isset($_GET["post"]) || isset($_GET["id"])) 
-	        {
-            
-	            $order_id = '';
-	            if(isset($_GET["post"])){
-	                $order_id = $_GET["post"];    
-	            }
-	            else{
-	                $order_id = $_GET["id"];
-	            }
+	        $order_id = $post->ID;
 
+	        if ($order_id && 'shop_order' === get_post_type($order_id)) 
+	        {
 	            $order = wc_get_order($order_id);
 
 	            if($order)
@@ -86,19 +79,11 @@ if (!class_exists('MRKV_UA_SHIPPING_WOO_ORDER'))
 	        }
 		}
 
-		public function mrkv_ua_shipping_changer_add_plugin_meta_box()
+		public function mrkv_ua_shipping_changer_add_plugin_meta_box($post)
 		{
-			if (isset($_GET["post"]) || isset($_GET["id"])) 
+			$order_id = $post->ID;
+			if ($order_id) 
 	        {
-            
-	            $order_id = '';
-	            if(isset($_GET["post"])){
-	                $order_id = $_GET["post"];    
-	            }
-	            else{
-	                $order_id = $_GET["id"];
-	            }
-
 	            $order = wc_get_order($order_id);
 
 	            if($order)
@@ -129,12 +114,12 @@ if (!class_exists('MRKV_UA_SHIPPING_WOO_ORDER'))
 	            				{
 	            					var shippingMethod = jQuery('#mrkv_ua_shipping_method').val();
 	            					var shippingMethodName = jQuery('#mrkv_ua_shipping_method option:selected').text();
-                					var orderId = '<?php echo $order_id; ?>';
+                					var orderId = '<?php echo esc_attr($order_id); ?>';
 
                 					if(shippingMethod)
                 					{
                 						jQuery.ajax({
-					                    url: '<?php echo admin_url( "admin-ajax.php" ) ?>',
+					                    url: '<?php echo esc_url(admin_url( "admin-ajax.php" )); ?>',
 					                    method: 'POST',
 					                    data: {
 					                        action: 'mrkv_update_shipping_method',
@@ -156,20 +141,12 @@ if (!class_exists('MRKV_UA_SHIPPING_WOO_ORDER'))
 	        }
 		}
 
-		public function mrkv_ua_shipping_add_plugin_meta_box()
+		public function mrkv_ua_shipping_add_plugin_meta_box($post)
 		{
-			if (isset($_GET["post"]) || isset($_GET["id"])) 
+			$order_id = $post->ID;
+			if ($order_id) 
 	        {
-            
-	            $order_id = '';
-	            if(isset($_GET["post"])){
-	                $order_id = $_GET["post"];    
-	            }
-	            else{
-	                $order_id = $_GET["id"];
-	            }
-
-	            $order = wc_get_order($order_id);
+            	$order = wc_get_order($order_id);
 
 	            if($order)
 	            {
@@ -330,7 +307,7 @@ if (!class_exists('MRKV_UA_SHIPPING_WOO_ORDER'))
 
 										woocommerce_form_field($current_shipping . $id, $field_val);
 						            }
-
+						            wp_nonce_field( 'mrkv_ua_ship_nonce_action', 'mrkv_ua_ship_nonce' );
 					            ?>
 					            <div class="mrkv_ua_shipping_change_field_address button">
 					            	<?php echo __('Save Field', 'mrkv-ua-shipping'); ?>
@@ -402,6 +379,10 @@ if (!class_exists('MRKV_UA_SHIPPING_WOO_ORDER'))
 
 		public function mrkv_ua_ship_save_admin_order_billing($order_id)
 		{
+			if ( !isset( $_POST['mrkv_ua_ship_nonce'] ) || !wp_verify_nonce( sanitize_text_field( wp_unslash($_POST['mrkv_ua_ship_nonce'])), 'mrkv_ua_ship_nonce_action' ) ) 
+			{
+		        return;
+		    }
 			$order = wc_get_order($order_id);
 
 			if($order)
@@ -435,7 +416,9 @@ if (!class_exists('MRKV_UA_SHIPPING_WOO_ORDER'))
 		            		{
 							    if ( isset($_POST[ $current_shipping . $key_field ]) ) 
 							    {
-							        $order->update_meta_data( $current_shipping . $key_field, wc_clean( wp_unslash( $_POST[ $current_shipping . $key_field ] ) ) );
+							        $data_field = sanitize_text_field( wp_unslash($_POST[ $current_shipping . $key_field ]));
+
+							        $order->update_meta_data( $current_shipping . $key_field, wc_clean( $data_field ) );
 							        $order->save();
 							    }
 		            		}

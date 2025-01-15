@@ -200,13 +200,37 @@
 		<div class="col-mrkv-5">
 			<div class="admin_ua_ship_morkva_settings_line">
 				<label>
-					<?php echo __('Length of shipment, cm', 'mrkv-ua-shipping'); ?>
+					<?php echo __('Dimensions of the shipment, cm', 'mrkv-ua-shipping'); ?>
 				</label>
-				<?php 
-					$data = isset($mrk_ua_ship_ukr_settings['shipment']['length']) ? $mrk_ua_ship_ukr_settings['shipment']['length'] : '';
-
-					echo $mrkv_global_option_generator->get_input_number('', 'mrkv_ua_ship_invoice_shipment_length', $data, $shipping_slug_option . '_mrkv_ua_ship_invoice_shipment_length' , '', '', '');
-				?>
+				<div class="adm_morkva_row_size">
+					<div class="adm_morkva_row_size__col">
+						<span><?php echo __('Length', 'mrkv-ua-shipping'); ?></span>
+						<?php 
+							$data = isset($mrk_ua_ship_ukr_settings['shipment']['length']) ? $mrk_ua_ship_ukr_settings['shipment']['length'] : '';
+							echo $mrkv_global_option_generator->get_input_number('', 'mrkv_ua_ship_invoice_shipment_length', $data, $shipping_slug_option. '_mrkv_ua_ship_invoice_shipment_length' , '', '', '');
+						?>
+					</div>
+					<span>
+						<svg width="20px" height="20px" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <path d="M8 18C5.17157 18 3.75736 18 2.87868 17.1213C2 16.2426 2 14.8284 2 12C2 9.17157 2 7.75736 2.87868 6.87868C3.75736 6 5.17157 6 8 6C10.8284 6 12.2426 6 13.1213 6.87868C14 7.75736 14 9.17157 14 12" stroke="#ed6230" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path> <path d="M10 12C10 14.8284 10 16.2426 10.8787 17.1213C11.7574 18 13.1716 18 16 18C18.8284 18 20.2426 18 21.1213 17.1213C21.4211 16.8215 21.6186 16.4594 21.7487 16M22 12C22 9.17157 22 7.75736 21.1213 6.87868C20.2426 6 18.8284 6 16 6" stroke="#ed6230" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path> </g></svg>
+					</span>
+					<div class="adm_morkva_row_size__col">
+						<span><?php echo __('Width', 'mrkv-ua-shipping'); ?></span>
+						<?php 
+							$data = isset($mrk_ua_ship_ukr_settings['shipment']['width']) ? $mrk_ua_ship_ukr_settings['shipment']['width'] : '';
+							echo $mrkv_global_option_generator->get_input_number('', 'mrkv_ua_ship_invoice_shipment_width', $data, $shipping_slug_option. '_mrkv_ua_ship_invoice_shipment_width' , '', '', '');
+						?>
+					</div>
+					<span>
+						<svg width="20px" height="20px" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <path d="M8 18C5.17157 18 3.75736 18 2.87868 17.1213C2 16.2426 2 14.8284 2 12C2 9.17157 2 7.75736 2.87868 6.87868C3.75736 6 5.17157 6 8 6C10.8284 6 12.2426 6 13.1213 6.87868C14 7.75736 14 9.17157 14 12" stroke="#ed6230" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path> <path d="M10 12C10 14.8284 10 16.2426 10.8787 17.1213C11.7574 18 13.1716 18 16 18C18.8284 18 20.2426 18 21.1213 17.1213C21.4211 16.8215 21.6186 16.4594 21.7487 16M22 12C22 9.17157 22 7.75736 21.1213 6.87868C20.2426 6 18.8284 6 16 6" stroke="#ed6230" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path> </g></svg>
+					</span>
+					<div class="adm_morkva_row_size__col">
+						<span><?php echo __('Height', 'mrkv-ua-shipping'); ?></span>
+						<?php 
+							$data = isset($mrk_ua_ship_ukr_settings['shipment']['height']) ? $mrk_ua_ship_ukr_settings['shipment']['height'] : '';
+							echo $mrkv_global_option_generator->get_input_number('', 'mrkv_ua_ship_invoice_shipment_height', $data, $shipping_slug_option. '_mrkv_ua_ship_invoice_shipment_height' , '', '', '');
+						?>
+					</div>
+				</div>
 			</div>
 		</div>
 	</div>

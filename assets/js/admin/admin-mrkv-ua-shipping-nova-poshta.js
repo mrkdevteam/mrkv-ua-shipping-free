@@ -30,7 +30,8 @@ jQuery(window).on('load', function()
 	            url: mrkv_ua_ship_helper.ajax_url,
 	            data: {
 	                action: 'mrkv_ua_ship_nova_poshta_area',
-	                name: request.term
+	                name: request.term,
+	                nonce: mrkv_ua_ship_helper.nonce,
 	            },
 	            success: function (json) {
 	                var data = JSON.parse(json);
@@ -71,7 +72,8 @@ jQuery(window).on('load', function()
 	            url: mrkv_ua_ship_helper.ajax_url,
 	            data: {
 	                action: 'mrkv_ua_ship_nova_poshta_city',
-	                name: request.term
+	                name: request.term,
+	                nonce: mrkv_ua_ship_helper.nonce,
 	            },
 	            success: function (json) {
 	                var data = JSON.parse(json);
@@ -114,7 +116,8 @@ jQuery(window).on('load', function()
 	            data: {
 	                action: 'mrkv_ua_ship_nova_poshta_warehouse',
 	                name: request.term,
-	                ref: city_ref
+	                ref: city_ref,
+	                nonce: mrkv_ua_ship_helper.nonce,
 	            },
 	            success: function (json) {
 	                var data = JSON.parse(json);
@@ -154,7 +157,8 @@ jQuery(window).on('load', function()
 	            data: {
 	                action: 'mrkv_ua_ship_nova_poshta_street',
 	                name: request.term,
-	                ref: city_ref
+	                ref: city_ref,
+	                nonce: mrkv_ua_ship_helper.nonce,
 	            },
 	            success: function (json) {
 	                var data = JSON.parse(json);
@@ -210,6 +214,7 @@ jQuery(window).on('load', function()
             data: {
                 action: 'mrkv_ua_ship_clear_log',
                 shipping: 'nova-poshta',
+                nonce: mrkv_ua_ship_helper.nonce,
             }, 
             success: function( data ) {
                 jQuery('.mrkv_log_file_content').text('');
@@ -246,7 +251,8 @@ jQuery(window).on('load', function()
 	                action: 'mrkv_ua_ship_nova_poshta_sender_get_address_ref',
 					sender_street_ref: sender_street_ref,
 					sender_building_number: sender_building_number,
-					sender_flat: sender_flat
+					sender_flat: sender_flat,
+					nonce: mrkv_ua_ship_helper.nonce,
 	            },
 	            success: function (data) {
 	                if(data)

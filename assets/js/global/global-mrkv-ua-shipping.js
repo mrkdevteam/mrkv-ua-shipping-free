@@ -41,7 +41,8 @@ jQuery(window).on('load', function()
             data: {
                 action: 'mrkv_ua_ship_get_order_data',
                 order_id: current_order_id,
-                description: description_shipping
+                description: description_shipping,
+                nonce: mrkv_ua_ship_helper.nonce,
             },
             success: function (json) {
                 var data = JSON.parse(json);
@@ -110,7 +111,7 @@ jQuery(window).on('load', function()
 			jQuery.ajax({
 	            type: 'POST',
 	            url: mrkv_ua_ship_helper.ajax_url,
-	            data: 'action=mrkv_ua_ship_create_invoice&' + post_fields + '&current_ship_key=' + current_ship_key + '',
+	            data: 'action=mrkv_ua_ship_create_invoice&' + post_fields + '&current_ship_key=' + current_ship_key + '&nonce=' + mrkv_ua_ship_helper.nonce + '',
 	            success: function (json) {
 	              var data = JSON.parse(json);
 	              if(data)
@@ -177,7 +178,7 @@ jQuery(window).on('load', function()
  			jQuery.ajax({
 	            type: 'POST',
 	            url: mrkv_ua_ship_helper.ajax_url,
-	            data: 'action=mrkv_ua_ship_update_order_data&' + post_fields + '',
+	            data: 'action=mrkv_ua_ship_update_order_data&' + post_fields  + '&nonce=' + mrkv_ua_ship_helper.nonce + '',
 	            success: function (json) {
 	              location.reload();
 	            }
@@ -198,7 +199,7 @@ jQuery(window).on('load', function()
  				jQuery.ajax({
 		            type: 'POST',
 		            url: mrkv_ua_ship_helper.ajax_url,
-		            data: 'action=mrkv_ua_ship_update_invoice_data&order_id=' + order_id + '&invoice=' + invoice + '',
+		            data: 'action=mrkv_ua_ship_update_invoice_data&order_id=' + order_id + '&invoice=' + invoice  + '&nonce=' + mrkv_ua_ship_helper.nonce + '',
 		            success: function (json) {
 		              location.reload();
 		            }
@@ -223,7 +224,7 @@ jQuery(window).on('load', function()
  			jQuery.ajax({
 	            type: 'POST',
 	            url: mrkv_ua_ship_helper.ajax_url,
-	            data: 'action=mrkv_ua_ship_remove_invoice_data&order_id=' + order_id + '&invoice=' + invoice + '',
+	            data: 'action=mrkv_ua_ship_remove_invoice_data&order_id=' + order_id + '&invoice=' + invoice  + '&nonce=' + mrkv_ua_ship_helper.nonce + '',
 	            success: function (json) {
 	              location.reload();
 	            }

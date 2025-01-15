@@ -2,6 +2,67 @@ jQuery(window).on('load', function()
 {
 	if (jQuery('form[name="checkout"]').length == 0) return;
 
+	var currentLang = jQuery('html').attr('lang');
+
+	if (currentLang === 'uk') 
+	{
+		jQuery.fn.select2.defaults.set("language", {
+		    errorLoading: function () {
+		        return "Неможливо завантажити результати.";
+		    },
+		    inputTooLong: function (args) {
+		        var overChars = args.input.length - args.maximum;
+		        return "Будь ласка, видаліть " + overChars + " символ(и/ів).";
+		    },
+		    inputTooShort: function (args) {
+		        return "Будь ласка, введіть ще " + args.minimum + " символ(и/ів).";
+		    },
+		    loadingMore: function () {
+		        return "Завантаження додаткових результатів...";
+		    },
+		    maximumSelected: function (args) {
+		        return "Ви можете вибрати лише " + args.maximum + " елемент(и/ів).";
+		    },
+		    noResults: function () {
+		        return "Нічого не знайдено.";
+		    },
+		    searching: function () {
+		        return "Пошук...";
+		    },
+		    removeAllItems: function () {
+		        return "Видалити всі елементи";
+		    },
+		});
+
+		jQuery.fn.selectWoo.defaults.set("language", {
+		    errorLoading: function () {
+		        return "Неможливо завантажити результати.";
+		    },
+		    inputTooLong: function (args) {
+		        var overChars = args.input.length - args.maximum;
+		        return "Будь ласка, видаліть " + overChars + " символ(и/ів).";
+		    },
+		    inputTooShort: function (args) {
+		        return "Будь ласка, введіть ще " + args.minimum + " символ(и/ів).";
+		    },
+		    loadingMore: function () {
+		        return "Завантаження додаткових результатів...";
+		    },
+		    maximumSelected: function (args) {
+		        return "Ви можете вибрати лише " + args.maximum + " елемент(и/ів).";
+		    },
+		    noResults: function () {
+		        return "Нічого не знайдено.";
+		    },
+		    searching: function () {
+		        return "Пошук...";
+		    },
+		    removeAllItems: function () {
+		        return "Видалити всі елементи";
+		    },
+		});
+	}
+
 	jQuery.fn.select2.amd.define('select2/data/extended-ajax',['./ajax','../utils','jquery'], function(AjaxAdapter, Utils, $){
 
 	  function ExtendedAjaxAdapter ($element,options) {
@@ -58,12 +119,14 @@ jQuery(window).on('load', function()
 		    		var query = {
 				      	action: 'mrkv_ua_ship_nova_poshta_city',
 				        name: params.term,
+				        nonce: mrkv_ua_ship_helper.nonce,
 				    }
 		    	}
 		    	else
 		    	{
 		    		var query = {
 				      	action: 'mrkv_ua_ship_nova_poshta_city',
+				      	nonce: mrkv_ua_ship_helper.nonce,
 				    }
 		    	}
 
@@ -154,7 +217,8 @@ jQuery(window).on('load', function()
 		            data: {
 		                action: 'mrkv_ua_ship_nova_poshta_warehouse',
 		                ref: current_option.ref,
-		                warehouse_type: mrkv_ua_ship_helper.nova_warehouse_type
+		                warehouse_type: mrkv_ua_ship_helper.nova_warehouse_type,
+		                nonce: mrkv_ua_ship_helper.nonce,
 		            },
 		            beforeSend: function() {
 		                if (jQuery('#mrkv_ua_shipping_nova-poshta_warehouse').length != 0) {
@@ -226,6 +290,7 @@ jQuery(window).on('load', function()
 		                	warehouse_type: mrkv_ua_ship_helper.nova_warehouse_type,
 		                	search_by: 'yes',
 		                	name: params.term,
+		                	nonce: mrkv_ua_ship_helper.nonce,
 					    }
 
 				      return query;
@@ -277,7 +342,8 @@ jQuery(window).on('load', function()
 	            data: {
 	                action: 'mrkv_ua_ship_nova_poshta_warehouse',
 	                ref: mrkv_ua_ship_warehouse,
-	                warehouse_type: mrkv_ua_ship_helper.nova_warehouse_type
+	                warehouse_type: mrkv_ua_ship_helper.nova_warehouse_type,
+	                nonce: mrkv_ua_ship_helper.nonce,
 	            },
 	            beforeSend: function() {
 	                if (jQuery('#mrkv_ua_shipping_nova-poshta_warehouse').length != 0) {
@@ -367,7 +433,8 @@ jQuery(window).on('load', function()
 	            data: {
 	                action: 'mrkv_ua_ship_nova_poshta_warehouse',
 	                ref: current_option.ref,
-	                warehouse_type: mrkv_ua_ship_helper.nova_poshtamat_type
+	                warehouse_type: mrkv_ua_ship_helper.nova_poshtamat_type,
+	                nonce: mrkv_ua_ship_helper.nonce,
 	            },
 	            beforeSend: function() {
 	                if (jQuery('#mrkv_ua_shipping_nova-poshta_poshtamat_name').length != 0) {
@@ -431,7 +498,8 @@ jQuery(window).on('load', function()
 	            data: {
 	                action: 'mrkv_ua_ship_nova_poshta_warehouse',
 	                ref: mrkv_ua_ship_poshtamat,
-	                warehouse_type: mrkv_ua_ship_helper.nova_poshtamat_type
+	                warehouse_type: mrkv_ua_ship_helper.nova_poshtamat_type,
+	                nonce: mrkv_ua_ship_helper.nonce,
 	            },
 	            beforeSend: function() {
 	                if (jQuery('#mrkv_ua_shipping_nova-poshta_poshtamat_name').length != 0) {
@@ -516,7 +584,8 @@ jQuery(window).on('load', function()
 		            data: {
 		                action: 'mrkv_ua_ship_nova_poshta_street',
 		                name: request.term,
-		                ref: city_ref
+		                ref: city_ref,
+		                nonce: mrkv_ua_ship_helper.nonce,
 		            },
 		            success: function (json) {
 		                var data = JSON.parse(json);
@@ -595,7 +664,8 @@ jQuery(window).on('load', function()
 		                action: 'mrkv_ua_ship_nova_poshta_sender_get_address_ref',
 						sender_street_ref: sender_street_ref,
 						sender_building_number: sender_building_number,
-						sender_flat: sender_flat
+						sender_flat: sender_flat,
+						nonce: mrkv_ua_ship_helper.nonce,
 		            },
 		            success: function (data) {
 		                if(data)

@@ -36,10 +36,15 @@ if (!class_exists('MRKV_UA_SHIPPING_AJAX_NOVA'))
 		 * */
 		public function get_nova_poshta_area()
 		{
+			if (!isset($_POST['nonce']) || !wp_verify_nonce(sanitize_text_field( wp_unslash($_POST['nonce'])), 'mrkv_ua_ship_nonce')) {
+		        wp_send_json_error(__('Invalid nonce.', 'mrkv-ua-shipping'), 403);
+		        wp_die();
+		    }
+
 			require_once MRKV_UA_SHIPPING_PLUGIN_PATH . 'classes/shipping_methods/nova-poshta/api/mrkv-ua-shipping-api-nova-poshta.php';
 			$mrkv_object_nova_poshta = new MRKV_UA_SHIPPING_API_NOVA_POSHTA(get_option('nova-poshta_m_ua_settings'));
 
-			$key_search = isset($_POST['name']) ? $_POST['name'] : '';
+			$key_search = isset($_POST['name']) ? sanitize_text_field($_POST['name']) : '';
 
 			$args = array(
 	            'apiKey' => $mrkv_object_nova_poshta->get_api_key(),
@@ -67,11 +72,11 @@ if (!class_exists('MRKV_UA_SHIPPING_AJAX_NOVA'))
 	        	}
 
 	        	# Return object
-	        	echo json_encode($areas);
+	        	echo wp_json_encode($areas);
 	        }
 	        else
 	        {
-	        	echo json_encode(array(array(
+	        	echo wp_json_encode(array(array(
 	        		'value' => 'none',
         			'label' => __('No results for your request', 'mrkv-ua-shipping')
 	        	)));
@@ -85,10 +90,15 @@ if (!class_exists('MRKV_UA_SHIPPING_AJAX_NOVA'))
 		 * */
 		public function get_nova_poshta_city()
 		{
+			if (!isset($_POST['nonce']) || !wp_verify_nonce(sanitize_text_field( wp_unslash($_POST['nonce'])), 'mrkv_ua_ship_nonce')) {
+		        wp_send_json_error(__('Invalid nonce.', 'mrkv-ua-shipping'), 403);
+		        wp_die();
+		    }
+
 			require_once MRKV_UA_SHIPPING_PLUGIN_PATH . 'classes/shipping_methods/nova-poshta/api/mrkv-ua-shipping-api-nova-poshta.php';
 			$mrkv_object_nova_poshta = new MRKV_UA_SHIPPING_API_NOVA_POSHTA(get_option('nova-poshta_m_ua_settings'));
 
-			$key_search = isset($_POST['name']) ? $_POST['name'] : '';
+			$key_search = isset($_POST['name']) ? sanitize_text_field($_POST['name']) : '';
 
 			$args = array(
 	            'apiKey' => $mrkv_object_nova_poshta->get_api_key(),
@@ -117,11 +127,11 @@ if (!class_exists('MRKV_UA_SHIPPING_AJAX_NOVA'))
 	        	}
 
 	        	# Return object
-	        	echo json_encode($areas);
+	        	echo wp_json_encode($areas);
 	        }
 	        else
 	        {
-	        	echo json_encode(array(array(
+	        	echo wp_json_encode(array(array(
 	        		'value' => 'none',
         			'label' => __('No results for your request', 'mrkv-ua-shipping')
 	        	)));
@@ -135,14 +145,19 @@ if (!class_exists('MRKV_UA_SHIPPING_AJAX_NOVA'))
 		 * */
 		public function get_nova_poshta_warehouse()
 		{
+			if (!isset($_POST['nonce']) || !wp_verify_nonce(sanitize_text_field( wp_unslash($_POST['nonce'])), 'mrkv_ua_ship_nonce')) {
+		        wp_send_json_error(__('Invalid nonce.', 'mrkv-ua-shipping'), 403);
+		        wp_die();
+		    }
+
 			$settings_method = get_option('nova-poshta_m_ua_settings');
 			require_once MRKV_UA_SHIPPING_PLUGIN_PATH . 'classes/shipping_methods/nova-poshta/api/mrkv-ua-shipping-api-nova-poshta.php';
 			$mrkv_object_nova_poshta = new MRKV_UA_SHIPPING_API_NOVA_POSHTA($settings_method);
 
-			$key_search = isset($_POST['name']) ? $_POST['name'] : '';
-			$city_ref = isset($_POST['ref']) ? $_POST['ref'] : '';
-			$warehouse_type = isset($_POST['warehouse_type']) ? $_POST['warehouse_type'] : '';
-			$search_by = isset($_POST['search_by']) ? $_POST['search_by'] : '';
+			$key_search = isset($_POST['name']) ? sanitize_text_field($_POST['name']) : '';
+			$city_ref = isset($_POST['ref']) ? sanitize_text_field($_POST['ref']) : '';
+			$warehouse_type = isset($_POST['warehouse_type']) ? sanitize_text_field($_POST['warehouse_type']) : '';
+			$search_by = isset($_POST['search_by']) ? sanitize_text_field($_POST['search_by']) : '';
 			$exclude_post = '';
 			
 			if($warehouse_type == 'none'){
@@ -180,7 +195,7 @@ if (!class_exists('MRKV_UA_SHIPPING_AJAX_NOVA'))
 	        if(isset($obj['data'][0]))
 	        {
 	        	$areas = array();
-	        	$skip_weight = isset($_POST['warehouse_type']) ? true : false;
+	        	$skip_weight = $warehouse_type ? true : false;
 
 	        	$areas[] = array(
         			'value' => '',
@@ -255,11 +270,11 @@ if (!class_exists('MRKV_UA_SHIPPING_AJAX_NOVA'))
 	        	}
 
 	        	# Return object
-	        	echo json_encode($areas);
+	        	echo wp_json_encode($areas);
 	        }
 	        else
 	        {
-	        	echo json_encode(array(array(
+	        	echo wp_json_encode(array(array(
 	        		'value' => 'none',
         			'label' => __('No results for your request', 'mrkv-ua-shipping')
 	        	)));
@@ -273,11 +288,16 @@ if (!class_exists('MRKV_UA_SHIPPING_AJAX_NOVA'))
 		 * */
 		public function get_nova_poshta_street()
 		{
+			if (!isset($_POST['nonce']) || !wp_verify_nonce(sanitize_text_field( wp_unslash($_POST['nonce'])), 'mrkv_ua_ship_nonce')) {
+		        wp_send_json_error(__('Invalid nonce.', 'mrkv-ua-shipping'), 403);
+		        wp_die();
+		    }
+
 			require_once MRKV_UA_SHIPPING_PLUGIN_PATH . 'classes/shipping_methods/nova-poshta/api/mrkv-ua-shipping-api-nova-poshta.php';
 			$mrkv_object_nova_poshta = new MRKV_UA_SHIPPING_API_NOVA_POSHTA(get_option('nova-poshta_m_ua_settings'));
 
-			$key_search = isset($_POST['name']) ? $_POST['name'] : '';
-			$city_ref = isset($_POST['ref']) ? $_POST['ref'] : '';
+			$key_search = isset($_POST['name']) ? sanitize_text_field($_POST['name']) : '';
+			$city_ref = isset($_POST['ref']) ? sanitize_text_field($_POST['ref']) : '';
 
 			$args = array(
 	            'apiKey' => $mrkv_object_nova_poshta->get_api_key(),
@@ -306,11 +326,11 @@ if (!class_exists('MRKV_UA_SHIPPING_AJAX_NOVA'))
 	        	}
 
 	        	# Return object
-	        	echo json_encode($areas);
+	        	echo wp_json_encode($areas);
 	        }
 	        else
 	        {
-	        	echo json_encode(array(array(
+	        	echo wp_json_encode(array(array(
 	        		'value' => 'none',
         			'label' => __('No results for your request', 'mrkv-ua-shipping')
 	        	)));
@@ -324,14 +344,19 @@ if (!class_exists('MRKV_UA_SHIPPING_AJAX_NOVA'))
 	     * */
 	    public function get_sender_get_address_ref()
 	    {
+	    	if (!isset($_POST['nonce']) || !wp_verify_nonce(sanitize_text_field( wp_unslash($_POST['nonce'])), 'mrkv_ua_ship_nonce')) {
+		        wp_send_json_error(__('Invalid nonce.', 'mrkv-ua-shipping'), 403);
+		        wp_die();
+		    }
+
 	    	require_once MRKV_UA_SHIPPING_PLUGIN_PATH . 'classes/shipping_methods/nova-poshta/api/mrkv-ua-shipping-api-nova-poshta.php';
 			$mrkv_object_nova_poshta = new MRKV_UA_SHIPPING_API_NOVA_POSHTA(get_option('nova-poshta_m_ua_settings'));
 			require_once MRKV_UA_SHIPPING_PLUGIN_PATH . 'classes/shipping_methods/nova-poshta/api/mrkv-ua-shipping-sender-nova-poshta.php';
 			$mrkv_sender_object_nova_poshta = new MRKV_UA_SHIPPING_SENDER_NOVA_POSHTA($mrkv_object_nova_poshta);
 
-			$sender_street_ref = isset($_POST['sender_street_ref']) ? $_POST['sender_street_ref'] : '';
-			$sender_building_number = isset($_POST['sender_building_number']) ? $_POST['sender_building_number'] : '';
-			$sender_flat = isset($_POST['sender_flat']) ? $_POST['sender_flat'] : '';
+			$sender_street_ref = isset($_POST['sender_street_ref']) ? sanitize_text_field($_POST['sender_street_ref']) : '';
+			$sender_building_number = isset($_POST['sender_building_number']) ? sanitize_text_field($_POST['sender_building_number']) : '';
+			$sender_flat = isset($_POST['sender_flat']) ? sanitize_text_field($_POST['sender_flat']) : '';
 
 	        # Send request
 	        $ref = $mrkv_sender_object_nova_poshta->get_sender_address_ref($sender_street_ref, $sender_building_number, $sender_flat);
@@ -340,7 +365,7 @@ if (!class_exists('MRKV_UA_SHIPPING_AJAX_NOVA'))
 	        if($ref)
 	        {
 	        	# Return object
-	        	echo json_encode($ref);
+	        	echo wp_json_encode($ref);
 	        }
 
 	        wp_die();

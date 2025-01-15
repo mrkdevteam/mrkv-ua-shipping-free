@@ -36,7 +36,9 @@ if (!class_exists('MRKV_UA_SHIPPING_METHODS_CHECKOUT'))
 	        wp_enqueue_script('front-mrkv-ua-shipping-select2', MRKV_UA_SHIPPING_ASSETS_URL . '/js/global/select2.min.js', array('jquery'), MRKV_UA_SHIPPING_PLUGIN_VERSION, true);
 	        wp_enqueue_script('front-mrkv-ua-shipping', MRKV_UA_SHIPPING_ASSETS_URL . '/js/front/front-mrkv-ua-shipping.js', array('jquery','jquery-ui-autocomplete'), MRKV_UA_SHIPPING_PLUGIN_VERSION, true);
 
-	        $args = array('ajax_url' => admin_url( 'admin-ajax.php' ));
+	        $args = array(
+	        	'ajax_url' => admin_url( 'admin-ajax.php' ),
+	        	'nonce'    => wp_create_nonce('mrkv_ua_ship_nonce'));
 
 	        if(!empty($this->active_shipping))
 	        {
@@ -144,6 +146,9 @@ if (!class_exists('MRKV_UA_SHIPPING_METHODS_CHECKOUT'))
 			            remove_all_filters('woocommerce_form_field_hidden');
 			        }
 
+			        # Include settings checkout by shipping
+					include 'mrkv_ua_shipping_translate.php';
+
 					foreach($shipping['methods'] as $method => $method_data)
 					{
 						?>
@@ -171,19 +176,19 @@ if (!class_exists('MRKV_UA_SHIPPING_METHODS_CHECKOUT'))
 
 						        			if(isset($args['label']) && function_exists( 'pll_translate_string' ))
 						        			{
-						        				$args['label'] = esc_html__( $args['label'], 'mrkv-ua-shipping' );
+						        				$args['label'] = esc_html( $translate_labels[$key]['method'][$method]['checkout_fields'][$id]['label'] );
 						        			}
 
 						        			if(isset($args['placeholder']) && function_exists( 'pll_translate_string' ))
 						        			{
-						        				$args['placeholder'] = esc_html__( $args['placeholder'], 'mrkv-ua-shipping' );
+						        				$args['placeholder'] = esc_html( $translate_labels[$key]['method'][$method]['checkout_fields'][$id]['placeholder'] );
 						        			}
 
 						        			if(isset($args['options']) && !empty($args['options']) && function_exists( 'pll_translate_string' ))
 						        			{
 						        				foreach($args['options'] as $key_option => $value_option)
 						        				{
-						        					$args['options'] = array('' => esc_html__($value_option, 'mrkv-ua-shipping')); 
+						        					$args['options'] = array('' => esc_html($translate_labels[$key]['method'][$method]['checkout_fields'][$id]['options'][''])); 
 						        				}
 						        			}
 

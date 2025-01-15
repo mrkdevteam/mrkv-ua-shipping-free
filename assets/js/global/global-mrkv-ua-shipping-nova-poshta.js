@@ -14,12 +14,14 @@ jQuery(window).on('load', function()
 		    		var query = {
 				      	action: 'mrkv_ua_ship_nova_poshta_city',
 				        name: params.term,
+				        nonce: mrkv_ua_ship_helper.nonce,
 				    }
 		    	}
 		    	else
 		    	{
 		    		var query = {
 				      	action: 'mrkv_ua_ship_nova_poshta_city',
+				      	nonce: mrkv_ua_ship_helper.nonce,
 				    }
 		    	}
 
@@ -85,7 +87,8 @@ jQuery(window).on('load', function()
 	            data: {
 	                action: 'mrkv_ua_ship_nova_poshta_warehouse',
 	                ref: current_option.ref,
-	                warehouse_type: mrkv_ua_ship_helper.nova_warehouse_type
+	                warehouse_type: mrkv_ua_ship_helper.nova_warehouse_type,
+	                nonce: mrkv_ua_ship_helper.nonce,
 	            },
 	            beforeSend: function() {
 	                if (jQuery('#mrkv_ua_shipping_nova-poshta_warehouse').length != 0) {
@@ -128,7 +131,8 @@ jQuery(window).on('load', function()
             data: {
                 action: 'mrkv_ua_ship_nova_poshta_warehouse',
                 ref: mrkv_ua_ship_warehouse,
-                warehouse_type: ''
+                warehouse_type: '',
+                nonce: mrkv_ua_ship_helper.nonce,
             },
             beforeSend: function() {
                 if (jQuery('#mrkv_ua_shipping_nova-poshta_warehouse').length != 0) {
@@ -209,7 +213,8 @@ jQuery(window).on('load', function()
 	            data: {
 	                action: 'mrkv_ua_ship_nova_poshta_warehouse',
 	                ref: current_option.ref,
-	                warehouse_type: mrkv_ua_ship_helper.nova_poshtamat_type
+	                warehouse_type: mrkv_ua_ship_helper.nova_poshtamat_type,
+	                nonce: mrkv_ua_ship_helper.nonce,
 	            },
 	            beforeSend: function() {
 	                if (jQuery('#mrkv_ua_shipping_nova-poshta_poshtamat_name').length != 0) {
@@ -251,7 +256,8 @@ jQuery(window).on('load', function()
             data: {
                 action: 'mrkv_ua_ship_nova_poshta_warehouse',
                 ref: mrkv_ua_ship_poshtamat,
-                warehouse_type: 'f9316480-5f2d-425d-bc2c-ac7cd29decf0'
+                warehouse_type: 'f9316480-5f2d-425d-bc2c-ac7cd29decf0',
+                nonce: mrkv_ua_ship_helper.nonce,
             },
             beforeSend: function() {
                 if (jQuery('#mrkv_ua_shipping_nova-poshta_poshtamat_name').length != 0) {
@@ -331,7 +337,8 @@ jQuery(window).on('load', function()
 		            data: {
 		                action: 'mrkv_ua_ship_nova_poshta_street',
 		                name: request.term,
-		                ref: city_ref
+		                ref: city_ref,
+		                nonce: mrkv_ua_ship_helper.nonce,
 		            },
 		            success: function (json) {
 		                var data = JSON.parse(json);
@@ -397,7 +404,8 @@ jQuery(window).on('load', function()
 		                action: 'mrkv_ua_ship_nova_poshta_sender_get_address_ref',
 						sender_street_ref: sender_street_ref,
 						sender_building_number: sender_building_number,
-						sender_flat: sender_flat
+						sender_flat: sender_flat,
+						nonce: mrkv_ua_ship_helper.nonce,
 		            },
 		            success: function (data) {
 		                if(data)

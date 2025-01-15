@@ -124,15 +124,15 @@ if (!class_exists('MRKV_UA_SHIPPING_WOO_ORDERS'))
 
 			            if($mrkv_ua_ship_invoice){
 			            	?>
-			            		<div class="mrkv_ua_ship_global__invoice"><?php echo $mrkv_ua_ship_invoice; ?></div>
+			            		<div class="mrkv_ua_ship_global__invoice"><?php echo esc_html($mrkv_ua_ship_invoice); ?></div>
 			            	<?php
 			            }
 			            else{
 			            	?>
 			            	<a>
-			            		<div data-method="<?php echo $current_shipping; ?>" data-ship="<?php echo $key; ?>" data-order-id="<?php echo $the_order->get_id(); ?>" class="mrkv_ua_ship_global_create__invoice">
-			            			<img src="<?php echo MRKV_UA_SHIPPING_IMG_URL . '/global'; ?>/add-square-icon.svg" alt="<?php echo $the_order->get_shipping_method(); ?>" title="<?php echo $the_order->get_shipping_method(); ?>">
-			            			<span><?php echo __('Create', 'mrkv-ua-shipping'); ?></span>
+			            		<div data-method="<?php echo esc_attr($current_shipping); ?>" data-ship="<?php echo esc_attr($key); ?>" data-order-id="<?php echo esc_attr($the_order->get_id()); ?>" class="mrkv_ua_ship_global_create__invoice">
+			            			<img src="<?php echo esc_url(MRKV_UA_SHIPPING_IMG_URL . '/global'); ?>/add-square-icon.svg" alt="<?php echo esc_attr($the_order->get_shipping_method()); ?>" title="<?php echo esc_attr($the_order->get_shipping_method()); ?>">
+			            			<span><?php echo esc_html(__('Create', 'mrkv-ua-shipping')); ?></span>
 			            			<div class="mrkv_ua_ship_create_invoice__loader"></div>
 			            		</div>
 			            	</a>
@@ -155,7 +155,7 @@ if (!class_exists('MRKV_UA_SHIPPING_WOO_ORDERS'))
 	            	{
 	            		?>
 	            			<div class="mrkv_ua_ship_global_orders_li">
-	            				<img src="<?php echo MRKV_UA_SHIPPING_IMG_URL . '/' . $key; ?>/logo-mini.png" alt="<?php echo $the_order->get_shipping_method(); ?>" title="<?php echo $the_order->get_shipping_method(); ?>">
+	            				<img src="<?php echo esc_url(MRKV_UA_SHIPPING_IMG_URL . '/' . $key); ?>/logo-mini.png" alt="<?php echo esc_attr($the_order->get_shipping_method()); ?>" title="<?php echo esc_attr($the_order->get_shipping_method()); ?>">
 	            			</div>
 	            		<?php
 	            	}

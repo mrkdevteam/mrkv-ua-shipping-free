@@ -13,12 +13,14 @@ jQuery(window).on('load', function()
 		    		var query = {
 				      	action: 'mrkv_ua_ship_ukr_poshta_city',
 				        name: params.term,
+				        nonce: mrkv_ua_ship_helper.nonce,
 				    }
 		    	}
 		    	else
 		    	{
 		    		var query = {
 				      	action: 'mrkv_ua_ship_ukr_poshta_city',
+				      	nonce: mrkv_ua_ship_helper.nonce,
 				    }
 		    	}
 
@@ -75,7 +77,8 @@ jQuery(window).on('load', function()
 	            url: mrkv_ua_ship_helper.ajax_url,
 	            data: {
 	                action: 'mrkv_ua_ship_ukr_poshta_warehouse',
-	                ref: current_option.ref
+	                ref: current_option.ref,
+	                nonce: mrkv_ua_ship_helper.nonce,
 	            },
 	            beforeSend: function() {
 	                if (jQuery('#mrkv_ua_shipping_ukr-poshta_warehouse').length != 0) {
@@ -115,7 +118,8 @@ jQuery(window).on('load', function()
             url: mrkv_ua_ship_helper.ajax_url,
             data: {
                 action: 'mrkv_ua_ship_ukr_poshta_warehouse',
-                ref: mrkv_ua_ship_warehouse
+                ref: mrkv_ua_ship_warehouse,
+                nonce: mrkv_ua_ship_helper.nonce,
             },
             beforeSend: function() {
                 if (jQuery('#mrkv_ua_shipping_ukr-poshta_warehouse').length != 0) {
@@ -154,7 +158,8 @@ jQuery(window).on('load', function()
                 url: mrkv_ua_ship_helper.ajax_url,
                 data: {
                     action: 'mrkv_ua_ship_ukr_poshta_warehouse_id',
-                    warehouse_name: jQuery(option_selected).attr('data-ref')
+                    warehouse_name: jQuery(option_selected).attr('data-ref'),
+                    nonce: mrkv_ua_ship_helper.nonce,
                 },
                 success: function (data) {
                     if(data)
@@ -194,7 +199,8 @@ jQuery(window).on('load', function()
 	            url: mrkv_ua_ship_helper.ajax_url,
 	            data: {
 	                action: 'mrkv_ua_ship_ukr_poshta_street',
-	                ref: current_option.ref
+	                ref: current_option.ref,
+	                nonce: mrkv_ua_ship_helper.nonce,
 	            },
 	            beforeSend: function() {
 	                if (jQuery('#mrkv_ua_shipping_ukr-poshta_address_street').length != 0) {
@@ -236,7 +242,8 @@ jQuery(window).on('load', function()
 	            url: mrkv_ua_ship_helper.ajax_url,
 	            data: {
 	                action: 'mrkv_ua_ship_ukr_poshta_house',
-	                ref: jQuery(option_selected).attr('data-ref')
+	                ref: jQuery(option_selected).attr('data-ref'),
+	                nonce: mrkv_ua_ship_helper.nonce,
 	            },
 	            beforeSend: function() {
 	                if (jQuery('#mrkv_ua_shipping_ukr-poshta_address_house').length != 0) {
@@ -315,7 +322,8 @@ jQuery(window).on('load', function()
 						region: region,
 						city: city,
 						street: street,
-						apartment_number: apartment_number 
+						apartment_number: apartment_number,
+						nonce: mrkv_ua_ship_helper.nonce,
 	                },
 	                success: function (data) {
 	                    if(data)
@@ -365,7 +373,8 @@ jQuery(window).on('load', function()
 						region: region,
 						city: city,
 						street: street,
-						apartment_number: apartment_number 
+						apartment_number: apartment_number,
+						nonce: mrkv_ua_ship_helper.nonce,
 	                },
 	                success: function (data) {
 	                    if(data)

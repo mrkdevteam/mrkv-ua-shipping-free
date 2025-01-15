@@ -56,7 +56,7 @@
 				}
 			}
 			$data = isset(MRKV_SHIPPING_SETTINGS['sender']['list']) ? MRKV_SHIPPING_SETTINGS['sender']['list'] : '';
-			echo $mrkv_global_option_generator->get_input_hidden(MRKV_OPTION_OBJECT_NAME . '[sender][list]', base64_encode(json_encode(MRKV_OPTION_NOVA_SENDER)), MRKV_OPTION_OBJECT_NAME . '_sender_list');
+			echo $mrkv_global_option_generator->get_input_hidden(MRKV_OPTION_OBJECT_NAME . '[sender][list]', base64_encode(wp_json_encode(MRKV_OPTION_NOVA_SENDER)), MRKV_OPTION_OBJECT_NAME . '_sender_list');
 		?>
 	</div>
 	<h3><img src="<?php echo MRKV_UA_SHIPPING_ASSETS_URL . '/images/global/routing-icon.svg'; ?>" alt="Sender address" title="Sender address"><?php echo __('Sender address', 'mrkv-ua-shipping'); ?></h3>

@@ -36,10 +36,15 @@ if (!class_exists('MRKV_UA_SHIPPING_AJAX_UKR'))
 
 		public function get_ukr_poshta_city()
 		{
+			if (!isset($_POST['nonce']) || !wp_verify_nonce(sanitize_text_field( wp_unslash($_POST['nonce'])), 'mrkv_ua_ship_nonce')) {
+		        wp_send_json_error(__('Invalid nonce.', 'mrkv-ua-shipping'), 403);
+		        wp_die();
+		    }
+
 			require_once MRKV_UA_SHIPPING_PLUGIN_PATH . 'classes/shipping_methods/ukr-poshta/api/mrkv-ua-shipping-api-ukr-poshta.php';
 			$mrkv_object_ukr_poshta = new MRKV_UA_SHIPPING_API_UKR_POSHTA(get_option('ukr-poshta_m_ua_settings'));
 
-			$key_search = isset($_POST['name']) ? $_POST['name'] : '';
+			$key_search = isset($_POST['name']) ? sanitize_text_field($_POST['name']) : '';
 
 	        # Send request
 	        $obj = $mrkv_object_ukr_poshta->send_post_request('address-classifier-ws/get_city_by_region_id_and_district_id_and_city_ua?region_id=&district_id=&city_ua=' . $key_search . '&fuzzy=1', 'GET');
@@ -60,11 +65,11 @@ if (!class_exists('MRKV_UA_SHIPPING_AJAX_UKR'))
        			}
 
        			# Return object
-	        	echo json_encode($cities);
+	        	echo wp_json_encode($cities);
        		}
        		else
        		{
-       			echo json_encode(array(array(
+       			echo wp_json_encode(array(array(
 	        		'value' => 'none',
         			'label' => __('No results for your request', 'mrkv-ua-shipping')
 	        	)));
@@ -75,10 +80,15 @@ if (!class_exists('MRKV_UA_SHIPPING_AJAX_UKR'))
 
 		public function get_ukr_poshta_warehouse()
 		{
+			if (!isset($_POST['nonce']) || !wp_verify_nonce(sanitize_text_field( wp_unslash($_POST['nonce'])), 'mrkv_ua_ship_nonce')) {
+		        wp_send_json_error(__('Invalid nonce.', 'mrkv-ua-shipping'), 403);
+		        wp_die();
+		    }
+
 			require_once MRKV_UA_SHIPPING_PLUGIN_PATH . 'classes/shipping_methods/ukr-poshta/api/mrkv-ua-shipping-api-ukr-poshta.php';
 			$mrkv_object_ukr_poshta = new MRKV_UA_SHIPPING_API_UKR_POSHTA(get_option('ukr-poshta_m_ua_settings'));
 
-			$city_ref = isset($_POST['ref']) ? $_POST['ref'] : '';
+			$city_ref = isset($_POST['ref']) ? sanitize_text_field($_POST['ref']) : '';
 
 			# Send request
 	        $obj = $mrkv_object_ukr_poshta->send_post_request('address-classifier-ws/get_postoffices_by_postcode_cityid_cityvpzid?city_id=' . $city_ref, 'GET');
@@ -96,11 +106,11 @@ if (!class_exists('MRKV_UA_SHIPPING_AJAX_UKR'))
        			}
 
        			# Return object
-	        	echo json_encode($warehouse);
+	        	echo wp_json_encode($warehouse);
        		}
        		else
        		{
-       			echo json_encode(array(array(
+       			echo wp_json_encode(array(array(
 	        		'value' => 'none',
         			'label' => __('No results for your request', 'mrkv-ua-shipping')
 	        	)));
@@ -111,10 +121,15 @@ if (!class_exists('MRKV_UA_SHIPPING_AJAX_UKR'))
 
 		public function get_ukr_poshta_street()
 		{
+			if (!isset($_POST['nonce']) || !wp_verify_nonce(sanitize_text_field( wp_unslash($_POST['nonce'])), 'mrkv_ua_ship_nonce')) {
+		        wp_send_json_error(__('Invalid nonce.', 'mrkv-ua-shipping'), 403);
+		        wp_die();
+		    }
+
 			require_once MRKV_UA_SHIPPING_PLUGIN_PATH . 'classes/shipping_methods/ukr-poshta/api/mrkv-ua-shipping-api-ukr-poshta.php';
 			$mrkv_object_ukr_poshta = new MRKV_UA_SHIPPING_API_UKR_POSHTA(get_option('ukr-poshta_m_ua_settings'));
 
-			$city_ref = isset($_POST['ref']) ? $_POST['ref'] : '';
+			$city_ref = isset($_POST['ref']) ? sanitize_text_field($_POST['ref']) : '';
 
 			# Send request
 	        $obj = $mrkv_object_ukr_poshta->send_post_request('address-classifier-ws/get_street_by_region_id_and_district_id_and_city_id_and_street_ua?city_id=' . $city_ref, 'GET');
@@ -132,11 +147,11 @@ if (!class_exists('MRKV_UA_SHIPPING_AJAX_UKR'))
        			}
 
        			# Return object
-	        	echo json_encode($warehouse);
+	        	echo wp_json_encode($warehouse);
        		}
        		else
        		{
-       			echo json_encode(array(array(
+       			echo wp_json_encode(array(array(
 	        		'value' => 'none',
         			'label' => __('No results for your request', 'mrkv-ua-shipping')
 	        	)));
@@ -147,11 +162,16 @@ if (!class_exists('MRKV_UA_SHIPPING_AJAX_UKR'))
 
 		public function get_ukr_poshta_house()
 		{
+			if (!isset($_POST['nonce']) || !wp_verify_nonce(sanitize_text_field( wp_unslash($_POST['nonce'])), 'mrkv_ua_ship_nonce')) {
+		        wp_send_json_error(__('Invalid nonce.', 'mrkv-ua-shipping'), 403);
+		        wp_die();
+		    }
+
 			require_once MRKV_UA_SHIPPING_PLUGIN_PATH . 'classes/shipping_methods/ukr-poshta/api/mrkv-ua-shipping-api-ukr-poshta.php';
 			$mrkv_object_ukr_poshta = new MRKV_UA_SHIPPING_API_UKR_POSHTA(get_option('ukr-poshta_m_ua_settings'));
 
-			$street_ref = isset($_POST['ref']) ? $_POST['ref'] : '';
-			$house = isset($_POST['name']) ? $_POST['name'] : '';
+			$street_ref = isset($_POST['ref']) ? sanitize_text_field($_POST['ref']) : '';
+			$house = isset($_POST['name']) ? sanitize_text_field($_POST['name']) : '';
 
 			# Send request
 	        $obj = $mrkv_object_ukr_poshta->send_post_request('address-classifier-ws/get_addr_house_by_street_id?street_id=' . $street_ref . '&housenumber=' . $house, 'GET');
@@ -169,11 +189,11 @@ if (!class_exists('MRKV_UA_SHIPPING_AJAX_UKR'))
        			}
 
        			# Return object
-	        	echo json_encode($houses);
+	        	echo wp_json_encode($houses);
        		}
        		else
        		{
-       			echo json_encode(array(array(
+       			echo wp_json_encode(array(array(
 	        		'value' => 'none',
         			'label' => __('No results for your request', 'mrkv-ua-shipping')
 	        	)));
@@ -184,10 +204,15 @@ if (!class_exists('MRKV_UA_SHIPPING_AJAX_UKR'))
 
 		public function get_warehouse_id()
 		{
+			if (!isset($_POST['nonce']) || !wp_verify_nonce(sanitize_text_field( wp_unslash($_POST['nonce'])), 'mrkv_ua_ship_nonce')) {
+		        wp_send_json_error(__('Invalid nonce.', 'mrkv-ua-shipping'), 403);
+		        wp_die();
+		    }
+
 			require_once MRKV_UA_SHIPPING_PLUGIN_PATH . 'classes/shipping_methods/ukr-poshta/api/mrkv-ua-shipping-api-ukr-poshta.php';
 			$mrkv_object_ukr_poshta = new MRKV_UA_SHIPPING_API_UKR_POSHTA(get_option('ukr-poshta_m_ua_settings'));
 
-			$warehouse_name = isset($_POST['warehouse_name']) ? $_POST['warehouse_name'] : '';
+			$warehouse_name = isset($_POST['warehouse_name']) ? sanitize_text_field($_POST['warehouse_name']) : '';
 
 			# Send request
 	        $obj = $mrkv_object_ukr_poshta->send_post_request_curl('ecom/0.0.1/addresses', 'POST', array( "postcode" => $warehouse_name  ));
@@ -202,15 +227,20 @@ if (!class_exists('MRKV_UA_SHIPPING_AJAX_UKR'))
 
 		public function get_address_id()
 		{
+			if (!isset($_POST['nonce']) || !wp_verify_nonce(sanitize_text_field( wp_unslash($_POST['nonce'])), 'mrkv_ua_ship_nonce')) {
+		        wp_send_json_error(__('Invalid nonce.', 'mrkv-ua-shipping'), 403);
+		        wp_die();
+		    }
+
 			require_once MRKV_UA_SHIPPING_PLUGIN_PATH . 'classes/shipping_methods/ukr-poshta/api/mrkv-ua-shipping-api-ukr-poshta.php';
 			$mrkv_object_ukr_poshta = new MRKV_UA_SHIPPING_API_UKR_POSHTA(get_option('ukr-poshta_m_ua_settings'));
 
-			$postcode = isset($_POST['postcode']) ? $_POST['postcode'] : '';
-			$country = isset($_POST['country']) ? $_POST['country'] : '';
-			$region = isset($_POST['region']) ? $_POST['region'] : '';
-			$city = isset($_POST['city']) ? $_POST['city'] : '';
-			$street = isset($_POST['street']) ? $_POST['street'] : '';
-			$apartment_number = isset($_POST['apartment_number']) ? $_POST['apartment_number'] : '';
+			$postcode = isset($_POST['postcode']) ? sanitize_text_field($_POST['postcode']) : '';
+			$country = isset($_POST['country']) ? sanitize_text_field($_POST['country']) : '';
+			$region = isset($_POST['region']) ? sanitize_text_field($_POST['region']) : '';
+			$city = isset($_POST['city']) ? sanitize_text_field($_POST['city']) : '';
+			$street = isset($_POST['street']) ? sanitize_text_field($_POST['street']) : '';
+			$apartment_number = isset($_POST['apartment_number']) ? sanitize_text_field($_POST['apartment_number']) : '';
 
 			# Send request
 	        $obj = $mrkv_object_ukr_poshta->send_post_request_curl('ecom/0.0.1/addresses', 'POST', array(

@@ -79,6 +79,8 @@ if (!class_exists('MRKV_UA_SHIPPING_UKR_POSHTA_INVOICE'))
 			$transfer_post_pay = $this->get_transfer_post_pay($declared_price);
 			$weight = $this->get_weight('shipment');
 			$length = $this->get_length('shipment', $dimension_unit);
+			$height = $this->get_height_shipment('shipment', $dimension_unit);
+			$width = $this->get_width_shipment('shipment', $dimension_unit);
 
 			$args = array(
 		    	"sender" 			=> array( "uuid" => $sender ),
@@ -96,6 +98,8 @@ if (!class_exists('MRKV_UA_SHIPPING_UKR_POSHTA_INVOICE'))
 		    	"parcels"			=> array( array(
 		    		"weight"			=> $weight,
 		    		"length"			=> $length,
+		    		"height"			=> $height,
+		    		"width"			=> $width,
 		    		"declaredPrice" 	=> $declared_price,
 			    )),
 			    "checkOnDelivery"	=> true,
@@ -486,6 +490,72 @@ if (!class_exists('MRKV_UA_SHIPPING_UKR_POSHTA_INVOICE'))
 				}
 
 				return $length;
+			}
+		}
+
+		private function get_height_shipment($shipment_type, $dimension_unit)
+		{
+			if(isset($this->post_fields['mrkv_ua_ship_invoice_shipment_height']) && $this->post_fields['mrkv_ua_ship_invoice_shipment_height'])
+			{
+				return $this->post_fields['mrkv_ua_ship_invoice_shipment_height'];
+			}
+			else
+			{
+				$height = 0;
+
+				if(isset($this->settings_shipping[$shipment_type]['height']) && $this->settings_shipping[$shipment_type]['height'])
+				{
+					$height = $this->settings_shipping[$shipment_type]['height'];
+				}
+
+
+				foreach ( $this->order->get_items() as $item_id => $product_item ) 
+	            {
+	            	$product_id = $product_item->get_variation_id() ? $product_item->get_variation_id() : $product_item->get_product_id();
+			            	
+	            	$product = wc_get_product($product_id);
+
+					if ( ! $product ) continue;
+
+					$item_height = ( null !== $product->get_height() && $product->get_height()) ? wc_get_dimension( $product->get_height(), 'cm', $dimension_unit ) : 0.00;
+
+	            	$height = ($item_height > $height) ? $item_height : $height;
+				}
+
+				return $height;
+			}
+		}
+
+		private function get_width_shipment($shipment_type, $dimension_unit)
+		{
+			if(isset($this->post_fields['mrkv_ua_ship_invoice_shipment_width']) && $this->post_fields['mrkv_ua_ship_invoice_shipment_width'])
+			{
+				return $this->post_fields['mrkv_ua_ship_invoice_shipment_width'];
+			}
+			else
+			{
+				$width = 0;
+
+				if(isset($this->settings_shipping[$shipment_type]['width']) && $this->settings_shipping[$shipment_type]['width'])
+				{
+					$width = $this->settings_shipping[$shipment_type]['width'];
+				}
+
+
+				foreach ( $this->order->get_items() as $item_id => $product_item ) 
+	            {
+	            	$product_id = $product_item->get_variation_id() ? $product_item->get_variation_id() : $product_item->get_product_id();
+			            	
+	            	$product = wc_get_product($product_id);
+
+					if ( ! $product ) continue;
+
+					$item_width = ( null !== $product->get_width() && $product->get_width()) ? wc_get_dimension( $product->get_width(), 'cm', $dimension_unit ) : 0.00;
+
+	            	$width = ($item_width > $width) ? $item_width : $width;
+				}
+
+				return $width;
 			}
 		}
 

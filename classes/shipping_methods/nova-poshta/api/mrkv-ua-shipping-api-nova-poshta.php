@@ -63,13 +63,13 @@ if (!class_exists('MRKV_UA_SHIPPING_API_NOVA_POSHTA'))
 				'headers' => array( 
 					"content-type" => "application/json",
 				),
-				'body' => \json_encode( $params ),
+				'body' => \wp_json_encode( $params ),
 				'cookies' => array(),
 				'sslverify' => true,
 			);
 
 			# Save to log
-			$this->debug_log->add_data_request(\json_encode( $params ));
+			$this->debug_log->add_data_request(\wp_json_encode( $params ));
 
 			# Send request
 			$response = wp_remote_post( $this->api_url, $args );
@@ -151,6 +151,34 @@ if (!class_exists('MRKV_UA_SHIPPING_API_NOVA_POSHTA'))
 				# Return false
 	    		return false;
 	    	}
+	    }
+
+	    /**
+	     * Remove invoices from Nova Poshta platform
+	     * @param array Invoices
+	     * */
+	    public function remove_invoice_data_platform($invoices_ref)
+	    {
+	    	if(isset($this->settings_method['api_key']) && $this->settings_method['api_key'])
+	    	{
+	    		if(is_array($invoices_ref) && !empty($invoices_ref))
+	    		{
+	    			# Set arguments
+		    		$args = array(
+			            "apiKey" => $this->settings_method['api_key'],
+			            "modelName" => "InternetDocument",
+			            "calledMethod" => "delete",
+			            "methodProperties" => array(
+				            "DocumentRefs" => $invoices_ref
+				        )
+			        );
+
+			        # Send request
+	    			$obj = $this->send_post_request( $args );
+	    		}
+	    	}
+
+	    	return;
 	    }
 
 	    /**
