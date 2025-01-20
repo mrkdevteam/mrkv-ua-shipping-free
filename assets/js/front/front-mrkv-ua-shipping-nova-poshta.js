@@ -98,7 +98,7 @@ jQuery(window).on('load', function()
 	var default_cities = [];
 
 	mrkv_ua_ship_helper.nova_city_area.map(function(item) {
-        default_cities.push({ id: item.label, text: item.label, ref: item.value, area: item.area });
+        default_cities.push({ id: item.label, text: item.label, ref: item.value, area: item.area, simple_label: item.label });
     });
 
     var $select;
@@ -153,7 +153,7 @@ jQuery(window).on('load', function()
 
 		    		return {
 				        results: data.map(function(item) {
-	                        return { id: item.label, text: item.label, ref: item.value, area: item.area };
+	                        return { id: item.label, text: item.label, ref: item.value, area: item.area, simple_label: item.label_simple };
 	                    })
 				    };
 		    	}
@@ -163,7 +163,7 @@ jQuery(window).on('load', function()
 
 		    		return {
 				        results: mrkv_ua_ship_helper.nova_city_area.map(function(item) {
-	                        return { id: item.label, text: item.label, ref: item.value, area: item.area };
+	                        return { id: item.label, text: item.label, ref: item.value, area: item.area, simple_label: item.label };
 	                    })
 				    };	
 		    	}
@@ -199,6 +199,7 @@ jQuery(window).on('load', function()
  			jQuery(this).val(current_option.id);
 	    	jQuery('#mrkv_ua_shipping_nova-poshta_city_ref').val(current_option.ref);
 	    	jQuery('#mrkv_ua_shipping_nova-poshta_area_name').val(current_option.area);
+	    	jQuery('#mrkv_ua_shipping_nova-poshta_city_label').val(current_option.simple_label);
 	    	jQuery('#mrkv_ua_shipping_nova-poshta_warehouse_ref').val('');
     		jQuery('#mrkv_ua_shipping_nova-poshta_warehouse_number').val('');
 
@@ -421,6 +422,7 @@ jQuery(window).on('load', function()
 
     		jQuery('#mrkv_ua_shipping_nova-poshta_poshtamat_city_ref').val(current_option.ref);
 	    	jQuery('#mrkv_ua_shipping_nova-poshta_poshtamat_area_name').val(current_option.area);
+	    	jQuery('#mrkv_ua_shipping_nova-poshta_poshtamat_city_label').val(current_option.simple_label);
 	    	jQuery('#mrkv_ua_shipping_nova-poshta_poshtamat_ref').val('');
     		jQuery('#mrkv_ua_shipping_nova-poshta_poshtamat_number').val('');
 
@@ -562,6 +564,7 @@ jQuery(window).on('load', function()
 
 	    	jQuery('#mrkv_ua_shipping_nova-poshta_address_city_ref').val(current_option.ref);
 	    	jQuery('#mrkv_ua_shipping_nova-poshta_address_area_name').val(current_option.area);
+	    	jQuery('#mrkv_ua_shipping_nova-poshta_address_city_label').val(current_option.simple_label);
 	    	jQuery('#mrkv_ua_shipping_nova-poshta_address_street_ref').val('');
 	        jQuery('#mrkv_ua_shipping_nova-poshta_address_house').val('');
 	        jQuery('#mrkv_ua_shipping_nova-poshta_address_flat').val('');

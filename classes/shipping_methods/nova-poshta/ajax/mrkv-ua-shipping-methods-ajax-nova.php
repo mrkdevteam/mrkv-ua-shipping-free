@@ -103,9 +103,9 @@ if (!class_exists('MRKV_UA_SHIPPING_AJAX_NOVA'))
 			$args = array(
 	            'apiKey' => $mrkv_object_nova_poshta->get_api_key(),
 	            'modelName' => 'AddressGeneral',
-	            'calledMethod' => 'getCities',
+	            'calledMethod' => 'searchSettlements',
             	'methodProperties' => array(
-            		'FindByString' => $key_search .'%',
+            		'CityName' => $key_search,
             		'Limit' => '50'
             	)
 	        );
@@ -113,16 +113,17 @@ if (!class_exists('MRKV_UA_SHIPPING_AJAX_NOVA'))
 	        # Send request
 	        $obj = $mrkv_object_nova_poshta->send_post_request( $args );
 
-	        if(isset($obj['data'][0]))
+	        if(isset($obj['data'][0]['Addresses'][0]))
 	        {
 	        	$areas = array();
 
-	        	foreach($obj['data'] as $area)
+	        	foreach($obj['data'][0]['Addresses'] as $area)
 	        	{
 	        		$areas[] = array(
-	        			'value' => $area['Ref'],
-	        			'label' => $area['Description'],
-	        			'area' => $area['AreaDescription']
+	        			'value' => $area['DeliveryCity'],
+	        			'label' => $area['Present'],
+	        			'area' => $area['Area'],
+	        			'label_simple' => $area['MainDescription']
 	        		);
 	        	}
 

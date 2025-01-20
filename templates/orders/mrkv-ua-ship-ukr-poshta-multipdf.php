@@ -14,7 +14,7 @@ if ( isset( $_POST['bearer'] ) && isset( $_POST['cp_token'] ) ) {
   $tokenQuery = "?token=" . $cptoken;
 
   $urlGr = $apiGroup . $tokenQuery;
-  $newgroup = "Mrkv Group " . date("Y-m-d H:i:s");
+  $newgroup = "Mrkv Group " . gmdate("Y-m-d H:i:s");
   $type = $_POST['sendtype'];
   $resGroup = makeShipmentGroup( $bearer, $urlGr, $newgroup, $type ); 
 

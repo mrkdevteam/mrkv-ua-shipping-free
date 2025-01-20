@@ -39,7 +39,7 @@ if (!class_exists('MRKV_UA_SHIPPING_WOO_ORDER'))
 
 	        $order_id = $post->ID;
 
-	        if ($order_id && 'shop_order' === get_post_type($order_id)) 
+	        if ($order_id) 
 	        {
 	            $order = wc_get_order($order_id);
 

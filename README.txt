@@ -4,7 +4,7 @@ Tags: Nova Poshta, нова пошта, новая почта, доставка
 Requires at least: 5.0
 Tested up to: 6.7
 Requires PHP: 7.0
-Stable tag: 1.0.20
+Stable tag: 1.0.21
 License: GPLv2
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -152,6 +152,11 @@ https://youtu.be/47-VrH_QJAE
 
 
 == Changelog ==
+
+= 1.0.21 =
+* [new] зробили поле номер квартири УП не обов'язковим
+* [new] оновили вивід міст НП
+* [new] додали вивід ТТН та статуса доставки на сторінці замовлень клієнта
 
 = 1.0.20 =
 * [new] додали параметри розміру відправлення для Укрпошти

@@ -320,10 +320,7 @@ if (!class_exists('MRKV_UA_SHIPPING_NOVA_POSHTA_INVOICE'))
 
 		private function get_invoice_date_time()
 		{
-			# Change Timezone
-	        date_default_timezone_set("Europe/Kiev");
-
-	        return date( 'd.m.Y');
+	        return gmdate( 'd.m.Y');
 		}
 
 		private function get_service_sender_type()

@@ -37,7 +37,7 @@ if (!class_exists('MRKV_UA_SHIPPING_LOG'))
 		{
 			# Set variable
 			$this->method_slug = $method_slug;
-			$this->datetime_log = date("Y-m-d h:i:sa");
+			$this->datetime_log = gmdate("Y-m-d h:i:sa");
 			$this->active_log = $active_log;
 			$this->active_log_request = $active_log_request;
 

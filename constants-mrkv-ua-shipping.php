@@ -53,7 +53,12 @@ define('MRKV_UA_SHIPPING_LIST', array(
 						'options' => array('' => __('Choose the city', 'mrkv-ua-shipping')),
 						'required' => true,
 						'label' => __('City', 'mrkv-ua-shipping'),
-						'replace' => '_city',
+						'replace' => '',
+					),
+					'_city_label' => array(
+						'type' => 'hidden',
+						'autocomplete' => 'on',
+						'replace' => '_city'
 					),
 					'_city_ref' => array(
 						'type' => 'hidden',
@@ -98,7 +103,12 @@ define('MRKV_UA_SHIPPING_LIST', array(
 						'options' => array('' => __('Choose the city', 'mrkv-ua-shipping')),
 						'required' => true,
 						'label' => __('City', 'mrkv-ua-shipping'),
-						'replace' => '_city',
+						'replace' => '',
+					),
+					'_city_label' => array(
+						'type' => 'hidden',
+						'autocomplete' => 'on',
+						'replace' => '_city'
 					),
 					'_city_ref' => array(
 						'type' => 'hidden',
@@ -156,7 +166,12 @@ define('MRKV_UA_SHIPPING_LIST', array(
 						'options' => array('' => __('Choose the city', 'mrkv-ua-shipping')),
 						'required' => true,
 						'label' => __('City', 'mrkv-ua-shipping'),
-						'replace' => '_city',
+						'replace' => '',
+					),
+					'_city_label' => array(
+						'type' => 'hidden',
+						'autocomplete' => 'on',
+						'replace' => '_city'
 					),
 					'_city_ref' => array(
 						'type' => 'hidden',
@@ -351,7 +366,7 @@ define('MRKV_UA_SHIPPING_LIST', array(
 					),
 					'_flat' => array(
 						'type' => 'text',
-						'required' => true,
+						'required' => false,
 						'label' => __('Flat', 'mrkv-ua-shipping'),
 						'placeholder' => __('Number of flat', 'mrkv-ua-shipping'),
 						'replace' => '_flat',

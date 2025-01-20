@@ -28,6 +28,96 @@ if (!class_exists('MRKV_UA_SHIPPING_WOO_ORDERS'))
 	        }
 
 	        add_action('admin_footer', array($this, 'mrkv_ua_ship_form_create_invoice'));
+
+	        add_filter( 'woocommerce_account_orders_columns', array($this, 'add_account_orders_column_ttn'), 10, 1 );
+	        add_action( 'woocommerce_my_account_my_orders_column_mrkv_ua_ship_ttn-column', array($this, 'add_account_orders_column_rows_ttn') );
+		}
+
+		public function add_account_orders_column_ttn($columns)
+		{
+			$order_actions  = $columns['order-actions']; 
+		    unset($columns['order-actions']); 
+
+		    $columns['mrkv_ua_ship_ttn-column'] = __('Invoice', 'mrkv-ua-shipping');
+
+		    $columns['order-actions'] = $order_actions;
+
+		    return $columns;
+		}
+
+		public function add_account_orders_column_rows_ttn($order)
+		{
+			$keys_shipping = array_keys(MRKV_UA_SHIPPING_LIST);
+    		$key = '';
+    		$current_shipping = '';
+
+	    	foreach($order->get_shipping_methods() as $shipping)
+            {
+            	foreach($keys_shipping as $key_ship)
+				{
+					$current_shipping = $shipping->get_method_id();
+
+					if(str_contains($shipping->get_method_id(), $key_ship))
+					{
+						$key = $key_ship;
+					}
+					if(in_array($current_shipping, MRKV_UA_SHIPPING_LIST[$key_ship]['old_slugs']))
+					{
+						$key = $key_ship;
+						$current_shipping = array_search($shipping->get_method_id(), MRKV_UA_SHIPPING_LIST[$key_ship]['old_slugs']);
+					}
+				}
+            }
+
+			$mrkv_ua_ship_invoice = $order->get_meta('mrkv_ua_ship_invoice_number');
+
+			if(!$mrkv_ua_ship_invoice)
+			{
+				$mrkv_ua_ship_invoice = $order->get_meta(MRKV_UA_SHIPPING_LIST[$key]['old_ttn_slug']);
+			}
+
+			esc_html_e($mrkv_ua_ship_invoice);
+
+			$shipping_settings = get_option($key . '_m_ua_settings');
+
+			if($key == 'ukr-poshta')
+			{
+				$mrkv_ua_ship_invoice = $order->get_meta('mrkv_ua_ship_invoice_ref');
+			}
+			else
+			{
+				$invoices_array = array('invoice' => $mrkv_ua_ship_invoice);
+				$invoices_object = json_decode(json_encode($invoices_array));
+				$mrkv_ua_ship_invoice = array($invoices_object);
+
+			}
+
+			$api_class = MRKV_UA_SHIPPING_LIST[$key]['api_class'];
+
+			require_once MRKV_UA_SHIPPING_PLUGIN_PATH . 'classes/shipping_methods/' . $key 
+							. '/api/mrkv-ua-shipping-api-' . $key . '.php';
+			$mrkv_global_shipping_object = new $api_class($shipping_settings);
+			$invoices_result = $mrkv_global_shipping_object->get_status_documents($mrkv_ua_ship_invoice);
+
+			if($key == 'ukr-poshta')
+			{
+				if(isset($invoices_result['status']))
+				{
+					echo '<br>';
+					esc_html_e($invoices_result['status']);
+				}
+			}
+			else
+			{
+				foreach($invoices_result as $data_invoice)
+				{
+					if(isset($data_invoice['Status']))
+					{
+						echo '<br>';
+						esc_html_e($data_invoice['Status']);
+					}
+				}
+			}
 		}
 
 		public function mrkv_ua_ship_form_create_invoice()
