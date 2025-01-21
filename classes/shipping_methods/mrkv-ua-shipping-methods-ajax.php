@@ -477,7 +477,7 @@ if (!class_exists('MRKV_UA_SHIPPING_METHODS_AJAX'))
 				# Validate shipping key
         		$allowed_keys = array_keys(MRKV_UA_SHIPPING_LIST);
 
-        		if (in_array($current_ship_key, $allowed_keys, true)) 
+        		if (in_array($key, $allowed_keys, true)) 
         		{
         			foreach(MRKV_UA_SHIPPING_LIST[$key]['method'][$current_shipping]['checkout_fields'] as $field_id => $field_val)
 	    			{
