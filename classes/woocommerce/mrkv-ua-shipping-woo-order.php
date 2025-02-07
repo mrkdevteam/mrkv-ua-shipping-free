@@ -126,6 +126,7 @@ if (!class_exists('MRKV_UA_SHIPPING_WOO_ORDER'))
 					                        order_id: orderId,
 					                        shipping_method: shippingMethod,
 					                        shipping_method_name: shippingMethodName,
+					                        nonce: '<?php echo wp_create_nonce('mrkv_ua_ship_nonce'); ?>'
 					                    },
 					                    success: function(response) 
 					                    {

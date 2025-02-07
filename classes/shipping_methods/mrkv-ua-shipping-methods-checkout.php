@@ -174,17 +174,17 @@ if (!class_exists('MRKV_UA_SHIPPING_METHODS_CHECKOUT'))
 						        				$args['custom_attributes']['data-default'] = $default_value;
 						        			}
 
-						        			if(isset($args['label']) && function_exists( 'pll_translate_string' ))
+						        			if(isset($args['label']))
 						        			{
 						        				$args['label'] = esc_html( $translate_labels[$key]['method'][$method]['checkout_fields'][$id]['label'] );
 						        			}
 
-						        			if(isset($args['placeholder']) && function_exists( 'pll_translate_string' ))
+						        			if(isset($args['placeholder']))
 						        			{
 						        				$args['placeholder'] = esc_html( $translate_labels[$key]['method'][$method]['checkout_fields'][$id]['placeholder'] );
 						        			}
 
-						        			if(isset($args['options']) && !empty($args['options']) && function_exists( 'pll_translate_string' ))
+						        			if(isset($args['options']) && !empty($args['options']))
 						        			{
 						        				foreach($args['options'] as $key_option => $value_option)
 						        				{

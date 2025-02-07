@@ -407,6 +407,11 @@ if (!class_exists('MRKV_UA_SHIPPING_METHODS_AJAX'))
 				$quantity = count($order->get_items());
 				$description = str_replace( "[quantity_p]", $quantity, $description );
 			}
+			if(str_contains($description, '[cost]')) 
+			{
+				$cost = $order->get_total();
+				$description = str_replace( "[cost]", $quantity, $description );
+			}
 			
 			return $description;
 	    }
