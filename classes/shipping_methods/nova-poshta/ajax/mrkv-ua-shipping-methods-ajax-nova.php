@@ -198,11 +198,22 @@ if (!class_exists('MRKV_UA_SHIPPING_AJAX_NOVA'))
 	        	$areas = array();
 	        	$skip_weight = $warehouse_type ? true : false;
 
-	        	$areas[] = array(
-        			'value' => '',
-        			'label' => __('Choose the warehouse', 'mrkv-ua-shipping'),
-        			'number' => ''
-        		);
+	        	if($warehouse_type)
+	        	{
+	        		$areas[] = array(
+	        			'value' => '',
+	        			'label' => __('Choose the poshtomat', 'mrkv-ua-shipping'),
+	        			'number' => ''
+	        		);
+	        	}
+	        	else
+	        	{
+	        		$areas[] = array(
+	        			'value' => '',
+	        			'label' => __('Choose the warehouse', 'mrkv-ua-shipping'),
+	        			'number' => ''
+	        		);
+	        	}
 
 	        	if($skip_weight)
 	        	{

@@ -2,6 +2,25 @@
 
 $translate_labels = array(
 	'nova-poshta' => array(
+		'name' => __('Nova Poshta', 'mrkv-ua-shipping'),
+		'description' => __('Add shipping method, calculate shipping costs, create and manage shipments, both manually and automatically. Using API 2.0 and connects directly to the Nova Poshta server for fast and secure user experience.', 'mrkv-ua-shipping'),
+		'invoice_class' => 'MRKV_UA_SHIPPING_NOVA_POSHTA_INVOICE',
+		'api_class' => 'MRKV_UA_SHIPPING_API_NOVA_POSHTA',
+		'settings_class' => 'MRKV_UA_SHIPPING_SETTINGS_NOVA_POSHTA',
+		'pages' => array(
+			'invoices' => __('My shipments', 'mrkv-ua-shipping')
+		),
+		'invoice_links' => array(
+			'invoice_pdf' => 'https://my.novaposhta.ua/orders/printDocument/orders[]/',
+			'invoice_sticker' => 'https://my.novaposhta.ua/orders/printMarkings/orders[]/',
+			'invoice_link_end' => '/type/pdf/apiKey/',
+		),
+		'old_slugs' => array(
+			'mrkv_ua_shipping_nova-poshta' => 'nova_poshta_shipping_method',
+			'mrkv_ua_shipping_nova-poshta_poshtamat' => 'nova_poshta_shipping_method_poshtomat',
+			'mrkv_ua_shipping_nova-poshta_address'=> 'npttn_address_shipping_method'
+		),
+		'old_ttn_slug' => 'novaposhta_ttn',
 		'method' => array(
 			'mrkv_ua_shipping_nova-poshta' => array(
 				'class' => 'MRKV_UA_SHIPPING_NOVA_POSHTA',
@@ -10,26 +29,31 @@ $translate_labels = array(
 				'checkout_fields' => array(
 					'_city' => array(
 						'type' => 'select',
-						'autocomplete' => 'on',
+						'autocomplete' => 'off',
 						'options' => array('' => __('Choose the city', 'mrkv-ua-shipping')),
 						'required' => true,
 						'label' => __('City', 'mrkv-ua-shipping'),
-						'replace' => '_city',
+						'replace' => '',
+					),
+					'_city_label' => array(
+						'type' => 'hidden',
+						'autocomplete' => 'off',
+						'replace' => '_city'
 					),
 					'_city_ref' => array(
 						'type' => 'hidden',
-						'autocomplete' => 'on',
+						'autocomplete' => 'off',
 						'replace' => '_city_ref',
 						'old_slug' => 'np_city_ref'
 					),
 					'_area_name' => array(
 						'type' => 'hidden',
-						'autocomplete' => 'on',
+						'autocomplete' => 'off',
 						'replace' => '_state'
 					),
 					'_warehouse' => array(
 						'type' => 'select',
-						'autocomplete' => 'on',
+						'autocomplete' => 'off',
 						'options' => array('' => __('Choose the warehouse', 'mrkv-ua-shipping')),
 						'required' => true,
 						'label' => __('Warehouse/poshtomat', 'mrkv-ua-shipping'),
@@ -37,13 +61,15 @@ $translate_labels = array(
 					),
 					'_warehouse_ref' => array(
 						'type' => 'hidden',
-						'autocomplete' => 'on',
+						'autocomplete' => 'off',
 						'replace' => '_warehouse_ref',
-						'old_slug' => 'np_warehouse_ref'
+						'old_slug' => 'np_warehouse_ref',
+						'required' => true,
+						'label' => __('Warehouse/poshtomat', 'mrkv-ua-shipping'),
 					),
 					'_warehouse_number' => array(
 						'type' => 'hidden',
-						'autocomplete' => 'on',
+						'autocomplete' => 'off',
 						'replace' => '_postcode'
 					)
 				)
@@ -55,26 +81,31 @@ $translate_labels = array(
 				'checkout_fields' => array(
 					'_city' => array(
 						'type' => 'select',
-						'autocomplete' => 'on',
+						'autocomplete' => 'off',
 						'options' => array('' => __('Choose the city', 'mrkv-ua-shipping')),
 						'required' => true,
 						'label' => __('City', 'mrkv-ua-shipping'),
-						'replace' => '_city',
+						'replace' => '',
+					),
+					'_city_label' => array(
+						'type' => 'hidden',
+						'autocomplete' => 'off',
+						'replace' => '_city'
 					),
 					'_city_ref' => array(
 						'type' => 'hidden',
-						'autocomplete' => 'on',
+						'autocomplete' => 'off',
 						'replace' => '_city_ref',
 						'old_slug' => 'np_city_ref'
 					),
 					'_area_name' => array(
 						'type' => 'hidden',
-						'autocomplete' => 'on',
+						'autocomplete' => 'off',
 						'replace' => '_state'
 					),
 					'_name' => array(
 						'type' => 'select',
-						'autocomplete' => 'on',
+						'autocomplete' => 'off',
 						'options' => array('' => __('Choose the poshtomat', 'mrkv-ua-shipping')),
 						'required' => true,
 						'label' => __('Poshtomat', 'mrkv-ua-shipping'),
@@ -82,13 +113,15 @@ $translate_labels = array(
 					),
 					'_ref' => array(
 						'type' => 'hidden',
-						'autocomplete' => 'on',
+						'autocomplete' => 'off',
 						'replace' => '_warehouse_ref',
-						'old_slug' => 'np_warehouse_ref'
+						'old_slug' => 'np_warehouse_ref',
+						'required' => true,
+						'label' => __('Poshtomat', 'mrkv-ua-shipping'),
 					),
 					'_number' => array(
 						'type' => 'hidden',
-						'autocomplete' => 'on',
+						'autocomplete' => 'off',
 						'replace' => '_postcode'
 					)
 				)
@@ -105,34 +138,40 @@ $translate_labels = array(
 						'placeholder' => __('Enter the patronymic', 'mrkv-ua-shipping'),
 						'replace' => '_patronymic',
 						'exclude' => true,
-						'order_edit' => true
+						'order_edit' => true,
+						'autocomplete' => 'off',
 					),
 					'_patronymic_enabled' => array(
 						'type' => 'hidden',
-						'autocomplete' => 'on'
+						'autocomplete' => 'off',
 					),
 					'_city' => array(
 						'type' => 'select',
-						'autocomplete' => 'on',
+						'autocomplete' => 'off',
 						'options' => array('' => __('Choose the city', 'mrkv-ua-shipping')),
 						'required' => true,
 						'label' => __('City', 'mrkv-ua-shipping'),
-						'replace' => '_city',
+						'replace' => '',
+					),
+					'_city_label' => array(
+						'type' => 'hidden',
+						'autocomplete' => 'off',
+						'replace' => '_city'
 					),
 					'_city_ref' => array(
 						'type' => 'hidden',
-						'autocomplete' => 'on',
+						'autocomplete' => 'off',
 						'replace' => '_city_ref',
 						'old_slug' => 'np_city_ref'
 					),
 					'_area_name' => array(
 						'type' => 'hidden',
-						'autocomplete' => 'on',
+						'autocomplete' => 'off',
 						'replace' => '_state'
 					),
 					'_street' => array(
 						'type' => 'text',
-						'autocomplete' => 'on',
+						'autocomplete' => 'off',
 						'required' => true,
 						'label' => __('Street', 'mrkv-ua-shipping'),
 						'placeholder' => __('Enter the street...', 'mrkv-ua-shipping'),
@@ -140,7 +179,7 @@ $translate_labels = array(
 					),
 					'_street_ref' => array(
 						'type' => 'hidden',
-						'autocomplete' => 'on',
+						'autocomplete' => 'off',
 						'replace' => '_street_ref'
 					),
 					'_house' => array(
@@ -148,7 +187,8 @@ $translate_labels = array(
 						'required' => true,
 						'label' => __('House', 'mrkv-ua-shipping'),
 						'placeholder' => __('Number of house', 'mrkv-ua-shipping'),
-						'replace' => '_address_2'
+						'replace' => '_address_2',
+						'autocomplete' => 'off',
 					),
 					'_flat' => array(
 						'type' => 'text',
@@ -156,11 +196,12 @@ $translate_labels = array(
 						'label' => __('Flat', 'mrkv-ua-shipping'),
 						'placeholder' => __('Number of flat', 'mrkv-ua-shipping'),
 						'replace' => '_flat',
-						'order_edit' => true
+						'order_edit' => true,
+						'autocomplete' => 'off',
 					),
 					'_address_ref' => array(
 						'type' => 'hidden',
-						'autocomplete' => 'on',
+						'autocomplete' => 'off',
 						'replace' => '_address_ref'
 					)
 				)
@@ -168,6 +209,24 @@ $translate_labels = array(
 		)
 	),
 	'ukr-poshta' => array(
+		'name' => __('UkrPoshta', 'mrkv-ua-shipping'),
+		'description' => __('Works with both domestic and international shipments. Add shipping method, calculate shipping costs, create and manage shipments, both manually and automatically. Get 10% off when creating shipments with our plugin.', 'mrkv-ua-shipping'),
+		'api_class' => 'MRKV_UA_SHIPPING_API_UKR_POSHTA',
+		'invoice_class' => 'MRKV_UA_SHIPPING_UKR_POSHTA_INVOICE',
+		'settings_class' => 'MRKV_UA_SHIPPING_SETTINGS_UKR_POSHTA',
+		'pages' => array(
+			'invoices' => __('My shipments', 'mrkv-ua-shipping')
+		),
+		'invoice_links' => array(
+			'invoice_pdf' => 'https://www.ukrposhta.ua/ecom/0.0.1/shipments/',
+			'invoice_sticker' => '',
+			'invoice_link_end' => '/sticker?token=',
+		),
+		'old_slugs' => array(
+			'mrkv_ua_shipping_ukr-poshta' => 'ukrposhta_shippping',
+			'mrkv_ua_shipping_ukr-poshta_address' => 'ukrposhta_address_shippping',
+		),
+		'old_ttn_slug' => 'ukrposhta_ttn',
 		'method' => array(
 			'mrkv_ua_shipping_ukr-poshta' => array(
 				'class' => 'MRKV_UA_SHIPPING_UKR_POSHTA',
@@ -182,14 +241,15 @@ $translate_labels = array(
 						'replace' => '_patronymic',
 						'order_edit' => true,
 						'exclude' => true,
+						'autocomplete' => 'off',
 					),
 					'_patronymic_enabled' => array(
 						'type' => 'hidden',
-						'autocomplete' => 'on'
+						'autocomplete' => 'off',
 					),
 					'_city' => array(
 						'type' => 'select',
-						'autocomplete' => 'on',
+						'autocomplete' => 'off',
 						'options' => array('' => __('Choose the city', 'mrkv-ua-shipping')),
 						'required' => true,
 						'label' => __('City', 'mrkv-ua-shipping'),
@@ -197,17 +257,17 @@ $translate_labels = array(
 					),
 					'_city_ref' => array(
 						'type' => 'hidden',
-						'autocomplete' => 'on',
+						'autocomplete' => 'off',
 						'replace' => '_city_ref'
 					),
 					'_area_name' => array(
 						'type' => 'hidden',
-						'autocomplete' => 'on',
+						'autocomplete' => 'off',
 						'replace' => '_state'
 					),
 					'_warehouse' => array(
 						'type' => 'select',
-						'autocomplete' => 'on',
+						'autocomplete' => 'off',
 						'options' => array('' => __('Choose the warehouse', 'mrkv-ua-shipping')),
 						'required' => true,
 						'label' => __('Warehouse', 'mrkv-ua-shipping'),
@@ -215,12 +275,14 @@ $translate_labels = array(
 					),
 					'_warehouse_ref' => array(
 						'type' => 'hidden',
-						'autocomplete' => 'on',
-						'replace' => '_postcode'
+						'autocomplete' => 'off',
+						'replace' => '_postcode',
+						'required' => true,
+						'label' => __('Warehouse', 'mrkv-ua-shipping'),
 					),
 					'_address_ref' => array(
 						'type' => 'hidden',
-						'autocomplete' => 'on',
+						'autocomplete' => 'off',
 						'replace' => '_address_ref'
 					)
 				)
@@ -236,11 +298,12 @@ $translate_labels = array(
 						'label' => __('Patronymic', 'mrkv-ua-shipping'),
 						'placeholder' => __('Enter the patronymic', 'mrkv-ua-shipping'),
 						'replace' => '_patronymic',
-						'order_edit' => true
+						'order_edit' => true,
+						'autocomplete' => 'off',
 					),
 					'_city' => array(
 						'type' => 'select',
-						'autocomplete' => 'on',
+						'autocomplete' => 'off',
 						'options' => array('' => __('Choose the city', 'mrkv-ua-shipping')),
 						'required' => true,
 						'label' => __('City', 'mrkv-ua-shipping'),
@@ -248,27 +311,27 @@ $translate_labels = array(
 					),
 					'_city_ref' => array(
 						'type' => 'hidden',
-						'autocomplete' => 'on',
+						'autocomplete' => 'off',
 						'replace' => '_city_ref'
 					),
 					'_area_name' => array(
 						'type' => 'hidden',
-						'autocomplete' => 'on',
+						'autocomplete' => 'off',
 						'replace' => '_state'
 					),
 					'_area_id' => array(
 						'type' => 'hidden',
-						'autocomplete' => 'on',
+						'autocomplete' => 'off',
 						'replace' => '_state_id'
 					),
 					'_district_id' => array(
 						'type' => 'hidden',
-						'autocomplete' => 'on',
+						'autocomplete' => 'off',
 						'replace' => '_district_id'
 					),
 					'_street' => array(
 						'type' => 'select',
-						'autocomplete' => 'on',
+						'autocomplete' => 'off',
 						'options' => array('' => __('Choose the street', 'mrkv-ua-shipping')),
 						'required' => true,
 						'label' => __('Street', 'mrkv-ua-shipping'),
@@ -276,12 +339,12 @@ $translate_labels = array(
 					),
 					'_street_ref' => array(
 						'type' => 'hidden',
-						'autocomplete' => 'on',
+						'autocomplete' => 'off',
 						'replace' => '_street_ref'
 					),
 					'_house' => array(
 						'type' => 'select',
-						'autocomplete' => 'on',
+						'autocomplete' => 'off',
 						'options' => array('' => __('Choose the house', 'mrkv-ua-shipping')),
 						'required' => true,
 						'label' => __('House', 'mrkv-ua-shipping'),
@@ -289,79 +352,21 @@ $translate_labels = array(
 					),
 					'_house_ref' => array(
 						'type' => 'hidden',
-						'autocomplete' => 'on',
+						'autocomplete' => 'off',
 						'replace' => '_postcode'
 					),
 					'_flat' => array(
 						'type' => 'text',
-						'required' => true,
+						'required' => false,
 						'label' => __('Flat', 'mrkv-ua-shipping'),
 						'placeholder' => __('Number of flat', 'mrkv-ua-shipping'),
 						'replace' => '_flat',
-						'order_edit' => true
+						'order_edit' => true,
+						'autocomplete' => 'off',
 					),
 					'_address_ref' => array(
 						'type' => 'hidden',
-						'autocomplete' => 'on',
-						'replace' => '_address_ref'
-					)
-				)
-			),
-			'mrkv_ua_shipping_ukr-poshta_international' => array(
-				'class' => 'MRKV_UA_SHIPPING_UKR_POSHTA_INTERNATIONAL',
-				'slug' => 'mrkv_ua_shipping_ukr-poshta_international',
-				'filename' => 'mrkv-ua-shipping-method-ukr-poshta-international',
-				'checkout_fields' => array(
-					'_postcode' => array(
-						'type' => 'text',
-						'autocomplete' => 'on',
-						'required' => true,
-						'label' => __('Postal code', 'mrkv-ua-shipping'),
-						'placeholder' => __('Enter the postal code', 'mrkv-ua-shipping'),
-						'replace' => '_postcode'
-					),
-					'_region' => array(
-						'type' => 'text',
-						'autocomplete' => 'on',
-						'required' => true,
-						'label' => __('Region', 'mrkv-ua-shipping'),
-						'placeholder' => __('Enter the region', 'mrkv-ua-shipping'),
-						'replace' => '_state'
-					),
-					'_city' => array(
-						'type' => 'text',
-						'autocomplete' => 'on',
-						'required' => true,
-						'label' => __('City', 'mrkv-ua-shipping'),
-						'placeholder' => __('Enter the city', 'mrkv-ua-shipping'),
-						'replace' => '_city'
-					),
-					'_street' => array(
-						'type' => 'text',
-						'autocomplete' => 'on',
-						'required' => true,
-						'label' => __('Street', 'mrkv-ua-shipping'),
-						'placeholder' => __('Enter the street', 'mrkv-ua-shipping'),
-						'replace' => '_address_1'
-					),
-					'_house' => array(
-						'type' => 'text',
-						'required' => true,
-						'label' => __('House', 'mrkv-ua-shipping'),
-						'placeholder' => __('Number of house', 'mrkv-ua-shipping'),
-						'replace' => '_address_2'
-					),
-					'_flat' => array(
-						'type' => 'text',
-						'required' => true,
-						'label' => __('Flat', 'mrkv-ua-shipping'),
-						'placeholder' => __('Number of flat', 'mrkv-ua-shipping'),
-						'replace' => '_flat',
-						'order_edit' => true
-					),
-					'_address_ref' => array(
-						'type' => 'hidden',
-						'autocomplete' => 'on',
+						'autocomplete' => 'off',
 						'replace' => '_address_ref'
 					)
 				)

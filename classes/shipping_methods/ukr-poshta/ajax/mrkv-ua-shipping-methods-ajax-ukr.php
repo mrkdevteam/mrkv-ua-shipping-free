@@ -97,6 +97,11 @@ if (!class_exists('MRKV_UA_SHIPPING_AJAX_UKR'))
        		{
        			$warehouse = array();
 
+       			$warehouse[] = array(
+        			'value' => '',
+        			'label' => __('Choose the warehouse', 'mrkv-ua-shipping'),
+        		);
+
        			foreach($obj['Entries']['Entry'] as $entry)
        			{
        				$warehouse[] = array(

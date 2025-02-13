@@ -81,3 +81,6 @@
 .mrkv_ua_shipping_checkout_fields select + .select2{
 	width: 100% !important;
 }
+.mrkv_ua_shipping_inner_field_arg{
+    display: none;
+}

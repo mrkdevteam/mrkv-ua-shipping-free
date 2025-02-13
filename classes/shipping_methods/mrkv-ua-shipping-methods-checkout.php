@@ -25,8 +25,54 @@ if (!class_exists('MRKV_UA_SHIPPING_METHODS_CHECKOUT'))
 		{
 			add_action('woocommerce_before_checkout_form', array($this, 'mrkv_add_checkout_custom_shipping_fields'));
 			add_filter( 'woocommerce_cart_shipping_packages', array($this, 'wc_shipping_rate_cache_invalidation'), 100 );
+			add_filter('woocommerce_checkout_fields', array($this, 'mrkv_custom_position_patronymic_field'));
 
 			new MRKV_UA_SHIPPING_METHODS_CHECKOUT_VALIDATION();
+		}
+
+		public function mrkv_custom_position_patronymic_field($fields)
+		{
+			foreach(MRKV_UA_SHIPPING_LIST as $key => $data)
+			{
+				$settings = get_option($key . '_m_ua_settings');
+
+				if(isset($settings['checkout']['middlename']['position']) && ($settings['checkout']['middlename']['position'] != 'default' && $settings['checkout']['middlename']['position'] != ''))
+				{
+					foreach($data['method'] as $method_id => $method_data)
+					{
+						if(isset($method_data['checkout_fields']['_patronymic']))
+						{
+							$middle_name_slug = $method_id . '_patronymic';
+							$middle_name_arg = $method_data['checkout_fields']['_patronymic'];
+
+							$middle_name_arg['class'] = array($method_id, 'mrkv_ua_shipping_inner_field_arg');
+
+							# Include settings checkout by shipping
+							include 'mrkv_ua_shipping_translate.php';
+
+							$middle_name_arg['label'] = $translate_labels[$key]['method'][$method_id]['checkout_fields']['_patronymic']['label'];
+
+							$new_field = array(
+								$middle_name_slug => $middle_name_arg
+							);
+
+							$billing_fields = $fields['billing'];
+        					$updated_billing_fields = [];
+
+        					foreach ($billing_fields as $key_billing => $value) {
+					            $updated_billing_fields[$key_billing] = $value;
+					            if ($key_billing === $settings['checkout']['middlename']['position']) {
+					                $updated_billing_fields = array_merge($updated_billing_fields, $new_field);
+					            }
+					        }
+
+					        $fields['billing'] = $updated_billing_fields;
+						}
+					}
+				}
+			}
+
+			return $fields;
 		}
 
 		public function mrkv_add_checkout_scripts($settings)
@@ -149,13 +195,23 @@ if (!class_exists('MRKV_UA_SHIPPING_METHODS_CHECKOUT'))
 			        # Include settings checkout by shipping
 					include 'mrkv_ua_shipping_translate.php';
 
+					$methods_fields = MRKV_UA_SHIPPING_LIST;
+
+					if(isset($this->active_shipping[$key]['settings']['checkout']['middlename']['position']) && ($this->active_shipping[$key]['settings']['checkout']['middlename']['position'] != 'default' && $this->active_shipping[$key]['settings']['checkout']['middlename']['position'] != ''))
+					{
+						foreach($shipping['methods'] as $key_method => $method_data)
+						{
+							unset($methods_fields[$key]['method'][$key_method]['checkout_fields']['_patronymic']);
+						}
+					}
+
 					foreach($shipping['methods'] as $method => $method_data)
 					{
 						?>
 					    	<div id="<?php echo esc_html($method); ?>_fields" class="<?php echo esc_html($method); ?>-fields mrkv_ua_shipping_checkout_fields">
 					        	<div id="<?php echo esc_html($method); ?>-shipping-info">
 					        		<?php 
-						        		foreach(MRKV_UA_SHIPPING_LIST[$key]['method'][$method]['checkout_fields'] as $id => $args)
+						        		foreach($methods_fields[$key]['method'][$method]['checkout_fields'] as $id => $args)
 						        		{
 						        			$is_enabled_address_data = (isset($shipping['settings']['checkout']['hide_saving_data']) && $shipping['settings']['checkout']['hide_saving_data'] == 'on') ? true : false;
 

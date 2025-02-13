@@ -49,7 +49,7 @@ define('MRKV_UA_SHIPPING_LIST', array(
 				'checkout_fields' => array(
 					'_city' => array(
 						'type' => 'select',
-						'autocomplete' => 'on',
+						'autocomplete' => 'off',
 						'options' => array('' => __('Choose the city', 'mrkv-ua-shipping')),
 						'required' => true,
 						'label' => __('City', 'mrkv-ua-shipping'),
@@ -57,23 +57,23 @@ define('MRKV_UA_SHIPPING_LIST', array(
 					),
 					'_city_label' => array(
 						'type' => 'hidden',
-						'autocomplete' => 'on',
+						'autocomplete' => 'off',
 						'replace' => '_city'
 					),
 					'_city_ref' => array(
 						'type' => 'hidden',
-						'autocomplete' => 'on',
+						'autocomplete' => 'off',
 						'replace' => '_city_ref',
 						'old_slug' => 'np_city_ref'
 					),
 					'_area_name' => array(
 						'type' => 'hidden',
-						'autocomplete' => 'on',
+						'autocomplete' => 'off',
 						'replace' => '_state'
 					),
 					'_warehouse' => array(
 						'type' => 'select',
-						'autocomplete' => 'on',
+						'autocomplete' => 'off',
 						'options' => array('' => __('Choose the warehouse', 'mrkv-ua-shipping')),
 						'required' => true,
 						'label' => __('Warehouse/poshtomat', 'mrkv-ua-shipping'),
@@ -81,13 +81,15 @@ define('MRKV_UA_SHIPPING_LIST', array(
 					),
 					'_warehouse_ref' => array(
 						'type' => 'hidden',
-						'autocomplete' => 'on',
+						'autocomplete' => 'off',
 						'replace' => '_warehouse_ref',
-						'old_slug' => 'np_warehouse_ref'
+						'old_slug' => 'np_warehouse_ref',
+						'required' => true,
+						'label' => __('Warehouse/poshtomat', 'mrkv-ua-shipping'),
 					),
 					'_warehouse_number' => array(
 						'type' => 'hidden',
-						'autocomplete' => 'on',
+						'autocomplete' => 'off',
 						'replace' => '_postcode'
 					)
 				)
@@ -99,7 +101,7 @@ define('MRKV_UA_SHIPPING_LIST', array(
 				'checkout_fields' => array(
 					'_city' => array(
 						'type' => 'select',
-						'autocomplete' => 'on',
+						'autocomplete' => 'off',
 						'options' => array('' => __('Choose the city', 'mrkv-ua-shipping')),
 						'required' => true,
 						'label' => __('City', 'mrkv-ua-shipping'),
@@ -107,23 +109,23 @@ define('MRKV_UA_SHIPPING_LIST', array(
 					),
 					'_city_label' => array(
 						'type' => 'hidden',
-						'autocomplete' => 'on',
+						'autocomplete' => 'off',
 						'replace' => '_city'
 					),
 					'_city_ref' => array(
 						'type' => 'hidden',
-						'autocomplete' => 'on',
+						'autocomplete' => 'off',
 						'replace' => '_city_ref',
 						'old_slug' => 'np_city_ref'
 					),
 					'_area_name' => array(
 						'type' => 'hidden',
-						'autocomplete' => 'on',
+						'autocomplete' => 'off',
 						'replace' => '_state'
 					),
 					'_name' => array(
 						'type' => 'select',
-						'autocomplete' => 'on',
+						'autocomplete' => 'off',
 						'options' => array('' => __('Choose the poshtomat', 'mrkv-ua-shipping')),
 						'required' => true,
 						'label' => __('Poshtomat', 'mrkv-ua-shipping'),
@@ -131,13 +133,15 @@ define('MRKV_UA_SHIPPING_LIST', array(
 					),
 					'_ref' => array(
 						'type' => 'hidden',
-						'autocomplete' => 'on',
+						'autocomplete' => 'off',
 						'replace' => '_warehouse_ref',
-						'old_slug' => 'np_warehouse_ref'
+						'old_slug' => 'np_warehouse_ref',
+						'required' => true,
+						'label' => __('Poshtomat', 'mrkv-ua-shipping'),
 					),
 					'_number' => array(
 						'type' => 'hidden',
-						'autocomplete' => 'on',
+						'autocomplete' => 'off',
 						'replace' => '_postcode'
 					)
 				)
@@ -154,15 +158,16 @@ define('MRKV_UA_SHIPPING_LIST', array(
 						'placeholder' => __('Enter the patronymic', 'mrkv-ua-shipping'),
 						'replace' => '_patronymic',
 						'exclude' => true,
-						'order_edit' => true
+						'order_edit' => true,
+						'autocomplete' => 'off',
 					),
 					'_patronymic_enabled' => array(
 						'type' => 'hidden',
-						'autocomplete' => 'on'
+						'autocomplete' => 'off',
 					),
 					'_city' => array(
 						'type' => 'select',
-						'autocomplete' => 'on',
+						'autocomplete' => 'off',
 						'options' => array('' => __('Choose the city', 'mrkv-ua-shipping')),
 						'required' => true,
 						'label' => __('City', 'mrkv-ua-shipping'),
@@ -170,23 +175,23 @@ define('MRKV_UA_SHIPPING_LIST', array(
 					),
 					'_city_label' => array(
 						'type' => 'hidden',
-						'autocomplete' => 'on',
+						'autocomplete' => 'off',
 						'replace' => '_city'
 					),
 					'_city_ref' => array(
 						'type' => 'hidden',
-						'autocomplete' => 'on',
+						'autocomplete' => 'off',
 						'replace' => '_city_ref',
 						'old_slug' => 'np_city_ref'
 					),
 					'_area_name' => array(
 						'type' => 'hidden',
-						'autocomplete' => 'on',
+						'autocomplete' => 'off',
 						'replace' => '_state'
 					),
 					'_street' => array(
 						'type' => 'text',
-						'autocomplete' => 'on',
+						'autocomplete' => 'off',
 						'required' => true,
 						'label' => __('Street', 'mrkv-ua-shipping'),
 						'placeholder' => __('Enter the street...', 'mrkv-ua-shipping'),
@@ -194,7 +199,7 @@ define('MRKV_UA_SHIPPING_LIST', array(
 					),
 					'_street_ref' => array(
 						'type' => 'hidden',
-						'autocomplete' => 'on',
+						'autocomplete' => 'off',
 						'replace' => '_street_ref'
 					),
 					'_house' => array(
@@ -202,7 +207,8 @@ define('MRKV_UA_SHIPPING_LIST', array(
 						'required' => true,
 						'label' => __('House', 'mrkv-ua-shipping'),
 						'placeholder' => __('Number of house', 'mrkv-ua-shipping'),
-						'replace' => '_address_2'
+						'replace' => '_address_2',
+						'autocomplete' => 'off',
 					),
 					'_flat' => array(
 						'type' => 'text',
@@ -210,11 +216,12 @@ define('MRKV_UA_SHIPPING_LIST', array(
 						'label' => __('Flat', 'mrkv-ua-shipping'),
 						'placeholder' => __('Number of flat', 'mrkv-ua-shipping'),
 						'replace' => '_flat',
-						'order_edit' => true
+						'order_edit' => true,
+						'autocomplete' => 'off',
 					),
 					'_address_ref' => array(
 						'type' => 'hidden',
-						'autocomplete' => 'on',
+						'autocomplete' => 'off',
 						'replace' => '_address_ref'
 					)
 				)
@@ -254,14 +261,15 @@ define('MRKV_UA_SHIPPING_LIST', array(
 						'replace' => '_patronymic',
 						'order_edit' => true,
 						'exclude' => true,
+						'autocomplete' => 'off',
 					),
 					'_patronymic_enabled' => array(
 						'type' => 'hidden',
-						'autocomplete' => 'on'
+						'autocomplete' => 'off',
 					),
 					'_city' => array(
 						'type' => 'select',
-						'autocomplete' => 'on',
+						'autocomplete' => 'off',
 						'options' => array('' => __('Choose the city', 'mrkv-ua-shipping')),
 						'required' => true,
 						'label' => __('City', 'mrkv-ua-shipping'),
@@ -269,17 +277,17 @@ define('MRKV_UA_SHIPPING_LIST', array(
 					),
 					'_city_ref' => array(
 						'type' => 'hidden',
-						'autocomplete' => 'on',
+						'autocomplete' => 'off',
 						'replace' => '_city_ref'
 					),
 					'_area_name' => array(
 						'type' => 'hidden',
-						'autocomplete' => 'on',
+						'autocomplete' => 'off',
 						'replace' => '_state'
 					),
 					'_warehouse' => array(
 						'type' => 'select',
-						'autocomplete' => 'on',
+						'autocomplete' => 'off',
 						'options' => array('' => __('Choose the warehouse', 'mrkv-ua-shipping')),
 						'required' => true,
 						'label' => __('Warehouse', 'mrkv-ua-shipping'),
@@ -287,12 +295,14 @@ define('MRKV_UA_SHIPPING_LIST', array(
 					),
 					'_warehouse_ref' => array(
 						'type' => 'hidden',
-						'autocomplete' => 'on',
-						'replace' => '_postcode'
+						'autocomplete' => 'off',
+						'replace' => '_postcode',
+						'required' => true,
+						'label' => __('Warehouse', 'mrkv-ua-shipping'),
 					),
 					'_address_ref' => array(
 						'type' => 'hidden',
-						'autocomplete' => 'on',
+						'autocomplete' => 'off',
 						'replace' => '_address_ref'
 					)
 				)
@@ -308,11 +318,12 @@ define('MRKV_UA_SHIPPING_LIST', array(
 						'label' => __('Patronymic', 'mrkv-ua-shipping'),
 						'placeholder' => __('Enter the patronymic', 'mrkv-ua-shipping'),
 						'replace' => '_patronymic',
-						'order_edit' => true
+						'order_edit' => true,
+						'autocomplete' => 'off',
 					),
 					'_city' => array(
 						'type' => 'select',
-						'autocomplete' => 'on',
+						'autocomplete' => 'off',
 						'options' => array('' => __('Choose the city', 'mrkv-ua-shipping')),
 						'required' => true,
 						'label' => __('City', 'mrkv-ua-shipping'),
@@ -320,27 +331,27 @@ define('MRKV_UA_SHIPPING_LIST', array(
 					),
 					'_city_ref' => array(
 						'type' => 'hidden',
-						'autocomplete' => 'on',
+						'autocomplete' => 'off',
 						'replace' => '_city_ref'
 					),
 					'_area_name' => array(
 						'type' => 'hidden',
-						'autocomplete' => 'on',
+						'autocomplete' => 'off',
 						'replace' => '_state'
 					),
 					'_area_id' => array(
 						'type' => 'hidden',
-						'autocomplete' => 'on',
+						'autocomplete' => 'off',
 						'replace' => '_state_id'
 					),
 					'_district_id' => array(
 						'type' => 'hidden',
-						'autocomplete' => 'on',
+						'autocomplete' => 'off',
 						'replace' => '_district_id'
 					),
 					'_street' => array(
 						'type' => 'select',
-						'autocomplete' => 'on',
+						'autocomplete' => 'off',
 						'options' => array('' => __('Choose the street', 'mrkv-ua-shipping')),
 						'required' => true,
 						'label' => __('Street', 'mrkv-ua-shipping'),
@@ -348,12 +359,12 @@ define('MRKV_UA_SHIPPING_LIST', array(
 					),
 					'_street_ref' => array(
 						'type' => 'hidden',
-						'autocomplete' => 'on',
+						'autocomplete' => 'off',
 						'replace' => '_street_ref'
 					),
 					'_house' => array(
 						'type' => 'select',
-						'autocomplete' => 'on',
+						'autocomplete' => 'off',
 						'options' => array('' => __('Choose the house', 'mrkv-ua-shipping')),
 						'required' => true,
 						'label' => __('House', 'mrkv-ua-shipping'),
@@ -361,7 +372,7 @@ define('MRKV_UA_SHIPPING_LIST', array(
 					),
 					'_house_ref' => array(
 						'type' => 'hidden',
-						'autocomplete' => 'on',
+						'autocomplete' => 'off',
 						'replace' => '_postcode'
 					),
 					'_flat' => array(
@@ -370,11 +381,12 @@ define('MRKV_UA_SHIPPING_LIST', array(
 						'label' => __('Flat', 'mrkv-ua-shipping'),
 						'placeholder' => __('Number of flat', 'mrkv-ua-shipping'),
 						'replace' => '_flat',
-						'order_edit' => true
+						'order_edit' => true,
+						'autocomplete' => 'off',
 					),
 					'_address_ref' => array(
 						'type' => 'hidden',
-						'autocomplete' => 'on',
+						'autocomplete' => 'off',
 						'replace' => '_address_ref'
 					)
 				)

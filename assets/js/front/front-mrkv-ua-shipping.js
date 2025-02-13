@@ -64,10 +64,13 @@ jQuery(window).on('load', function()
  	function mrkvUaShipShowGroup(mrkv_ua_current_shipping)
  	{
  		jQuery('.mrkv_ua_shipping_checkout_fields').hide();
+ 		jQuery('.mrkv_ua_shipping_inner_field_arg').hide();
  		jQuery('#' + mrkv_ua_current_shipping + '_fields').show();
+ 		jQuery('.' + mrkv_ua_current_shipping + '.mrkv_ua_shipping_inner_field_arg').show();
  	}
  	function mrkvUaShipHideAllGroups()
  	{
  		jQuery('.mrkv_ua_shipping_checkout_fields').hide();
+ 		jQuery('.mrkv_ua_shipping_inner_field_arg').hide();
  	}
 });

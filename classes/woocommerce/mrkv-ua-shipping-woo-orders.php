@@ -69,6 +69,11 @@ if (!class_exists('MRKV_UA_SHIPPING_WOO_ORDERS'))
 				}
             }
 
+            if(!$key)
+            {
+            	return;
+            }
+
 			$mrkv_ua_ship_invoice = $order->get_meta('mrkv_ua_ship_invoice_number');
 
 			if(!$mrkv_ua_ship_invoice)
