@@ -255,7 +255,7 @@ define('MRKV_UA_SHIPPING_LIST', array(
 				'checkout_fields' => array(
 					'_patronymic' => array(
 						'type' => 'text',
-						'required' => true,
+						'required' => false,
 						'label' => __('Patronymic', 'mrkv-ua-shipping'),
 						'placeholder' => __('Enter the patronymic', 'mrkv-ua-shipping'),
 						'replace' => '_patronymic',
@@ -314,7 +314,7 @@ define('MRKV_UA_SHIPPING_LIST', array(
 				'checkout_fields' => array(
 					'_patronymic' => array(
 						'type' => 'text',
-						'required' => true,
+						'required' => false,
 						'label' => __('Patronymic', 'mrkv-ua-shipping'),
 						'placeholder' => __('Enter the patronymic', 'mrkv-ua-shipping'),
 						'replace' => '_patronymic',

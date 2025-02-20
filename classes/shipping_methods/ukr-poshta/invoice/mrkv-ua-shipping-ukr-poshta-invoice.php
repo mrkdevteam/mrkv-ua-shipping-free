@@ -76,7 +76,7 @@ if (!class_exists('MRKV_UA_SHIPPING_UKR_POSHTA_INVOICE'))
 			$receive_type = $this->get_receive_type();
 			$post_pay = $this->get_postpay();
 			$post_pay_recipient = $this->get_post_pay_recipient('shipment');
-			$transfer_post_pay = $this->get_transfer_post_pay($declared_price);
+			$transfer_post_pay = $this->get_transfer_post_pay($declared_price, $post_pay);
 			$weight = $this->get_weight('shipment');
 			$length = $this->get_length('shipment', $dimension_unit);
 			$height = $this->get_height_shipment('shipment', $dimension_unit);
@@ -328,6 +328,7 @@ if (!class_exists('MRKV_UA_SHIPPING_UKR_POSHTA_INVOICE'))
 		{
 			$postcode = $this->order->get_billing_postcode() ? $this->order->get_billing_postcode() : $this->order->get_shipping_postcode();
 			$country = $this->order->get_billing_country() ? $this->order->get_billing_country() : $this->order->get_shipping_country();
+			$country = $country ? $country : 'UA';
 			$region = $this->order->get_billing_state() ? $this->order->get_billing_state() : $this->order->get_shipping_state();
 			$city = $this->order->get_billing_city() ? $this->order->get_billing_city() : $this->order->get_shipping_city();
 			$street = $this->order->get_billing_address_1() ? $this->order->get_billing_address_1() : $this->order->get_shipping_address_1();
@@ -464,7 +465,7 @@ if (!class_exists('MRKV_UA_SHIPPING_UKR_POSHTA_INVOICE'))
 		{
 			if(isset($this->post_fields['mrkv_ua_ship_invoice_shipment_length']) && $this->post_fields['mrkv_ua_ship_invoice_shipment_length'])
 			{
-				return $this->post_fields['mrkv_ua_ship_invoice_shipment_length'];
+				return floatval($this->post_fields['mrkv_ua_ship_invoice_shipment_length']);
 			}
 			else
 			{
@@ -497,7 +498,7 @@ if (!class_exists('MRKV_UA_SHIPPING_UKR_POSHTA_INVOICE'))
 		{
 			if(isset($this->post_fields['mrkv_ua_ship_invoice_shipment_height']) && $this->post_fields['mrkv_ua_ship_invoice_shipment_height'])
 			{
-				return $this->post_fields['mrkv_ua_ship_invoice_shipment_height'];
+				return floatval($this->post_fields['mrkv_ua_ship_invoice_shipment_height']);
 			}
 			else
 			{
@@ -530,7 +531,7 @@ if (!class_exists('MRKV_UA_SHIPPING_UKR_POSHTA_INVOICE'))
 		{
 			if(isset($this->post_fields['mrkv_ua_ship_invoice_shipment_width']) && $this->post_fields['mrkv_ua_ship_invoice_shipment_width'])
 			{
-				return $this->post_fields['mrkv_ua_ship_invoice_shipment_width'];
+				return floatval($this->post_fields['mrkv_ua_ship_invoice_shipment_width']);
 			}
 			else
 			{
@@ -683,7 +684,7 @@ if (!class_exists('MRKV_UA_SHIPPING_UKR_POSHTA_INVOICE'))
 			return $this->order->get_total();
 		}
 
-		private function get_transfer_post_pay($declared_price)
+		private function get_transfer_post_pay($declared_price, $post_pay)
 		{
 			$sender_type = (isset($this->settings_shipping['sender']['type']) && $this->settings_shipping['sender']['type']) ? $this->settings_shipping['sender']['type'] : '';
 
@@ -699,6 +700,11 @@ if (!class_exists('MRKV_UA_SHIPPING_UKR_POSHTA_INVOICE'))
 				{
 					return true;
 				}
+			}
+
+			if($post_pay)
+			{
+				return true;
 			}
 		    
 		    return false;

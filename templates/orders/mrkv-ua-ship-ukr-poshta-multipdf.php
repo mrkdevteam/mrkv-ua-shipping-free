@@ -42,7 +42,7 @@ if ( isset( $_POST['bearer'] ) && isset( $_POST['cp_token'] ) ) {
 
 function makeShipmentGroup( $bearer, $url, $group, $type ) {
 
-  $bodyRow = wp_json_encode( array( "name" => $group, "type" => $type ) );
+  $bodyRow = json_encode( array( "name" => $group, "type" => $type ) );
 
   $curl = curl_init($url);
 

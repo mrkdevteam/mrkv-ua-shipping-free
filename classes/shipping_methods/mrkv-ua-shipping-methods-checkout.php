@@ -235,6 +235,11 @@ if (!class_exists('MRKV_UA_SHIPPING_METHODS_CHECKOUT'))
 						        				$args['label'] = esc_html( $translate_labels[$key]['method'][$method]['checkout_fields'][$id]['label'] );
 						        			}
 
+						        			if(isset($args['type']) && $args['type'] == 'hidden')
+						        			{
+						        				unset($args['label']);
+						        			}
+
 						        			if(isset($args['placeholder']))
 						        			{
 						        				$args['placeholder'] = esc_html( $translate_labels[$key]['method'][$method]['checkout_fields'][$id]['placeholder'] );
