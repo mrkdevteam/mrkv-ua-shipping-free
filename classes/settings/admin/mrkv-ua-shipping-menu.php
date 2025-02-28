@@ -25,7 +25,7 @@ if (!class_exists('MRKV_UA_SHIPPING_MENU'))
 			add_action('admin_menu', array($this, 'mrkv_ua_shipping_register_plugin_page'), 99);
 
 			# Add support language
-			add_action( 'plugins_loaded', array($this, 'mrkv_ua_shipping_load_textdomain'), 11 );
+			add_action( 'plugins_loaded', array($this, 'mrkv_ua_shipping_load_textdomain'), 1 );
 		}
 
 		/**
@@ -93,11 +93,14 @@ if (!class_exists('MRKV_UA_SHIPPING_MENU'))
 
 		public function mrkv_ua_shipping_load_textdomain()
 		{
-			load_plugin_textdomain(
-		        'mrkv-ua-shipping', 
-		        false,             
-		        MRKV_UA_SHIPPING_PLUGIN_PATH . 'i18n/'
-		    );
+			$site_locale = get_locale(); 
+		    $user_locale = get_user_locale();
+
+		    if (is_admin() && ($user_locale === 'ru_RU' || $user_locale === 'uk') && $site_locale !== $user_locale) {
+		        load_textdomain('mrkv-ua-shipping', MRKV_UA_SHIPPING_PLUGIN_PATH . 'i18n/mrkv-ua-shipping-' . $user_locale . '.mo');
+		    } else {
+		        load_plugin_textdomain('mrkv-ua-shipping', false, MRKV_UA_SHIPPING_PLUGIN_PATH . 'i18n/');
+		    }
 		}
 	}
 }

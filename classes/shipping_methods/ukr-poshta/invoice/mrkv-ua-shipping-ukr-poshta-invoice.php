@@ -686,6 +686,10 @@ if (!class_exists('MRKV_UA_SHIPPING_UKR_POSHTA_INVOICE'))
 
 		private function get_transfer_post_pay($declared_price, $post_pay)
 		{
+			if(!$post_pay || $post_pay == 0)
+			{
+				return false;
+			}
 			$sender_type = (isset($this->settings_shipping['sender']['type']) && $this->settings_shipping['sender']['type']) ? $this->settings_shipping['sender']['type'] : '';
 
 			if($declared_price && $this->order->get_payment_method() == 'cod')
@@ -702,7 +706,7 @@ if (!class_exists('MRKV_UA_SHIPPING_UKR_POSHTA_INVOICE'))
 				}
 			}
 
-			if($post_pay)
+			if($post_pay && $post_pay > 0)
 			{
 				return true;
 			}

@@ -301,7 +301,7 @@ if (!class_exists('MRKV_UA_SHIPPING_WOO_ORDER'))
 				            				$field_val['default'] = $default_value;
 				            			}
 
-				            			if($field_val['default'] && $field_val['type'] == 'select')
+				            			if(isset($field_val['default']) && $field_val['default'] && $field_val['type'] == 'select')
 					        			{
 					        				$field_val['options'][$default_value] = $default_value;
 					        			}
