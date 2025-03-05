@@ -4,7 +4,7 @@ Tags: Nova Poshta, нова пошта, новая почта, доставка
 Requires at least: 5.0
 Tested up to: 6.7
 Requires PHP: 7.0
-Stable tag: 1.0.27
+Stable tag: 1.1.0
 License: GPLv2
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -13,13 +13,13 @@ License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
 == Description ==
 
-* Єдиний плагін який вам потрібен для доставок по Україні: Нова Нова Пошта, Укрпошта
+* Єдиний плагін для доставок по Україні: Нова Пошта, Укрпошта, Rozetka Delivery
 * Міжнародна доставка з України: Укрпошта
 * Підтримка високопродуктивне сховище HPOS від WooCommerce
 * Підтримка зон доставки WooCommerce
 * Підтримка PHP 8.0+
 * Підтримка WPML та Polylang
-* Сумісність з плагінами Freelancevip Turbo SMS, Morkva Sales Drive, Morkva Dilovod, Morkva KeyCRM, Morkva Plata by Mono, Morkva LiqPay
+* Сумісність з плагінами Morkva Sales Drive, Morkva Dilovod, Morkva KeyCRM, Morkva Plata by Mono, Morkva LiqPay, Freelancevip Turbo SMS
 
 [База знань](https://docs.morkva.co.ua/uk/plugins)
 [Про-версія](https://morkva.co.ua/shop/morkva-ua-shipping/)
@@ -51,6 +51,12 @@ License URI: http://www.gnu.org/licenses/gpl-2.0.html
 * Автозаповнення вулиць
 * Вибір місця виводу полів плагіна
 * Введені дані доставки запамʼятовуються для зареєстрованих покупців
+
+**Способи доставки Rozetka Delivery**
+
+* Доставка на відділення, як окремий спосіб
+* Фіксована вартість доставки
+* Безкоштовна доставка
 
 **Створення ТТН Нова Пошта по Україні**
 
@@ -152,6 +158,10 @@ https://youtu.be/47-VrH_QJAE
 
 
 == Changelog ==
+
+= 1.1.0 =
+* [new] додали новий спосіб доставки Rozetka Delivery
+* [new] додали механізм перевірки ключа API Нової Пошти
 
 = 1.0.27 =
 * [fix] виправили переклад налаштувань

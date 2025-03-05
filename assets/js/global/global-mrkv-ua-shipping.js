@@ -150,7 +150,6 @@ jQuery(window).on('load', function()
 	jQuery('.mrkv_ua_ship_close, .close-error-mrkv-ua-ship').click(function()
 	{
 		jQuery(this).closest('.mrkv_ua_ship_modal').fadeOut(300);
-		jQuery('input[name="mrkv_ua_ship_invoice_money_transfer"]').prop( "checked", false );
 	});
 	jQuery('#mrkv_ua_ship_create_invoice .mrkv_ua_ship_close').click(function()
 	{

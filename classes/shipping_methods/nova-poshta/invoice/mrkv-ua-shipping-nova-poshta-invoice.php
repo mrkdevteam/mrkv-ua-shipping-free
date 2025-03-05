@@ -320,7 +320,7 @@ if (!class_exists('MRKV_UA_SHIPPING_NOVA_POSHTA_INVOICE'))
 
 		private function get_invoice_date_time()
 		{
-	        return gmdate( 'd.m.Y');
+	        return wp_date('d.m.Y');
 		}
 
 		private function get_service_sender_type()

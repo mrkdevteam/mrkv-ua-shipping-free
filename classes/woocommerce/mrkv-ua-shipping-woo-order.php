@@ -238,26 +238,35 @@ if (!class_exists('MRKV_UA_SHIPPING_WOO_ORDER'))
 			            	<?php
 			            }
 			            else{
-			            	?>
-			            	<a>
-			            		<div data-method="<?php echo $current_shipping; ?>" data-ship="<?php echo $key; ?>" data-order-id="<?php echo $order->get_id(); ?>" class="mrkv_ua_ship_global_create__invoice">
-			            			<img src="<?php echo MRKV_UA_SHIPPING_IMG_URL . '/global'; ?>/add-square-icon.svg" alt="<?php echo $order->get_shipping_method(); ?>" title="<?php echo $order->get_shipping_method(); ?>">
-			            			<span><?php echo __('Create Invoice', 'mrkv-ua-shipping'); ?></span>
-			            			<div class="mrkv_ua_ship_create_invoice__loader"></div>
-			            		</div>
-			            	</a>
-			            	<?php
+			            	if(!empty(MRKV_UA_SHIPPING_LIST[$key]['invoice_links']))
+			            	{
+				            	?>
+				            	<a>
+				            		<div data-method="<?php echo $current_shipping; ?>" data-ship="<?php echo $key; ?>" data-order-id="<?php echo $order->get_id(); ?>" class="mrkv_ua_ship_global_create__invoice">
+				            			<img src="<?php echo MRKV_UA_SHIPPING_IMG_URL . '/global'; ?>/add-square-icon.svg" alt="<?php echo $order->get_shipping_method(); ?>" title="<?php echo $order->get_shipping_method(); ?>">
+				            			<span><?php echo __('Create Invoice', 'mrkv-ua-shipping'); ?></span>
+				            			<div class="mrkv_ua_ship_create_invoice__loader"></div>
+				            		</div>
+				            	</a>
+				            	<?php
+				            }
 			            }
 
+			            if(!empty(MRKV_UA_SHIPPING_LIST[$key]['invoice_links']))
+		            	{
+		            		?>
+		            			<hr class="mrkv-hr-sidebar">
+				            	<h3><?php echo esc_html__('Custom Invoice number', 'mrkv-ua-shipping'); ?></h3>
+			            		<input type="text" name="custom_invoice_number" minlength="13" value="<?php echo esc_html($mrkv_ua_ship_invoice); ?>">
+			            		<div class="mrkv_ua_ship_custom_invoice button">
+			            			<?php echo esc_html__('Save Invoice', 'mrkv-ua-shipping'); ?>
+						            <div class="mrkv_ua_ship_create_invoice__loader"></div>
+			            		</div>
+			            		<hr class="mrkv-hr-sidebar">
+		            		<?php
+		            	}
+
 			            ?>
-			            	<hr class="mrkv-hr-sidebar">
-			            	<h3><?php echo __('Custom Invoice number', 'mrkv-ua-shipping'); ?></h3>
-		            		<input type="text" name="custom_invoice_number" minlength="13" value="<?php echo $mrkv_ua_ship_invoice; ?>">
-		            		<div class="mrkv_ua_ship_custom_invoice button">
-		            			<?php echo __('Save Invoice', 'mrkv-ua-shipping'); ?>
-					            <div class="mrkv_ua_ship_create_invoice__loader"></div>
-		            		</div>
-		            		<hr class="mrkv-hr-sidebar">
 			            	<h3><?php echo __('Change address', 'mrkv-ua-shipping'); ?></h3>
 			            	<div class="mrkv_ua_ship_edit_data">
 			            		<input type="hidden" name="mrkv_order_id" value="<?php echo $order_id; ?>">
@@ -304,6 +313,11 @@ if (!class_exists('MRKV_UA_SHIPPING_WOO_ORDER'))
 				            			if(isset($field_val['default']) && $field_val['default'] && $field_val['type'] == 'select')
 					        			{
 					        				$field_val['options'][$default_value] = $default_value;
+					        			}
+
+					        			if(isset($field_val['type']) && $field_val['type'] == 'hidden')
+					        			{
+					        				unset($field_val['label']);
 					        			}
 
 										woocommerce_form_field($current_shipping . $id, $field_val);

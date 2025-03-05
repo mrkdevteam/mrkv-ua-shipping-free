@@ -130,10 +130,12 @@ if (!class_exists('MRKV_UA_SHIPPING_API_NOVA_POSHTA'))
 
 	    		if(isset($obj['success']) && $obj['success'] == true)
 	    		{
+	    			update_option('mrkv_api_fixed_np', false);
 	    			return true;
 	    		}
 	    		else
 	    		{
+	    			update_option('mrkv_api_fixed_np', true);
 	    			if($obj['errors'][0])
 	    			{
 	    				# Return false
@@ -148,6 +150,7 @@ if (!class_exists('MRKV_UA_SHIPPING_API_NOVA_POSHTA'))
 	    	}
 	    	else
 	    	{
+	    		update_option('mrkv_api_fixed_np', true);
 				# Return false
 	    		return false;
 	    	}

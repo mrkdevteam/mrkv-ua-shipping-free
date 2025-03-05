@@ -208,7 +208,7 @@ if (!class_exists('MRKV_UA_SHIPPING_WOO_ORDERS'))
 
 		    	if ($column == 'mrkv_ua_invoice') 
 		    	{
-		    		if($key && $enabled_shipping)
+		    		if($key && $enabled_shipping  && !empty(MRKV_UA_SHIPPING_LIST[$key]['invoice_links']))
 		    		{
 		    			$mrkv_ua_ship_invoice = $the_order->get_meta('mrkv_ua_ship_invoice_number');
 

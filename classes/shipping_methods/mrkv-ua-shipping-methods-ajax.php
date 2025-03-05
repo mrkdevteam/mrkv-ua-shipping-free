@@ -6,6 +6,8 @@ if ( ! defined( 'ABSPATH' ) ) exit;
 require_once 'nova-poshta/ajax/mrkv-ua-shipping-methods-ajax-nova.php';
 # Include nova post menu
 require_once 'ukr-poshta/ajax/mrkv-ua-shipping-methods-ajax-ukr.php';
+# Include rozetka ajax
+require_once 'rozetka-delivery/ajax/mrkv-ua-shipping-methods-ajax-rozetka.php';
 
 # Check if class exist
 if (!class_exists('MRKV_UA_SHIPPING_METHODS_AJAX'))
@@ -24,6 +26,8 @@ if (!class_exists('MRKV_UA_SHIPPING_METHODS_AJAX'))
 			new MRKV_UA_SHIPPING_AJAX_NOVA();
 			# Call ajax ukr poshta
 			new MRKV_UA_SHIPPING_AJAX_UKR();
+			# Call ajax rozetka
+			new MRKV_UA_SHIPPING_AJAX_RZTK();
 			
 			add_action( 'wp_ajax_mrkv_ua_ship_clear_log', array($this, 'mrkv_ua_ship_clear_log_func') );
 			add_action( 'wp_ajax_nopriv_mrkv_ua_ship_clear_log', array($this, 'mrkv_ua_ship_clear_log_func') );

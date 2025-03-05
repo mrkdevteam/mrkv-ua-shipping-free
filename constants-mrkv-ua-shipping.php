@@ -392,5 +392,78 @@ define('MRKV_UA_SHIPPING_LIST', array(
 				)
 			)
 		)
+	),
+	'rozetka-delivery' => array(
+		'name' => __('Rozetka Delivery', 'mrkv-ua-shipping'),
+		'description' => __('Get the opportunity to deliver a parcel to any ROZETKA warehouse. You save your own time on order picking and shipping, as these processes are handled by ROZETKA', 'mrkv-ua-shipping'),
+		'api_class' => 'MRKV_UA_SHIPPING_API_ROZETKA_DELIVERY',
+		'invoice_class' => '',
+		'settings_class' => 'MRKV_UA_SHIPPING_SETTINGS_ROZETKA_DELIVERY',
+		'pages' => array(),
+		'invoice_links' => array(),
+		'old_slugs' => array(),
+		'old_ttn_slug' => '',
+		'method' => array(
+			'mrkv_ua_shipping_rozetka-delivery' => array(
+				'class' => 'MRKV_UA_SHIPPING_ROZETKA_DELIVERY',
+				'slug' => 'mrkv_ua_shipping_rozetka-delivery',
+				'filename' => 'mrkv-ua-shipping-method-rozetka-delivery',
+				'checkout_fields' => array(
+					'_city' => array(
+						'type' => 'select',
+						'autocomplete' => 'off',
+						'options' => array('' => __('Choose the city', 'mrkv-ua-shipping')),
+						'required' => true,
+						'label' => __('City', 'mrkv-ua-shipping'),
+						'replace' => '',
+					),
+					'_city_label' => array(
+						'type' => 'hidden',
+						'autocomplete' => 'off',
+						'replace' => '_city'
+					),
+					'_district' => array(
+						'type' => 'hidden',
+						'autocomplete' => 'off',
+						'replace' => '_address_2'
+					),
+					'_district_id' => array(
+						'type' => 'hidden',
+						'autocomplete' => 'off',
+						'replace' => '_district_id'
+					),
+					'_area_name' => array(
+						'type' => 'hidden',
+						'autocomplete' => 'off',
+						'replace' => '_state'
+					),
+					'_area_id' => array(
+						'type' => 'hidden',
+						'autocomplete' => 'off',
+						'replace' => '_area_id'
+					),
+					'_city_ref' => array(
+						'type' => 'hidden',
+						'autocomplete' => 'off',
+						'replace' => '_city_ref'
+					),
+					'_warehouse' => array(
+						'type' => 'select',
+						'autocomplete' => 'off',
+						'options' => array('' => __('Choose the warehouse', 'mrkv-ua-shipping')),
+						'required' => true,
+						'label' => __('Warehouse', 'mrkv-ua-shipping'),
+						'replace' => '_address_1'
+					),
+					'_warehouse_ref' => array(
+						'type' => 'hidden',
+						'autocomplete' => 'off',
+						'replace' => '_warehouse_ref',
+						'required' => true,
+						'label' => __('Warehouse', 'mrkv-ua-shipping'),
+					)
+				)
+			)
+		)
 	)
 ));

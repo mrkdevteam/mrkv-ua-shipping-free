@@ -10,6 +10,8 @@ require_once 'admin/mrkv-ua-shipping-menu.php';
 require_once 'admin/mrkv-ua-shipping-admin-assets.php';
 # Include debug log
 require_once 'log/mrkv-ua-shipping-log.php'; 
+# Include notification
+require_once 'admin/mrkv-ua-shipping-notification.php'; 
 
 # Check if class exist
 if (!class_exists('MRKV_UA_SHIPPING_SETTINGS'))
@@ -32,6 +34,9 @@ if (!class_exists('MRKV_UA_SHIPPING_SETTINGS'))
 
 			# Setup woo plugin settings assets
 			new MRKV_UA_SHIPPING_ADMIN_ASSETS();
+
+			# Setup woo plugin settings notification
+			new MRKV_UA_SHIPPING_NOTIFICATION();
 		}
 	}
 }
