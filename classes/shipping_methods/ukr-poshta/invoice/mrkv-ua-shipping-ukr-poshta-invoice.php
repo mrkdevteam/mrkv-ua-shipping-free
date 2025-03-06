@@ -156,7 +156,10 @@ if (!class_exists('MRKV_UA_SHIPPING_UKR_POSHTA_INVOICE'))
 				'status' => $status,
 				'message' => $message,
 				'invoice' => $invoice,
-				'arguments' => $args
+				'arguments' => $args,
+				'print' => '',
+				'form_print' => 'form-ukr-poshta-ttn',
+				'print_sticker' => ''
 			);
 		}
 

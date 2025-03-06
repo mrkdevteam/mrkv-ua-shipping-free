@@ -229,7 +229,10 @@ if (!class_exists('MRKV_UA_SHIPPING_NOVA_POSHTA_INVOICE'))
 				'status' => $status,
 				'message' => $message,
 				'invoice' => $invoice,
-				'arguments' => $args
+				'arguments' => $args,
+				'print' => 'https://my.novaposhta.ua/orders/printDocument/orders%5B%5D/' . $invoice . '/type/pdf/apiKey/' . $this->settings_shipping['api_key'],
+				'form_print' => '',
+				'print_sticker' =>  'https://my.novaposhta.ua/orders/printMarkings/orders[]/' . $invoice . '/type/pdf/apiKey/' . $this->settings_shipping['api_key']
 			);
 		}
 

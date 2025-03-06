@@ -119,6 +119,25 @@ jQuery(window).on('load', function()
 	              	if(data.status == 'completed')
 	              	{
 	              		jQuery('.mrkv_ua_ship_modal-content__message_completed').html(data.message);
+
+	              		jQuery('.print-ttn-mrkv-ua-ship').attr('href', '');
+	              		jQuery('.print-ttn-mrkv-ua-ship').attr('data-ship', current_ship_key);
+	              		jQuery('.print-ttn-mrkv-ua-ship').attr('data-invoice', data.invoice);
+	              		jQuery('.print-sticker-mrkv-ua-ship').hide();
+	              		if(data.print)
+	              		{
+	              			jQuery('.print-ttn-mrkv-ua-ship').attr('href', data.print);
+	              		}
+	              		if(data.form_print)
+	              		{
+	              			jQuery('.print-ttn-mrkv-ua-ship').attr('data-form', data.form_print);
+	              		}
+	              		if(data.print_sticker)
+	              		{
+	              			jQuery('.print-sticker-mrkv-ua-ship').attr('href', data.print_sticker);
+	              			jQuery('.print-sticker-mrkv-ua-ship').show();
+	              		}
+
 	              		jQuery('#mrkv_ua_ship_create_invoice_completed').fadeIn(300);
 	              		var order_id = jQuery('.mrkv_ua_ship_create_invoice__changed.active input[name="order_id"]').val();
 	              		jQuery('#the-list #order-' + order_id + ' .column-mrkv_ua_invoice a').empty();

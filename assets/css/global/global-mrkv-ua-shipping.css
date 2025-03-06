@@ -1,3 +1,25 @@
+.print-ttn-mrkv-ua-ship, .print-sticker-mrkv-ua-ship{
+    display: flex !important;
+    align-items: center;
+    justify-content: center;
+    height: 38px;
+    margin-bottom: 20px !important;
+    border: 1px solid #ed6230;
+    border-radius: 10px !important;
+    text-decoration: unset !important;
+    color: #ed6230 !important;
+    background-color: transparent !important;
+    font-size: 16px !important;
+    font-weight: 600;
+    border-color: #ed6230 !important;
+    position: relative;
+    margin-bottom: 0 !important;
+    padding: 0 30px;
+}
+.print-ttn-mrkv-ua-ship:hover, .print-sticker-mrkv-ua-ship:hover{
+    background-color: #ed6230 !important;
+    color: #fff !important;
+}
 .mrkv-ua-shupping-change-method.button{
     background-color: #ed6230 !important;
     border: unset !important;
