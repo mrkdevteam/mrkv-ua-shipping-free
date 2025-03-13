@@ -57,12 +57,13 @@ if (!class_exists('MRKV_UA_SHIPPING_OPTION_FILEDS'))
 		 * 
 		 * @return string HTML
 		 * */
-	    public function get_input_number($label, $name, $value = '', $id = '', $default_value = '', $placeholder = '', $description = '', $readonly = '', $step = '0.01')
+	    public function get_input_number($label, $name, $value = '', $id = '', $default_value = '', $placeholder = '', $description = '', $readonly = '', $step = '0.01', $max = '')
 	    {
 	    	# Get all fields
 	    	$label_content = $label ? '<label for="' . $id . '">' . $label . '</label>' : '';
 	    	$value_content = $value ? $value : $default_value;
-	    	$name_content = $name ? '<input step="' . $step . '" min="0" id="' . $id . '" type="number" onwheel="this.blur()" name="' . $name . '" placeholder="' . $placeholder . '" value="' . $value_content . '" ' . $readonly . '>' : '';
+	    	$max_content = $max ? 'max="' . $max . '"' : '';
+	    	$name_content = $name ? '<input step="' . $step . '" min="0" ' . $max_content . ' id="' . $id . '" type="number" onwheel="this.blur()" name="' . $name . '" placeholder="' . $placeholder . '" value="' . $value_content . '" ' . $readonly . '>' : '';
 	    	$description_content = $description ? '<p class="mrkv-ua-ship-description">' . $description . '</p>' : '';
 
 	    	# Create HTML

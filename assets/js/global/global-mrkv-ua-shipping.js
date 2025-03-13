@@ -58,7 +58,7 @@ jQuery(window).on('load', function()
 	            		{
 	            			jQuery('[data-ship="' + data.mrkv_ua_ship_key + '"] form [name=' + index + ']').prop( "checked", true );
 	            		}
-	            		else if(index == 'mrkv_ua_ship_invoice_payer_delivery')
+	            		else if(index == 'mrkv_ua_ship_invoice_payer_delivery' || index == 'mrkv_ua_ship_invoice_shipment_type')
 	            		{
 	            			if(value)
 	            			{
@@ -274,6 +274,18 @@ jQuery(window).on('load', function()
             jQuery('input[name="mrkv_ua_ship_invoice_shipment_volume"]')
                 .val(mrkvnpCalcVolumeWeightSettings());
     });
+
+        jQuery(document).on('input', 'form[data-ship="ukr-poshta"] .adm_morkva_row_size input[type="number"]', function() {
+    let max = parseFloat(jQuery(this).attr('max'));
+    let min = parseFloat(jQuery(this).attr('min'));
+    let value = parseFloat(jQuery(this).val());
+
+    if (value > max) {
+        jQuery(this).val(max);
+    } else if (value < min) {
+        jQuery(this).val(min);
+    }
+});
 
 	function mrkvnpCalcVolumeWeightSettings() {
 	    let length = jQuery('input[name="mrkv_ua_ship_invoice_shipment_length"]').val();

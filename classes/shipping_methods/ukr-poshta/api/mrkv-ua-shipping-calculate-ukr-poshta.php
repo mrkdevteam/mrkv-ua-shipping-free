@@ -28,7 +28,7 @@ if (!class_exists('MRKV_UA_SHIPPING_CALCULATE_UKR_POSHTA'))
 		 * Get all sender contacts list
 		 * @return 
 		 * */
-		public function calculate_shipping_cost($address_from, $address_to, $weight, $service_type, $cost, $cargo_type, $length) 
+		public function calculate_shipping_cost($address_from, $address_to, $weight, $service_type, $cost, $cargo_type, $length, $max_width, $max_height) 
 	    {
 	    	# Set arguments
 	        $args = array(
@@ -43,7 +43,14 @@ if (!class_exists('MRKV_UA_SHIPPING_CALCULATE_UKR_POSHTA'))
 		        "type"  => $cargo_type,
 		        "deliveryType"  => $service_type,
 		        "declaredPrice" => $cost,
-		        "validate" => 'true'
+		        "validate" => 'true',
+		        "parcels"			=> array( array(
+		    		"weight"			=> $weight,
+		    		"length"			=> $length,
+		    		"height"			=> $max_height,
+		    		"width"			=> $max_width,
+		    		"declaredPrice" 	=> $cost,
+			    ))
 	        );
 
 	        # Send request

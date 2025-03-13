@@ -58,12 +58,25 @@ if (!class_exists('MRKV_UA_SHIPPING_UKR_POSHTA'))
          */
         public function init_form_fields()
         {
+            $ukr_poshta_settings = get_option('ukr-poshta_m_ua_settings');
+            $default_type_sipping = isset($ukr_poshta_settings['shipment']['type']) ? $ukr_poshta_settings['shipment']['type'] : 'STANDARD';
+            
             $this->instance_form_fields = array(
                 'title' => array(
                     'title' => __('This controls the title which the user sees during checkout', 'mrkv-ua-shipping'),
                     'type' => 'text',
                     'description' => '',
                     'default' => __('UkrPoshta Warehouse', 'mrkv-ua-shipping')
+                ),
+                'shipping_type' => array(
+                    'title'       => __('Type of shipment', 'mrkv-ua-shipping'),
+                    'type'        => 'select',
+                    'description' => '',
+                    'default'     => $default_type_sipping,
+                    'options'     => array(
+                        'STANDARD' => __('STANDARD', 'mrkv-ua-shipping'),
+                        'EXPRESS'  => __('EXPRESS', 'mrkv-ua-shipping'),
+                    ),
                 ),
                 'enable_fix_cost' => array(
                     'title' => __('Enable Fixed Price for Delivery', 'mrkv-ua-shipping'),
@@ -113,7 +126,7 @@ if (!class_exists('MRKV_UA_SHIPPING_UKR_POSHTA'))
         {
         	# Create rate
         	$rate = array(
-                'id' => $this->id,
+                'id' => $this->id . '_' . $this->instance_id,
                 'label' => $this->title,
                 'cost' => 0.00,
                 'calc_tax' => 'per_item'

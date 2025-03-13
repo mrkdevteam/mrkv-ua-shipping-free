@@ -316,7 +316,7 @@
 	<div class="admin_ua_ship_morkva_settings_row">
 		<div class="col-mrkv-5">
 			<div class="admin_ua_ship_morkva_settings_line">
-				<label><?php echo __('Type of shipment', 'mrkv-ua-shipping'); ?></label>
+				<label><?php echo __('Type of shipment (Default value)', 'mrkv-ua-shipping'); ?></label>
 				<div class="admin_ua_ship_morkva_settings_row">
 					<?php
 						$data = isset(MRKV_SHIPPING_SETTINGS['shipment']['type']) ? MRKV_SHIPPING_SETTINGS['shipment']['type'] : '';
@@ -348,7 +348,7 @@
 						<span><?php echo __('Length', 'mrkv-ua-shipping'); ?></span>
 						<?php 
 							$data = isset(MRKV_SHIPPING_SETTINGS['shipment']['length']) ? MRKV_SHIPPING_SETTINGS['shipment']['length'] : '';
-							echo $mrkv_global_option_generator->get_input_number('', MRKV_OPTION_OBJECT_NAME . '[shipment][length]', $data, MRKV_OPTION_OBJECT_NAME. '_shipment_length' , '', '', '');
+							echo $mrkv_global_option_generator->get_input_number('', MRKV_OPTION_OBJECT_NAME . '[shipment][length]', $data, MRKV_OPTION_OBJECT_NAME. '_shipment_length' , '', '', '', '', '0.01', '120');
 						?>
 					</div>
 					<span>
@@ -358,7 +358,7 @@
 						<span><?php echo __('Width', 'mrkv-ua-shipping'); ?></span>
 						<?php 
 							$data = isset(MRKV_SHIPPING_SETTINGS['shipment']['width']) ? MRKV_SHIPPING_SETTINGS['shipment']['width'] : '';
-							echo $mrkv_global_option_generator->get_input_number('', MRKV_OPTION_OBJECT_NAME . '[shipment][width]', $data, MRKV_OPTION_OBJECT_NAME. '_shipment_width' , '', '', '');
+							echo $mrkv_global_option_generator->get_input_number('', MRKV_OPTION_OBJECT_NAME . '[shipment][width]', $data, MRKV_OPTION_OBJECT_NAME. '_shipment_width' , '', '', '', '', '0.01', '70');
 						?>
 					</div>
 					<span>
@@ -368,7 +368,7 @@
 						<span><?php echo __('Height', 'mrkv-ua-shipping'); ?></span>
 						<?php 
 							$data = isset(MRKV_SHIPPING_SETTINGS['shipment']['height']) ? MRKV_SHIPPING_SETTINGS['shipment']['height'] : '';
-							echo $mrkv_global_option_generator->get_input_number('', MRKV_OPTION_OBJECT_NAME . '[shipment][height]', $data, MRKV_OPTION_OBJECT_NAME. '_shipment_height' , '', '', '');
+							echo $mrkv_global_option_generator->get_input_number('', MRKV_OPTION_OBJECT_NAME . '[shipment][height]', $data, MRKV_OPTION_OBJECT_NAME. '_shipment_height' , '', '', '', '', '0.01', '70');
 						?>
 					</div>
 				</div>

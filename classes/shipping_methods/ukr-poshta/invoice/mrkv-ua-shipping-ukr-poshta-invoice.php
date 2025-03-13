@@ -361,12 +361,24 @@ if (!class_exists('MRKV_UA_SHIPPING_UKR_POSHTA_INVOICE'))
 			{
 				return $this->post_fields['mrkv_ua_ship_invoice_shipment_type'];
 			}
-			else
+
+			$shipping_methods = $this->order->get_shipping_methods();
+
+			foreach ($shipping_methods as $shipping_method) 
 			{
-				if(isset($this->settings_shipping['shipment']['type']) && $this->settings_shipping['shipment']['type'])
-				{
-					return $this->settings_shipping['shipment']['type'];
-				}
+				$shipping_method_id = $shipping_method->get_method_id();
+				$instance_id = $shipping_method->get_instance_id();
+
+				$shipping_settings = get_option("woocommerce_{$shipping_method_id}_{$instance_id}_settings");
+
+				if (!empty($shipping_settings) && isset($shipping_settings['shipping_type'])) {
+			        return $shipping_settings['shipping_type'];
+			    }
+			}
+
+			if(isset($this->settings_shipping['shipment']['type']) && $this->settings_shipping['shipment']['type'])
+			{
+				return $this->settings_shipping['shipment']['type'];
 			}
 
 			return 'STANDARD';

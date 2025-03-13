@@ -49,7 +49,7 @@ if (!class_exists('MRKV_UA_SHIPPING_METHODS_CHECKOUT_VALIDATION'))
 		 * 
 		 * @return bool Answer
 		 * */
-		private function rztk_maybe_disable_default_fields()
+		private function mrkv_ua_ship_maybe_disable_default_fields()
 		{
 			$this->type_shipping = (isset($_POST['ship_to_different_address']) && $_POST['ship_to_different_address']) ? 'shipping' : 'billing';
 
@@ -68,7 +68,9 @@ if (!class_exists('MRKV_UA_SHIPPING_METHODS_CHECKOUT_VALIDATION'))
 				if($this->current_shipping_global){
 					foreach(MRKV_UA_SHIPPING_LIST[$this->current_shipping_global]['method'] as $method_slug => $method_data)
 					{
-						if($_POST['shipping_method'][0] == $method_slug)
+						$clean_shipping_method = preg_replace('/_\d+$/', '', $_POST['shipping_method'][0]);
+						
+						if($clean_shipping_method == $method_slug)
 						{
 							$this->current_shipping = $method_slug;
 							$this->has_mrkv_ua_ship = true; 
@@ -81,7 +83,7 @@ if (!class_exists('MRKV_UA_SHIPPING_METHODS_CHECKOUT_VALIDATION'))
 
 		public function mrkv_ua_ship_validate_fields()
 		{
-			$this->rztk_maybe_disable_default_fields();
+			$this->mrkv_ua_ship_maybe_disable_default_fields();
 
 			# Check current shipping
 		    if ( isset( $_POST['shipping_method'][0] ) ) 
@@ -132,7 +134,7 @@ if (!class_exists('MRKV_UA_SHIPPING_METHODS_CHECKOUT_VALIDATION'))
 
 		public function mrkv_ua_ship_remove_default_fields_from_validation($fields)
 		{
-			$this->rztk_maybe_disable_default_fields();
+			$this->mrkv_ua_ship_maybe_disable_default_fields();
 
 			if($this->has_mrkv_ua_ship)
 			{

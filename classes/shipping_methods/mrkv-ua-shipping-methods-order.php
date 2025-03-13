@@ -40,7 +40,9 @@ if (!class_exists('MRKV_UA_SHIPPING_METHODS_ORDER'))
 				{
 					foreach(MRKV_UA_SHIPPING_LIST[$key]['method'] as $method_slug => $method_data)
 					{
-						if($_POST['shipping_method'][0] == $method_slug)
+						$clean_shipping_method = preg_replace('/_\d+$/', '', $_POST['shipping_method'][0]);
+						
+						if($clean_shipping_method == $method_slug)
 						{
 							$current_shipping = $method_slug;
 							$has_mrkv_ua_ship = true; 

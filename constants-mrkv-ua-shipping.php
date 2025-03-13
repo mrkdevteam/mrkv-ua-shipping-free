@@ -1,7 +1,7 @@
 <?php
 # Get plugin data
 require_once ABSPATH . 'wp-admin/includes/plugin.php';
-$plugData = get_plugin_data(MRKV_UA_SHIPPING_PLUGIN_FILE);
+$plugData = get_plugin_data(MRKV_UA_SHIPPING_PLUGIN_FILE,false, true);
 
 # Constans 
 
@@ -34,6 +34,7 @@ define('MRKV_UA_SHIPPING_LIST', array(
 			'invoice_pdf' => 'https://my.novaposhta.ua/orders/printDocument/orders[]/',
 			'invoice_sticker' => 'https://my.novaposhta.ua/orders/printMarkings/orders[]/',
 			'invoice_link_end' => '/type/pdf/apiKey/',
+			'invoice_view' => 'https://novaposhta.ua/tracking/?cargo_number='
 		),
 		'old_slugs' => array(
 			'mrkv_ua_shipping_nova-poshta' => 'nova_poshta_shipping_method',

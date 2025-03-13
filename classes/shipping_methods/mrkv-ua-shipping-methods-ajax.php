@@ -255,6 +255,10 @@ if (!class_exists('MRKV_UA_SHIPPING_METHODS_AJAX'))
 						    {
 						        $payer_delivery = 'Sender';
 						    }
+
+						    if (!empty($shipping_settings) && isset($shipping_settings['shipping_type'])) {
+						        $args['mrkv_ua_ship_invoice_shipment_type'] = $shipping_settings['shipping_type'];
+						    }
 			            }
 
 			            $args['mrkv_ua_ship_invoice_payer_delivery'] = $payer_delivery;

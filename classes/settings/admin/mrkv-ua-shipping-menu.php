@@ -25,7 +25,7 @@ if (!class_exists('MRKV_UA_SHIPPING_MENU'))
 			add_action('admin_menu', array($this, 'mrkv_ua_shipping_register_plugin_page'), 99);
 
 			# Add support language
-			add_action( 'plugins_loaded', array($this, 'mrkv_ua_shipping_load_textdomain'), 1 );
+			add_action( 'init', array($this, 'mrkv_ua_shipping_load_textdomain') );
 		}
 
 		/**

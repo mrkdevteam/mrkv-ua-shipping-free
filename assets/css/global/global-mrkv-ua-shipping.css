@@ -1,3 +1,17 @@
+.mrkv_ua_ship_global_invoice-link{
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+.mrkv_ua_ship_global_invoice-link:hover{
+    color: #ed6230;
+}
+.mrkv_ua_ship_global_invoice-link:focus{
+    box-shadow: 0 0 0 2px #ed6230;
+}
+.mrkv_ua_ship_global_invoice-link img{
+    width: 15px;
+}
 .print-ttn-mrkv-ua-ship, .print-sticker-mrkv-ua-ship{
     display: flex !important;
     align-items: center;

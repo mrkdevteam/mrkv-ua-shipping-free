@@ -374,6 +374,7 @@
 	gap: 0 30px;
 }
 #domestic_settings > h2 + p + hr + h3,
+#domestic_v2_settings > h2 + p + hr + h3,
 #international_settings > h2 + p + hr + h3{
 	margin-top: 0;
 }
@@ -628,10 +629,12 @@
 	margin-bottom: 20px;
 	align-items: center;
 }
-.ukr-poshta_m_ua_settings_sender_type_block{
+.ukr-poshta_m_ua_settings_sender_type_block,
+.ukr-poshta_m_ua_settings_sender_type_block_v2{
 	display: none;
 }
-.ukr-poshta_m_ua_settings_sender_type_block.active{
+.ukr-poshta_m_ua_settings_sender_type_block.active,
+.ukr-poshta_m_ua_settings_sender_type_block_v2.active{
 	display: block;
 }
 .admin_ua_ship_morkva_settings_row_btns h4{

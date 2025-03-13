@@ -64,6 +64,18 @@ jQuery(window).on('load', function()
          jQuery(this).closest('.admin_ua_ship_morkva_settings_line').find('textarea').val(new_text_data);
     });
 
+    jQuery('.adm_morkva_row_size input[type="number"]').on('input', function() {
+        let max = parseFloat(jQuery(this).attr('max'));
+        let min = parseFloat(jQuery(this).attr('min'));
+        let value = parseFloat(jQuery(this).val());
+
+        if (value > max) {
+            jQuery(this).val(max);
+        } else if (value < min) {
+            jQuery(this).val(min);
+        }
+    });
+
     jQuery('.mrkv_btn_log_clean').click(function(){
         jQuery.ajax({
             url: mrkv_ua_ship_helper.ajax_url,

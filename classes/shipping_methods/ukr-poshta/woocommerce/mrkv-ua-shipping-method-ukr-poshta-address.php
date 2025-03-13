@@ -58,12 +58,25 @@ if (!class_exists('MRKV_UA_SHIPPING_UKR_POSHTA_ADDRESS'))
          */
         public function init_form_fields()
         {
+            $ukr_poshta_settings = get_option('ukr-poshta_m_ua_settings');
+            $default_type_sipping = isset($ukr_poshta_settings['shipment']['type']) ? $ukr_poshta_settings['shipment']['type'] : 'STANDARD';
+            
             $this->instance_form_fields = array(
                'title' => array(
                     'title' => __('This controls the title which the user sees during checkout', 'mrkv-ua-shipping'),
                     'type' => 'text',
                     'description' => '',
                     'default' => __('UkrPoshta Address', 'mrkv-ua-shipping')
+                ),
+               'shipping_type' => array(
+                    'title'       => __('Type of shipment', 'mrkv-ua-shipping'),
+                    'type'        => 'select',
+                    'description' => '',
+                    'default'     => $default_type_sipping,
+                    'options'     => array(
+                        'STANDARD' => __('STANDARD', 'mrkv-ua-shipping'),
+                        'EXPRESS'  => __('EXPRESS', 'mrkv-ua-shipping'),
+                    ),
                 ),
                 'enable_cost' => array(
                     'title' => __('Enable Price for Delivery', 'mrkv-ua-shipping'),
@@ -120,7 +133,7 @@ if (!class_exists('MRKV_UA_SHIPPING_UKR_POSHTA_ADDRESS'))
         {
         	# Create rate
         	$rate = array(
-                'id' => $this->id,
+                'id' => $this->id . '_' . $this->instance_id,
                 'label' => $this->title,
                 'cost' => 0.00,
                 'calc_tax' => 'per_item'
@@ -142,6 +155,11 @@ if (!class_exists('MRKV_UA_SHIPPING_UKR_POSHTA_ADDRESS'))
                 $cost = WC()->cart->get_subtotal();
                 $service_type = 'W2D';
                 $cargo_type = (isset($settings_method['shipment']['type']) && $settings_method['shipment']['type']) ? $settings_method['shipment']['type'] : 'EXPRESS';
+
+                if($this->get_option('shipping_type'))
+                {
+                    $cargo_type = $this->get_option('shipping_type');
+                }
 
                 if(isset( $_POST['post_data'] ))
                 {
@@ -166,6 +184,8 @@ if (!class_exists('MRKV_UA_SHIPPING_UKR_POSHTA_ADDRESS'))
                 }
 
                 $dimension_unit = get_option( 'woocommerce_dimension_unit' );
+                $max_width = 0.00;
+                $max_height = 0.00;
 
                 foreach(WC()->cart->get_cart() as $cart_item => $cart_value)
                 {
@@ -174,6 +194,8 @@ if (!class_exists('MRKV_UA_SHIPPING_UKR_POSHTA_ADDRESS'))
                     $item_height = ( null !== $cart_value['data']->get_height() && $cart_value['data']->get_height()) ? wc_get_dimension( $cart_value['data']->get_height(), 'cm', $dimension_unit ) : 0.00;
 
                     $product_length = intval( ceil( floatval(max($item_length, $item_width, $item_height))));
+                    $max_width = intval( ceil( floatval(max($max_width, $item_width))));
+                    $max_height = intval( ceil( floatval(max($max_height, $item_height))));
 
                     if($product_length > $length)
                     {
@@ -185,8 +207,17 @@ if (!class_exists('MRKV_UA_SHIPPING_UKR_POSHTA_ADDRESS'))
                 {
                     $length = intval( ceil($settings_method['shipment']['length']));
                 }
+                if((!$max_width) && isset($settings_method['shipment']['width']) && $settings_method['shipment']['width'])
+                {
+                    $max_width = intval( ceil($settings_method['shipment']['width']));
+                }
 
-                $result_calculate = $mrkv_calculate_ukr_poshta->calculate_shipping_cost($city_sender, $city_recipient, $weight, $service_type, $cost, $cargo_type, $length);
+                if((!$max_height) && isset($settings_method['shipment']['height']) && $settings_method['shipment']['height'])
+                {
+                    $max_height = intval( ceil($settings_method['shipment']['height']));
+                }
+
+                $result_calculate = $mrkv_calculate_ukr_poshta->calculate_shipping_cost($city_sender, $city_recipient, $weight, $service_type, $cost, $cargo_type, $length, $max_width, $max_height);
 
                 if($result_calculate)
                 {
