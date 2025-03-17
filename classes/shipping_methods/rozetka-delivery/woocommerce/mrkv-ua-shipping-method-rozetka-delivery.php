@@ -113,7 +113,7 @@ if (!class_exists('MRKV_UA_SHIPPING_ROZETKA_DELIVERY'))
         {
         	# Create rate
         	$rate = array(
-                'id' => $this->id,
+                'id' => $this->id . '_' . $this->instance_id,
                 'label' => $this->title,
                 'cost' => 0.00,
                 'calc_tax' => 'per_item'

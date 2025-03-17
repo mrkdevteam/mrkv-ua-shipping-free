@@ -33,34 +33,35 @@ jQuery(window).on('load', function()
 		        return "Видалити всі елементи";
 		    },
 		});
-
-		jQuery.fn.selectWoo.defaults.set("language", {
-		    errorLoading: function () {
-		        return "Неможливо завантажити результати.";
-		    },
-		    inputTooLong: function (args) {
-		        var overChars = args.input.length - args.maximum;
-		        return "Будь ласка, видаліть " + overChars + " символ(и/ів).";
-		    },
-		    inputTooShort: function (args) {
-		        return "Будь ласка, введіть ще " + args.minimum + " символ(и/ів).";
-		    },
-		    loadingMore: function () {
-		        return "Завантаження додаткових результатів...";
-		    },
-		    maximumSelected: function (args) {
-		        return "Ви можете вибрати лише " + args.maximum + " елемент(и/ів).";
-		    },
-		    noResults: function () {
-		        return "Нічого не знайдено.";
-		    },
-		    searching: function () {
-		        return "Пошук...";
-		    },
-		    removeAllItems: function () {
-		        return "Видалити всі елементи";
-		    },
-		});
+		if (typeof jQuery.fn.selectWoo !== 'undefined') {
+			jQuery.fn.selectWoo.defaults.set("language", {
+			    errorLoading: function () {
+			        return "Неможливо завантажити результати.";
+			    },
+			    inputTooLong: function (args) {
+			        var overChars = args.input.length - args.maximum;
+			        return "Будь ласка, видаліть " + overChars + " символ(и/ів).";
+			    },
+			    inputTooShort: function (args) {
+			        return "Будь ласка, введіть ще " + args.minimum + " символ(и/ів).";
+			    },
+			    loadingMore: function () {
+			        return "Завантаження додаткових результатів...";
+			    },
+			    maximumSelected: function (args) {
+			        return "Ви можете вибрати лише " + args.maximum + " елемент(и/ів).";
+			    },
+			    noResults: function () {
+			        return "Нічого не знайдено.";
+			    },
+			    searching: function () {
+			        return "Пошук...";
+			    },
+			    removeAllItems: function () {
+			        return "Видалити всі елементи";
+			    },
+			});
+		}
 	}
 
 	jQuery.fn.select2.amd.define('select2/data/extended-ajax',['./ajax','../utils','jquery'], function(AjaxAdapter, Utils, $){
