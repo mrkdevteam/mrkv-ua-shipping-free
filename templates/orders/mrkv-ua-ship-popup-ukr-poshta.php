@@ -24,29 +24,38 @@
 							$lastname = isset($mrk_ua_ship_ukr_settings['sender']['individual']['lastname']) ? $mrk_ua_ship_ukr_settings['sender']['individual']['lastname'] . ' ' : '';
 							$name = isset($mrk_ua_ship_ukr_settings['sender']['individual']['name']) ? $mrk_ua_ship_ukr_settings['sender']['individual']['name'] . ' ' : '';
 							$middlename = isset($mrk_ua_ship_ukr_settings['sender']['individual']['middlename']) ? $mrk_ua_ship_ukr_settings['sender']['individual']['middlename'] . ' ' : '';
-							$companyname = isset($mrk_ua_ship_ukr_settings['sender']['individual']['name_main']) ? $mrk_ua_ship_ukr_settings['sender']['individual']['name_main'] . ' ' : '';
 							$phone = isset($mrk_ua_ship_ukr_settings['sender']['individual']['phone']) ? $mrk_ua_ship_ukr_settings['sender']['individual']['phone'] . ' ' : '';
 						}
-						elseif($sender_type == 'COMPANY'){
-							$lastname = isset($mrk_ua_ship_ukr_settings['sender']['company']['lastname']) ? $mrk_ua_ship_ukr_settings['sender']['company']['lastname'] . ' ' : '';
-							$name = isset($mrk_ua_ship_ukr_settings['sender']['company']['name']) ? $mrk_ua_ship_ukr_settings['sender']['company']['name'] . ' ' : '';
-							$middlename = isset($mrk_ua_ship_ukr_settings['sender']['company']['middlename']) ? $mrk_ua_ship_ukr_settings['sender']['company']['middlename'] . ' ' : '';
-							$companyname = isset($mrk_ua_ship_ukr_settings['sender']['company']['name_main']) ? $mrk_ua_ship_ukr_settings['sender']['company']['name_main'] . ' ' : '';
-							$phone = isset($mrk_ua_ship_ukr_settings['sender']['company']['phone']) ? $mrk_ua_ship_ukr_settings['sender']['company']['phone'] . ' ' : '';
-						}
-						elseif($sender_type == 'PRIVATE_ENTREPRENEUR'){
-							$lastname = isset($mrk_ua_ship_ukr_settings['sender']['private']['lastname']) ? $mrk_ua_ship_ukr_settings['sender']['private']['lastname'] . ' ' : '';
-							$name = isset($mrk_ua_ship_ukr_settings['sender']['private']['name']) ? $mrk_ua_ship_ukr_settings['sender']['private']['name'] . ' ' : '';
-							$middlename = isset($mrk_ua_ship_ukr_settings['sender']['private']['middlename']) ? $mrk_ua_ship_ukr_settings['sender']['private']['middlename'] . ' ' : '';
-							$companyname = isset($mrk_ua_ship_ukr_settings['sender']['private']['name_main']) ? $mrk_ua_ship_ukr_settings['sender']['private']['name_main'] . ' ' : '';
-							$phone = isset($mrk_ua_ship_ukr_settings['sender']['private']['phone']) ? $mrk_ua_ship_ukr_settings['sender']['private']['phone'] . ' ' : '';
+						elseif($sender_type && $sender_type != 'INDIVIDUAL')
+						{
+							$lastname = (isset($mrk_ua_ship_ukr_settings['sender']['company']['lastname']) && $mrk_ua_ship_ukr_settings['sender']['company']['lastname']) ? $mrk_ua_ship_ukr_settings['sender']['company']['lastname'] : $lastname;
+
+							if(!$lastname){
+								$lastname = (isset($mrk_ua_ship_ukr_settings['sender']['private']['lastname']) && $mrk_ua_ship_ukr_settings['sender']['private']['lastname']) ? $mrk_ua_ship_ukr_settings['sender']['private']['lastname'] : $lastname;
+							}
+
+							$name = (isset($mrk_ua_ship_ukr_settings['sender']['company']['name']) && $mrk_ua_ship_ukr_settings['sender']['company']['name']) ? $mrk_ua_ship_ukr_settings['sender']['company']['name'] : $name;
+
+							if(!$name)
+							{
+								$name = (isset($mrk_ua_ship_ukr_settings['sender']['private']['name']) && $mrk_ua_ship_ukr_settings['sender']['private']['name']) ? $mrk_ua_ship_ukr_settings['sender']['private']['name'] : $name;
+							}
+
+							$middlename = (isset($mrk_ua_ship_ukr_settings['sender']['private']['middlename']) && $mrk_ua_ship_ukr_settings['sender']['private']['middlename']) ? $mrk_ua_ship_ukr_settings['sender']['private']['middlename'] : $middlename;
+
+							$phone = (isset($mrk_ua_ship_ukr_settings['sender']['company']['phone']) && $mrk_ua_ship_ukr_settings['sender']['company']['phone']) ? $mrk_ua_ship_ukr_settings['sender']['company']['phone'] : $phone;
+
+							if(!$phone)
+							{
+								$phone = (isset($mrk_ua_ship_ukr_settings['sender']['private']['phone']) && $mrk_ua_ship_ukr_settings['sender']['private']['phone']) ? $mrk_ua_ship_ukr_settings['sender']['private']['phone'] : $phone;
+							}
 						}
 						else
 						{
 							$has_empty = true;	
 						}
 
-						$fullname = $lastname . $name . $middlename . $companyname;
+						$fullname = $lastname . $name . $middlename;
 
 						if(!$lastname && !$name)
 						{

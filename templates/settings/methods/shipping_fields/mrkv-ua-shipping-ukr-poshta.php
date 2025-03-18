@@ -83,16 +83,45 @@
 		<div class="admin_ua_ship_morkva_settings_row mrkv_row_reverse">
 			<div class="col-mrkv-5">
 				<?php 
-					$data = isset(MRKV_SHIPPING_SETTINGS['sender']['type']) ? MRKV_SHIPPING_SETTINGS['sender']['type'] : '';
+					$data_sender_type = isset(MRKV_SHIPPING_SETTINGS['sender']['type']) ? MRKV_SHIPPING_SETTINGS['sender']['type'] : '';
+					$sender_lastname = isset(MRKV_SHIPPING_SETTINGS['sender']['individual']['lastname']) ? MRKV_SHIPPING_SETTINGS['sender']['individual']['lastname'] : '';
+					$sender_firstname = isset(MRKV_SHIPPING_SETTINGS['sender']['individual']['name']) ? MRKV_SHIPPING_SETTINGS['sender']['individual']['name'] : '';
+					$sender_middlename = isset(MRKV_SHIPPING_SETTINGS['sender']['individual']['middlename']) ? MRKV_SHIPPING_SETTINGS['sender']['individual']['middlename'] : '';
+					$sender_phone = isset(MRKV_SHIPPING_SETTINGS['sender']['individual']['phone']) ? MRKV_SHIPPING_SETTINGS['sender']['individual']['phone'] : '';
+
+					if($data_sender_type && $data_sender_type != 'INDIVIDUAL')
+					{
+						$data_sender_type = 'INDIVIDUAL';
+						$sender_lastname = (isset(MRKV_SHIPPING_SETTINGS['sender']['company']['lastname']) && MRKV_SHIPPING_SETTINGS['sender']['company']['lastname']) ? MRKV_SHIPPING_SETTINGS['sender']['company']['lastname'] : $sender_lastname;
+
+						if(!$sender_lastname){
+							$sender_lastname = (isset(MRKV_SHIPPING_SETTINGS['sender']['private']['lastname']) && MRKV_SHIPPING_SETTINGS['sender']['private']['lastname']) ? MRKV_SHIPPING_SETTINGS['sender']['private']['lastname'] : $sender_lastname;
+						}
+
+						$sender_firstname = (isset(MRKV_SHIPPING_SETTINGS['sender']['company']['name']) && MRKV_SHIPPING_SETTINGS['sender']['company']['name']) ? MRKV_SHIPPING_SETTINGS['sender']['company']['name'] : $sender_firstname;
+
+						if(!$sender_firstname)
+						{
+							$sender_firstname = (isset(MRKV_SHIPPING_SETTINGS['sender']['private']['name']) && MRKV_SHIPPING_SETTINGS['sender']['private']['name']) ? MRKV_SHIPPING_SETTINGS['sender']['private']['name'] : $sender_firstname;
+						}
+
+						$sender_middlename = (isset(MRKV_SHIPPING_SETTINGS['sender']['private']['middlename']) && MRKV_SHIPPING_SETTINGS['sender']['private']['middlename']) ? MRKV_SHIPPING_SETTINGS['sender']['private']['middlename'] : $sender_middlename;
+
+						$sender_phone = (isset(MRKV_SHIPPING_SETTINGS['sender']['company']['phone']) && MRKV_SHIPPING_SETTINGS['sender']['company']['phone']) ? MRKV_SHIPPING_SETTINGS['sender']['company']['phone'] : $sender_phone;
+
+						if(!$sender_phone)
+						{
+							$sender_phone = (isset(MRKV_SHIPPING_SETTINGS['sender']['private']['phone']) && MRKV_SHIPPING_SETTINGS['sender']['private']['phone']) ? MRKV_SHIPPING_SETTINGS['sender']['private']['phone'] : $sender_phone;
+						}
+					}
+
 					$senders_type_list = array(
-						'INDIVIDUAL' => __('An individual', 'mrkv-ua-shipping'),
-						'COMPANY' => __('Legal entity', 'mrkv-ua-shipping'),
-						'PRIVATE_ENTREPRENEUR' => __('An individual entrepreneur (IE)', 'mrkv-ua-shipping'),
+						'INDIVIDUAL' => __('An individual', 'mrkv-ua-shipping')
 					);
 
 					$description = __('The choice affects the fields that need to be filled in in the setup', 'mrkv-ua-shipping');
 
-					echo $mrkv_global_option_generator->get_select_simple(__('The sender represents', 'mrkv-ua-shipping'), MRKV_OPTION_OBJECT_NAME . '[sender][type]', $senders_type_list, $data, MRKV_OPTION_OBJECT_NAME . '_sender_type' , __('Choose a type', 'mrkv-ua-shipping'), $description);
+					echo $mrkv_global_option_generator->get_select_simple(__('The sender represents', 'mrkv-ua-shipping'), MRKV_OPTION_OBJECT_NAME . '[sender][type]', $senders_type_list, $data_sender_type, MRKV_OPTION_OBJECT_NAME . '_sender_type' , __('Choose a type', 'mrkv-ua-shipping'), $description);
 				?>
 			</div>
 			<div class="col-mrkv-5">
@@ -105,9 +134,6 @@
 				?>
 			</div>
 		</div>
-		<?php 
-			$data_sender_type = isset(MRKV_SHIPPING_SETTINGS['sender']['type']) ? MRKV_SHIPPING_SETTINGS['sender']['type'] : '';
-		?>
 		<div class="admin_ua_ship_morkva_settings_line__inner active" id="<?php echo MRKV_OPTION_OBJECT_NAME; ?>_sender_type_list">
 			<div data-sender="DEFAULT" class="<?php echo MRKV_OPTION_OBJECT_NAME; ?>_sender_type_block <?php if(!$data_sender_type){ echo 'active'; } ?>">
 				<div class="admin_ua_ship_morkva_settings_row">
@@ -127,14 +153,14 @@
 				<div class="admin_ua_ship_morkva_settings_row">
 					<div class="col-mrkv-5">
 						<?php 
-							$data = isset(MRKV_SHIPPING_SETTINGS['sender']['individual']['lastname']) ? MRKV_SHIPPING_SETTINGS['sender']['individual']['lastname'] : '';
+							$data = $sender_lastname;
 							echo $mrkv_global_option_generator->get_input_text(__('Lastname', 'mrkv-ua-shipping'), MRKV_OPTION_OBJECT_NAME . '[sender][individual][lastname]', $data, MRKV_OPTION_OBJECT_NAME. '_sender_individual_lastname' , '', __('Enter the lastname...', 'mrkv-ua-shipping'), '');
 						?>
 						<p></p>
 					</div>
 					<div class="col-mrkv-5">
 						<?php 
-							$data = isset(MRKV_SHIPPING_SETTINGS['sender']['individual']['name']) ? MRKV_SHIPPING_SETTINGS['sender']['individual']['name'] : '';
+							$data = $sender_firstname;
 							echo $mrkv_global_option_generator->get_input_text(__('Name', 'mrkv-ua-shipping'), MRKV_OPTION_OBJECT_NAME . '[sender][individual][name]', $data, MRKV_OPTION_OBJECT_NAME. '_sender_individual_name' , '', __('Enter the name...', 'mrkv-ua-shipping'), '');
 						?>
 						<p></p>
@@ -143,138 +169,17 @@
 				<div class="admin_ua_ship_morkva_settings_row">
 					<div class="col-mrkv-5">
 						<?php 
-							$data = isset(MRKV_SHIPPING_SETTINGS['sender']['individual']['middlename']) ? MRKV_SHIPPING_SETTINGS['sender']['individual']['middlename'] : '';
+							$data = $sender_middlename;
 							echo $mrkv_global_option_generator->get_input_text(__('Middlename', 'mrkv-ua-shipping'), MRKV_OPTION_OBJECT_NAME . '[sender][individual][middlename]', $data, MRKV_OPTION_OBJECT_NAME. '_sender_individual_middlename' , '', __('Enter the middlename...', 'mrkv-ua-shipping'), '');
 						?>
 						<p></p>
 					</div>
 					<div class="col-mrkv-5">
 						<?php 
-							$data = isset(MRKV_SHIPPING_SETTINGS['sender']['individual']['phone']) ? MRKV_SHIPPING_SETTINGS['sender']['individual']['phone'] : '';
+							$data = $sender_phone;
 							$description = __('Hint: the main format is 0987654321 (without +38)', 'mrkv-ua-shipping');
 							echo $mrkv_global_option_generator->get_input_text(__('Phone', 'mrkv-ua-shipping'), MRKV_OPTION_OBJECT_NAME . '[sender][individual][phone]', $data, MRKV_OPTION_OBJECT_NAME. '_sender_individual_phone' , '', __('Enter the phone...', 'mrkv-ua-shipping'), $description);
 						?>
-					</div>
-				</div>
-			</div>
-			<div data-sender="COMPANY" class="<?php echo MRKV_OPTION_OBJECT_NAME; ?>_sender_type_block <?php if($data_sender_type == 'COMPANY'){ echo 'active'; } ?>">
-				<div class="admin_ua_ship_morkva_settings_row">
-					<div class="col-mrkv-5">
-						<?php 
-							$data = isset(MRKV_SHIPPING_SETTINGS['sender']['company']['lastname']) ? MRKV_SHIPPING_SETTINGS['sender']['company']['lastname'] : '';
-							echo $mrkv_global_option_generator->get_input_text(__('Lastname', 'mrkv-ua-shipping'), MRKV_OPTION_OBJECT_NAME . '[sender][company][lastname]', $data, MRKV_OPTION_OBJECT_NAME. '_sender_company_lastname' , '', __('Enter the lastname...', 'mrkv-ua-shipping'), '');
-						?>
-						<p></p>
-					</div>
-					<div class="col-mrkv-5">
-						<?php 
-							$data = isset(MRKV_SHIPPING_SETTINGS['sender']['company']['name']) ? MRKV_SHIPPING_SETTINGS['sender']['company']['name'] : '';
-							echo $mrkv_global_option_generator->get_input_text(__('Name', 'mrkv-ua-shipping'), MRKV_OPTION_OBJECT_NAME . '[sender][company][name]', $data, MRKV_OPTION_OBJECT_NAME. '_sender_company_name' , '', __('Enter the name...', 'mrkv-ua-shipping'), '');
-						?>
-						<p></p>
-					</div>
-				</div>
-				<div class="admin_ua_ship_morkva_settings_row">
-					<div class="col-mrkv-5">
-						<?php 
-							$data = isset(MRKV_SHIPPING_SETTINGS['sender']['company']['name_main']) ? MRKV_SHIPPING_SETTINGS['sender']['company']['name_main'] : '';
-							echo $mrkv_global_option_generator->get_input_text(__('Name of the company / individual entrepreneur', 'mrkv-ua-shipping'), MRKV_OPTION_OBJECT_NAME . '[sender][company][name_main]', $data, MRKV_OPTION_OBJECT_NAME. '_sender_company_name_main' , '', __('Enter the company name...', 'mrkv-ua-shipping'), '');
-						?>
-						<p></p>
-					</div>
-					<div class="col-mrkv-5">
-						<?php 
-							$data = isset(MRKV_SHIPPING_SETTINGS['sender']['company']['iban']) ? MRKV_SHIPPING_SETTINGS['sender']['company']['iban'] : '';
-							echo $mrkv_global_option_generator->get_input_text(__('IBAN account', 'mrkv-ua-shipping'), MRKV_OPTION_OBJECT_NAME . '[sender][company][iban]', $data, MRKV_OPTION_OBJECT_NAME. '_sender_company_iban' , '', __('Enter the iban...', 'mrkv-ua-shipping'), '');
-						?>
-						<p></p>
-					</div>
-				</div>
-				<div class="admin_ua_ship_morkva_settings_row">
-					<div class="col-mrkv-5">
-						<?php 
-							$data = isset(MRKV_SHIPPING_SETTINGS['sender']['company']['edrpou']) ? MRKV_SHIPPING_SETTINGS['sender']['company']['edrpou'] : '';
-							echo $mrkv_global_option_generator->get_input_text(__('EDRPOU', 'mrkv-ua-shipping'), MRKV_OPTION_OBJECT_NAME . '[sender][company][edrpou]', $data, MRKV_OPTION_OBJECT_NAME. '_sender_company_edrpou' , '', __('Enter the EDRPOU...', 'mrkv-ua-shipping'), '');
-						?>
-						<p></p>
-					</div>
-					<div class="col-mrkv-5">
-						<?php 
-							$data = isset(MRKV_SHIPPING_SETTINGS['sender']['company']['phone']) ? MRKV_SHIPPING_SETTINGS['sender']['company']['phone'] : '';
-							$description = __('Hint: the main format is 0987654321 (without +38)', 'mrkv-ua-shipping');
-							echo $mrkv_global_option_generator->get_input_text(__('Phone', 'mrkv-ua-shipping'), MRKV_OPTION_OBJECT_NAME . '[sender][company][phone]', $data, MRKV_OPTION_OBJECT_NAME. '_sender_company_phone' , '', __('Enter the phone...', 'mrkv-ua-shipping'), $description);
-						?>
-					</div>
-				</div>
-				<?php
-					$data = isset(MRKV_SHIPPING_SETTINGS['sender']['company']['postpay']) ? MRKV_SHIPPING_SETTINGS['sender']['company']['postpay'] : '';
-					echo $mrkv_global_option_generator->get_input_checkbox(__('Receive cash on delivery by bank transfer', 'mrkv-ua-shipping'), MRKV_OPTION_OBJECT_NAME . '[sender][company][postpay]', $data, MRKV_OPTION_OBJECT_NAME . '_sender_company_postpay', );
-				?>
-				<?php echo '<p class="mrkv-ua-ship-description">' . __('Cash on delivery to a current account is possible only for the Sender - a legal entity or individual entrepreneur and for the STANDARD shipment type with the declared value.', 'mrkv-ua-shipping') . '</p>'; ?>
-			</div>
-			<div data-sender="PRIVATE_ENTREPRENEUR" class="<?php echo MRKV_OPTION_OBJECT_NAME; ?>_sender_type_block <?php if($data_sender_type == 'PRIVATE_ENTREPRENEUR'){ echo 'active'; } ?>">
-				<div class="admin_ua_ship_morkva_settings_row">
-					<div class="col-mrkv-5">
-						<?php 
-							$data = isset(MRKV_SHIPPING_SETTINGS['sender']['private']['lastname']) ? MRKV_SHIPPING_SETTINGS['sender']['private']['lastname'] : '';
-							echo $mrkv_global_option_generator->get_input_text(__('Lastname', 'mrkv-ua-shipping'), MRKV_OPTION_OBJECT_NAME . '[sender][private][lastname]', $data, MRKV_OPTION_OBJECT_NAME. '_sender_private_lastname' , '', __('Enter the lastname...', 'mrkv-ua-shipping'), '');
-						?>
-						<p></p>
-					</div>
-					<div class="col-mrkv-5">
-						<?php 
-							$data = isset(MRKV_SHIPPING_SETTINGS['sender']['private']['name']) ? MRKV_SHIPPING_SETTINGS['sender']['private']['name'] : '';
-							echo $mrkv_global_option_generator->get_input_text(__('Name', 'mrkv-ua-shipping'), MRKV_OPTION_OBJECT_NAME . '[sender][private][name]', $data, MRKV_OPTION_OBJECT_NAME. '_sender_private_name' , '', __('Enter the name...', 'mrkv-ua-shipping'), '');
-						?>
-						<p></p>
-					</div>
-				</div>
-				<div class="admin_ua_ship_morkva_settings_row">
-					<div class="col-mrkv-5">
-						<?php 
-							$data = isset(MRKV_SHIPPING_SETTINGS['sender']['private']['middlename']) ? MRKV_SHIPPING_SETTINGS['sender']['private']['middlename'] : '';
-							echo $mrkv_global_option_generator->get_input_text(__('Middlename', 'mrkv-ua-shipping'), MRKV_OPTION_OBJECT_NAME . '[sender][private][middlename]', $data, MRKV_OPTION_OBJECT_NAME. '_sender_private_middlename' , '', __('Enter the middlename...', 'mrkv-ua-shipping'), '');
-						?>
-						<p></p>
-					</div>
-					<div class="col-mrkv-5">
-						<?php 
-							$data = isset(MRKV_SHIPPING_SETTINGS['sender']['private']['phone']) ? MRKV_SHIPPING_SETTINGS['sender']['private']['phone'] : '';
-							$description = __('Hint: the main format is 0987654321 (without +38)', 'mrkv-ua-shipping');
-							echo $mrkv_global_option_generator->get_input_text(__('Phone', 'mrkv-ua-shipping'), MRKV_OPTION_OBJECT_NAME . '[sender][private][phone]', $data, MRKV_OPTION_OBJECT_NAME. '_sender_private_phone' , '', __('Enter the phone...', 'mrkv-ua-shipping'), $description);
-						?>
-					</div>
-				</div>
-				<div class="admin_ua_ship_morkva_settings_row">
-					<div class="col-mrkv-5">
-						<?php 
-							$data = isset(MRKV_SHIPPING_SETTINGS['sender']['private']['name_main']) ? MRKV_SHIPPING_SETTINGS['sender']['private']['name_main'] : '';
-							echo $mrkv_global_option_generator->get_input_text(__('Name of the company / individual entrepreneur', 'mrkv-ua-shipping'), MRKV_OPTION_OBJECT_NAME . '[sender][private][name_main]', $data, MRKV_OPTION_OBJECT_NAME. '_sender_private_name_main' , '', __('Enter the company name...', 'mrkv-ua-shipping'), '');
-						?>
-						<p></p>
-					</div>
-					<div class="col-mrkv-5">
-						<?php 
-							$data = isset(MRKV_SHIPPING_SETTINGS['sender']['private']['iban']) ? MRKV_SHIPPING_SETTINGS['sender']['private']['iban'] : '';
-							echo $mrkv_global_option_generator->get_input_text(__('IBAN account', 'mrkv-ua-shipping'), MRKV_OPTION_OBJECT_NAME . '[sender][private][iban]', $data, MRKV_OPTION_OBJECT_NAME. '_sender_private_iban' , '', __('Enter the iban...', 'mrkv-ua-shipping'), '');
-						?>
-						<p></p>
-					</div>
-				</div>
-				<div class="admin_ua_ship_morkva_settings_row">
-					<div class="col-mrkv-5">
-						<?php 
-							$data = isset(MRKV_SHIPPING_SETTINGS['sender']['private']['ipn']) ? MRKV_SHIPPING_SETTINGS['sender']['private']['ipn'] : '';
-							echo $mrkv_global_option_generator->get_input_text(__('Individual tax number (TIN)', 'mrkv-ua-shipping'), MRKV_OPTION_OBJECT_NAME . '[sender][private][ipn]', $data, MRKV_OPTION_OBJECT_NAME. '_sender_private_ipn' , '', __('Enter the Individual tax number...', 'mrkv-ua-shipping'), '');
-						?>
-						<p></p>
-					</div>
-					<div class="col-mrkv-5">
-						<?php
-						$data = isset(MRKV_SHIPPING_SETTINGS['sender']['private']['postpay']) ? MRKV_SHIPPING_SETTINGS['sender']['private']['postpay'] : '';
-						echo $mrkv_global_option_generator->get_input_checkbox(__('Receive cash on delivery by bank transfer', 'mrkv-ua-shipping'), MRKV_OPTION_OBJECT_NAME . '[sender][private][postpay]', $data, MRKV_OPTION_OBJECT_NAME . '_sender_private_postpay', );
-					?>
-					<?php echo '<p class="mrkv-ua-ship-description">' . __('Cash on delivery to a current account is possible only for the Sender - a legal entity or individual entrepreneur and for the STANDARD shipment type with the declared value.', 'mrkv-ua-shipping') . '</p>'; ?>
 					</div>
 				</div>
 			</div>

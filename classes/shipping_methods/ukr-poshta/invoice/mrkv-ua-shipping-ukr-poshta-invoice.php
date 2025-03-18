@@ -191,52 +191,29 @@ if (!class_exists('MRKV_UA_SHIPPING_UKR_POSHTA_INVOICE'))
 					$sender_phone = $this->settings_shipping['sender']['individual']['phone'];
 				}
 			}
-			elseif($sender_type == 'COMPANY')
+			else
 			{
-				if(isset($this->settings_shipping['sender']['company']['name']) && $this->settings_shipping['sender']['company']['name']){
-					$sender_first_name = $this->settings_shipping['sender']['company']['name'];
+				$sender_type = 'INDIVIDUAL';
+				$sender_last_name = (isset($this->settings_shipping['sender']['company']['lastname']) && $this->settings_shipping['sender']['company']['lastname']) ? $this->settings_shipping['sender']['company']['lastname'] : $sender_last_name;
+
+				if(!$sender_last_name){
+					$sender_last_name = (isset($this->settings_shipping['sender']['private']['lastname']) && $this->settings_shipping['sender']['private']['lastname']) ? $this->settings_shipping['sender']['private']['lastname'] : $sender_last_name;
 				}
-				if(isset($this->settings_shipping['sender']['company']['lastname']) && $this->settings_shipping['sender']['company']['lastname']){
-					$sender_last_name = $this->settings_shipping['sender']['company']['lastname'];
+
+				$sender_first_name = (isset($this->settings_shipping['sender']['company']['name']) && $this->settings_shipping['sender']['company']['name']) ? $this->settings_shipping['sender']['company']['name'] : $sender_first_name;
+
+				if(!$sender_first_name)
+				{
+					$sender_first_name = (isset($this->settings_shipping['sender']['private']['name']) && $this->settings_shipping['sender']['private']['name']) ? $this->settings_shipping['sender']['private']['name'] : $sender_first_name;
 				}
-				if(isset($this->settings_shipping['sender']['company']['middlename']) && $this->settings_shipping['sender']['company']['middlename']){
-					$sender_middle_name = $this->settings_shipping['sender']['company']['middlename'];
-				}
-				if(isset($this->settings_shipping['sender']['company']['phone']) && $this->settings_shipping['sender']['company']['phone']){
-					$sender_phone = $this->settings_shipping['sender']['company']['phone'];
-				}
-				if(isset($this->settings_shipping['sender']['company']['name_main']) && $this->settings_shipping['sender']['company']['name_main']){
-					$sender_name = $this->settings_shipping['sender']['company']['name_main'];
-				}
-				if(isset($this->settings_shipping['sender']['company']['edrpou']) && $this->settings_shipping['sender']['company']['edrpou']){
-					$sender_edprou = $this->settings_shipping['sender']['company']['edrpou'];
-				}
-				if(isset($this->settings_shipping['sender']['company']['iban']) && $this->settings_shipping['sender']['company']['iban']){
-					$sender_bank = $this->settings_shipping['sender']['company']['iban'];
-				}
-			}
-			elseif($sender_type == 'PRIVATE_ENTREPRENEUR')
-			{
-				if(isset($this->settings_shipping['sender']['private']['name']) && $this->settings_shipping['sender']['private']['name']){
-					$sender_first_name = $this->settings_shipping['sender']['private']['name'];
-				}
-				if(isset($this->settings_shipping['sender']['private']['lastname']) && $this->settings_shipping['sender']['private']['lastname']){
-					$sender_last_name = $this->settings_shipping['sender']['private']['lastname'];
-				}
-				if(isset($this->settings_shipping['sender']['private']['middlename']) && $this->settings_shipping['sender']['private']['middlename']){
-					$sender_middle_name = $this->settings_shipping['sender']['private']['middlename'];
-				}
-				if(isset($this->settings_shipping['sender']['private']['phone']) && $this->settings_shipping['sender']['private']['phone']){
-					$sender_phone = $this->settings_shipping['sender']['private']['phone'];
-				}
-				if(isset($this->settings_shipping['sender']['private']['name_main']) && $this->settings_shipping['sender']['private']['name_main']){
-					$sender_name = $this->settings_shipping['sender']['private']['name_main'];
-				}
-				if(isset($this->settings_shipping['sender']['private']['iban']) && $this->settings_shipping['sender']['private']['iban']){
-					$sender_bank = $this->settings_shipping['sender']['private']['iban'];
-				}
-				if(isset($this->settings_shipping['sender']['private']['ipn']) && $this->settings_shipping['sender']['private']['ipn']){
-					$sender_tin = $this->settings_shipping['sender']['private']['ipn'];
+
+				$sender_middle_name = (isset($this->settings_shipping['sender']['private']['middlename']) && $this->settings_shipping['sender']['private']['middlename']) ? $this->settings_shipping['sender']['private']['middlename'] : $sender_middle_name;
+
+				$sender_phone = (isset($this->settings_shipping['sender']['company']['phone']) && $this->settings_shipping['sender']['company']['phone']) ? $this->settings_shipping['sender']['company']['phone'] : $sender_phone;
+
+				if(!$sender_phone)
+				{
+					$sender_phone = (isset($this->settings_shipping['sender']['private']['phone']) && $this->settings_shipping['sender']['private']['phone']) ? $this->settings_shipping['sender']['private']['phone'] : $sender_phone;
 				}
 			}
 
@@ -706,20 +683,6 @@ if (!class_exists('MRKV_UA_SHIPPING_UKR_POSHTA_INVOICE'))
 				return false;
 			}
 			$sender_type = (isset($this->settings_shipping['sender']['type']) && $this->settings_shipping['sender']['type']) ? $this->settings_shipping['sender']['type'] : '';
-
-			if($declared_price && $this->order->get_payment_method() == 'cod')
-			{
-				if('COMPANY' == $sender_type && isset($this->settings_shipping['sender']['company']['postpay']) 
-				&& $this->settings_shipping['sender']['company']['postpay'] == 'on')
-				{
-					return true;
-				}
-				elseif('PRIVATE_ENTREPRENEUR' == $sender_type && isset($this->settings_shipping['sender']['private']['postpay']) 
-				&& $this->settings_shipping['sender']['private']['postpay'] == 'on')
-				{
-					return true;
-				}
-			}
 
 			if($post_pay && $post_pay > 0)
 			{

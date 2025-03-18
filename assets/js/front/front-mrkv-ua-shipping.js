@@ -2,18 +2,20 @@ jQuery(window).on('load', function()
 {
 	if (jQuery('form[name="checkout"]').length == 0) return;
 
-	let mrkv_ua_current_shipping = mrkvUaShipGetCurrentShipping();
+	setTimeout(function(){
+		let mrkv_ua_current_shipping = mrkvUaShipGetCurrentShipping();
 
-	if(mrkv_ua_current_shipping && ~mrkv_ua_current_shipping.indexOf("mrkv_ua_shipping"))
-	{
-		mrkvUaShipDisableDefaultFieldsforup();
-		mrkvUaShipShowGroup(mrkv_ua_current_shipping);
-	}
-	else
-	{
-		mrkvUaShipEnableDefaultFieldsforup();
-		mrkvUaShipHideAllGroups();
-	}
+		if(mrkv_ua_current_shipping && ~mrkv_ua_current_shipping.indexOf("mrkv_ua_shipping"))
+		{
+			mrkvUaShipDisableDefaultFieldsforup();
+			mrkvUaShipShowGroup(mrkv_ua_current_shipping);
+		}
+		else
+		{
+			mrkvUaShipEnableDefaultFieldsforup();
+			mrkvUaShipHideAllGroups();
+		}
+	}, 200);
 
  	jQuery( document.body ).on( 'updated_checkout', () => {
  		let mrkv_ua_current_shipping = mrkvUaShipGetCurrentShipping();
