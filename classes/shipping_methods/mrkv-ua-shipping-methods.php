@@ -26,12 +26,18 @@ if (!class_exists('MRKV_UA_SHIPPING_METHODS'))
 			new MRKV_UA_SHIPPING_METHODS_AJAX();
 
 			# Load settings page constants
-			add_action( 'plugins_loaded', array($this, 'get_shipping_admin_settings'), 10);
+			add_action( 'wp_loaded', array($this, 'get_shipping_admin_settings'));
 			# Include new shipping methods
 			add_action( 'woocommerce_shipping_init', array($this, 'mrkv_ua_shipping_include_shipping_method') );
 			# Setup new shipping methods
 			add_filter( 'woocommerce_shipping_methods', array($this, 'mrkv_ua_shipping_add_shipping_method_woo') );
+		}
 
+		/**
+		 * Add shippings settings admin page
+		 * **/
+		public function get_shipping_admin_settings()
+		{
 			$m_ua_active_plugins = get_option('m_ua_active_plugins');
 			
 			foreach(MRKV_UA_SHIPPING_LIST as $slug => $shipping)
@@ -47,13 +53,7 @@ if (!class_exists('MRKV_UA_SHIPPING_METHODS'))
 					break;
 				}
 			}
-		}
-
-		/**
-		 * Add shippings settings admin page
-		 * **/
-		public function get_shipping_admin_settings()
-		{
+			
 			# Check page data
 			if(isset($_GET['page']))
 			{

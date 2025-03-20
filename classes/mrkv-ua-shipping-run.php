@@ -28,11 +28,6 @@ if (!class_exists('MRKV_UA_SHIPPING_RUN'))
 			# Setup woo plugin shipping methods
 			new MRKV_UA_SHIPPING_METHODS();
 
-			add_action( 'before_woocommerce_init', array($this, 'mrkv_ua_ship_woocommerce_init'));
-		}
-
-		public function mrkv_ua_ship_woocommerce_init()
-		{
 			# Setup woo plugin woocommerce settings
 			new MRKV_UA_SHIPPING_WOOCOMMERCE();
 		}

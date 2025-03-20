@@ -23,9 +23,6 @@ if (!class_exists('MRKV_UA_SHIPPING_MENU'))
 		{
 			# Register page settings
 			add_action('admin_menu', array($this, 'mrkv_ua_shipping_register_plugin_page'), 99);
-
-			# Add support language
-			add_action( 'init', array($this, 'mrkv_ua_shipping_load_textdomain') );
 		}
 
 		/**
@@ -89,18 +86,6 @@ if (!class_exists('MRKV_UA_SHIPPING_MENU'))
 		{
 			# Include template
 			include MRKV_UA_SHIPPING_PLUGIN_PATH_TEMP . '/settings/template-mrkv-ua-shipping-about-us.php';
-		}
-
-		public function mrkv_ua_shipping_load_textdomain()
-		{
-			$site_locale = get_locale(); 
-		    $user_locale = get_user_locale();
-
-		    if (is_admin() && ($user_locale === 'ru_RU' || $user_locale === 'uk') && $site_locale !== $user_locale) {
-		        load_textdomain('mrkv-ua-shipping', MRKV_UA_SHIPPING_PLUGIN_PATH . 'i18n/mrkv-ua-shipping-' . $user_locale . '.mo');
-		    } else {
-		        load_plugin_textdomain('mrkv-ua-shipping', false, MRKV_UA_SHIPPING_PLUGIN_PATH . 'i18n/');
-		    }
 		}
 	}
 }

@@ -3,7 +3,7 @@
  * Plugin Name: Morkva UA Shipping
  * Plugin URI: https://morkva.co.ua/product-category/plugins/
  * Description: 2-in-1: Nova Poshta and Ukrposhta delivery services. Create shipping methods and shipments easily
- * Version: 1.2.2
+ * Version: 1.2.3
  * Author: MORKVA
  * Text Domain: mrkv-ua-shipping
  * Domain Path: /i18n/
@@ -29,12 +29,36 @@ define('MRKV_UA_SHIPPING_PLUGIN_FILE', __FILE__);
 # Include CONSTANTS
 require_once 'constants-mrkv-ua-shipping.php';
 
-# Check if Woo plugin activated
-if (in_array('woocommerce/woocommerce.php', apply_filters('active_plugins', get_option('active_plugins')))) 
-{
-    # Include plugin settings
-    require_once 'classes/mrkv-ua-shipping-run.php'; 
+/**
+ * Initialize the plugin after all plugins are loaded.
+ */
+function mrkv_ua_shipping_init() {
+    // Ensure WooCommerce is active
+    if ( ! class_exists( 'WooCommerce' ) ) {
+        return;
+    }
 
-    # Setup plugin settings
+    // Load translations first
+    mrkv_ua_shipping_load_textdomain();
+
+    // Include and initialize the main plugin class
+    require_once 'classes/mrkv-ua-shipping-run.php';
     new MRKV_UA_SHIPPING_RUN();
 }
+
+add_action( 'init', 'mrkv_ua_shipping_init' );
+
+function mrkv_ua_shipping_load_textdomain()
+{
+    $site_locale = get_locale(); 
+    $user_locale = get_user_locale();
+
+    if (is_admin() && ($user_locale === 'ru_RU' || $user_locale === 'uk') && $site_locale !== $user_locale) {
+        load_textdomain('mrkv-ua-shipping', dirname( plugin_basename( MRKV_UA_SHIPPING_PLUGIN_FILE ) ) . '/i18n/mrkv-ua-shipping-' . $user_locale . '.mo');
+    } else {
+        load_plugin_textdomain('mrkv-ua-shipping', false, dirname( plugin_basename( MRKV_UA_SHIPPING_PLUGIN_FILE ) ) . '/i18n/');
+    }
+
+    // Include plugin constants
+    require_once 'constants-mrkv-ua-shipping-methods.php';
+}    

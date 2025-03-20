@@ -4,7 +4,7 @@ Tags: Nova Poshta, нова пошта, новая почта, доставка
 Requires at least: 5.0
 Tested up to: 6.7
 Requires PHP: 7.0
-Stable tag: 1.2.2
+Stable tag: 1.2.3
 License: GPLv2
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -158,6 +158,10 @@ https://youtu.be/47-VrH_QJAE
 
 
 == Changelog ==
+
+= 1.2.3 =
+* [fix] виправили помилку завантаження полів Оформлення замовлення
+* [dev] fix for WP 6.7 _load_textdomain_just_in_time
 
 = 1.2.2 =
 * [dev] прибрали помилково додану можливість створення ТТН від імені юридичних осіб

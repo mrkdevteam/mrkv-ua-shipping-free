@@ -3,9 +3,14 @@ jQuery(window).on('load', function()
 	jQuery('#mrkv_ua_shipping_method').select2();
 	// Get the modal
 	var mrkv_ua_ship_create_invoice = document.getElementById("mrkv_ua_ship_create_invoice");
+	let isProcessingOpenForm = false;
+	let isProcessingCreateInvoice = false;
 
 	jQuery('.mrkv_ua_ship_global_create__invoice').click(function()
 	{
+		if (isProcessingOpenForm) return;
+    	isProcessingOpenForm = true;
+
 		var loader_btn = jQuery(this).find('.mrkv_ua_ship_create_invoice__loader');
 		jQuery(loader_btn).show();
 		let current_ship = jQuery(this).attr('data-ship');
@@ -79,11 +84,16 @@ jQuery(window).on('load', function()
 
                 jQuery('#mrkv_ua_ship_create_invoice').fadeIn(300);
                 jQuery(loader_btn).hide();
+                isProcessingOpenForm = false;
             }
         });
 	});
 
-	jQuery('.mrkv_ua_ship_create_invoice__action').click(function(){
+	jQuery('.mrkv_ua_ship_create_invoice__action').click(function()
+	{
+		if (isProcessingCreateInvoice) return;
+    	isProcessingCreateInvoice = true;
+
 		var loading_create = jQuery(this).closest('.mrkv_ua_ship_create_invoice__footer').find('.mrkv_ua_ship_create_invoice__loader');
 		jQuery(loading_create).show();
 		let current_ship_key = jQuery(this).attr('data-ship');
@@ -161,6 +171,7 @@ jQuery(window).on('load', function()
 	              }
 
 	              jQuery(loading_create).hide();
+	              isProcessingCreateInvoice = false;
 	            }
 	        });
 		}

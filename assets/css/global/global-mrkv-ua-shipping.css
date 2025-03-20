@@ -99,6 +99,10 @@
     cursor: pointer;
     color: #000;
     position: relative;
+    user-select: none;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
 }
 .mrkv_ua_ship_global_create__invoice:hover{
     box-shadow: 0 0 0 1px #fff, 0 0 0 3px #ed6230;
