@@ -61,6 +61,11 @@ if (!class_exists('MRKV_UA_SHIPPING_API_ROZETKA_DELIVERY'))
 	    	}
 	    }
 
+	    public function get_status_documents($data)
+	    {
+	    	return '';
+	    }
+
 	    /**
 	     * Get Debug request enabled
 	     * @return boolean Debug

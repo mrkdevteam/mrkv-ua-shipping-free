@@ -27,8 +27,6 @@ if (!class_exists('MRKV_UA_SHIPPING_METHODS'))
 
 			# Load settings page constants
 			add_action( 'wp_loaded', array($this, 'get_shipping_admin_settings'));
-			# Include new shipping methods
-			add_action( 'woocommerce_shipping_init', array($this, 'mrkv_ua_shipping_include_shipping_method') );
 			# Setup new shipping methods
 			add_filter( 'woocommerce_shipping_methods', array($this, 'mrkv_ua_shipping_add_shipping_method_woo') );
 		}
@@ -101,26 +99,6 @@ if (!class_exists('MRKV_UA_SHIPPING_METHODS'))
 							global $mrkv_global_shipping_object;
 							$mrkv_global_shipping_object = new $api_class(MRKV_SHIPPING_SETTINGS);
 						}
-					}
-				}
-			}
-		}
-
-		/**
-		 * Include shipping files
-		 */
-		public function mrkv_ua_shipping_include_shipping_method()
-		{
-			$m_ua_active_plugins = get_option('m_ua_active_plugins');
-
-			foreach(MRKV_UA_SHIPPING_LIST as $slug => $shipping)
-			{
-				if(isset($m_ua_active_plugins[$slug]['enabled']) && $m_ua_active_plugins[$slug]['enabled'] == 'on')
-				{
-					foreach($shipping['method'] as $method)
-					{
-						# Include Shipping method
-			    		require_once MRKV_UA_SHIPPING_PLUGIN_PATH_SHIP . '/' . $slug . '/woocommerce/' . $method['filename'] . '.php';
 					}
 				}
 			}
