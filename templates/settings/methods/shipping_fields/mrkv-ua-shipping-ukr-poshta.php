@@ -291,6 +291,25 @@
 			?>
 		</div>
 	</div>
+	<div class="admin_ua_ship_morkva_settings_row">
+		<div class="col-mrkv-5">
+			<div class="admin_ua_ship_morkva_settings_line">
+				<?php 
+					$data = isset(MRKV_SHIPPING_SETTINGS['shipment']['cart_total']) ? MRKV_SHIPPING_SETTINGS['shipment']['cart_total'] : '';
+					$mrkv_ua_shipping_cart_total = array(
+						'subtotal' => __('From the intermediate cost of the order (excluding promotional codes)', 'mrkv-ua-shipping'),
+						'total' => __('Of the total cost of the order (including promotional codes)', 'mrkv-ua-shipping'),
+					);
+
+					$description = __('Choose how much the shipping cost will be calculated', 'mrkv-ua-shipping');
+
+					echo $mrkv_global_option_generator->get_select_simple(__('Free shipping calculation', 'mrkv-ua-shipping'), MRKV_OPTION_OBJECT_NAME . '[shipment][cart_total]', $mrkv_ua_shipping_cart_total, $data, MRKV_OPTION_OBJECT_NAME . '_shipment_cart_total' , __('Choose a cart cost', 'mrkv-ua-shipping'), $description);
+				?>
+			</div>
+		</div>
+		<div class="col-mrkv-5">
+		</div>
+	</div>
 	<div class="admin_ua_ship_morkva_settings_line">
 		<?php
 			$data = isset(MRKV_SHIPPING_SETTINGS['shipment']['description']) ? MRKV_SHIPPING_SETTINGS['shipment']['description'] : '';

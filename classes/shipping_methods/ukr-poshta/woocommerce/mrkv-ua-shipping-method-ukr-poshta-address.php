@@ -139,95 +139,6 @@ if (!class_exists('MRKV_UA_SHIPPING_UKR_POSHTA_ADDRESS'))
                 'calc_tax' => 'per_item'
             );
 
-            if($this->get_option('enable_cost') && $this->get_option('enable_cost') == 'yes' && $this->get_option('enable_fix_cost') != 'yes')
-            {
-                $settings_method = get_option('ukr-poshta_m_ua_settings');
-
-                require_once MRKV_UA_SHIPPING_PLUGIN_PATH . 'classes/shipping_methods/ukr-poshta/api/mrkv-ua-shipping-api-ukr-poshta.php';
-                $mrkv_object_ukr_poshta = new MRKV_UA_SHIPPING_API_UKR_POSHTA($settings_method);
-                require_once MRKV_UA_SHIPPING_PLUGIN_PATH . 'classes/shipping_methods/ukr-poshta/api/mrkv-ua-shipping-calculate-ukr-poshta.php';
-                $mrkv_calculate_ukr_poshta = new MRKV_UA_SHIPPING_CALCULATE_UKR_POSHTA($mrkv_object_ukr_poshta);
-
-                $city_recipient = '04071';
-                $city_sender = (isset($settings_method['sender']['warehouse']['name']) && $settings_method['sender']['warehouse']['name']) ? $settings_method['sender']['warehouse']['name'] : '47743';
-                $weight = 0.00;
-                $length = 0.00;
-                $cost = WC()->cart->get_subtotal();
-                $service_type = 'W2D';
-                $cargo_type = (isset($settings_method['shipment']['type']) && $settings_method['shipment']['type']) ? $settings_method['shipment']['type'] : 'EXPRESS';
-
-                if($this->get_option('shipping_type'))
-                {
-                    $cargo_type = $this->get_option('shipping_type');
-                }
-
-                if(isset( $_POST['post_data'] ))
-                {
-                    parse_str( $_POST['post_data'], $post_data );
-                    
-                    if(isset($post_data[$this->id . '_house_ref']) && $post_data[$this->id . '_house_ref'])
-                    {
-                        $city_recipient = $post_data[$this->id . '_house_ref'];
-                    }
-                }
-                else
-                {
-                    $city_recipient = get_user_meta( get_current_user_id(), $this->id . '_house_ref' , true  );
-                }
-
-                $weight_coef = $this->convert_weight_unit();
-                $weight = ( WC()->cart->cart_contents_weight > 0 ) ? WC()->cart->cart_contents_weight * $weight_coef : 0.00;
-
-                if((!$weight) && isset($settings_method['shipment']['weight']) && $settings_method['shipment']['weight'])
-                {
-                    $weight = $settings_method['shipment']['weight'];
-                }
-
-                $dimension_unit = get_option( 'woocommerce_dimension_unit' );
-                $max_width = 0.00;
-                $max_height = 0.00;
-
-                foreach(WC()->cart->get_cart() as $cart_item => $cart_value)
-                {
-                    $item_length = ( null !== $cart_value['data']->get_length() && $cart_value['data']->get_length()) ? wc_get_dimension( $cart_value['data']->get_length(), 'cm', $dimension_unit ) : 0.00;
-                    $item_width = ( null !== $cart_value['data']->get_width() && $cart_value['data']->get_width()) ? wc_get_dimension( $cart_value['data']->get_width(), 'cm', $dimension_unit ) : 0.00;
-                    $item_height = ( null !== $cart_value['data']->get_height() && $cart_value['data']->get_height()) ? wc_get_dimension( $cart_value['data']->get_height(), 'cm', $dimension_unit ) : 0.00;
-
-                    $product_length = intval( ceil( floatval(max($item_length, $item_width, $item_height))));
-                    $max_width = intval( ceil( floatval(max($max_width, $item_width))));
-                    $max_height = intval( ceil( floatval(max($max_height, $item_height))));
-
-                    if($product_length > $length)
-                    {
-                        $length = intval( ceil( floatval(max($item_length, $item_width, $item_height))));
-                    }
-                }
-
-                if((!$length) && isset($settings_method['shipment']['length']) && $settings_method['shipment']['length'])
-                {
-                    $length = intval( ceil($settings_method['shipment']['length']));
-                }
-                if((!$max_width) && isset($settings_method['shipment']['width']) && $settings_method['shipment']['width'])
-                {
-                    $max_width = intval( ceil($settings_method['shipment']['width']));
-                }
-
-                if((!$max_height) && isset($settings_method['shipment']['height']) && $settings_method['shipment']['height'])
-                {
-                    $max_height = intval( ceil($settings_method['shipment']['height']));
-                }
-
-                $result_calculate = $mrkv_calculate_ukr_poshta->calculate_shipping_cost($city_sender, $city_recipient, $weight, $service_type, $cost, $cargo_type, $length, $max_width, $max_height);
-
-                if($result_calculate)
-                {
-                    $rate['cost'] = $result_calculate;
-                }
-                else{
-                    $rate['cost'] = 0.00;
-                }
-            }
-
             if($this->get_option('enable_fix_cost') && $this->get_option('enable_fix_cost') == 'yes')
             {
                 $rate['cost'] = $this->get_option('fix_cost_total');
@@ -236,6 +147,13 @@ if (!class_exists('MRKV_UA_SHIPPING_UKR_POSHTA_ADDRESS'))
             if($this->get_option('enable_minimum_cost') && $this->get_option('enable_minimum_cost') == 'yes')
             {
                 $woo_cart_total = WC()->cart->get_subtotal();
+
+                $settings_method = get_option('ukr-poshta_m_ua_settings');
+
+                if(isset($settings_method['shipment']['cart_total']) && $settings_method['shipment']['cart_total'] == 'total')
+                {
+                    $woo_cart_total = WC()->cart->cart_contents_total;
+                }
 
                 if($woo_cart_total >= $this->get_option('minimum_cost_total'))
                 {

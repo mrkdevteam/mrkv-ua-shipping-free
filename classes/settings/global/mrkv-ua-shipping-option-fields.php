@@ -226,7 +226,7 @@ if (!class_exists('MRKV_UA_SHIPPING_OPTION_FILEDS'))
 	    	# Get all fields
 	    	$label_content = $label ? '<label for="' . $id . '">' . $label . '</label>' : '';
 	    	$checked = ($value == $data) ? 'checked' : '';
-	    	$checked = (!$value && ($default_value == $data)) ? 'checked' : $checked;
+	    	$checked = (!$value && $value !== '0' && ($default_value == $data)) ? 'checked' : $checked;
 	    	$name_content = $name ? '<input ' . $readonly . ' id="' . $id . '" type="radio" name="' . $name . '" value="' . $data . '" ' . $checked . '>' : '';
 
 	    	# Create HTML

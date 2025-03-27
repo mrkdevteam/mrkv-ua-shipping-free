@@ -250,8 +250,17 @@ if (!class_exists('MRKV_UA_SHIPPING_METHODS_AJAX'))
 
 			            	$shipping_settings = get_option('woocommerce_' . $current_shipping . '_' . $instance_id . '_settings');
 
+			            	$order_total_for_min = $order->get_total();
+
+			            	$shipping_settings_global = get_option($key . '_m_ua_settings');
+
+			            	if(isset($shipping_settings_global['shipment']['cart_total']) && $shipping_settings_global['shipment']['cart_total'] == 'subtotal')
+			            	{
+			            		$order_total_for_min = $order->get_subtotal();
+			            	}
+
 			            	if(isset($shipping_settings['enable_minimum_cost']) && $shipping_settings['enable_minimum_cost'] == 'yes' 
-			            		&& isset($shipping_settings['minimum_cost_total']) && $shipping_settings['minimum_cost_total'] <= $order->get_total())
+			            		&& isset($shipping_settings['minimum_cost_total']) && $shipping_settings['minimum_cost_total'] <= $order_total_for_min)
 						    {
 						        $payer_delivery = 'Sender';
 						    }

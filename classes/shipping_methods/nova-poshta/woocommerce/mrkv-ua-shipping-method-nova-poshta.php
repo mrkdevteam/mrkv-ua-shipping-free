@@ -142,6 +142,13 @@ if (!class_exists('MRKV_UA_SHIPPING_NOVA_POSHTA'))
             {
                 $woo_cart_total = WC()->cart->get_subtotal();
 
+                $settings_method = get_option('nova-poshta_m_ua_settings');
+
+                if(isset($settings_method['shipment']['cart_total']) && $settings_method['shipment']['cart_total'] == 'total')
+                {
+                    $woo_cart_total = WC()->cart->cart_contents_total;
+                }
+
                 if($woo_cart_total >= $this->get_option('minimum_cost_total'))
                 {
                     $rate['cost'] = 0.00;
