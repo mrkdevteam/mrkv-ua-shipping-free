@@ -196,7 +196,7 @@ if (!class_exists('MRKV_UA_SHIPPING_AJAX_NOVA'))
 	        if(isset($obj['data'][0]))
 	        {
 	        	$areas = array();
-	        	$skip_weight = $warehouse_type ? true : false;
+	        	$skip_weight = true;
 
 	        	if($warehouse_type)
 	        	{
