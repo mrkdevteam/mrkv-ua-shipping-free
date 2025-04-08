@@ -8,7 +8,7 @@ jQuery(window).on('load', function()
 	{
 		jQuery.fn.select2.defaults.set("language", {
 		    errorLoading: function () {
-		        return "Неможливо завантажити результати.";
+		        return "Пошук...";
 		    },
 		    inputTooLong: function (args) {
 		        var overChars = args.input.length - args.maximum;
@@ -37,7 +37,7 @@ jQuery(window).on('load', function()
 		if (typeof jQuery.fn.selectWoo !== 'undefined') {
 			jQuery.fn.selectWoo.defaults.set("language", {
 			    errorLoading: function () {
-			        return "Неможливо завантажити результати.";
+			        return "Пошук...";
 			    },
 			    inputTooLong: function (args) {
 			        var overChars = args.input.length - args.maximum;
