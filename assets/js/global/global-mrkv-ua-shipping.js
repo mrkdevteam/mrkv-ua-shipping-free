@@ -128,7 +128,7 @@ jQuery(window).on('load', function()
 	              {
 	              	if(data.status == 'completed')
 	              	{
-	              		jQuery('.mrkv_ua_ship_modal-content__message_completed').html(data.message);
+	              		jQuery('.mrkv_ua_ship_modal-content__message_completed').html('<div class="mrkv_ua_ship_ttn_copy" data-ttn="' + data.invoice + '">' + data.message + '</div>');
 
 	              		jQuery('.print-ttn-mrkv-ua-ship').attr('href', '');
 	              		jQuery('.print-ttn-mrkv-ua-ship').attr('data-ship', current_ship_key);
@@ -151,7 +151,7 @@ jQuery(window).on('load', function()
 	              		jQuery('#mrkv_ua_ship_create_invoice_completed').fadeIn(300);
 	              		var order_id = jQuery('.mrkv_ua_ship_create_invoice__changed.active input[name="order_id"]').val();
 	              		jQuery('#the-list #order-' + order_id + ' .column-mrkv_ua_invoice a').empty();
-	              		jQuery('#the-list #order-' + order_id + ' .column-mrkv_ua_invoice a').html('<div class="mrkv_ua_ship_global__invoice">' + data.invoice + '</div>');
+	              		jQuery('#the-list #order-' + order_id + ' .column-mrkv_ua_invoice a').html('<div class="mrkv_ua_ship_global__invoice" data-ttn="' + data.invoice + '">' + data.invoice + '</div>');
 	              	}
 	              	else
 	              	{
@@ -174,6 +174,20 @@ jQuery(window).on('load', function()
 	              isProcessingCreateInvoice = false;
 	            }
 	        });
+		}
+	});
+
+	jQuery(document).on('click','.mrkv_ua_ship_ttn_copy',function(){
+		let current_ttn = jQuery(this).attr('data-ttn');
+		if (navigator.clipboard) {
+			navigator.clipboard.writeText(current_ttn);
+		}
+	});
+
+	jQuery(document).on('click','.mrkv_ua_ship_global__invoice',function(){
+		let current_ttn = jQuery(this).attr('data-ttn');
+		if (navigator.clipboard) {
+			navigator.clipboard.writeText(current_ttn);
 		}
 	});
 

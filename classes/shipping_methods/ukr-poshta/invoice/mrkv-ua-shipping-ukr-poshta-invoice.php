@@ -112,7 +112,7 @@ if (!class_exists('MRKV_UA_SHIPPING_UKR_POSHTA_INVOICE'))
 	        if(isset($obj['barcode']))
 	        {
 	        	$status = 'completed';
-	        	$message = __('Invoice created','mrkv-ua-shipping') . ' #' . $obj['barcode'];
+	        	$message = __('Invoice created','mrkv-ua-shipping') . ' #' . $obj['barcode']  . '<img src="' .  esc_url(MRKV_UA_SHIPPING_IMG_URL . '/global') . '/copy-ttn.svg" alt="' . esc_html__('Copy invoice', 'mrkv-ua-shipping') . '" title="' . esc_html__('Copy invoice', 'mrkv-ua-shipping') . '">';
 	        	$invoice = $obj['barcode'];
 
 	        	$this->order->update_meta_data('mrkv_ua_ship_invoice_number', $obj['barcode']);

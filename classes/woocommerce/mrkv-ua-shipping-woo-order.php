@@ -188,7 +188,7 @@ if (!class_exists('MRKV_UA_SHIPPING_WOO_ORDER'))
 			            if($mrkv_ua_ship_invoice){
 			            	?>
 			            		<h3><?php echo __('Invoice number', 'mrkv-ua-shipping'); ?></h3>
-			            		<div class="mrkv_ua_ship_global__invoice"><?php echo $mrkv_ua_ship_invoice; ?></div>
+			            		<div class="mrkv_ua_ship_global__invoice" data-ttn="<?php echo esc_html($mrkv_ua_ship_invoice); ?>"><?php echo $mrkv_ua_ship_invoice; ?><img src="<?php echo esc_url(MRKV_UA_SHIPPING_IMG_URL . '/global'); ?>/copy-ttn.svg" alt="<?php echo esc_html__('Copy invoice', 'mrkv-ua-shipping'); ?>" title="<?php echo esc_html__('Copy invoice', 'mrkv-ua-shipping'); ?>"></div>
 			            		<hr class="mrkv-hr-sidebar">
 			            		<h3><?php echo __('Invoice action', 'mrkv-ua-shipping'); ?></h3>
 			            		<div class="mrkv_ua_invoice_action_list">

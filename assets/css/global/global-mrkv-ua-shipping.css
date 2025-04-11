@@ -1,3 +1,15 @@
+.mrkv_ua_ship_ttn_copy{
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    cursor: pointer;
+}
+.mrkv_ua_ship_global__invoice{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+}
 .mrkv_ua_ship_global_invoice-link{
     display: flex;
     align-items: center;

@@ -187,7 +187,7 @@ if (!class_exists('MRKV_UA_SHIPPING_NOVA_POSHTA_INVOICE'))
 	        if(isset($obj['data'][0]['Ref']))
 	        {
 	        	$status = 'completed';
-	        	$message = __('Invoice created','mrkv-ua-shipping') . ' #' . $obj['data'][0]['IntDocNumber'];
+	        	$message = __('Invoice created','mrkv-ua-shipping') . ' #' . $obj['data'][0]['IntDocNumber']  . '<img src="' .  esc_url(MRKV_UA_SHIPPING_IMG_URL . '/global') . '/copy-ttn.svg" alt="' . esc_html__('Copy invoice', 'mrkv-ua-shipping') . '" title="' . esc_html__('Copy invoice', 'mrkv-ua-shipping') . '">';
 	        	$invoice = $obj['data'][0]['IntDocNumber'];
 
 	        	$this->order->update_meta_data('mrkv_ua_ship_invoice_number', $obj['data'][0]['IntDocNumber']);

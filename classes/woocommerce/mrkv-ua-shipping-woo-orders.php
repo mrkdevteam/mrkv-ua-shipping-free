@@ -221,13 +221,13 @@ if (!class_exists('MRKV_UA_SHIPPING_WOO_ORDERS'))
 			            	if(isset(MRKV_UA_SHIPPING_LIST[$key]['invoice_links']['invoice_view']))
 			            	{
 			            		?>
-				            		<a target="blanc" href="<?php echo MRKV_UA_SHIPPING_LIST[$key]['invoice_links']['invoice_view'] . esc_html($mrkv_ua_ship_invoice); ?>" class="mrkv_ua_ship_global__invoice mrkv_ua_ship_global_invoice-link"><?php echo esc_html($mrkv_ua_ship_invoice); ?> <img src="<?php echo esc_url(MRKV_UA_SHIPPING_IMG_URL . '/global'); ?>/external-link.svg" alt="External" title="External"></a>
+				            		<a target="blanc" href="<?php echo MRKV_UA_SHIPPING_LIST[$key]['invoice_links']['invoice_view'] . esc_html($mrkv_ua_ship_invoice); ?>" class="mrkv_ua_ship_global__invoice mrkv_ua_ship_global_invoice-link" data-ttn="<?php echo esc_html($mrkv_ua_ship_invoice); ?>"><?php echo esc_html($mrkv_ua_ship_invoice); ?> <img src="<?php echo esc_url(MRKV_UA_SHIPPING_IMG_URL . '/global'); ?>/external-link.svg" alt="External" title="External"></a>
 				            	<?php
 			            	}
 			            	else
 			            	{
 			            		?>
-			            			<div class="mrkv_ua_ship_global__invoice"><?php echo esc_html($mrkv_ua_ship_invoice); ?></div>
+			            			<div class="mrkv_ua_ship_global__invoice" data-ttn="<?php echo esc_html($mrkv_ua_ship_invoice); ?>"><?php echo esc_html($mrkv_ua_ship_invoice); ?></div>
 			            		<?php
 			            	}
 			            }
