@@ -27,8 +27,6 @@ if (!class_exists('MRKV_UA_SHIPPING_METHODS'))
 
 			# Load settings page constants
 			add_action( 'wp_loaded', array($this, 'get_shipping_admin_settings'));
-			# Setup new shipping methods
-			add_filter( 'woocommerce_shipping_methods', array($this, 'mrkv_ua_shipping_add_shipping_method_woo') );
 		}
 
 		/**
@@ -102,32 +100,6 @@ if (!class_exists('MRKV_UA_SHIPPING_METHODS'))
 					}
 				}
 			}
-		}
-
-		/**
-		 * Add new shipping methods class in the shipping list
-		 * @param array All shipping methods
-		 * 
-		 * @return array All shipping methods
-		 * */
-		public function mrkv_ua_shipping_add_shipping_method_woo($methods)
-		{
-			$m_ua_active_plugins = get_option('m_ua_active_plugins');
-
-			foreach(MRKV_UA_SHIPPING_LIST as $slug => $shipping)
-			{
-				if(isset($m_ua_active_plugins[$slug]['enabled']) && $m_ua_active_plugins[$slug]['enabled'] == 'on')
-				{
-					foreach($shipping['method'] as $method)
-					{
-						# Add new shipping method
-						$methods[$method['slug']] = $method['class'];
-					}
-				}
-			}
-
-			# Return all methods
-  			return $methods;
 		}
 	}
 }

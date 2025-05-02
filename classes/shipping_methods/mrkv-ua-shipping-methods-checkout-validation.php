@@ -100,6 +100,8 @@ if (!class_exists('MRKV_UA_SHIPPING_METHODS_CHECKOUT_VALIDATION'))
 		    # Include settings checkout by shipping
 			include 'mrkv_ua_shipping_translate.php';
 
+			$settings = get_option($this->current_shipping_global . '_m_ua_settings');
+
 		    foreach(MRKV_UA_SHIPPING_LIST[$this->current_shipping_global]['method'][$this->current_shipping]['checkout_fields'] as $field_id => $field_val)
 		    {
 		    	$options_data_loader = '';
@@ -112,6 +114,16 @@ if (!class_exists('MRKV_UA_SHIPPING_METHODS_CHECKOUT_VALIDATION'))
 		    	if(!isset($_POST[$this->current_shipping . $field_id]) || $_POST[$this->current_shipping . $field_id] == ''
 		    		|| ($options_data_loader && $_POST[$this->current_shipping . $field_id] == $options_data_loader))
 		    	{
+		    		if(isset($settings['checkout']['middlename']['required']) && $settings['checkout']['middlename']['required'] == 'on' && '_patronymic' == $field_id)
+					{
+						$translated_field_val = $translate_labels[$this->current_shipping_global]['method'][$this->current_shipping]['checkout_fields'][$field_id]['label'];
+
+		    			wc_add_notice(__('Field', 'mrkv-ua-shipping') . ' ' . $translated_field_val . ' ' . __('is required', 'mrkv-ua-shipping'), 'error');
+
+		    			return;	
+
+					}
+					
 		    		if(isset($field_val['exclude']) && $field_val['exclude'] && isset($_POST[$this->current_shipping . $field_id . '_enabled']) && $_POST[$this->current_shipping . $field_id . '_enabled'] == 'off')
 		    		{
 		    			continue;

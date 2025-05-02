@@ -52,6 +52,8 @@ if (!class_exists('MRKV_UA_SHIPPING_METHODS_CHECKOUT'))
 
 							$middle_name_arg['label'] = $translate_labels[$key]['method'][$method_id]['checkout_fields']['_patronymic']['label'];
 
+							$middle_name_arg['required'] = false;
+
 							$new_field = array(
 								$middle_name_slug => $middle_name_arg
 							);

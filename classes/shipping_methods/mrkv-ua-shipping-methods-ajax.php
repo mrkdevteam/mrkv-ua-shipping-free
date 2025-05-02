@@ -4,6 +4,8 @@ if ( ! defined( 'ABSPATH' ) ) exit;
 
 # Include nova post menu
 require_once 'nova-poshta/ajax/mrkv-ua-shipping-methods-ajax-nova.php';
+# Include nova global ajax
+require_once 'nova-global/ajax/mrkv-ua-shipping-methods-ajax-nova-global.php';
 # Include nova post menu
 require_once 'ukr-poshta/ajax/mrkv-ua-shipping-methods-ajax-ukr.php';
 # Include rozetka ajax
@@ -24,6 +26,8 @@ if (!class_exists('MRKV_UA_SHIPPING_METHODS_AJAX'))
 		{
 			# Call ajax nova poshta
 			new MRKV_UA_SHIPPING_AJAX_NOVA();
+			# Call ajax nova global
+			new MRKV_UA_SHIPPING_AJAX_NOVA_GLOBAL();
 			# Call ajax ukr poshta
 			new MRKV_UA_SHIPPING_AJAX_UKR();
 			# Call ajax rozetka
