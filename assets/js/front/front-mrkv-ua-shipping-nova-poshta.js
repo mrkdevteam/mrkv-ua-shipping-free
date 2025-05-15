@@ -110,7 +110,7 @@ jQuery(window).on('load', function()
 			defaultResults: default_cities,
 		minimumInputLength: 3,
 			ajax: {
-				delay: 200,
+				delay: 800,
 		    url: mrkv_ua_ship_helper.ajax_url,
 		    type: "POST",
 		    data: function (params) {
@@ -134,16 +134,16 @@ jQuery(window).on('load', function()
 		      return query;
 		    },
 		    beforeSend: function (e) {
-		    	var current_select_name = 'select2-' + jQuery($select).attr('name') + '-results';
+		    	/*var current_select_name = 'select2-' + jQuery($select).attr('name') + '-results';
 		    	jQuery('input[aria-owns="' + current_select_name + '"]').prop('disabled', true);
-		    	jQuery('input[aria-owns="' + current_select_name + '"]').closest('.select2-search').append('<span class="mrkv-public-loader"></span>');
+		    	jQuery('input[aria-owns="' + current_select_name + '"]').closest('.select2-search').append('<span class="mrkv-public-loader"></span>');*/
 
 		    },
 		    complete: function () {
-		    	var current_select_name = 'select2-' + jQuery($select).attr('name') + '-results';
+		    	/*var current_select_name = 'select2-' + jQuery($select).attr('name') + '-results';
 		    	jQuery('input[aria-owns="' + current_select_name + '"]').prop('disabled', false);
 		    	jQuery('input[aria-owns="' + current_select_name + '"]').focus();
-		    	jQuery('.mrkv-public-loader').remove();
+		    	jQuery('.mrkv-public-loader').remove();*/
             },
 		    processResults: function (json) {
 		    	var data;
@@ -279,7 +279,7 @@ jQuery(window).on('load', function()
 		        }, 
 				minimumInputLength: 1,
 				ajax: {
-					delay: 200,
+					delay: 800,
 			    	url: mrkv_ua_ship_helper.ajax_url,
 			    	type: "POST",
 				    data: function (params) 

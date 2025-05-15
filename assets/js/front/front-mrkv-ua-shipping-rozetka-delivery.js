@@ -111,7 +111,7 @@ jQuery(window).on('load', function()
 			defaultResults: default_cities,
 		minimumInputLength: 3,
 			ajax: {
-				delay: 200,
+				delay: 800,
 		    url: mrkv_ua_ship_helper.ajax_url,
 		    type: "POST",
 		    data: function (params) {
