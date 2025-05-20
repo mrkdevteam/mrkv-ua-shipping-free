@@ -96,6 +96,34 @@ if (!class_exists('MRKV_UA_SHIPPING_NOVA_POSHTA_INVOICE'))
 			$recipient_first_name = $this->get_recipient_first_name();
 			$recipient_middle_name = $this->get_recipient_middle_name($current_shipping_method);
 			$recipient_last_name = $this->get_recipient_last_name();
+
+			if(preg_match('/[A-Za-z]/', $recipient_first_name))
+			{
+				$this->order->add_order_note(__('Error with Recipient First Name. Contains latin letters','mrkv-ua-shipping'), $is_customer_note = 0, $added_by_user = false);
+				return array(
+					'status' => 'failed',
+					'message' => __('Error with Recipient First Name. Contains latin letters','mrkv-ua-shipping'),
+					'invoice' => '',
+					'arguments' => array(),
+					'print' => '',
+					'form_print' => '',
+					'print_sticker' =>  ''
+				);
+			}
+			if(preg_match('/[A-Za-z]/', $recipient_last_name))
+			{
+				$this->order->add_order_note(__('Error with Recipient Lastname. Contains latin letters','mrkv-ua-shipping'), $is_customer_note = 0, $added_by_user = false);
+				return array(
+					'status' => 'failed',
+					'message' => __('Error with Recipient Lastname. Contains latin letters','mrkv-ua-shipping'),
+					'invoice' => '',
+					'arguments' => array(),
+					'print' => '',
+					'form_print' => '',
+					'print_sticker' =>  ''
+				);
+			}
+
 			$recipient_phone = $this->get_recipient_phone();
 			require_once MRKV_UA_SHIPPING_PLUGIN_PATH . 'classes/shipping_methods/nova-poshta/api/mrkv-ua-shipping-recipient-nova-poshta.php';
 			$mrkv_recipient_object = new MRKV_UA_SHIPPING_RECIPIENT_NOVA_POSHTA($this->shipping_api);
@@ -569,6 +597,7 @@ if (!class_exists('MRKV_UA_SHIPPING_NOVA_POSHTA_INVOICE'))
 			}
 
 			$description = $this->convert_description($description);
+			$description = str_replace('#', '', $description);
 
 
 			return substr($description, 0, 100);

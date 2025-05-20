@@ -4,7 +4,7 @@ Tags: Nova Poshta, нова пошта, новая почта, доставка
 Requires at least: 5.0
 Tested up to: 6.8
 Requires PHP: 7.0
-Stable tag: 1.4.0
+Stable tag: 1.4.1
 License: GPLv2
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -164,6 +164,10 @@ https://youtu.be/47-VrH_QJAE
 
 
 == Changelog ==
+
+= 1.4.1 =
+* [new] додали валідацію опису
+* [new] додали валідацію імені та прізвища на латинські літери
 
 = 1.4.0 =
 * [dev] НП: змінили підхід роботи select2 поля: збільшили затримку перед відправленням запиту до АРІ на пошук міста (виправляє помилку 429 too many requests)
