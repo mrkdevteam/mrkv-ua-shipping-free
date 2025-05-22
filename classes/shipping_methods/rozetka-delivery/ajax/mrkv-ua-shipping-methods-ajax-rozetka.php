@@ -80,14 +80,39 @@ if (!class_exists('MRKV_UA_SHIPPING_AJAX_RZTK'))
 
 			$city_ref = isset($_POST['ref']) ? sanitize_text_field($_POST['ref']) : '';
 
+			$all_departments = [];
+			$page = 1;
+			$limit = 100;
+			$has_more = true;
+
+			do {
+			    $endpoint = 'api/department?page=' . $page . '&limit=' . $limit . '&city_id=' . $city_ref . '&can_receive_tracks=true';
+			    $response = $mrkv_object_rztk_delivery->send_post_request($endpoint, 'GET');
+
+			    if (isset($response['data']) && !empty($response['data'])) 
+			    {
+			        $all_departments = array_merge($all_departments, $response['data']);
+
+			        $total_pages = isset($response['pagination']['page_count']) ? (int)$response['pagination']['page_count'] : 1;
+			        $page++;
+
+			        if ($page > $total_pages) {
+			            $has_more = false;
+			        }
+			    } else {
+			        $has_more = false;
+			    }
+
+			} while ($has_more);
+
 			# Send request
 	        $obj = $mrkv_object_rztk_delivery->send_post_request('api/department?page=1&limit=100&city_id=' . $city_ref . '&can_receive_tracks=true', 'GET');
 
-	        if(isset($obj['data']) && is_array($obj['data']) && !empty($obj['data']))
+	        if(!empty($all_departments))
        		{
        			$warehouse = array();
 
-       			foreach($obj['data'] as $entry)
+       			foreach($all_departments as $entry)
        			{
        				$warehouse[] = array(
 	        			'value' => $entry['name'],
