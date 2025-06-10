@@ -56,6 +56,11 @@ if (!class_exists('MRKV_UA_SHIPPING_AJAX_NOVA'))
             	)
 	        );
 
+	        if ($mrkv_object_nova_poshta->active_api !== true) {
+	        	$args['modelName'] = 'Address';
+	        	unset($args['apiKey']);
+	        }
+
 	        # Send request
 	        $obj = $mrkv_object_nova_poshta->send_post_request( $args );
 
@@ -110,8 +115,37 @@ if (!class_exists('MRKV_UA_SHIPPING_AJAX_NOVA'))
             	)
 	        );
 
+	        if ($mrkv_object_nova_poshta->active_api !== true) {
+	        	$args['modelName'] = 'Address';
+	        	unset($args['apiKey']);
+	        }
+
 	        # Send request
 	        $obj = $mrkv_object_nova_poshta->send_post_request( $args );
+
+	        if ($mrkv_object_nova_poshta->active_api !== true) {
+		        if(!isset($obj['data']) || !isset($obj['data'][0]['Addresses'][0]))
+		        {
+		        	$response = wp_remote_get( 'https://np.morkva.co.ua/api.php', [
+					    'timeout' => 10,
+					    'headers' => [
+					        'Accept' => 'application/json',
+					    ],
+					    'body' => [
+					        'query_type' => 'city',
+					        'query_text' => $key_search,
+					    ]
+					]);
+
+		        	if ( is_wp_error( $response ) ) {
+					} else {
+					    $body = wp_remote_retrieve_body( $response );
+					    $city_array = json_decode( $body, true );
+
+				    	$obj['data'][0]['Addresses'] = $city_array;
+					}
+		        }
+		    }
 
 	        if(isset($obj['data'][0]['Addresses'][0]))
 	        {
@@ -175,6 +209,11 @@ if (!class_exists('MRKV_UA_SHIPPING_AJAX_NOVA'))
             	)
 	        );
 
+	        if ($mrkv_object_nova_poshta->active_api !== true) {
+	        	$args['modelName'] = 'Address';
+	        	unset($args['apiKey']);
+	        }
+
 	        if($search_by)
 	        {
 	        	$args['methodProperties']['FindByString'] = '';
@@ -192,6 +231,30 @@ if (!class_exists('MRKV_UA_SHIPPING_AJAX_NOVA'))
 
 	        # Send request
 	        $obj = $mrkv_object_nova_poshta->send_post_request( $args );
+
+	        if ($mrkv_object_nova_poshta->active_api !== true) {
+		        if(!isset($obj['data']) || !isset($obj['data'][0]))
+		        {
+		        	$response = wp_remote_get( 'https://np.morkva.co.ua/api.php', [
+					    'timeout' => 10,
+					    'headers' => [
+					        'Accept' => 'application/json',
+					    ],
+					    'body' => [
+					        'query_type' => 'warehouse_poshtomat',
+					        'city_ref' => $city_ref,
+					    ]
+					]);
+
+		        	if ( is_wp_error( $response ) ) {
+					} else {
+					    $body = wp_remote_retrieve_body( $response );
+					    $warehouse_array = json_decode( $body, true );
+
+				    	$obj['data'] = $warehouse_array;
+					}
+		        }
+		    }
 
 	        if(isset($obj['data'][0]))
 	        {
@@ -321,6 +384,11 @@ if (!class_exists('MRKV_UA_SHIPPING_AJAX_NOVA'))
             		'Limit' => '10'
             	)
 	        );
+
+	        if ($mrkv_object_nova_poshta->active_api !== true) {
+	        	$args['modelName'] = 'Address';
+	        	unset($args['apiKey']);
+	        }
 
 	        # Send request
 	        $obj = $mrkv_object_nova_poshta->send_post_request( $args );
