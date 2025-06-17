@@ -302,7 +302,7 @@ if (!class_exists('MRKV_UA_SHIPPING_NOVA_GLOBAL_ADDRESS'))
                 if ($key === '30+') {
                     $over30 = $value;
                 } else {
-                    $numericKeys[(float)$key] = $value;
+                    $numericKeys[$key] = $value;
                 }
             }
             ksort($numericKeys);
