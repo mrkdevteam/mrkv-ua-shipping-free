@@ -345,7 +345,10 @@ if (!class_exists('MRKV_UA_SHIPPING_METHODS_AJAX'))
 				            if ( 'oz' == $weight_unit ) $weight_coef = 28.34;
 						}
 
-			            $args['mrkv_ua_ship_invoice_shipment_weight'] = $weight * $weight_coef;
+						$weight = $weight * $weight_coef;
+						$weight = number_format($weight, 2);
+
+			            $args['mrkv_ua_ship_invoice_shipment_weight'] = $weight;
 			            $args['mrkv_ua_ship_invoice_shipment_length'] = $length;
 			            $args['mrkv_ua_ship_invoice_shipment_width'] = $width;
 			            $args['mrkv_ua_ship_invoice_shipment_height'] = $height;
@@ -357,6 +360,8 @@ if (!class_exists('MRKV_UA_SHIPPING_METHODS_AJAX'))
 			            	$description_converted = str_replace('pcs', '', $description_converted);
 			            	$args['mrkv_ua_ship_invoice_shipment_description'] = $description_converted;
 			            }
+
+			            $args = apply_filters( 'mrkv_ua_shipping_arg_order_data', $args, $order, $current_shipping );
 
 			            echo wp_json_encode($args);
 					}

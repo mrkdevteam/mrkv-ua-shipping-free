@@ -106,6 +106,8 @@ if (!class_exists('MRKV_UA_SHIPPING_UKR_POSHTA_INVOICE'))
 			    "transferPostPayToBankAccount" => $transfer_post_pay
 		    );
 
+		    $args = apply_filters( 'mrkv_ua_shipping_arg_invoice_data', $args, $this->order, $current_shipping_method );
+
 			# Send request
 	        $obj = $this->shipping_api->send_post_request_curl('ecom/0.0.1/shipments', 'POST', $args, 'token');
 
@@ -456,6 +458,7 @@ if (!class_exists('MRKV_UA_SHIPPING_UKR_POSHTA_INVOICE'))
 	            if ( 'oz' == $weight_unit ) $weight_coef = 28.34;
 
 				$weight = $weight_coef * $weight;
+				$weight = number_format($weight, 2);
 
 				return max($default_weight, $weight);
 			}

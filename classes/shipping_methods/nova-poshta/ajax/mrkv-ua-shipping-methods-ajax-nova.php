@@ -44,7 +44,7 @@ if (!class_exists('MRKV_UA_SHIPPING_AJAX_NOVA'))
 			require_once MRKV_UA_SHIPPING_PLUGIN_PATH . 'classes/shipping_methods/nova-poshta/api/mrkv-ua-shipping-api-nova-poshta.php';
 			$mrkv_object_nova_poshta = new MRKV_UA_SHIPPING_API_NOVA_POSHTA(get_option('nova-poshta_m_ua_settings'));
 
-			$key_search = isset($_POST['name']) ? sanitize_text_field($_POST['name']) : '';
+			$key_search = isset($_POST['name']) ? sanitize_text_field(wp_unslash($_POST['name'])) : '';
 
 			$args = array(
 	            'apiKey' => $mrkv_object_nova_poshta->get_api_key(),
@@ -81,10 +81,7 @@ if (!class_exists('MRKV_UA_SHIPPING_AJAX_NOVA'))
 	        }
 	        else
 	        {
-	        	echo wp_json_encode(array(array(
-	        		'value' => 'none',
-        			'label' => __('No results for your request', 'mrkv-ua-shipping')
-	        	)));
+	        	echo wp_json_encode(array());
 	        }
 
 			wp_die();
@@ -166,10 +163,7 @@ if (!class_exists('MRKV_UA_SHIPPING_AJAX_NOVA'))
 	        }
 	        else
 	        {
-	        	echo wp_json_encode(array(array(
-	        		'value' => 'none',
-        			'label' => __('No results for your request', 'mrkv-ua-shipping')
-	        	)));
+	        	echo wp_json_encode(array());
 	        }
 
 			wp_die();
@@ -193,6 +187,7 @@ if (!class_exists('MRKV_UA_SHIPPING_AJAX_NOVA'))
 			$city_ref = isset($_POST['ref']) ? sanitize_text_field($_POST['ref']) : '';
 			$warehouse_type = isset($_POST['warehouse_type']) ? sanitize_text_field($_POST['warehouse_type']) : '';
 			$search_by = isset($_POST['search_by']) ? sanitize_text_field($_POST['search_by']) : '';
+			$source_query = isset($_POST['source_query']) ? sanitize_text_field($_POST['source_query']) : '';
 			$exclude_post = '';
 			
 			if($warehouse_type == 'none'){
@@ -278,7 +273,7 @@ if (!class_exists('MRKV_UA_SHIPPING_AJAX_NOVA'))
 	        		);
 	        	}
 
-	        	if($skip_weight)
+	        	if($skip_weight  && $source_query == 'front')
 	        	{
 	        		$weight = 0;
 		        	$volume_weight = 0.00;
@@ -344,15 +339,23 @@ if (!class_exists('MRKV_UA_SHIPPING_AJAX_NOVA'))
 	        		}
 	        	}
 
+	        	if($skip_weight  && $source_query == 'front' && count($areas) <= 1 && $obj['data'] > 1)
+	        	{
+	        		$areas = array(
+	        			array(
+		        			'value' => '',
+		        			'label' => __('Order products don\'t match weight and dimensions criteria, try another method', 'mrkv-ua-shipping'),
+		        			'number' => ''
+		        		)
+	        		);
+	        	}
+
 	        	# Return object
 	        	echo wp_json_encode($areas);
 	        }
 	        else
 	        {
-	        	echo wp_json_encode(array(array(
-	        		'value' => 'none',
-        			'label' => __('No results for your request', 'mrkv-ua-shipping')
-	        	)));
+	        	echo wp_json_encode(array());
 	        }
 
 			wp_die();
@@ -410,10 +413,7 @@ if (!class_exists('MRKV_UA_SHIPPING_AJAX_NOVA'))
 	        }
 	        else
 	        {
-	        	echo wp_json_encode(array(array(
-	        		'value' => 'none',
-        			'label' => __('No results for your request', 'mrkv-ua-shipping')
-	        	)));
+	        	echo wp_json_encode(array());
 	        }
 
 			wp_die();
