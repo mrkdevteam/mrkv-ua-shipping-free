@@ -360,7 +360,16 @@ if (!class_exists('MRKV_UA_SHIPPING_NOVA_POSHTA_INVOICE'))
 
 		private function get_invoice_date_time()
 		{
-	        return wp_date('d.m.Y');
+			$datetime = new DateTime('now', wp_timezone());
+			$current_hour = (int) $datetime->format('H');
+
+			if ( $current_hour >= 22 ) {
+			    $datetime->modify('+1 day');
+			}
+
+			$delivery_date = $datetime->format('d.m.Y');
+
+	        return $delivery_date;
 		}
 
 		private function get_service_sender_type()

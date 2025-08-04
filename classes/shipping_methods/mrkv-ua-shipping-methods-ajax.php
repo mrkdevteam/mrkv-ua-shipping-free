@@ -346,7 +346,7 @@ if (!class_exists('MRKV_UA_SHIPPING_METHODS_AJAX'))
 						}
 
 						$weight = $weight * $weight_coef;
-						$weight = number_format($weight, 2);
+						$weight = number_format($weight, 2, '.', '');
 
 			            $args['mrkv_ua_ship_invoice_shipment_weight'] = $weight;
 			            $args['mrkv_ua_ship_invoice_shipment_length'] = $length;
