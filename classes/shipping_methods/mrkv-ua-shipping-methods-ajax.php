@@ -346,6 +346,13 @@ if (!class_exists('MRKV_UA_SHIPPING_METHODS_AJAX'))
 						}
 
 						$weight = $weight * $weight_coef;
+						$shipping_settings_global = get_option($key . '_m_ua_settings');
+
+						if($weight <= 0 && isset($shipping_settings_global['shipment']['weight']) && $shipping_settings_global['shipment']['weight'] > 0)
+						{
+							$weight = $shipping_settings_global['shipment']['weight'];
+						}
+
 						$weight = number_format($weight, 2, '.', '');
 
 			            $args['mrkv_ua_ship_invoice_shipment_weight'] = $weight;
