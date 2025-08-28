@@ -35,7 +35,7 @@ if (!class_exists('MRKV_UA_SHIPPING_AJAX_RZTK'))
 			$key_search = isset($_POST['name']) ? sanitize_text_field(wp_unslash($_POST['name'])) : '';
 
 	        # Send request
-	        $obj = $mrkv_object_rztk_delivery->send_post_request('api/city?page=1&limit=50&name=' . $key_search . '&can_receive_tracks=true&sort_by_population=ASC', 'GET');
+	        $obj = $mrkv_object_rztk_delivery->send_post_request('api/city?page=1&limit=50&name=' . $key_search . '&sort_by_population=ASC', 'GET');
 
 	        if(isset($obj['data']) && is_array($obj['data']) && !empty($obj['data']))
        		{
@@ -83,7 +83,7 @@ if (!class_exists('MRKV_UA_SHIPPING_AJAX_RZTK'))
 			$has_more = true;
 
 			do {
-			    $endpoint = 'api/department?page=' . $page . '&limit=' . $limit . '&city_id=' . $city_ref . '&can_receive_tracks=true';
+			    $endpoint = 'api/department?page=' . $page . '&limit=' . $limit . '&city_id=' . $city_ref . '';
 			    $response = $mrkv_object_rztk_delivery->send_post_request($endpoint, 'GET');
 
 			    if (isset($response['data']) && !empty($response['data'])) 
@@ -103,7 +103,7 @@ if (!class_exists('MRKV_UA_SHIPPING_AJAX_RZTK'))
 			} while ($has_more);
 
 			# Send request
-	        $obj = $mrkv_object_rztk_delivery->send_post_request('api/department?page=1&limit=100&city_id=' . $city_ref . '&can_receive_tracks=true', 'GET');
+	        $obj = $mrkv_object_rztk_delivery->send_post_request('api/department?page=1&limit=100&city_id=' . $city_ref . '', 'GET');
 
 	        if(!empty($all_departments))
        		{
