@@ -20,6 +20,8 @@
 						$fullname = '';
 						$middlename = '';
 						$phone = '';
+						$lastname = '';
+						$name = '';
 
 						if($sender_type == 'INDIVIDUAL')
 						{
