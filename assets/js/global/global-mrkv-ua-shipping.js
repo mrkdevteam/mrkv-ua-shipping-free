@@ -70,6 +70,14 @@ jQuery(window).on('load', function()
 	            				jQuery('[data-ship="' + data.mrkv_ua_ship_key + '"] form [name=' + index + '][value=' + value + ']').attr('checked', 'checked');
 	            			}
 	            		}
+	            		else if(index == 'mrkv_ua_ship_validate_latin')
+	            		{
+	            			jQuery.each(value, function(i, fieldName) {
+						        var input_latin = jQuery('[data-ship="' + data.mrkv_ua_ship_key + '"] form [name=' + fieldName + ']');
+						        jQuery(input_latin).closest('label').append('<span class="mrkv-ua-ship-latin-error">' + mrkv_ua_ship_helper.error_latin_text + '</span>');
+						        jQuery(input_latin).addClass('mrkv-ua-ship-latin-error-input');
+						    });
+	            		}
 	            		else
 	            		{
 	            			if(value)
@@ -88,6 +96,33 @@ jQuery(window).on('load', function()
             }
         });
 	});
+
+let latinRegex = /[A-Za-z]/;
+
+    // Selector for all target fields
+    let selector = 'form[data-ship="nova-poshta"] input[name="mrkv_ua_ship_invoice_first_name"],' +
+        'form[data-ship="nova-poshta"] input[name="mrkv_ua_ship_invoice_last_name"],' +
+        'form[data-ship="nova-poshta"] input[name="mrkv_ua_ship_invoice_patronymic"],' +
+        'form[data-ship="ukr-poshta"] input[name="mrkv_ua_ship_invoice_first_name"],' +
+        'form[data-ship="ukr-poshta"] input[name="mrkv_ua_ship_invoice_last_name"],' +
+        'form[data-ship="ukr-poshta"] input[name="mrkv_ua_ship_invoice_patronymic"]';
+
+	jQuery(document).on('keyup', selector, function() {
+        let $input = jQuery(this);
+        let val = $input.val();
+
+        // Remove old error before checking
+        $input.removeClass('mrkv-ua-ship-latin-error-input');
+        $input.closest('.admin_ua_ship_morkva_settings_line').find('label').find('.mrkv-ua-ship-latin-error').remove();
+
+        // If contains Latin letters -> show error
+        if (latinRegex.test(val)) {
+            $input.addClass('mrkv-ua-ship-latin-error-input');
+            $input.closest('.admin_ua_ship_morkva_settings_line').find('label').append(
+                '<span class="mrkv-ua-ship-latin-error">' + mrkv_ua_ship_helper.error_latin_text + '</span>'
+            );
+        }
+    });
 
 	jQuery('.mrkv_ua_ship_create_invoice__action').click(function()
 	{

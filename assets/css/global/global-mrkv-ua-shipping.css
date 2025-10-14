@@ -1,3 +1,17 @@
+.mrkv-ua-ship-latin-error{
+    color: red;
+    padding-left: 10px;
+    font-size: 11px;
+}
+.mrkv-ua-ship-latin-error:before{
+    content: '(';
+}
+.mrkv-ua-ship-latin-error:after{
+    content: ')';
+}
+.mrkv-ua-ship-latin-error-input{
+    background: #ffb6b6 !important;
+}
 .mrkv_ua_ship_ttn_copy{
     display: flex;
     align-items: center;

@@ -291,6 +291,164 @@
 		</div>
 	</div>
 </section>
+<section id="international_settings" class="mrkv_up_ship_shipping_tab_block">
+	<h2><img src="<?php echo MRKV_UA_SHIPPING_ASSETS_URL . '/images/global/map-icon.svg'; ?>" alt="International shipping settings" title="International shipping settings"><?php echo __('International shipping settings', 'mrkv-ua-shipping'); ?></h2>
+	<hr class="mrkv-ua-ship__hr">
+	<div class="admin_ua_ship_morkva_settings_row">
+		<div class="col-mrkv-5">
+			<div class="admin_ua_ship_morkva_settings_line">
+				<h4><?php echo __('Payer of delivery', 'mrkv-ua-shipping'); ?></h4>
+				<div class="admin_ua_ship_morkva_settings_row">
+					<?php
+						$data = isset(MRKV_SHIPPING_SETTINGS['internal_api_server']) ? MRKV_SHIPPING_SETTINGS['internal_api_server'] : 'sandbox';
+						echo $mrkv_global_option_generator->get_input_radio(__('Production', 'mrkv-ua-shipping'), MRKV_OPTION_OBJECT_NAME . '[internal_api_server]', 'production', $data, MRKV_OPTION_OBJECT_NAME . '_internal_api_server_production', 'sandbox');
+						echo $mrkv_global_option_generator->get_input_radio(__('Sandbox', 'mrkv-ua-shipping'), MRKV_OPTION_OBJECT_NAME . '[internal_api_server]', 'sandbox', $data, MRKV_OPTION_OBJECT_NAME . '_internal_api_server_sandbox', 'sandbox');
+					?>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="admin_ua_ship_morkva_settings_line">
+		<?php 
+			$data = isset(MRKV_SHIPPING_SETTINGS['internal_api_key']) ? MRKV_SHIPPING_SETTINGS['internal_api_key'] : '';
+			$label = __('API Key', 'mrkv-ua-shipping');
+
+			require_once MRKV_UA_SHIPPING_PLUGIN_PATH . 'classes/shipping_methods/nova-poshta/api/mrkv-ua-shipping-api-nova-post.php';
+			$api_internal = new MRKV_UA_SHIPPING_API_NOVA_POST(MRKV_SHIPPING_SETTINGS);
+
+			if(is_string($api_internal->active_api))
+			{
+				$label .= '<div class="admin_ua_ship_morkva__notification mrkv-notification-red">' . $api_internal->active_api . '</div>';
+			}
+			elseif($api_internal->active_api)
+			{
+				$label .= '<div class="admin_ua_ship_morkva__notification mrkv-notification-green">' . __('API key correct','mrkv-ua-shipping') . '</div>';
+			}
+
+			$description = __('During the registration process, you will receive an API access key. Make sure to store this information in a secure place.', 'mrkv-ua-shipping');
+
+			echo $mrkv_global_option_generator->get_input_text($label, MRKV_OPTION_OBJECT_NAME . '[internal_api_key]', $data, MRKV_OPTION_OBJECT_NAME. '_internal_api_key' , '', __('Enter the key...', 'mrkv-ua-shipping'), $description);
+		?>
+	</div>
+	<h3><img src="<?php echo MRKV_UA_SHIPPING_ASSETS_URL . '/images/global/user-icon.svg'; ?>" alt="Sender settings" title="Sender settings"><?php echo __('Sender settings', 'mrkv-ua-shipping'); ?></h3>
+	<p><?php echo __('Fill in the default shipping data sender', 'mrkv-ua-shipping'); ?></p>
+	<hr class="mrkv-ua-ship__hr">
+	<div class="admin_ua_ship_morkva_settings_row">
+		<div class="col-mrkv-5">
+			<div class="admin_ua_ship_morkva_settings_line">
+				<h4><?php echo __('Payer of delivery', 'mrkv-ua-shipping'); ?></h4>
+				<div class="admin_ua_ship_morkva_settings_row">
+					<?php
+						$data = isset(MRKV_SHIPPING_SETTINGS['inter']['payer']) ? MRKV_SHIPPING_SETTINGS['inter']['payer'] : '';
+						echo $mrkv_global_option_generator->get_input_radio(__('Recipient', 'mrkv-ua-shipping'), MRKV_OPTION_OBJECT_NAME . '[inter][payer]', 'Recipient', $data, MRKV_OPTION_OBJECT_NAME . '_inter_payer_recipient', 'Recipient');
+						echo $mrkv_global_option_generator->get_input_radio(__('Sender', 'mrkv-ua-shipping'), MRKV_OPTION_OBJECT_NAME . '[inter][payer]', 'Sender', $data, MRKV_OPTION_OBJECT_NAME . '_inter_payer_sender', 'Recipient');
+					?>
+				</div>
+			</div>
+		</div>
+		<div class="col-mrkv-5">
+			<div class="admin_ua_ship_morkva_settings_line">
+				<?php 
+					$data = isset(MRKV_SHIPPING_SETTINGS['inter']['cart_total']) ? MRKV_SHIPPING_SETTINGS['inter']['cart_total'] : '';
+
+					$description = __('Choose how much the shipping cost will be calculated', 'mrkv-ua-shipping');
+
+					echo $mrkv_global_option_generator->get_select_simple(__('Free shipping calculation', 'mrkv-ua-shipping'), MRKV_OPTION_OBJECT_NAME . '[inter][cart_total]', $mrkv_ua_shipping_cart_total, $data, MRKV_OPTION_OBJECT_NAME . '_inter_cart_total' , __('Choose a cart cost', 'mrkv-ua-shipping'), $description);
+				?>
+			</div>
+		</div>
+	</div>
+	<div class="admin_ua_ship_morkva_settings_line">
+		<?php 
+			$data = isset(MRKV_SHIPPING_SETTINGS['inter']['division_address']) ? MRKV_SHIPPING_SETTINGS['inter']['division_address'] : '';
+			$label = __('Sender division', 'mrkv-ua-shipping');
+
+			$description = __('Currently, only shipping from the branch is supported.', 'mrkv-ua-shipping');
+
+			echo $mrkv_global_option_generator->get_input_text($label, MRKV_OPTION_OBJECT_NAME . '[inter][division_address]', $data, MRKV_OPTION_OBJECT_NAME. '_inter_division_address' , '', __('Enter the address...', 'mrkv-ua-shipping'), $description);
+		
+			$data = isset(MRKV_SHIPPING_SETTINGS['inter']['division_id']) ? MRKV_SHIPPING_SETTINGS['inter']['division_id'] : '';
+			echo $mrkv_global_option_generator->get_input_hidden(MRKV_OPTION_OBJECT_NAME . '[inter][division_id]', $data, MRKV_OPTION_OBJECT_NAME . '_inter_division_id');
+
+			$data = isset(MRKV_SHIPPING_SETTINGS['inter']['division_number']) ? MRKV_SHIPPING_SETTINGS['inter']['division_number'] : '';
+			echo $mrkv_global_option_generator->get_input_hidden(MRKV_OPTION_OBJECT_NAME . '[inter][division_number]', $data, MRKV_OPTION_OBJECT_NAME . '_inter_division_number');
+		?>
+	</div>
+	<h3><img src="<?php echo MRKV_UA_SHIPPING_ASSETS_URL . '/images/global/tuning-icon.svg'; ?>" alt="Shipment" title="Shipment"><?php echo __('Shipment', 'mrkv-ua-shipping'); ?></h3>
+	<p><?php echo __('Fill in the default shipping data for the shipment', 'mrkv-ua-shipping'); ?></p>
+	<hr class="mrkv-ua-ship__hr">
+	<div class="admin_ua_ship_morkva_settings_row">
+		<div class="col-mrkv-5">
+			<div class="admin_ua_ship_morkva_settings_line">
+				<h4><?php echo __('Type', 'mrkv-ua-shipping'); ?></h4>
+				<div class="admin_ua_ship_morkva_settings_row">
+					<?php
+						$data = isset(MRKV_SHIPPING_SETTINGS['inter']['shipment_type']) ? MRKV_SHIPPING_SETTINGS['inter']['shipment_type'] : '';
+						echo $mrkv_global_option_generator->get_input_radio(__('Parcel', 'mrkv-ua-shipping'), MRKV_OPTION_OBJECT_NAME . '[inter][shipment_type]', 'Parcel', $data, MRKV_OPTION_OBJECT_NAME . '_inter_shipment_type_parcel', 'Parcel');
+						echo $mrkv_global_option_generator->get_input_radio(__('Pallet', 'mrkv-ua-shipping'), MRKV_OPTION_OBJECT_NAME . '[inter][shipment_type]', 'Pallet', $data, MRKV_OPTION_OBJECT_NAME . '_inter_shipment_type_pallet', 'Parcel');
+						echo $mrkv_global_option_generator->get_input_radio(__('Documents', 'mrkv-ua-shipping'), MRKV_OPTION_OBJECT_NAME . '[inter][shipment_type]', 'Documents', $data, MRKV_OPTION_OBJECT_NAME . '_inter_shipment_type_documents', 'Parcel');
+					?>
+				</div>
+			</div>
+		</div>
+		<div class="col-mrkv-5"></div>
+	</div>
+	<div class="admin_ua_ship_morkva_settings_row">
+		<div class="col-mrkv-5">
+			<div class="admin_ua_ship_morkva_settings_line">
+				<h4><?php echo __('Weight, kg', 'mrkv-ua-shipping'); ?></h4>
+				<?php 
+					$data = isset(MRKV_SHIPPING_SETTINGS['inter']['weight']) ? MRKV_SHIPPING_SETTINGS['inter']['weight'] : '';
+
+					echo $mrkv_global_option_generator->get_input_number('', MRKV_OPTION_OBJECT_NAME . '[inter][weight]', $data, MRKV_OPTION_OBJECT_NAME. '_inter_weight' , '', '', '');
+				?>
+			</div>
+		</div>
+		<div class="col-mrkv-5">
+			<div class="admin_ua_ship_morkva_settings_line">
+				<h4><?php echo __('Dimensions, cm', 'mrkv-ua-shipping'); ?></h4>
+				<div class="adm_morkva_row_size">
+					<div class="adm_morkva_row_size__col">
+						<span><?php echo __('Length', 'mrkv-ua-shipping'); ?></span>
+						<?php 
+							$data = isset(MRKV_SHIPPING_SETTINGS['inter']['length']) ? MRKV_SHIPPING_SETTINGS['inter']['length'] : '';
+							echo $mrkv_global_option_generator->get_input_number('', MRKV_OPTION_OBJECT_NAME . '[inter][length]', $data, MRKV_OPTION_OBJECT_NAME. '_inter_length' , '', '', '');
+						?>
+					</div>
+					<span>
+						<svg width="20px" height="20px" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <path d="M8 18C5.17157 18 3.75736 18 2.87868 17.1213C2 16.2426 2 14.8284 2 12C2 9.17157 2 7.75736 2.87868 6.87868C3.75736 6 5.17157 6 8 6C10.8284 6 12.2426 6 13.1213 6.87868C14 7.75736 14 9.17157 14 12" stroke="#ed6230" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path> <path d="M10 12C10 14.8284 10 16.2426 10.8787 17.1213C11.7574 18 13.1716 18 16 18C18.8284 18 20.2426 18 21.1213 17.1213C21.4211 16.8215 21.6186 16.4594 21.7487 16M22 12C22 9.17157 22 7.75736 21.1213 6.87868C20.2426 6 18.8284 6 16 6" stroke="#ed6230" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path> </g></svg>
+					</span>
+					<div class="adm_morkva_row_size__col">
+						<span><?php echo __('Width', 'mrkv-ua-shipping'); ?></span>
+						<?php 
+							$data = isset(MRKV_SHIPPING_SETTINGS['inter']['width']) ? MRKV_SHIPPING_SETTINGS['inter']['width'] : '';
+							echo $mrkv_global_option_generator->get_input_number('', MRKV_OPTION_OBJECT_NAME . '[inter][width]', $data, MRKV_OPTION_OBJECT_NAME. '_inter_width' , '', '', '');
+						?>
+					</div>
+					<span>
+						<svg width="20px" height="20px" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <path d="M8 18C5.17157 18 3.75736 18 2.87868 17.1213C2 16.2426 2 14.8284 2 12C2 9.17157 2 7.75736 2.87868 6.87868C3.75736 6 5.17157 6 8 6C10.8284 6 12.2426 6 13.1213 6.87868C14 7.75736 14 9.17157 14 12" stroke="#ed6230" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path> <path d="M10 12C10 14.8284 10 16.2426 10.8787 17.1213C11.7574 18 13.1716 18 16 18C18.8284 18 20.2426 18 21.1213 17.1213C21.4211 16.8215 21.6186 16.4594 21.7487 16M22 12C22 9.17157 22 7.75736 21.1213 6.87868C20.2426 6 18.8284 6 16 6" stroke="#ed6230" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path> </g></svg>
+					</span>
+					<div class="adm_morkva_row_size__col">
+						<span><?php echo __('Height', 'mrkv-ua-shipping'); ?></span>
+						<?php 
+							$data = isset(MRKV_SHIPPING_SETTINGS['inter']['height']) ? MRKV_SHIPPING_SETTINGS['inter']['height'] : '';
+							echo $mrkv_global_option_generator->get_input_number('', MRKV_OPTION_OBJECT_NAME . '[inter][height]', $data, MRKV_OPTION_OBJECT_NAME. '_inter_height' , '', '', '');
+						?>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="admin_ua_ship_morkva_settings_line admin_ua_ship_morkva_one_data">
+		<?php 
+			$data = isset(MRKV_SHIPPING_SETTINGS['inter']['volume']) ? MRKV_SHIPPING_SETTINGS['inter']['volume'] : '';
+			$description = __('It is calculated automatically according to the dimensions in the settings.', 'mrkv-ua-shipping');
+
+			echo $mrkv_global_option_generator->get_input_number(__('Volumetric weight', 'mrkv-ua-shipping'), MRKV_OPTION_OBJECT_NAME . '[inter][volume]', $data, MRKV_OPTION_OBJECT_NAME. '_inter_volume' , '', '', $description, 'readonly');
+		?>
+		<p><strong><?php echo __('These standard weight and dimensions apply when products do not have ones of their own', 'mrkv-ua-shipping'); ?></strong></p>
+	</div>
+</section>
 <section id="email_settings" class="mrkv_up_ship_shipping_tab_block">
 	<h2><img src="<?php echo MRKV_UA_SHIPPING_ASSETS_URL . '/images/global/mention-square-icon.svg'; ?>" alt="Sending email from TTN" title="Sending email from TTN"><?php echo __('Email settings', 'mrkv-ua-shipping'); ?></h2>
 	<p><?php echo __('Create a custom message that will be sent after creating the shipment', 'mrkv-ua-shipping'); ?></p>

@@ -238,7 +238,7 @@ if (!class_exists('MRKV_UA_SHIPPING_WOO_ORDER'))
 			            	<?php
 			            }
 			            else{
-			            	if(!empty(MRKV_UA_SHIPPING_LIST[$key]['invoice_links']))
+			            	if(!empty(MRKV_UA_SHIPPING_LIST[$key]['invoice_links']) && $current_shipping != 'mrkv_ua_shipping_nova-poshta_international' && $current_shipping != 'mrkv_ua_shipping_nova-poshta_inter_address')
 			            	{
 				            	?>
 				            	<a>
@@ -252,7 +252,7 @@ if (!class_exists('MRKV_UA_SHIPPING_WOO_ORDER'))
 				            }
 			            }
 
-			            if(!empty(MRKV_UA_SHIPPING_LIST[$key]['invoice_links']))
+			            if(!empty(MRKV_UA_SHIPPING_LIST[$key]['invoice_links'])  && $current_shipping != 'mrkv_ua_shipping_nova-poshta_international' && $current_shipping != 'mrkv_ua_shipping_nova-poshta_inter_address')
 		            	{
 		            		?>
 		            			<hr class="mrkv-hr-sidebar">

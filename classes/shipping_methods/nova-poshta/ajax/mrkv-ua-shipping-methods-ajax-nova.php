@@ -29,6 +29,49 @@ if (!class_exists('MRKV_UA_SHIPPING_AJAX_NOVA'))
 
 			add_action( 'wp_ajax_mrkv_ua_ship_nova_poshta_sender_get_address_ref', array($this, 'get_sender_get_address_ref') );
 			add_action( 'wp_ajax_nopriv_mrkv_ua_ship_nova_poshta_sender_get_address_ref', array($this, 'get_sender_get_address_ref') );
+
+			add_action( 'wp_ajax_mrkv_ua_ship_novapost_divisions', array($this, 'get_mrkv_ua_ship_novapost_divisions') );
+			add_action( 'wp_ajax_nopriv_mrkv_ua_ship_novapost_divisions', array($this, 'get_mrkv_ua_ship_novapost_divisions') );
+		}
+
+		public function get_mrkv_ua_ship_novapost_divisions()
+		{
+			if (!isset($_POST['nonce']) || !wp_verify_nonce(sanitize_text_field( wp_unslash($_POST['nonce'])), 'mrkv_ua_ship_nonce')) {
+		        wp_send_json_error(__('Invalid nonce.', 'mrkv-ua-shipping'), 403);
+		        wp_die();
+		    }
+
+		    $novapost_term_suggestion = isset($_POST['term']) ? sanitize_text_field($_POST['term']) : '';
+		    $mrkvup_country_suggestion = isset($_POST['mrkvup_country_suggestion']) ? sanitize_text_field($_POST['mrkvup_country_suggestion']) : '';
+
+		    require_once MRKV_UA_SHIPPING_PLUGIN_PATH . 'classes/shipping_methods/nova-poshta/api/mrkv-ua-shipping-api-nova-post.php';
+			$mrkv_object_nova_post = new MRKV_UA_SHIPPING_API_NOVA_POST(get_option('nova-poshta_m_ua_settings'));
+
+			$city_body = $mrkv_object_nova_post->send_post_request([], 'divisions?countryCodes[]=' . $mrkvup_country_suggestion . '&limit=100&textSearch=' . $novapost_term_suggestion, 'GET');
+
+			$city_output = array();
+
+			if(isset($city_body['items']))
+			{
+				foreach($city_body['items'] as $city){
+
+					$label = $city['address'];
+
+					if($mrkvup_country_suggestion == 'UA')
+					{
+						$label = $city['shortName'];
+					}
+
+					$city_output['response'][] = array(
+						"label" => $label,
+						"value" => $city['id'],
+						"number" => $city['number']
+					);
+				}
+			}
+
+			echo wp_json_encode( $city_output );
+			wp_die();
 		}
 
 		/**

@@ -36,7 +36,8 @@ if (!class_exists('MRKV_UA_SHIPPING_ADMIN_ASSETS'))
 
     			wp_localize_script('global-mrkv-ua-shipping', 'mrkv_ua_ship_helper', [
 	            	'ajax_url' => admin_url( "admin-ajax.php" ),
-	            	'nonce'    => wp_create_nonce('mrkv_ua_ship_nonce')
+	            	'nonce'    => wp_create_nonce('mrkv_ua_ship_nonce'),
+	            	'error_latin_text'    => __('contains Latin characters', 'mrkv-ua-shipping')
 	        	]);
 
 	        	if(isset($_GET['action']) && $_GET['action'] == 'edit' && (isset($_GET['id']) || isset($_GET['post'])))

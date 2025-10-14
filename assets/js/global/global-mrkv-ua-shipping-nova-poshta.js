@@ -421,6 +421,64 @@ jQuery(window).on('load', function()
 		}
  	}
 
+ 	if(jQuery('#mrkv_ua_shipping_nova-poshta_international_warehouse').length != 0)
+ 	{
+ 		let autoSelectCityPo = function() 
+		{
+		    jQuery('#mrkv_ua_shipping_nova-poshta_international_warehouse').autocomplete({
+
+		    source: function(request, response) { 
+		    	jQuery('#mrkv_ua_shipping_nova-poshta_international_warehouse').removeClass('ui-autocomplete-loading');
+		      if(request.term.length > 2){
+		        var country_sender = jQuery('#_billing_country').length ? jQuery('#_billing_country').val() : 'UA';
+		        jQuery('#mrkv_ua_shipping_nova-poshta_international_warehouse').addClass('ui-autocomplete-loading');
+		        jQuery.ajax({
+		            method: 'POST',
+		            url: mrkv_ua_ship_helper.ajax_url,
+		            dataType: 'json',
+		            data: {
+		              term: request.term,
+		              action: 'mrkv_ua_ship_novapost_divisions',
+		              mrkvup_country_suggestion: country_sender,
+		              nonce: mrkv_ua_ship_helper.nonce,
+		            },
+		            success: function(data) {
+		              if(!Array.isArray(data))
+		              {
+		                response(data.response);
+		              }
+		              else
+		              {
+		                response(data);
+		              }
+
+		              
+		              jQuery('#mrkv_ua_shipping_nova-poshta_international_warehouse').removeClass('ui-autocomplete-loading');
+		            },
+		                error: function(xhr, status, error) {
+		                    
+		                },
+		          });
+		      }
+		    },
+		    select: function(event, ui) {
+		      event.preventDefault();
+		      jQuery(this).val( ui.item.label );
+		      jQuery( "#mrkv_ua_shipping_nova-poshta_international_warehouse_ref" ).val( ui.item.value );
+		      jQuery( "#mrkv_ua_shipping_nova-poshta_international_warehouse_number" ).val( ui.item.number );
+		      jQuery('body').trigger('update_checkout');
+		      },
+		      minLength: 0,
+		      delay: 0,
+		    }).focus(function(){            
+		            jQuery(this).data("uiAutocomplete").search(jQuery(this).val());
+		            jQuery('#mrkv_ua_shipping_nova-poshta_international_warehouse').removeClass('ui-autocomplete-loading');
+		        });
+		  }
+
+	  autoSelectCityPo();
+ 	}
+
  	if(jQuery('#mrkv_ua_shipping_nova-poshta_address_patronymic_field').length != 0)
  	{
  		if(mrkv_ua_ship_helper.nova_middlename_exclude == 'yes')
