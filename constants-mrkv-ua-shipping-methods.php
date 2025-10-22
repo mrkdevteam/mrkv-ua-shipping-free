@@ -33,7 +33,7 @@ define('MRKV_UA_SHIPPING_LIST', array(
 						'autocomplete' => 'off',
 						'options' => array('' => __('Choose the city', 'mrkv-ua-shipping')),
 						'required' => true,
-						'label' => __('City', 'mrkv-ua-shipping'),
+						'label' => __('City (settlement)', 'mrkv-ua-shipping'),
 						'replace' => '',
 					),
 					'_city_label' => array(
@@ -86,7 +86,7 @@ define('MRKV_UA_SHIPPING_LIST', array(
 						'autocomplete' => 'off',
 						'options' => array('' => __('Choose the city', 'mrkv-ua-shipping')),
 						'required' => true,
-						'label' => __('City', 'mrkv-ua-shipping'),
+						'label' => __('City (settlement)', 'mrkv-ua-shipping'),
 						'replace' => '',
 					),
 					'_city_label' => array(
@@ -153,7 +153,7 @@ define('MRKV_UA_SHIPPING_LIST', array(
 						'autocomplete' => 'off',
 						'options' => array('' => __('Choose the city', 'mrkv-ua-shipping')),
 						'required' => true,
-						'label' => __('City', 'mrkv-ua-shipping'),
+						'label' => __('City (settlement)', 'mrkv-ua-shipping'),
 						'replace' => '',
 					),
 					'_city_label' => array(
@@ -342,7 +342,7 @@ define('MRKV_UA_SHIPPING_LIST', array(
 						'autocomplete' => 'off',
 						'options' => array('' => __('Choose the city', 'mrkv-ua-shipping')),
 						'required' => true,
-						'label' => __('City', 'mrkv-ua-shipping'),
+						'label' => __('City (settlement)', 'mrkv-ua-shipping'),
 						'replace' => '_city',
 					),
 					'_city_ref' => array(
@@ -397,7 +397,7 @@ define('MRKV_UA_SHIPPING_LIST', array(
 						'autocomplete' => 'off',
 						'options' => array('' => __('Choose the city', 'mrkv-ua-shipping')),
 						'required' => true,
-						'label' => __('City', 'mrkv-ua-shipping'),
+						'label' => __('City (settlement)', 'mrkv-ua-shipping'),
 						'replace' => '_city',
 					),
 					'_city_ref' => array(
@@ -486,7 +486,7 @@ define('MRKV_UA_SHIPPING_LIST', array(
 						'autocomplete' => 'off',
 						'options' => array('' => __('Choose the city', 'mrkv-ua-shipping')),
 						'required' => true,
-						'label' => __('City', 'mrkv-ua-shipping'),
+						'label' => __('City (settlement)', 'mrkv-ua-shipping'),
 						'replace' => '',
 					),
 					'_city_label' => array(
@@ -575,7 +575,7 @@ define('MRKV_UA_SHIPPING_LIST', array(
 						'type' => 'text',
 						'autocomplete' => 'off',
 						'required' => true,
-						'label' => __('City', 'mrkv-ua-shipping'),
+						'label' => __('City (settlement)', 'mrkv-ua-shipping'),
 						'placeholder' => __('Enter the city', 'mrkv-ua-shipping'),
 						'replace' => '_city'
 					),

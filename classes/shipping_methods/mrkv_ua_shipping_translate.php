@@ -32,7 +32,7 @@ $translate_labels = array(
 						'autocomplete' => 'off',
 						'options' => array('' => __('Choose the city', 'mrkv-ua-shipping')),
 						'required' => true,
-						'label' => __('City', 'mrkv-ua-shipping'),
+						'label' => __('City (settlement)', 'mrkv-ua-shipping'),
 						'replace' => '',
 					),
 					'_city_label' => array(
@@ -84,7 +84,7 @@ $translate_labels = array(
 						'autocomplete' => 'off',
 						'options' => array('' => __('Choose the city', 'mrkv-ua-shipping')),
 						'required' => true,
-						'label' => __('City', 'mrkv-ua-shipping'),
+						'label' => __('City (settlement)', 'mrkv-ua-shipping'),
 						'replace' => '',
 					),
 					'_city_label' => array(
@@ -150,7 +150,7 @@ $translate_labels = array(
 						'autocomplete' => 'off',
 						'options' => array('' => __('Choose the city', 'mrkv-ua-shipping')),
 						'required' => true,
-						'label' => __('City', 'mrkv-ua-shipping'),
+						'label' => __('City (settlement)', 'mrkv-ua-shipping'),
 						'replace' => '',
 					),
 					'_city_label' => array(
@@ -261,7 +261,7 @@ $translate_labels = array(
 						'type' => 'text',
 						'autocomplete' => 'new-password',
 						'required' => true,
-						'label' => __('City', 'mrkv-ua-shipping'),
+						'label' => __('City (settlement)', 'mrkv-ua-shipping'),
 						'placeholder' => __('Enter the city', 'mrkv-ua-shipping'),
 						'replace' => '_city'
 					),
@@ -338,7 +338,7 @@ $translate_labels = array(
 						'autocomplete' => 'off',
 						'options' => array('' => __('Choose the city', 'mrkv-ua-shipping')),
 						'required' => true,
-						'label' => __('City', 'mrkv-ua-shipping'),
+						'label' => __('City (settlement)', 'mrkv-ua-shipping'),
 						'replace' => '_city',
 					),
 					'_city_ref' => array(
@@ -392,7 +392,7 @@ $translate_labels = array(
 						'autocomplete' => 'off',
 						'options' => array('' => __('Choose the city', 'mrkv-ua-shipping')),
 						'required' => true,
-						'label' => __('City', 'mrkv-ua-shipping'),
+						'label' => __('City (settlement)', 'mrkv-ua-shipping'),
 						'replace' => '_city',
 					),
 					'_city_ref' => array(
@@ -480,7 +480,7 @@ $translate_labels = array(
 						'autocomplete' => 'off',
 						'options' => array('' => __('Choose the city', 'mrkv-ua-shipping')),
 						'required' => true,
-						'label' => __('City', 'mrkv-ua-shipping'),
+						'label' => __('City (settlement)', 'mrkv-ua-shipping'),
 						'replace' => '',
 					),
 					'_city_label' => array(
@@ -610,7 +610,7 @@ $translate_labels = array(
 						'type' => 'text',
 						'autocomplete' => 'off',
 						'required' => true,
-						'label' => __('City', 'mrkv-ua-shipping'),
+						'label' => __('City (settlement)', 'mrkv-ua-shipping'),
 						'placeholder' => __('Enter the city', 'mrkv-ua-shipping'),
 						'replace' => '_city'
 					),

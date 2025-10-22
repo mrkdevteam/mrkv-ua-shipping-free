@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Morkva UA Shipping\n"
 "POT-Creation-Date: 2024-10-01 09:03+0300\n"
-"PO-Revision-Date: 2025-10-09 10:15+0000\n"
+"PO-Revision-Date: 2025-10-22 09:01+0000\n"
 "Last-Translator: \n"
 "Language-Team: English (UK)\n"
 "Language: en_GB\n"
@@ -42,6 +42,10 @@ msgstr ""
 #: templates/settings/methods/shipping_fields/mrkv-ua-shipping-ukr-poshta.php:551
 msgid "(temporarily unavailable)"
 msgstr "(temporarily unavailable)"
+
+#: templates/orders/mrkv-ua-ship-popup-ukr-poshta.php:297
+msgid "(this feature is only available if the sender pays for delivery)"
+msgstr "(this feature is only available if the sender pays for delivery)"
 
 #: templates/settings/methods/shipping_fields/mrkv-ua-shipping-ukr-poshta.php:288
 msgid "100*100 mm"
@@ -170,7 +174,7 @@ msgstr "API key incorrect"
 msgid "Auto-creation of a shipment"
 msgstr "Auto-creation of a shipment"
 
-#: classes/shipping_methods/ukr-poshta/invoice/mrkv-ua-shipping-ukr-poshta-invoice.php:129
+#: classes/shipping_methods/ukr-poshta/invoice/mrkv-ua-shipping-ukr-poshta-invoice.php:134
 #: classes/shipping_methods/nova-poshta/invoice/mrkv-ua-shipping-nova-poshta-invoice.php:232
 msgid "Automatic created invoice"
 msgstr "Automatic created invoice"
@@ -392,17 +396,10 @@ msgstr "Choose the street"
 msgid "Choose the warehouse"
 msgstr "Choose the warehouse"
 
-#: constants-mrkv-ua-shipping-methods.php:36
-#: constants-mrkv-ua-shipping-methods.php:89
-#: constants-mrkv-ua-shipping-methods.php:156
-#: constants-mrkv-ua-shipping-methods.php:267
 #: constants-mrkv-ua-shipping-methods.php:345
 #: constants-mrkv-ua-shipping-methods.php:400
 #: constants-mrkv-ua-shipping-methods.php:489
 #: constants-mrkv-ua-shipping-methods.php:578
-#: classes/shipping_methods/mrkv_ua_shipping_translate.php:35
-#: classes/shipping_methods/mrkv_ua_shipping_translate.php:87
-#: classes/shipping_methods/mrkv_ua_shipping_translate.php:153
 #: classes/shipping_methods/mrkv_ua_shipping_translate.php:264
 #: classes/shipping_methods/mrkv_ua_shipping_translate.php:341
 #: classes/shipping_methods/mrkv_ua_shipping_translate.php:395
@@ -412,6 +409,15 @@ msgstr "Choose the warehouse"
 #: templates/settings/methods/shipping_fields/mrkv-ua-shipping-nova-poshta.php:71
 msgid "City"
 msgstr "City"
+
+#: constants-mrkv-ua-shipping-methods.php:36
+#: constants-mrkv-ua-shipping-methods.php:89
+#: constants-mrkv-ua-shipping-methods.php:156
+#: classes/shipping_methods/mrkv_ua_shipping_translate.php:35
+#: classes/shipping_methods/mrkv_ua_shipping_translate.php:87
+#: classes/shipping_methods/mrkv_ua_shipping_translate.php:153
+msgid "City (settlement)"
+msgstr "City (settlement)"
 
 #: templates/settings/methods/shipping_fields/mrkv-ua-shipping-ukr-poshta.php:747
 #: templates/settings/methods/shipping_fields/mrkv-ua-shipping-rozetka-delivery.php:70
@@ -442,8 +448,8 @@ msgid "contains Latin characters"
 msgstr "contains Latin characters"
 
 #: classes/woocommerce/mrkv-ua-shipping-woo-order.php:191
-#: classes/shipping_methods/ukr-poshta/invoice/mrkv-ua-shipping-ukr-poshta-invoice.php:117
-#: classes/shipping_methods/ukr-poshta/invoice/mrkv-ua-shipping-ukr-poshta-invoice.php:117
+#: classes/shipping_methods/ukr-poshta/invoice/mrkv-ua-shipping-ukr-poshta-invoice.php:122
+#: classes/shipping_methods/ukr-poshta/invoice/mrkv-ua-shipping-ukr-poshta-invoice.php:122
 #: classes/shipping_methods/nova-poshta/invoice/mrkv-ua-shipping-nova-poshta-invoice.php:220
 #: classes/shipping_methods/nova-poshta/invoice/mrkv-ua-shipping-nova-poshta-invoice.php:220
 msgid "Copy invoice"
@@ -788,7 +794,6 @@ msgstr "Enter the address..."
 msgid "Enter the amount in numbers"
 msgstr "Enter the amount in numbers"
 
-#: constants-mrkv-ua-shipping-methods.php:268
 #: constants-mrkv-ua-shipping-methods.php:579
 #: classes/shipping_methods/mrkv_ua_shipping_translate.php:265
 #: classes/shipping_methods/mrkv_ua_shipping_translate.php:614
@@ -896,7 +901,6 @@ msgstr "Enter the Phone"
 msgid "Enter the phone..."
 msgstr "Enter the phone..."
 
-#: constants-mrkv-ua-shipping-methods.php:252
 #: constants-mrkv-ua-shipping-methods.php:563
 #: classes/shipping_methods/mrkv_ua_shipping_translate.php:249
 #: classes/shipping_methods/mrkv_ua_shipping_translate.php:598
@@ -907,14 +911,12 @@ msgstr "Enter the postal code"
 msgid "Enter the postal index..."
 msgstr "Enter the postal index..."
 
-#: constants-mrkv-ua-shipping-methods.php:260
 #: constants-mrkv-ua-shipping-methods.php:571
 #: classes/shipping_methods/mrkv_ua_shipping_translate.php:257
 #: classes/shipping_methods/mrkv_ua_shipping_translate.php:606
 msgid "Enter the region"
 msgstr "Enter the region"
 
-#: constants-mrkv-ua-shipping-methods.php:276
 #: constants-mrkv-ua-shipping-methods.php:587
 #: classes/shipping_methods/mrkv_ua_shipping_translate.php:273
 #: classes/shipping_methods/mrkv_ua_shipping_translate.php:622
@@ -942,12 +944,12 @@ msgstr "Enter the username..."
 msgid "Enter the warehouse..."
 msgstr "Enter the warehouse..."
 
-#: classes/shipping_methods/ukr-poshta/invoice/mrkv-ua-shipping-ukr-poshta-invoice.php:153
+#: classes/shipping_methods/ukr-poshta/invoice/mrkv-ua-shipping-ukr-poshta-invoice.php:158
 #: classes/shipping_methods/nova-poshta/invoice/mrkv-ua-shipping-nova-poshta-invoice.php:255
 msgid "Error create invoice"
 msgstr "Error create invoice"
 
-#: classes/shipping_methods/ukr-poshta/invoice/mrkv-ua-shipping-ukr-poshta-invoice.php:148
+#: classes/shipping_methods/ukr-poshta/invoice/mrkv-ua-shipping-ukr-poshta-invoice.php:153
 #: classes/shipping_methods/nova-poshta/invoice/mrkv-ua-shipping-nova-poshta-invoice.php:251
 #: classes/shipping_methods/nova-poshta/invoice/mrkv-ua-shipping-nova-poshta-invoice.php:252
 msgid "Error with create invoice"
@@ -1043,7 +1045,6 @@ msgid "Fixed shipping price"
 msgstr "Fixed shipping price"
 
 #: constants-mrkv-ua-shipping-methods.php:199
-#: constants-mrkv-ua-shipping-methods.php:290
 #: constants-mrkv-ua-shipping-methods.php:452
 #: constants-mrkv-ua-shipping-methods.php:601
 #: classes/shipping_methods/mrkv_ua_shipping_translate.php:196
@@ -1173,7 +1174,6 @@ msgid "Hint: the main format is 0987654321 (without +38)"
 msgstr "Hint: the main format is 0987654321 (without +38)"
 
 #: constants-mrkv-ua-shipping-methods.php:191
-#: constants-mrkv-ua-shipping-methods.php:282
 #: constants-mrkv-ua-shipping-methods.php:441
 #: constants-mrkv-ua-shipping-methods.php:593
 #: classes/shipping_methods/mrkv_ua_shipping_translate.php:188
@@ -1300,7 +1300,7 @@ msgstr "Invoice"
 msgid "Invoice action"
 msgstr "Invoice action"
 
-#: classes/shipping_methods/ukr-poshta/invoice/mrkv-ua-shipping-ukr-poshta-invoice.php:117
+#: classes/shipping_methods/ukr-poshta/invoice/mrkv-ua-shipping-ukr-poshta-invoice.php:122
 #: classes/shipping_methods/nova-poshta/invoice/mrkv-ua-shipping-nova-poshta-invoice.php:220
 msgid "Invoice created"
 msgstr "Invoice created"
@@ -1478,7 +1478,7 @@ msgstr "Lviv, Lviv district"
 msgid "Make the middle name field mandatory"
 msgstr "Make the middle name field mandatory"
 
-#: classes/shipping_methods/ukr-poshta/invoice/mrkv-ua-shipping-ukr-poshta-invoice.php:125
+#: classes/shipping_methods/ukr-poshta/invoice/mrkv-ua-shipping-ukr-poshta-invoice.php:130
 #: classes/shipping_methods/nova-poshta/invoice/mrkv-ua-shipping-nova-poshta-invoice.php:228
 msgid "Manually created invoice"
 msgstr "Manually created invoice"
@@ -1610,7 +1610,6 @@ msgid "Nova Poshta Warehouse International"
 msgstr "Nova Poshta Warehouse International"
 
 #: constants-mrkv-ua-shipping-methods.php:200
-#: constants-mrkv-ua-shipping-methods.php:291
 #: constants-mrkv-ua-shipping-methods.php:453
 #: constants-mrkv-ua-shipping-methods.php:602
 #: classes/shipping_methods/mrkv_ua_shipping_translate.php:197
@@ -1621,7 +1620,6 @@ msgid "Number of flat"
 msgstr "Number of flat"
 
 #: constants-mrkv-ua-shipping-methods.php:192
-#: constants-mrkv-ua-shipping-methods.php:283
 #: constants-mrkv-ua-shipping-methods.php:594
 #: classes/shipping_methods/mrkv_ua_shipping_translate.php:189
 #: classes/shipping_methods/mrkv_ua_shipping_translate.php:280
@@ -1800,9 +1798,9 @@ msgstr "Payment type (Sender-related)"
 #: classes/shipping_methods/mrkv-ua-shipping-methods-ajax.php:464
 #: classes/shipping_methods/mrkv-ua-shipping-methods-ajax.php:479
 #: classes/shipping_methods/mrkv-ua-shipping-methods-ajax.php:494
-#: classes/shipping_methods/ukr-poshta/invoice/mrkv-ua-shipping-ukr-poshta-invoice.php:596
-#: classes/shipping_methods/ukr-poshta/invoice/mrkv-ua-shipping-ukr-poshta-invoice.php:611
-#: classes/shipping_methods/ukr-poshta/invoice/mrkv-ua-shipping-ukr-poshta-invoice.php:626
+#: classes/shipping_methods/ukr-poshta/invoice/mrkv-ua-shipping-ukr-poshta-invoice.php:641
+#: classes/shipping_methods/ukr-poshta/invoice/mrkv-ua-shipping-ukr-poshta-invoice.php:656
+#: classes/shipping_methods/ukr-poshta/invoice/mrkv-ua-shipping-ukr-poshta-invoice.php:671
 #: classes/shipping_methods/nova-poshta/invoice/mrkv-ua-shipping-nova-poshta-invoice.php:630
 #: classes/shipping_methods/nova-poshta/invoice/mrkv-ua-shipping-nova-poshta-invoice.php:645
 #: classes/shipping_methods/nova-poshta/invoice/mrkv-ua-shipping-nova-poshta-invoice.php:660
@@ -1854,7 +1852,6 @@ msgstr "Position of plugin fields in Checkout"
 msgid "Post-it note (100mm x 100mm)"
 msgstr "Post-it note (100mm x 100mm)"
 
-#: constants-mrkv-ua-shipping-methods.php:251
 #: constants-mrkv-ua-shipping-methods.php:562
 #: classes/shipping_methods/mrkv_ua_shipping_translate.php:248
 #: classes/shipping_methods/mrkv_ua_shipping_translate.php:597
@@ -1908,8 +1905,8 @@ msgstr "Production"
 msgid "PRODUCTION BEARER eCom"
 msgstr "PRODUCTION BEARER eCom"
 
-#: classes/shipping_methods/ukr-poshta/api/mrkv-ua-shipping-api-ukr-poshta.php:211
-#: classes/shipping_methods/ukr-poshta/api/mrkv-ua-shipping-api-ukr-poshta.php:247
+#: classes/shipping_methods/ukr-poshta/api/mrkv-ua-shipping-api-ukr-poshta.php:219
+#: classes/shipping_methods/ukr-poshta/api/mrkv-ua-shipping-api-ukr-poshta.php:255
 msgid "PRODUCTION BEARER eCom incorrect"
 msgstr "PRODUCTION BEARER eCom incorrect"
 
@@ -1942,7 +1939,6 @@ msgstr "Recipient"
 msgid "Recipient's data"
 msgstr "Recipient's data"
 
-#: constants-mrkv-ua-shipping-methods.php:259
 #: constants-mrkv-ua-shipping-methods.php:570
 #: classes/shipping_methods/mrkv_ua_shipping_translate.php:256
 #: classes/shipping_methods/mrkv_ua_shipping_translate.php:605
@@ -1967,14 +1963,6 @@ msgstr "Remove the patronymic field from the checkout page"
 #: templates/settings/methods/invoices/mrkv-ua-shipping-nova-poshta.php:37
 msgid "Remove ttn"
 msgstr "Remove ttn"
-
-#: templates/orders/mrkv-ua-ship-popup-ukr-poshta.php:296
-msgid ""
-"Return the shipment after the expiration of the free storage period (5 "
-"working days)"
-msgstr ""
-"Return the shipment after the expiration of the free storage period (5 "
-"working days)"
 
 #: templates/orders/mrkv-ua-ship-popup-ukr-poshta.php:295
 msgid "Return to the sender in 14 calendar days"
@@ -2194,7 +2182,6 @@ msgid "Sticker format"
 msgstr "Sticker format"
 
 #: constants-mrkv-ua-shipping-methods.php:179
-#: constants-mrkv-ua-shipping-methods.php:275
 #: constants-mrkv-ua-shipping-methods.php:428
 #: constants-mrkv-ua-shipping-methods.php:586
 #: classes/shipping_methods/mrkv_ua_shipping_translate.php:176
@@ -2369,8 +2356,8 @@ msgstr "this video"
 msgid "To keep an error log, enable it in the settings"
 msgstr "To keep an error log, enable it in the settings"
 
-#: classes/shipping_methods/ukr-poshta/api/mrkv-ua-shipping-api-ukr-poshta.php:217
-#: classes/shipping_methods/ukr-poshta/api/mrkv-ua-shipping-api-ukr-poshta.php:253
+#: classes/shipping_methods/ukr-poshta/api/mrkv-ua-shipping-api-ukr-poshta.php:225
+#: classes/shipping_methods/ukr-poshta/api/mrkv-ua-shipping-api-ukr-poshta.php:261
 msgid "Token incorrect"
 msgstr "Token incorrect"
 

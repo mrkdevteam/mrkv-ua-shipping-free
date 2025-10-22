@@ -291,10 +291,10 @@
 				</label>
 				<div class="admin_ua_ship_morkva_settings_row admin_ua_ship_morkva_settings_row-col">
 					<?php
-						$data = 'RETURN_AFTER_7_DAYS';
+						$data = 'RETURN';
 						echo $mrkv_global_option_generator->get_input_radio(__('Return to the sender in 14 calendar days', 'mrkv-ua-shipping'), 'mrkv_ua_ship_invoice_return', 'RETURN', $data, $shipping_slug_option . '_mrkv_ua_ship_invoice_return_return', 'RETURN_AFTER_7_DAYS');
-						echo $mrkv_global_option_generator->get_input_radio(__('Return the shipment after the expiration of the free storage period (5 working days)', 'mrkv-ua-shipping'), 'mrkv_ua_ship_invoice_return', 'RETURN_AFTER_7_DAYS', $data, $shipping_slug_option . '_mrkv_ua_ship_invoice_return_seven', 'RETURN_AFTER_7_DAYS');
-						echo $mrkv_global_option_generator->get_input_radio(__('Destroy the shipment', 'mrkv-ua-shipping'), 'mrkv_ua_ship_invoice_return', 'PROCESS_AS_REFUSAL', $data, $shipping_slug_option . '_mrkv_ua_ship_invoice_return_process', 'RETURN_AFTER_7_DAYS');
+						/*echo $mrkv_global_option_generator->get_input_radio(__('Return the shipment after the expiration of the free storage period (5 working days)', 'mrkv-ua-shipping'), 'mrkv_ua_ship_invoice_return', 'RETURN_AFTER_7_DAYS', $data, $shipping_slug_option . '_mrkv_ua_ship_invoice_return_seven', 'RETURN_AFTER_7_DAYS');*/
+						echo $mrkv_global_option_generator->get_input_radio(__('Destroy the shipment', 'mrkv-ua-shipping') . ' ' . __('(this feature is only available if the sender pays for delivery)', 'mrkv-ua-shipping'), 'mrkv_ua_ship_invoice_return', 'PROCESS_AS_REFUSAL', $data, $shipping_slug_option . '_mrkv_ua_ship_invoice_return_process', 'RETURN');
 					?>
 				</div>
 			</div>

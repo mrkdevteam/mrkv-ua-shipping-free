@@ -3,7 +3,7 @@ Contributors: bandido, dpmine
 Tags: Nova Poshta, Нова Пошта, Укрпошта
 Tested up to: 6.8
 Requires PHP: 7.4
-Stable tag: 1.7.0
+Stable tag: 1.7.1
 License: GPLv2
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -167,6 +167,9 @@ https://youtu.be/47-VrH_QJAE
 
 
 == Changelog ==
+
+= 1.7.1 =
+* [new] додали завантаження існуючих клієнтів УП
 
 = 1.7.0 =
 * [new] додали міжнародну доставку Нова Пошта на адресу та у відділення Nova Post
