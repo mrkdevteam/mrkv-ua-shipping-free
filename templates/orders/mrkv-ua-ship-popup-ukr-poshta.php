@@ -314,31 +314,34 @@
 
         $order = wc_get_order($order_id);
 
-        $mrkv_ua_ship_invoice = $order->get_meta('mrkv_ua_ship_invoice_number');
-
-        if($mrkv_ua_ship_invoice)
+        if($order)
         {
-        	$sticker_default = isset($mrk_ua_ship_ukr_settings['shipment']['sticker']) ? $mrk_ua_ship_ukr_settings['shipment']['sticker'] : '';
-        	$production_bearer_ecom = isset($mrk_ua_ship_ukr_settings['production_bearer_ecom']) ? $mrk_ua_ship_ukr_settings['production_bearer_ecom'] : '';
-        	$production_cp_token = isset($mrk_ua_ship_ukr_settings['production_cp_token']) ? $mrk_ua_ship_ukr_settings['production_cp_token'] : '';
-        	$sticker_default_inter = isset($mrk_ua_ship_ukr_settings['international']['sticker']) ? $mrk_ua_ship_ukr_settings['international']['sticker'] : '';
-        	?>
-        		<form class="form-ukr-poshta-ttn" action="<?php echo MRKV_UA_SHIPPING_PLUGIN_DIR . 'templates/orders/mrkv-ua-ship-ukr-poshta-pdf.php'; ?>" method="post" target="_blank" style="display: none;">
-					<input type="hidden" name="invoice_number" value="<?php echo $mrkv_ua_ship_invoice; ?>">
-					<input type="hidden" name="type" value="<?php echo $sticker_default; ?>">
-					<input type="hidden" name="bearer" value="<?php echo $production_bearer_ecom; ?>">
-					<input type="hidden" name="cp_token" value="<?php echo $production_cp_token; ?>">
-					<input type="submit">
-				</form>
-				<form class="form-ukr-poshta-ttn-international" action="<?php echo MRKV_UA_SHIPPING_PLUGIN_DIR . 'templates/orders/mrkv-ua-ship-ukr-poshta-pdf.php'; ?>" method="post" target="_blank" style="display: none;">
-					<input type="hidden" name="invoice_number" value="<?php echo $mrkv_ua_ship_invoice; ?>">
-					<input type="hidden" name="fs1" value="<?php echo $sticker_default_inter; ?>">
-					<input type="hidden" name="bearer" value="<?php echo $production_bearer_ecom; ?>">
-					<input type="hidden" name="cp_token" value="<?php echo $production_cp_token; ?>">
-					<input type="hidden" name="type" value="<?php echo $sticker_default; ?>">
-					<input type="submit">
-				</form>
-        	<?php
+        	$mrkv_ua_ship_invoice = $order->get_meta('mrkv_ua_ship_invoice_number');
+
+	        if($mrkv_ua_ship_invoice)
+	        {
+	        	$sticker_default = isset($mrk_ua_ship_ukr_settings['shipment']['sticker']) ? $mrk_ua_ship_ukr_settings['shipment']['sticker'] : '';
+	        	$production_bearer_ecom = isset($mrk_ua_ship_ukr_settings['production_bearer_ecom']) ? $mrk_ua_ship_ukr_settings['production_bearer_ecom'] : '';
+	        	$production_cp_token = isset($mrk_ua_ship_ukr_settings['production_cp_token']) ? $mrk_ua_ship_ukr_settings['production_cp_token'] : '';
+	        	$sticker_default_inter = isset($mrk_ua_ship_ukr_settings['international']['sticker']) ? $mrk_ua_ship_ukr_settings['international']['sticker'] : '';
+	        	?>
+	        		<form class="form-ukr-poshta-ttn" action="<?php echo MRKV_UA_SHIPPING_PLUGIN_DIR . 'templates/orders/mrkv-ua-ship-ukr-poshta-pdf.php'; ?>" method="post" target="_blank" style="display: none;">
+						<input type="hidden" name="invoice_number" value="<?php echo $mrkv_ua_ship_invoice; ?>">
+						<input type="hidden" name="type" value="<?php echo $sticker_default; ?>">
+						<input type="hidden" name="bearer" value="<?php echo $production_bearer_ecom; ?>">
+						<input type="hidden" name="cp_token" value="<?php echo $production_cp_token; ?>">
+						<input type="submit">
+					</form>
+					<form class="form-ukr-poshta-ttn-international" action="<?php echo MRKV_UA_SHIPPING_PLUGIN_DIR . 'templates/orders/mrkv-ua-ship-ukr-poshta-pdf.php'; ?>" method="post" target="_blank" style="display: none;">
+						<input type="hidden" name="invoice_number" value="<?php echo $mrkv_ua_ship_invoice; ?>">
+						<input type="hidden" name="fs1" value="<?php echo $sticker_default_inter; ?>">
+						<input type="hidden" name="bearer" value="<?php echo $production_bearer_ecom; ?>">
+						<input type="hidden" name="cp_token" value="<?php echo $production_cp_token; ?>">
+						<input type="hidden" name="type" value="<?php echo $sticker_default; ?>">
+						<input type="submit">
+					</form>
+	        	<?php
+	        }
         }
     }
 ?>

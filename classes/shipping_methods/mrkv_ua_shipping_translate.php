@@ -170,12 +170,12 @@ $translate_labels = array(
 						'replace' => '_state'
 					),
 					'_street' => array(
-						'type' => 'text',
+						'type' => 'select',
 						'autocomplete' => 'off',
+						'options' => array('' => __('Choose the street', 'mrkv-ua-shipping')),
 						'required' => true,
 						'label' => __('Street', 'mrkv-ua-shipping'),
-						'placeholder' => __('Enter the street...', 'mrkv-ua-shipping'),
-						'replace' => '_address_1'
+						'replace' => '_address_1',
 					),
 					'_street_ref' => array(
 						'type' => 'hidden',
