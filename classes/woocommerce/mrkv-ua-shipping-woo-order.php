@@ -88,6 +88,8 @@ if (!class_exists('MRKV_UA_SHIPPING_WOO_ORDER'))
 
 	            if($order)
 	            {
+	            	$order_already_created = ($post->post_status === 'auto-draft' || $post->post_status === 'draft') ? false : true;
+
 	            	$available_methods = WC()->shipping->load_shipping_methods();
 	            	?>
 	            		<h3><?php echo esc_html__('Change shipping method', 'mrkv-ua-shipping'); ?></h3>
@@ -106,37 +108,44 @@ if (!class_exists('MRKV_UA_SHIPPING_WOO_ORDER'))
 		            				}
 		            			?>
 		            		</select>
-		            		<div class="mrkv-ua-shupping-change-method button"><?php echo esc_html__('Change method', 'mrkv-ua-shipping'); ?></div>
+		            		<div class="mrkv-ua-shupping-change-method button <?php if(!$order_already_created){ echo 'disabled'; } ?>"><?php echo esc_html__('Change method', 'mrkv-ua-shipping'); ?></div>
 	            		</div>
-	            		<script>
-	            			jQuery(document).ready(function($) {
-	            				jQuery('.mrkv-ua-shupping-change-method').on('click', function() 
-	            				{
-	            					var shippingMethod = jQuery('#mrkv_ua_shipping_method').val();
-	            					var shippingMethodName = jQuery('#mrkv_ua_shipping_method option:selected').text();
-                					var orderId = '<?php echo esc_attr($order_id); ?>';
+	            		<?php
+	            			if($order_already_created)
+	            			{
+	            				?>
+	            					<script>
+			            			jQuery(document).ready(function($) {
+			            				jQuery('.mrkv-ua-shupping-change-method').on('click', function() 
+			            				{
+			            					var shippingMethod = jQuery('#mrkv_ua_shipping_method').val();
+			            					var shippingMethodName = jQuery('#mrkv_ua_shipping_method option:selected').text();
+		                					var orderId = '<?php echo esc_attr($order_id); ?>';
 
-                					if(shippingMethod)
-                					{
-                						jQuery.ajax({
-					                    url: '<?php echo esc_url(admin_url( "admin-ajax.php" )); ?>',
-					                    method: 'POST',
-					                    data: {
-					                        action: 'mrkv_update_shipping_method',
-					                        order_id: orderId,
-					                        shipping_method: shippingMethod,
-					                        shipping_method_name: shippingMethodName,
-					                        nonce: '<?php echo wp_create_nonce('mrkv_ua_ship_nonce'); ?>'
-					                    },
-					                    success: function(response) 
-					                    {
-					                        location.reload();
-					                    }
-					                });
-                					}
-            					});
-	            			});
-	            		</script>
+		                					if(shippingMethod)
+		                					{
+		                						jQuery.ajax({
+							                    url: '<?php echo esc_url(admin_url( "admin-ajax.php" )); ?>',
+							                    method: 'POST',
+							                    data: {
+							                        action: 'mrkv_update_shipping_method',
+							                        order_id: orderId,
+							                        shipping_method: shippingMethod,
+							                        shipping_method_name: shippingMethodName,
+							                        nonce: '<?php echo wp_create_nonce('mrkv_ua_ship_nonce'); ?>'
+							                    },
+							                    success: function(response) 
+							                    {
+							                        location.reload();
+							                    }
+							                });
+		                					}
+		            					});
+			            			});
+			            		</script>
+	            				<?php
+	            			}
+	            		?>
 	            	<?php
 	            }
 	        }

@@ -3,7 +3,7 @@ Contributors: bandido, dpmine
 Tags: Nova Poshta, Нова Пошта, Укрпошта
 Tested up to: 6.8
 Requires PHP: 7.4
-Stable tag: 1.7.2
+Stable tag: 1.7.3
 License: GPLv2
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -167,6 +167,12 @@ https://youtu.be/47-VrH_QJAE
 
 
 == Changelog ==
+
+= 1.7.3 =
+* [new] зробили недоступним віджет зміни методу доставки поки замовлення не буде створене
+* [fix] вулиці вантажаться раніше загального спінера вукомерс
+* [fix] додати оновлення по-батькові УП при існуючому клієнті у БД УП
+* [ui] Нова Пошта - зробити Select2 якщо обрано пошук лише за номером
 
 = 1.7.2 =
 * [new] змінили поля адресної доставки НП

@@ -325,6 +325,7 @@ if (!class_exists('MRKV_UA_SHIPPING_UKR_POSHTA_INVOICE'))
 				if(is_array($obj) && isset($obj[0]['uuid']))
 				{
 					$this->shipping_api->send_post_request_curl('ecom/0.0.1/clients/' . $obj[0]['uuid'], 'PUT', [
+						'middleName' => $recipient_middle_name,
 					    'addresses' => [
 					        [
 					            'addressId' => $address_id,

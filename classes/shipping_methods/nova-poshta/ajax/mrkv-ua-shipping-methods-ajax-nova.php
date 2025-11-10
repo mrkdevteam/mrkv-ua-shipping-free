@@ -234,6 +234,7 @@ if (!class_exists('MRKV_UA_SHIPPING_AJAX_NOVA'))
 			$warehouse_type = isset($_POST['warehouse_type']) ? sanitize_text_field($_POST['warehouse_type']) : '';
 			$search_by = isset($_POST['search_by']) ? sanitize_text_field($_POST['search_by']) : '';
 			$source_query = isset($_POST['source_query']) ? sanitize_text_field($_POST['source_query']) : '';
+			$default_type = isset($_POST['default_content']) ? sanitize_text_field($_POST['default_content']) : '';
 			$exclude_post = '';
 			
 			if($warehouse_type == 'none'){
@@ -268,6 +269,11 @@ if (!class_exists('MRKV_UA_SHIPPING_AJAX_NOVA'))
 	        if($warehouse_type)
 	        {
 	        	$args['methodProperties']['TypeOfWarehouseRef'] = $warehouse_type;
+	        }
+
+	        if($default_type && $default_type == 'part')
+	        {
+	        	$args['methodProperties']['Limit'] = '20';
 	        }
 
 	        # Send request

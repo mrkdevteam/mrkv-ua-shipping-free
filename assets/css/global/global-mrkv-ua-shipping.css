@@ -73,6 +73,11 @@
     margin-top: 15px !important;
     position: relative;
 }
+.mrkv-ua-shupping-change-method.button.disabled{
+    background-color: #0000004a !important;
+    cursor: not-allowed;
+    color: #000 !important;
+}
 .mrkv-ua-shipping-line-choose-method > .select2{
     width: 100% !important;
 }
