@@ -88,7 +88,8 @@ if (!class_exists('MRKV_UA_SHIPPING_WOO_ORDER'))
 
 	            if($order)
 	            {
-	            	$order_already_created = ($post->post_status === 'auto-draft' || $post->post_status === 'draft') ? false : true;
+	            	$order_status = $order->get_status();
+	            	$order_already_created = $order_status != 'auto-draft' ? true : false;
 
 	            	$available_methods = WC()->shipping->load_shipping_methods();
 	            	?>
