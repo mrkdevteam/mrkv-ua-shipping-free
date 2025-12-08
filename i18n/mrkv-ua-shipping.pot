@@ -3,7 +3,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Morkva UA Shipping\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-10-23 12:17+0000\n"
+"POT-Creation-Date: 2025-12-04 08:14+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: \n"
@@ -224,15 +224,15 @@ msgstr ""
 msgid "Category of shipment"
 msgstr ""
 
-#: classes/woocommerce/mrkv-ua-shipping-woo-order.php:270
+#: classes/woocommerce/mrkv-ua-shipping-woo-order.php:280
 msgid "Change address"
 msgstr ""
 
-#: classes/woocommerce/mrkv-ua-shipping-woo-order.php:109
+#: classes/woocommerce/mrkv-ua-shipping-woo-order.php:112
 msgid "Change method"
 msgstr ""
 
-#: classes/woocommerce/mrkv-ua-shipping-woo-order.php:93
+#: classes/woocommerce/mrkv-ua-shipping-woo-order.php:96
 msgid "Change shipping method"
 msgstr ""
 
@@ -333,7 +333,7 @@ msgstr ""
 msgid "Choose how much the shipping cost will be calculated"
 msgstr ""
 
-#: classes/woocommerce/mrkv-ua-shipping-woo-order.php:96
+#: classes/woocommerce/mrkv-ua-shipping-woo-order.php:99
 msgid "Choose method"
 msgstr ""
 
@@ -359,7 +359,7 @@ msgstr ""
 
 #: constants-mrkv-ua-shipping-methods.php:111
 #: classes/shipping_methods/mrkv_ua_shipping_translate.php:109
-#: classes/shipping_methods/nova-poshta/ajax/mrkv-ua-shipping-methods-ajax-nova.php:309
+#: classes/shipping_methods/nova-poshta/ajax/mrkv-ua-shipping-methods-ajax-nova.php:315
 msgid "Choose the poshtomat"
 msgstr ""
 
@@ -378,7 +378,7 @@ msgstr ""
 #: classes/shipping_methods/mrkv_ua_shipping_translate.php:519
 #: classes/shipping_methods/mrkv_ua_shipping_translate.php:554
 #: classes/shipping_methods/ukr-poshta/ajax/mrkv-ua-shipping-methods-ajax-ukr.php:99
-#: classes/shipping_methods/nova-poshta/ajax/mrkv-ua-shipping-methods-ajax-nova.php:317
+#: classes/shipping_methods/nova-poshta/ajax/mrkv-ua-shipping-methods-ajax-nova.php:323
 msgid "Choose the warehouse"
 msgstr ""
 
@@ -433,7 +433,7 @@ msgstr ""
 msgid "contains Latin characters"
 msgstr ""
 
-#: classes/woocommerce/mrkv-ua-shipping-woo-order.php:191
+#: classes/woocommerce/mrkv-ua-shipping-woo-order.php:201
 #: classes/shipping_methods/ukr-poshta/invoice/mrkv-ua-shipping-ukr-poshta-invoice.php:122
 #: classes/shipping_methods/ukr-poshta/invoice/mrkv-ua-shipping-ukr-poshta-invoice.php:122
 #: classes/shipping_methods/nova-poshta/invoice/mrkv-ua-shipping-nova-poshta-invoice.php:220
@@ -469,7 +469,7 @@ msgstr ""
 msgid "Create a custom message that will be sent after creating the shipment"
 msgstr ""
 
-#: classes/woocommerce/mrkv-ua-shipping-woo-order.php:247
+#: classes/woocommerce/mrkv-ua-shipping-woo-order.php:257
 msgid "Create Invoice"
 msgstr ""
 
@@ -489,7 +489,7 @@ msgstr ""
 msgid "Currently, only shipping from the branch is supported."
 msgstr ""
 
-#: classes/woocommerce/mrkv-ua-shipping-woo-order.php:259
+#: classes/woocommerce/mrkv-ua-shipping-woo-order.php:269
 msgid "Custom Invoice number"
 msgstr ""
 
@@ -1256,9 +1256,9 @@ msgstr ""
 #: classes/shipping_methods/nova-poshta/ajax/mrkv-ua-shipping-methods-ajax-nova.php:86
 #: classes/shipping_methods/nova-poshta/ajax/mrkv-ua-shipping-methods-ajax-nova.php:142
 #: classes/shipping_methods/nova-poshta/ajax/mrkv-ua-shipping-methods-ajax-nova.php:224
-#: classes/shipping_methods/nova-poshta/ajax/mrkv-ua-shipping-methods-ajax-nova.php:416
-#: classes/shipping_methods/nova-poshta/ajax/mrkv-ua-shipping-methods-ajax-nova.php:473
-#: classes/shipping_methods/nova-poshta/ajax/mrkv-ua-shipping-methods-ajax-nova.php:531
+#: classes/shipping_methods/nova-poshta/ajax/mrkv-ua-shipping-methods-ajax-nova.php:422
+#: classes/shipping_methods/nova-poshta/ajax/mrkv-ua-shipping-methods-ajax-nova.php:479
+#: classes/shipping_methods/nova-poshta/ajax/mrkv-ua-shipping-methods-ajax-nova.php:537
 msgid "Invalid nonce."
 msgstr ""
 
@@ -1267,7 +1267,7 @@ msgstr ""
 msgid "Invoice"
 msgstr ""
 
-#: classes/woocommerce/mrkv-ua-shipping-woo-order.php:193
+#: classes/woocommerce/mrkv-ua-shipping-woo-order.php:203
 msgid "Invoice action"
 msgstr ""
 
@@ -1276,7 +1276,7 @@ msgstr ""
 msgid "Invoice created"
 msgstr ""
 
-#: classes/woocommerce/mrkv-ua-shipping-woo-order.php:190
+#: classes/woocommerce/mrkv-ua-shipping-woo-order.php:200
 msgid "Invoice number"
 msgstr ""
 
@@ -1606,6 +1606,11 @@ msgstr ""
 msgid "Number of seats"
 msgstr ""
 
+#: templates/orders/mrkv-ua-ship-popup-nova-poshta.php:252
+#: templates/orders/mrkv-ua-ship-popup-ukr-poshta.php:275
+msgid "Number of symbols:"
+msgstr ""
+
 #: classes/shipping_methods/rozetka-delivery/checkout/mrkv-ua-shipping-checkout.php:12
 #: classes/shipping_methods/nova-poshta/checkout/mrkv-ua-shipping-checkout.php:61
 #: classes/shipping_methods/nova-poshta/checkout/mrkv-ua-shipping-checkout.php:61
@@ -1670,7 +1675,7 @@ msgstr ""
 msgid "Order number"
 msgstr ""
 
-#: classes/shipping_methods/nova-poshta/ajax/mrkv-ua-shipping-methods-ajax-nova.php:393
+#: classes/shipping_methods/nova-poshta/ajax/mrkv-ua-shipping-methods-ajax-nova.php:399
 #: classes/shipping_methods/nova-poshta/checkout/mrkv-ua-shipping-checkout.php:48
 msgid ""
 "Order products don't match weight and dimensions criteria, try another method"
@@ -1764,9 +1769,9 @@ msgstr ""
 #: classes/shipping_methods/mrkv-ua-shipping-methods-ajax.php:464
 #: classes/shipping_methods/mrkv-ua-shipping-methods-ajax.php:479
 #: classes/shipping_methods/mrkv-ua-shipping-methods-ajax.php:494
-#: classes/shipping_methods/ukr-poshta/invoice/mrkv-ua-shipping-ukr-poshta-invoice.php:641
-#: classes/shipping_methods/ukr-poshta/invoice/mrkv-ua-shipping-ukr-poshta-invoice.php:656
-#: classes/shipping_methods/ukr-poshta/invoice/mrkv-ua-shipping-ukr-poshta-invoice.php:671
+#: classes/shipping_methods/ukr-poshta/invoice/mrkv-ua-shipping-ukr-poshta-invoice.php:642
+#: classes/shipping_methods/ukr-poshta/invoice/mrkv-ua-shipping-ukr-poshta-invoice.php:657
+#: classes/shipping_methods/ukr-poshta/invoice/mrkv-ua-shipping-ukr-poshta-invoice.php:672
 #: classes/shipping_methods/nova-poshta/invoice/mrkv-ua-shipping-nova-poshta-invoice.php:630
 #: classes/shipping_methods/nova-poshta/invoice/mrkv-ua-shipping-nova-poshta-invoice.php:645
 #: classes/shipping_methods/nova-poshta/invoice/mrkv-ua-shipping-nova-poshta-invoice.php:660
@@ -1842,14 +1847,14 @@ msgstr ""
 msgid "Print"
 msgstr ""
 
-#: classes/woocommerce/mrkv-ua-shipping-woo-order.php:202
-#: classes/woocommerce/mrkv-ua-shipping-woo-order.php:203
-#: classes/woocommerce/mrkv-ua-shipping-woo-order.php:216
-#: classes/woocommerce/mrkv-ua-shipping-woo-order.php:216
-#: classes/woocommerce/mrkv-ua-shipping-woo-order.php:217
-#: classes/woocommerce/mrkv-ua-shipping-woo-order.php:225
-#: classes/woocommerce/mrkv-ua-shipping-woo-order.php:225
+#: classes/woocommerce/mrkv-ua-shipping-woo-order.php:212
+#: classes/woocommerce/mrkv-ua-shipping-woo-order.php:213
 #: classes/woocommerce/mrkv-ua-shipping-woo-order.php:226
+#: classes/woocommerce/mrkv-ua-shipping-woo-order.php:226
+#: classes/woocommerce/mrkv-ua-shipping-woo-order.php:227
+#: classes/woocommerce/mrkv-ua-shipping-woo-order.php:235
+#: classes/woocommerce/mrkv-ua-shipping-woo-order.php:235
+#: classes/woocommerce/mrkv-ua-shipping-woo-order.php:236
 #: templates/orders/mrkv-ua-ship-popup.php:91
 #: templates/settings/methods/invoices/mrkv-ua-shipping-ukr-poshta.php:24
 #: templates/settings/methods/invoices/mrkv-ua-shipping-ukr-poshta.php:24
@@ -1858,8 +1863,8 @@ msgstr ""
 msgid "Print invoice"
 msgstr ""
 
-#: classes/woocommerce/mrkv-ua-shipping-woo-order.php:206
-#: classes/woocommerce/mrkv-ua-shipping-woo-order.php:207
+#: classes/woocommerce/mrkv-ua-shipping-woo-order.php:216
+#: classes/woocommerce/mrkv-ua-shipping-woo-order.php:217
 #: templates/orders/mrkv-ua-ship-popup.php:92
 #: templates/settings/methods/invoices/mrkv-ua-shipping-nova-poshta.php:27
 #: templates/settings/methods/invoices/mrkv-ua-shipping-nova-poshta.php:27
@@ -1913,6 +1918,11 @@ msgstr ""
 msgid "Recipient's data"
 msgstr ""
 
+#: templates/orders/mrkv-ua-ship-popup-nova-poshta.php:252
+#: templates/orders/mrkv-ua-ship-popup-ukr-poshta.php:275
+msgid "Reduce the number of characters."
+msgstr ""
+
 #: constants-mrkv-ua-shipping-methods.php:570
 #: classes/shipping_methods/mrkv_ua_shipping_translate.php:256
 #: classes/shipping_methods/mrkv_ua_shipping_translate.php:605
@@ -1933,8 +1943,8 @@ msgstr ""
 msgid "Remove the patronymic field from the checkout page"
 msgstr ""
 
-#: classes/woocommerce/mrkv-ua-shipping-woo-order.php:234
-#: classes/woocommerce/mrkv-ua-shipping-woo-order.php:235
+#: classes/woocommerce/mrkv-ua-shipping-woo-order.php:244
+#: classes/woocommerce/mrkv-ua-shipping-woo-order.php:245
 #: templates/settings/methods/invoices/mrkv-ua-shipping-ukr-poshta.php:28
 #: templates/settings/methods/invoices/mrkv-ua-shipping-ukr-poshta.php:28
 #: templates/settings/methods/invoices/mrkv-ua-shipping-nova-poshta.php:37
@@ -1991,11 +2001,11 @@ msgstr ""
 msgid "Save customer selected fields"
 msgstr ""
 
-#: classes/woocommerce/mrkv-ua-shipping-woo-order.php:328
+#: classes/woocommerce/mrkv-ua-shipping-woo-order.php:338
 msgid "Save Field"
 msgstr ""
 
-#: classes/woocommerce/mrkv-ua-shipping-woo-order.php:262
+#: classes/woocommerce/mrkv-ua-shipping-woo-order.php:272
 msgid "Save Invoice"
 msgstr ""
 
@@ -2479,6 +2489,11 @@ msgstr ""
 #: templates/settings/methods/shipping_fields/mrkv-ua-shipping-nova-poshta.php:422
 #: templates/settings/methods/shipping_fields/mrkv-ua-shipping-nova-global.php:86
 msgid "Width"
+msgstr ""
+
+#: templates/orders/mrkv-ua-ship-popup-nova-poshta.php:252
+#: templates/orders/mrkv-ua-ship-popup-ukr-poshta.php:275
+msgid "Within acceptable limits."
 msgstr ""
 
 #: constants-mrkv-ua-shipping-methods.php:302

@@ -89,6 +89,21 @@ jQuery(window).on('load', function()
 				});
 				jQuery('input[name="mrkv_ua_ship_invoice_shipment_volume"]').val(mrkvnpCalcVolumeWeightSettings());
 				jQuery('.mrkv_ua_ship_create_invoice__changed form input[name="order_id"]').val(current_order_id);
+				let desc_symb_amount = jQuery('[data-ship="' + data.mrkv_ua_ship_key + '"] form textarea[name="mrkv_ua_ship_invoice_shipment_description"]').val();
+				let desc_length = desc_symb_amount.length;
+				jQuery('[data-ship="' + data.mrkv_ua_ship_key + '"] form .mrkv-ua-ship-cout-symb').text(desc_length);
+
+				if (length > 100) {
+					jQuery('[data-ship="' + data.mrkv_ua_ship_key + '"] form .mrkv-ua-shipping-desc-validation').addClass('red');
+					let desc_text = jQuery('[data-ship="' + data.mrkv_ua_ship_key + '"] form .mrkv-ua-shipping-desc-validation').attr('data-error');
+				    jQuery('[data-ship="' + data.mrkv_ua_ship_key + '"] form .mrkv-ua-ship-message-symb').text(desc_text);
+				}
+				else
+				{
+					jQuery('[data-ship="' + data.mrkv_ua_ship_key + '"] form .mrkv-ua-shipping-desc-validation').removeClass('red');
+					let desc_text = jQuery('[data-ship="' + data.mrkv_ua_ship_key + '"] form .mrkv-ua-shipping-desc-validation').attr('data-success');
+					jQuery('[data-ship="' + data.mrkv_ua_ship_key + '"] form .mrkv-ua-ship-message-symb').text(desc_text);
+				}
 
                 jQuery('#mrkv_ua_ship_create_invoice').fadeIn(300);
                 jQuery(loader_btn).hide();
@@ -123,6 +138,25 @@ let latinRegex = /[A-Za-z]/;
             );
         }
     });
+
+    jQuery(document).on('keyup', 'textarea[name="mrkv_ua_ship_invoice_shipment_description"]', function () {
+	    let text = jQuery(this).val();
+	    let length = text.length;
+
+	    let validation_desc = jQuery(this).closest('.admin_ua_ship_morkva_settings_line').find('.mrkv-ua-shipping-desc-validation');
+	    jQuery(validation_desc).find('.mrkv-ua-ship-cout-symb').text(length);
+
+	    if (length > 100) {
+	        jQuery(validation_desc).addClass('red');
+	        let desc_text = jQuery(validation_desc).attr('data-error');
+		    jQuery(validation_desc).find('.mrkv-ua-ship-message-symb').text(desc_text);
+
+	    } else {
+	        jQuery(validation_desc).removeClass('red');
+	        let desc_text = jQuery(validation_desc).attr('data-success');
+		    jQuery(validation_desc).find('.mrkv-ua-ship-message-symb').text(desc_text);
+	    }
+	});
 
 	jQuery('.mrkv_ua_ship_create_invoice__action').click(function()
 	{

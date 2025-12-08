@@ -1,9 +1,9 @@
 === Morkva UA Shipping ===
 Contributors: bandido, dpmine
 Tags: Nova Poshta, Нова Пошта, Укрпошта
-Tested up to: 6.8
+Tested up to: 6.9
 Requires PHP: 7.4
-Stable tag: 1.7.4
+Stable tag: 1.7.5
 License: GPLv2
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -167,6 +167,10 @@ https://youtu.be/47-VrH_QJAE
 
 
 == Changelog ==
+
+= 1.7.5 =
+* [new] додали валідацію опису при створенні ТТН
+* WP 6.9 - сумісний
 
 = 1.7.4 =
 * [fix] виправили призначення методу на замовлення

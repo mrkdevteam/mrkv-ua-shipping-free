@@ -272,7 +272,7 @@
 	<div class="admin_ua_ship_morkva_settings_line">
 		<?php
 			$data = isset($mrk_ua_ship_ukr_settings['shipment']['description']) ? $mrk_ua_ship_ukr_settings['shipment']['description'] : '';
-			$description = __('Maximum number of characters:', 'mrkv-ua-shipping') . ' 100';
+			$description = __('Maximum number of characters:', 'mrkv-ua-shipping') . ' 100' . '<div class="mrkv-ua-shipping-desc-validation" data-success="' . __('Within acceptable limits.', 'mrkv-ua-shipping') . '" data-error="' . __('Reduce the number of characters.', 'mrkv-ua-shipping') . '">' . __('Number of symbols:', 'mrkv-ua-shipping') . ' <span class="mrkv-ua-ship-cout-symb"></span>. <span class="mrkv-ua-ship-message-symb"></span>' . '</div>';
 
 			echo $mrkv_global_option_generator->get_textarea(__('Description of the shipment', 'mrkv-ua-shipping'), 'mrkv_ua_ship_invoice_shipment_description', $data, $shipping_slug_option . 'mrkv_ua_ship_invoice_shipment_description' , '', __('For example, products for children...', 'mrkv-ua-shipping'), $description);
 		?>
