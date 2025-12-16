@@ -3,7 +3,7 @@ Contributors: bandido, dpmine
 Tags: Nova Poshta, Нова Пошта, Укрпошта
 Tested up to: 6.9
 Requires PHP: 7.4
-Stable tag: 1.7.5
+Stable tag: 1.7.6
 License: GPLv2
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -128,6 +128,8 @@ License URI: http://www.gnu.org/licenses/gpl-2.0.html
 4. В налаштуваннях WooCommerce - Доставка додайте способи доставки в зону доставки Україна
 5. Перевірте чи відображається спосіб доставки і поля НП в чекауті. При виникненні запитань - пишіть в підтримку support@morkva.co.ua
 
+https://youtu.be/GNPhDFcuM-Q
+
 == Відеоогляд Pro-версії ==
 https://youtu.be/47-VrH_QJAE
 
@@ -167,6 +169,9 @@ https://youtu.be/47-VrH_QJAE
 
 
 == Changelog ==
+
+= 1.7.6 =
+* [fix] виправили поля доставки при створені замовлення в адмінці
 
 = 1.7.5 =
 * [new] додали валідацію опису при створенні ТТН
