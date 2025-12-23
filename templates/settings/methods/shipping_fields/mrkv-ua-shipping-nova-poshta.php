@@ -84,7 +84,7 @@
 			?>
 			<div class="admin_ua_ship_morkva_settings_line__inner">
 				<?php 
-				$data = isset(MRKV_SHIPPING_SETTINGS['sender']['warehouse']['name']) ? MRKV_SHIPPING_SETTINGS['sender']['warehouse']['name'] : '';
+				$data = isset(MRKV_SHIPPING_SETTINGS['sender']['warehouse']['name']) ? esc_attr(MRKV_SHIPPING_SETTINGS['sender']['warehouse']['name']) : '';
 				$description = __('Enter the first 2-3 letters and wait for the data to load', 'mrkv-ua-shipping');
 
 				echo $mrkv_global_option_generator->get_input_text(__('Warehouse', 'mrkv-ua-shipping'), MRKV_OPTION_OBJECT_NAME . '[sender][warehouse][name]', $data, MRKV_OPTION_OBJECT_NAME. '_sender_warehouse_name' , '', __('Enter the warehouse...', 'mrkv-ua-shipping'), $description);
