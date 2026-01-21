@@ -235,6 +235,7 @@ if (!class_exists('MRKV_UA_SHIPPING_AJAX_NOVA'))
 			$search_by = isset($_POST['search_by']) ? sanitize_text_field($_POST['search_by']) : '';
 			$source_query = isset($_POST['source_query']) ? sanitize_text_field($_POST['source_query']) : '';
 			$default_type = isset($_POST['default_content']) ? sanitize_text_field($_POST['default_content']) : '';
+			$search_by_number = isset($_POST['search_by_number']) ? sanitize_text_field($_POST['search_by_number']) : '';
 			$exclude_post = '';
 			
 			if($warehouse_type == 'none'){
@@ -318,11 +319,24 @@ if (!class_exists('MRKV_UA_SHIPPING_AJAX_NOVA'))
 	        	}
 	        	else
 	        	{
-	        		$areas[] = array(
-	        			'value' => '',
-	        			'label' => __('Choose the warehouse', 'mrkv-ua-shipping'),
-	        			'number' => ''
-	        		);
+	        		if($search_by_number && $search_by_number == 'yes')
+	        		{
+	        			$areas[] = array(
+		        			'value' => '',
+		        			'label' => __('Please enter warehouse number', 'mrkv-ua-shipping'),
+		        			'number' => '',
+		        			'zipcode' => ''
+		        		);
+	        		}
+	        		else
+	        		{
+	        			$areas[] = array(
+		        			'value' => '',
+		        			'label' => __('Choose the warehouse', 'mrkv-ua-shipping'),
+		        			'number' => '',
+		        			'zipcode' => ''
+		        		);
+	        		}
 	        	}
 
 	        	if($skip_weight  && $source_query == 'front')

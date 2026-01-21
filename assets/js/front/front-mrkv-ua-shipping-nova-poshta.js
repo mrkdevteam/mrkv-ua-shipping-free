@@ -184,6 +184,7 @@ jQuery(window).on('load', function()
 		                warehouse_type: mrkv_ua_ship_helper.nova_warehouse_type,
 		                source_query: 'front',
 		                default_content: 'part',
+		                search_by_number: 'yes',
 		                nonce: mrkv_ua_ship_helper.nonce,
 		            },
 		            beforeSend: function() {
@@ -356,6 +357,7 @@ jQuery(window).on('load', function()
 		                	search_by: 'yes',
 		                	name: params.term,
 		                	source_query: 'front',
+		                	search_by_number: 'yes',
 		                	nonce: mrkv_ua_ship_helper.nonce,
 					    }
 

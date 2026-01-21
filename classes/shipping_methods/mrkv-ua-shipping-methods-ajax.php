@@ -650,6 +650,7 @@ if (!class_exists('MRKV_UA_SHIPPING_METHODS_AJAX'))
 				$order = wc_get_order($order_id);
 				$order->update_meta_data('mrkv_ua_ship_invoice_number', $invoice_data);
 				$order->add_order_note(__('Added invoice number','mrkv-ua-shipping') . ': ' . $invoice_data, $is_customer_note = 0, $added_by_user = false);
+				do_action('mrkv_keycrm_update_invoice_number', $order_id);
 	        	$order->save();
 			}
 
@@ -707,6 +708,7 @@ if (!class_exists('MRKV_UA_SHIPPING_METHODS_AJAX'))
 				$order->delete_meta_data('mrkv_ua_ship_invoice_number');
 				$order->delete_meta_data('novaposhta_ttn');
 				$order->delete_meta_data('ukrposhta_ttn');
+				do_action('mrkv_keycrm_remove_invoice_number', $order_id);
 				$order->add_order_note(__('Invoice removed','mrkv-ua-shipping'), $is_customer_note = 0, $added_by_user = false);
 	        	$order->save();
 			}
