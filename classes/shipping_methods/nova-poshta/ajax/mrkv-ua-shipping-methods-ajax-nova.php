@@ -339,6 +339,8 @@ if (!class_exists('MRKV_UA_SHIPPING_AJAX_NOVA'))
 	        		}
 	        	}
 
+	        	$weight = 0;
+
 	        	if($skip_weight  && $source_query == 'front')
 	        	{
 	        		$weight = 0;
