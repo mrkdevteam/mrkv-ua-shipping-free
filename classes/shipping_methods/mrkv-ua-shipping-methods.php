@@ -66,7 +66,7 @@ if (!class_exists('MRKV_UA_SHIPPING_METHODS'))
 							. '/api/mrkv-ua-shipping-api-' . SETTINGS_MRKV_UA_SHIPPING_SLUG . '.php';
 
 						global $mrkv_global_option_generator;
-						$mrkv_global_option_generator = new MRKV_UA_SHIPPING_OPTION_FILEDS();
+						$mrkv_global_option_generator = new MRKV_UA_SHIPPING_OPTION_FIELDS();
 						define('MRKV_OPTION_OBJECT_NAME', SETTINGS_MRKV_UA_SHIPPING_SLUG . '_m_ua_settings');
 						define('MRKV_SHIPPING_SETTINGS', get_option(MRKV_OPTION_OBJECT_NAME));
 						

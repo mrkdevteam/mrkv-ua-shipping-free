@@ -72,7 +72,7 @@ if (!class_exists('MRKV_UA_SHIPPING_NOVA_POSHTA_INVOICE'))
 			
 			# Cargo data
 			$cargo_type = $this->get_cargo_type();
-			$cargo_weight = $this->get_cargo_weight();
+			$cargo_weight = $this->check_cargo_weight($cargo_type, $this->get_cargo_weight());
 			$cargo_length = $this->get_cargo_length($dimension_unit);
 			$cargo_width = $this->get_cargo_width($dimension_unit);
 			$cargo_height = $this->get_cargo_height($dimension_unit);
@@ -467,6 +467,16 @@ if (!class_exists('MRKV_UA_SHIPPING_NOVA_POSHTA_INVOICE'))
 
 				return max($default_weight, $weight);
 			}
+		}
+
+		private function check_cargo_weight($cargo_type, $cargo_weight)
+		{
+			if($cargo_type == 'Documents')
+			{
+				$cargo_weight = 1;
+			}
+
+			return $cargo_weight;
 		}
 
 		private function get_cargo_length($dimension_unit)

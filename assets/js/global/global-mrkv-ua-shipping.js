@@ -217,6 +217,15 @@ let latinRegex = /[A-Za-z]/;
 	              			jQuery('.print-sticker-mrkv-ua-ship').show();
 	              		}
 
+	              		if(current_ship_key == 'ukr-poshta')
+	              		{
+	              			jQuery('.mrkv_orders_list .print-sticker-mrkv-ua-ship').hide();
+	              			jQuery('.mrkv_orders_list .print-ttn-mrkv-ua-ship').hide();
+	              		}
+	              		else{
+	              			jQuery('.mrkv_orders_list .print-ttn-mrkv-ua-ship').show();
+	              		}
+
 	              		jQuery('#mrkv_ua_ship_create_invoice_completed').fadeIn(300);
 	              		var order_id = jQuery('.mrkv_ua_ship_create_invoice__changed.active input[name="order_id"]').val();
 	              		jQuery('#the-list #order-' + order_id + ' .column-mrkv_ua_invoice a').empty();
