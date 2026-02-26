@@ -500,7 +500,7 @@
 	transition: all .7s;
 }
 .admin_ua_ship_morkva_settings_line input[type="radio"]:checked + label:before{
-	background-color: #fff;
+	background-color: #ed6230;
 	border-color: #ed6230;
 }
 .mrkv-ua-ship-description{

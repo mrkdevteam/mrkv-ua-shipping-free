@@ -152,7 +152,9 @@
 					<?php
 						$data = isset($mrk_ua_ship_nova_settings['shipment']['type']) ? $mrk_ua_ship_nova_settings['shipment']['type'] : '';
 						echo $mrkv_global_option_generator->get_input_radio(__('Parcel', 'mrkv-ua-shipping'), 'mrkv_ua_ship_invoice_shipment_type', 'Parcel', $data, $shipping_slug_option . '_mrkv_ua_ship_invoice_shipment_type_parcel', 'Parcel');
-						echo $mrkv_global_option_generator->get_input_radio(__('Pallet', 'mrkv-ua-shipping'), 'mrkv_ua_ship_invoice_shipment_type', 'Pallet', $data, $shipping_slug_option . '_mrkv_ua_ship_invoice_shipment_type_pallet', 'Parcel');
+						/*echo $mrkv_global_option_generator->get_input_radio(__('Pallet', 'mrkv-ua-shipping'), 'mrkv_ua_ship_invoice_shipment_type', 'Pallet', $data, $shipping_slug_option . '_mrkv_ua_ship_invoice_shipment_type_pallet', 'Parcel');*/
+						echo $mrkv_global_option_generator->get_input_radio(__('Documents', 'mrkv-ua-shipping'), 'mrkv_ua_ship_invoice_shipment_type', 'Documents', $data, $shipping_slug_option . '_mrkv_ua_ship_invoice_shipment_type_documents', 'Parcel');
+						echo $mrkv_global_option_generator->get_input_radio(__('Tires', 'mrkv-ua-shipping'), 'mrkv_ua_ship_invoice_shipment_type', 'TiresWheels', $data, $shipping_slug_option . '_mrkv_ua_ship_invoice_shipment_type_tires', 'Parcel');
 					?>
 				</div>
 			</div>

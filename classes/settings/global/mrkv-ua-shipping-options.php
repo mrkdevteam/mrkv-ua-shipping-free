@@ -124,8 +124,29 @@ if (!class_exists('MRKV_UA_SHIPPING_OPTIONS'))
 		    $output['default_addresses'] = isset( $input['default_addresses'] ) ? sanitize_text_field( $input['default_addresses'] ) : '0';
 
 		    # --- Shipment ---
-		    if ( isset( $input['shipment'] ) && is_array( $input['shipment'] ) ) {
+		    if ( isset( $input['shipment'] ) && is_array( $input['shipment'] ) ) { 
 		        $shipment = $input['shipment'];
+
+		        $shipment_class = [
+			        'enabled' => isset( $shipment['class']['enabled'] )
+			            ? sanitize_text_field( $shipment['class']['enabled'] )
+			            : 'off',
+			        'list' => [],
+			    ];
+
+			    if ( isset( $shipment['class']['list'] ) && is_array( $shipment['class']['list'] ) ) {
+
+			        foreach ( $shipment['class']['list'] as $cargo_type => $class_ids ) {
+
+			            if ( ! is_array( $class_ids ) ) {
+			                continue;
+			            }
+
+			            $shipment_class['list'][ sanitize_text_field( $cargo_type ) ] =
+			                array_map( 'intval', $class_ids );
+			        }
+			    }
+
 		        $output['shipment'] = [
 		            'type'            => isset( $shipment['type'] ) ? sanitize_text_field( $shipment['type'] ) : 'Parcel',
 		            'payment'         => isset( $shipment['payment'] ) ? sanitize_text_field( $shipment['payment'] ) : 'Cash',
@@ -138,6 +159,7 @@ if (!class_exists('MRKV_UA_SHIPPING_OPTIONS'))
 		            'cart_total'      => isset( $shipment['cart_total'] ) ? sanitize_text_field( $shipment['cart_total'] ) : '',
 		            'prepayment_type' => isset( $shipment['prepayment_type'] ) ? sanitize_text_field( $shipment['prepayment_type'] ) : 'value_total',
 		            'prepayment'      => isset( $shipment['prepayment'] ) ? sanitize_text_field( $shipment['prepayment'] ) : '',
+		            'class'           => $shipment_class,
 		        ];
 		    }
 

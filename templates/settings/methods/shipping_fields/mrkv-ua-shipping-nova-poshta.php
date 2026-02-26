@@ -171,29 +171,96 @@
 	<h3><img src="<?php echo MRKV_UA_SHIPPING_ASSETS_URL . '/images/global/tuning-icon.svg'; ?>" alt="Shipment" title="Shipment"><?php echo __('Shipment', 'mrkv-ua-shipping'); ?></h3>
 	<p><?php echo __('Fill in the default shipping data for the shipment', 'mrkv-ua-shipping'); ?></p>
 	<hr class="mrkv-ua-ship__hr">
-	<div class="admin_ua_ship_morkva_settings_row">
-		<div class="col-mrkv-5">
-			<div class="admin_ua_ship_morkva_settings_line">
-				<h4><?php echo __('Type', 'mrkv-ua-shipping'); ?></h4>
-				<div class="admin_ua_ship_morkva_settings_row">
-					<?php
-						$data = isset(MRKV_SHIPPING_SETTINGS['shipment']['type']) ? MRKV_SHIPPING_SETTINGS['shipment']['type'] : '';
-						echo wp_kses( $mrkv_global_option_generator->get_input_radio(__('Parcel', 'mrkv-ua-shipping'), MRKV_OPTION_OBJECT_NAME . '[shipment][type]', 'Parcel', $data, MRKV_OPTION_OBJECT_NAME . '_shipment_type_parcel', 'Parcel'), MRKV_UA_SHIPPING_ALLOW_TAGS);
-						echo wp_kses( $mrkv_global_option_generator->get_input_radio(__('Pallet', 'mrkv-ua-shipping'), MRKV_OPTION_OBJECT_NAME . '[shipment][type]', 'Pallet', $data, MRKV_OPTION_OBJECT_NAME . '_shipment_type_pallet', 'Parcel'), MRKV_UA_SHIPPING_ALLOW_TAGS);
+	<div class="admin_ua_ship_morkva_settings_line">
+		<h4><?php echo __('Global Cargo Type', 'mrkv-ua-shipping'); ?></h4>
+		<div class="admin_ua_ship_morkva_settings_row">
+			<?php
+				$data = isset(MRKV_SHIPPING_SETTINGS['shipment']['type']) ? MRKV_SHIPPING_SETTINGS['shipment']['type'] : '';
+				echo wp_kses($mrkv_global_option_generator->get_input_radio(__('Parcel', 'mrkv-ua-shipping'), MRKV_OPTION_OBJECT_NAME . '[shipment][type]', 'Parcel', $data, MRKV_OPTION_OBJECT_NAME . '_shipment_type_parcel', 'Parcel'), MRKV_UA_SHIPPING_ALLOW_TAGS);
+				/*echo wp_kses($mrkv_global_option_generator->get_input_radio(__('Pallet', 'mrkv-ua-shipping'), MRKV_OPTION_OBJECT_NAME . '[shipment][type]', 'Pallet', $data, MRKV_OPTION_OBJECT_NAME . '_shipment_type_pallet', 'Parcel'), MRKV_UA_SHIPPING_ALLOW_TAGS);*/
+				echo wp_kses($mrkv_global_option_generator->get_input_radio(__('Documents', 'mrkv-ua-shipping'), MRKV_OPTION_OBJECT_NAME . '[shipment][type]', 'Documents', $data, MRKV_OPTION_OBJECT_NAME . '_shipment_type_documents', 'Parcel'), MRKV_UA_SHIPPING_ALLOW_TAGS);
+				echo wp_kses($mrkv_global_option_generator->get_input_radio(__('Tires', 'mrkv-ua-shipping'), MRKV_OPTION_OBJECT_NAME . '[shipment][type]', 'TiresWheels', $data, MRKV_OPTION_OBJECT_NAME . '_shipment_type_tires', 'Parcel'), MRKV_UA_SHIPPING_ALLOW_TAGS);
+			?>
+		</div>
+	</div>
+	<div class="admin_ua_ship_morkva_settings_line admin_ua_shipping_classes">
+		<?php
+			$classes_enabled = isset(MRKV_SHIPPING_SETTINGS['shipment']['class']['enabled']) ? MRKV_SHIPPING_SETTINGS['shipment']['class']['enabled'] : '';
+			echo wp_kses($mrkv_global_option_generator->get_input_checkbox(__('Enabled classes support', 'mrkv-ua-shipping'), MRKV_OPTION_OBJECT_NAME . '[shipment][class][enabled]', $classes_enabled, MRKV_OPTION_OBJECT_NAME . '_shipment_class_enabled', ), MRKV_UA_SHIPPING_ALLOW_TAGS);
+
+			$shipping_classes = [];
+
+			foreach ( WC()->shipping()->get_shipping_classes() as $class ) {
+			    $shipping_classes[ (int) $class->term_id ] = $class->name;
+			}
+		?>
+		<?php echo '<p class="mrkv-ua-ship-description">' . __('Enable if you need to use cargo types for product classes', 'mrkv-ua-shipping') . '</p>'; ?>
+		<div class="admin_ua_ship_morkva_settings_line__inner inner-align">
+			<div class="admin_ua_ship_morkva_settings_row">
+				<div class="col-mrkv-5">
+					<h4><?php echo __('Cargo Type', 'mrkv-ua-shipping'); ?></h4>
+				</div>
+				<div class="col-mrkv-5">
+					<h4><?php echo __('Product classes', 'mrkv-ua-shipping'); ?></h4>
+				</div>
+			</div>
+			<div class="admin_ua_ship_morkva_settings_row">
+				<div class="col-mrkv-5">
+					<p><?php echo __('Parcel', 'mrkv-ua-shipping'); ?></p>
+				</div>
+				<div class="col-mrkv-5">
+					<?php 
+						$data = isset(MRKV_SHIPPING_SETTINGS['shipment']['class']['list']['Parcel']) ? MRKV_SHIPPING_SETTINGS['shipment']['class']['list']['Parcel'] : '';
+						echo wp_kses($mrkv_global_option_generator->get_select_multiple('', MRKV_OPTION_OBJECT_NAME . '[shipment][class][list][Parcel][]', $shipping_classes, $data, MRKV_OPTION_OBJECT_NAME . '_shipment_class_list_parcel', '' , __('Choose classes', 'mrkv-ua-shipping'),  'multiple'), MRKV_UA_SHIPPING_ALLOW_TAGS);
+					?>
+				</div>
+			</div>
+			<div class="admin_ua_ship_morkva_settings_row">
+				<div class="col-mrkv-5">
+					<p><?php echo __('Pallet', 'mrkv-ua-shipping'); ?></p>
+				</div>
+				<div class="col-mrkv-5">
+					<?php 
+						$data = isset(MRKV_SHIPPING_SETTINGS['shipment']['class']['list']['Pallet']) ? MRKV_SHIPPING_SETTINGS['shipment']['class']['list']['Pallet'] : '';
+						echo wp_kses($mrkv_global_option_generator->get_select_multiple('', MRKV_OPTION_OBJECT_NAME . '[shipment][class][list][Pallet][]', $shipping_classes, $data, MRKV_OPTION_OBJECT_NAME . '_shipment_class_list_pallet', '' , __('Choose classes', 'mrkv-ua-shipping'),  'multiple'), MRKV_UA_SHIPPING_ALLOW_TAGS);
+					?>
+				</div>
+			</div>
+			<div class="admin_ua_ship_morkva_settings_row">
+				<div class="col-mrkv-5">
+					<p><?php echo __('Documents', 'mrkv-ua-shipping'); ?></p>
+				</div>
+				<div class="col-mrkv-5">
+					<?php 
+						$data = isset(MRKV_SHIPPING_SETTINGS['shipment']['class']['list']['Documents']) ? MRKV_SHIPPING_SETTINGS['shipment']['class']['list']['Documents'] : '';
+						echo wp_kses($mrkv_global_option_generator->get_select_multiple('', MRKV_OPTION_OBJECT_NAME . '[shipment][class][list][Documents][]', $shipping_classes, $data, MRKV_OPTION_OBJECT_NAME . '_shipment_class_list_documents', '' , __('Choose classes', 'mrkv-ua-shipping'),  'multiple'), MRKV_UA_SHIPPING_ALLOW_TAGS);
+					?>
+				</div>
+			</div>
+			<div class="admin_ua_ship_morkva_settings_row">
+				<div class="col-mrkv-5">
+					<p><?php echo __('TiresWheels', 'mrkv-ua-shipping'); ?></p>
+				</div>
+				<div class="col-mrkv-5">
+					<?php 
+						$data = isset(MRKV_SHIPPING_SETTINGS['shipment']['class']['list']['TiresWheels']) ? MRKV_SHIPPING_SETTINGS['shipment']['class']['list']['TiresWheels'] : '';
+						echo wp_kses($mrkv_global_option_generator->get_select_multiple('', MRKV_OPTION_OBJECT_NAME . '[shipment][class][list][TiresWheels][]', $shipping_classes, $data, MRKV_OPTION_OBJECT_NAME . '_shipment_class_list_tire', '' , __('Choose classes', 'mrkv-ua-shipping'),  'multiple'), MRKV_UA_SHIPPING_ALLOW_TAGS);
 					?>
 				</div>
 			</div>
 		</div>
+	</div>
+	<div class="admin_ua_ship_morkva_settings_row">
 		<div class="col-mrkv-5">
 			<div class="admin_ua_ship_morkva_settings_line">
 				<h4><?php echo __('Payment type (Sender-related)', 'mrkv-ua-shipping'); ?></h4>
 				<div class="admin_ua_ship_morkva_settings_row">
 					<?php
 						$data = isset(MRKV_SHIPPING_SETTINGS['shipment']['payment']) ? MRKV_SHIPPING_SETTINGS['shipment']['payment'] : '';
-						echo wp_kses( $mrkv_global_option_generator->get_input_radio(__('Cash', 'mrkv-ua-shipping'), MRKV_OPTION_OBJECT_NAME . '[shipment][payment]', 'Cash', $data, MRKV_OPTION_OBJECT_NAME . '_shipment_payment_cash', 'Cash'), MRKV_UA_SHIPPING_ALLOW_TAGS);
+						echo wp_kses($mrkv_global_option_generator->get_input_radio(__('Cash', 'mrkv-ua-shipping'), MRKV_OPTION_OBJECT_NAME . '[shipment][payment]', 'Cash', $data, MRKV_OPTION_OBJECT_NAME . '_shipment_payment_cash', 'Cash'), MRKV_UA_SHIPPING_ALLOW_TAGS);
 
 						$label = __('NonCash', 'mrkv-ua-shipping') . '<span class="mrkv-up-ship-tooltip"><img src="' . MRKV_UA_SHIPPING_ASSETS_URL . '/images/global/info-icon.svg' .'" ><div class="mrkv-up-ship-tooltip__data">' . __('Cashless payment for the sender is available only if the contract is signed.', 'mrkv-ua-shipping') . '</div></span>';
-						echo wp_kses( $mrkv_global_option_generator->get_input_radio($label, MRKV_OPTION_OBJECT_NAME . '[shipment][payment]', 'NonCash', $data, MRKV_OPTION_OBJECT_NAME . '_shipment_payment_cashless', 'Cash'), MRKV_UA_SHIPPING_ALLOW_TAGS);
+						echo wp_kses($mrkv_global_option_generator->get_input_radio($label, MRKV_OPTION_OBJECT_NAME . '[shipment][payment]', 'NonCash', $data, MRKV_OPTION_OBJECT_NAME . '_shipment_payment_cashless', 'Cash'), MRKV_UA_SHIPPING_ALLOW_TAGS);
 					?>
 				</div>
 			</div>
@@ -385,7 +452,7 @@
 					<?php
 						$data = isset(MRKV_SHIPPING_SETTINGS['inter']['shipment_type']) ? MRKV_SHIPPING_SETTINGS['inter']['shipment_type'] : '';
 						echo wp_kses( $mrkv_global_option_generator->get_input_radio(__('Parcel', 'mrkv-ua-shipping'), MRKV_OPTION_OBJECT_NAME . '[inter][shipment_type]', 'Parcel', $data, MRKV_OPTION_OBJECT_NAME . '_inter_shipment_type_parcel', 'Parcel'), MRKV_UA_SHIPPING_ALLOW_TAGS);
-						echo wp_kses( $mrkv_global_option_generator->get_input_radio(__('Pallet', 'mrkv-ua-shipping'), MRKV_OPTION_OBJECT_NAME . '[inter][shipment_type]', 'Pallet', $data, MRKV_OPTION_OBJECT_NAME . '_inter_shipment_type_pallet', 'Parcel'), MRKV_UA_SHIPPING_ALLOW_TAGS);
+						/*echo wp_kses( $mrkv_global_option_generator->get_input_radio(__('Pallet', 'mrkv-ua-shipping'), MRKV_OPTION_OBJECT_NAME . '[inter][shipment_type]', 'Pallet', $data, MRKV_OPTION_OBJECT_NAME . '_inter_shipment_type_pallet', 'Parcel'), MRKV_UA_SHIPPING_ALLOW_TAGS);*/
 						echo wp_kses( $mrkv_global_option_generator->get_input_radio(__('Documents', 'mrkv-ua-shipping'), MRKV_OPTION_OBJECT_NAME . '[inter][shipment_type]', 'Documents', $data, MRKV_OPTION_OBJECT_NAME . '_inter_shipment_type_documents', 'Parcel'), MRKV_UA_SHIPPING_ALLOW_TAGS);
 						echo wp_kses( $mrkv_global_option_generator->get_input_radio(__('TiresWheels', 'mrkv-ua-shipping'), MRKV_OPTION_OBJECT_NAME . '[inter][shipment_type]', 'TiresWheels', $data, MRKV_OPTION_OBJECT_NAME . '_inter_shipment_type_tirewheels', 'Parcel', true), MRKV_UA_SHIPPING_ALLOW_TAGS);
 					?>
