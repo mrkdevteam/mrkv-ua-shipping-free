@@ -74,7 +74,6 @@ if (!class_exists('MRKV_UA_SHIPPING_API_UKR_POSHTA'))
 				'httpversion' => '1.0',
 				'blocking' => true,
 				'headers' => array( 
-					"Сontent-type" => "application/json, charset=utf-8",
 					'Accept' => 'application/json',
 		      		'Authorization' => 'Bearer ' . $this->get_production_bearer_ecom($api_token_type),
 				),

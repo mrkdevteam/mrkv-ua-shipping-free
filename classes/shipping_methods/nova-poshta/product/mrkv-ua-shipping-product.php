@@ -4,7 +4,16 @@
     $tire_classes = (isset($settings_shipping['shipment']['class']['list']['TiresWheels']) && is_array($settings_shipping['shipment']['class']['list']['TiresWheels']) && !empty($settings_shipping['shipment']['class']['list']['TiresWheels'])) ? $settings_shipping['shipment']['class']['list']['TiresWheels'] : [];
     $document_classes = (isset($settings_shipping['shipment']['class']['list']['Documents']) && is_array($settings_shipping['shipment']['class']['list']['Documents']) && !empty($settings_shipping['shipment']['class']['list']['Documents'])) ? $settings_shipping['shipment']['class']['list']['Documents'] : [];
     $shipping_class_id = $product->get_shipping_class_id();
-    if(($classes_enabled && !empty($tire_classes) && in_array($shipping_class_id, $tire_classes)) || $global_cargo_type == 'TiresWheels')
+
+    $exists = false;
+
+    $ids = array_column($settings_shipping['shipment']['class']['list'], 0);
+
+    if (in_array((int)$shipping_class_id, $ids, true)) {
+        $exists = true;
+    }
+
+    if(($classes_enabled && !empty($tire_classes) && in_array($shipping_class_id, $tire_classes)) || ($global_cargo_type == 'TiresWheels' && !$exists))
     {
         require_once MRKV_UA_SHIPPING_PLUGIN_PATH . 'classes/shipping_methods/nova-poshta/api/mrkv-ua-shipping-api-nova-poshta.php';
         $mrkv_object_nova_poshta = new MRKV_UA_SHIPPING_API_NOVA_POSHTA($settings_shipping);
@@ -30,7 +39,7 @@
         <?php
     }
 
-    if(($classes_enabled && !empty($document_classes) && in_array($shipping_class_id, $document_classes)) || $global_cargo_type == 'Documents')
+    if(($classes_enabled && !empty($document_classes) && in_array($shipping_class_id, $document_classes)) || ($global_cargo_type == 'Documents' && !$exists))
     {
         $nova_poshta_document_weights = [
             '0.1' => __('0.1 kg', 'mrkv-ua-shipping'),

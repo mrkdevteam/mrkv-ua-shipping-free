@@ -35,6 +35,13 @@ define('MRKV_UA_SHIPPING_LIST', array(
 						'required' => true,
 						'label' => __('City (settlement)', 'mrkv-ua-shipping'),
 						'replace' => '',
+						'custom_attributes' => array(
+						    'autocomplete' => 'off',
+						    'aria-autocomplete' => 'none',
+						    'data-lpignore' => 'true',
+						    'data-form-type' => 'other',
+						    'readonly' => 'readonly',
+						)
 					),
 					'_city_label' => array(
 						'type' => 'hidden',
@@ -88,6 +95,13 @@ define('MRKV_UA_SHIPPING_LIST', array(
 						'required' => true,
 						'label' => __('City (settlement)', 'mrkv-ua-shipping'),
 						'replace' => '',
+						'custom_attributes' => array(
+						    'autocomplete' => 'off',
+						    'aria-autocomplete' => 'none',
+						    'data-lpignore' => 'true',
+						    'data-form-type' => 'other',
+						    'readonly' => 'readonly',
+						)
 					),
 					'_city_label' => array(
 						'type' => 'hidden',
@@ -155,6 +169,13 @@ define('MRKV_UA_SHIPPING_LIST', array(
 						'required' => true,
 						'label' => __('City (settlement)', 'mrkv-ua-shipping'),
 						'replace' => '',
+						'custom_attributes' => array(
+						    'autocomplete' => 'off',
+						    'aria-autocomplete' => 'none',
+						    'data-lpignore' => 'true',
+						    'data-form-type' => 'other',
+						    'readonly' => 'readonly',
+						)
 					),
 					'_city_label' => array(
 						'type' => 'hidden',
@@ -332,6 +353,7 @@ define('MRKV_UA_SHIPPING_LIST', array(
 						'order_edit' => true,
 						'exclude' => true,
 						'autocomplete' => 'off',
+						'cod_validation' => true
 					),
 					'_patronymic_enabled' => array(
 						'type' => 'hidden',
@@ -344,6 +366,13 @@ define('MRKV_UA_SHIPPING_LIST', array(
 						'required' => true,
 						'label' => __('City (settlement)', 'mrkv-ua-shipping'),
 						'replace' => '_city',
+						'custom_attributes' => array(
+						    'autocomplete' => 'off',
+						    'aria-autocomplete' => 'none',
+						    'data-lpignore' => 'true',
+						    'data-form-type' => 'other',
+						    'readonly' => 'readonly',
+						)
 					),
 					'_city_ref' => array(
 						'type' => 'hidden',
@@ -399,6 +428,13 @@ define('MRKV_UA_SHIPPING_LIST', array(
 						'required' => true,
 						'label' => __('City (settlement)', 'mrkv-ua-shipping'),
 						'replace' => '_city',
+						'custom_attributes' => array(
+						    'autocomplete' => 'off',
+						    'aria-autocomplete' => 'none',
+						    'data-lpignore' => 'true',
+						    'data-form-type' => 'other',
+						    'readonly' => 'readonly',
+						)
 					),
 					'_city_ref' => array(
 						'type' => 'hidden',
@@ -488,6 +524,13 @@ define('MRKV_UA_SHIPPING_LIST', array(
 						'required' => true,
 						'label' => __('City (settlement)', 'mrkv-ua-shipping'),
 						'replace' => '',
+						'custom_attributes' => array(
+						    'autocomplete' => 'off',
+						    'aria-autocomplete' => 'none',
+						    'data-lpignore' => 'true',
+						    'data-form-type' => 'other',
+						    'readonly' => 'readonly',
+						)
 					),
 					'_city_label' => array(
 						'type' => 'hidden',

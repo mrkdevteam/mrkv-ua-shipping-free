@@ -520,6 +520,27 @@ jQuery(window).on('load', function()
  		}
  	}
 
+ 	function checkPaymentMethod() 
+ 	{
+	    var selected = jQuery('input[name="payment_method"]:checked').val();
+
+	    if (selected === 'cod') 
+	    {
+	    	jQuery('#mrkv_ua_shipping_ukr-poshta_patronymic_field').show();
+	    	jQuery('label[for="mrkv_ua_shipping_ukr-poshta_patronymic"] abbr').show();
+	    }
+	}
+
+ 	checkPaymentMethod();
+
+ 	jQuery('form.checkout').on('change', 'input[name="payment_method"]', function(){
+        checkPaymentMethod();
+    });
+
+    jQuery(document.body).on('updated_checkout', function(){
+        checkPaymentMethod();
+    });
+
  	function mrkvUaShipUpdateCartUkr()
  	{
  		jQuery('body').trigger('update_checkout', { update_shipping_method: true });

@@ -177,7 +177,7 @@
 			<?php
 				$data = isset(MRKV_SHIPPING_SETTINGS['shipment']['type']) ? MRKV_SHIPPING_SETTINGS['shipment']['type'] : '';
 				echo wp_kses($mrkv_global_option_generator->get_input_radio(__('Parcel', 'mrkv-ua-shipping'), MRKV_OPTION_OBJECT_NAME . '[shipment][type]', 'Parcel', $data, MRKV_OPTION_OBJECT_NAME . '_shipment_type_parcel', 'Parcel'), MRKV_UA_SHIPPING_ALLOW_TAGS);
-				/*echo wp_kses($mrkv_global_option_generator->get_input_radio(__('Pallet', 'mrkv-ua-shipping'), MRKV_OPTION_OBJECT_NAME . '[shipment][type]', 'Pallet', $data, MRKV_OPTION_OBJECT_NAME . '_shipment_type_pallet', 'Parcel'), MRKV_UA_SHIPPING_ALLOW_TAGS);*/
+				echo wp_kses($mrkv_global_option_generator->get_input_radio(__('Pallet', 'mrkv-ua-shipping'), MRKV_OPTION_OBJECT_NAME . '[shipment][type]', 'Pallet', $data, MRKV_OPTION_OBJECT_NAME . '_shipment_type_pallet', 'Parcel'), MRKV_UA_SHIPPING_ALLOW_TAGS);
 				echo wp_kses($mrkv_global_option_generator->get_input_radio(__('Documents', 'mrkv-ua-shipping'), MRKV_OPTION_OBJECT_NAME . '[shipment][type]', 'Documents', $data, MRKV_OPTION_OBJECT_NAME . '_shipment_type_documents', 'Parcel'), MRKV_UA_SHIPPING_ALLOW_TAGS);
 				echo wp_kses($mrkv_global_option_generator->get_input_radio(__('Tires', 'mrkv-ua-shipping'), MRKV_OPTION_OBJECT_NAME . '[shipment][type]', 'TiresWheels', $data, MRKV_OPTION_OBJECT_NAME . '_shipment_type_tires', 'Parcel'), MRKV_UA_SHIPPING_ALLOW_TAGS);
 			?>
