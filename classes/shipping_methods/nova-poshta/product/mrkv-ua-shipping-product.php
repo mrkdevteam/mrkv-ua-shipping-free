@@ -7,10 +7,14 @@
 
     $exists = false;
 
-    $ids = array_column($settings_shipping['shipment']['class']['list'], 0);
+    if(isset($settings_shipping['shipment']['class']['list']) &&
+    is_array($settings_shipping['shipment']['class']['list']) && !empty($settings_shipping['shipment']['class']['list']))
+    {
+        $ids = array_column($settings_shipping['shipment']['class']['list'], 0);
 
-    if (in_array((int)$shipping_class_id, $ids, true)) {
-        $exists = true;
+        if (in_array((int)$shipping_class_id, $ids, true)) {
+            $exists = true;
+        }
     }
 
     if(($classes_enabled && !empty($tire_classes) && in_array($shipping_class_id, $tire_classes)) || ($global_cargo_type == 'TiresWheels' && !$exists))
