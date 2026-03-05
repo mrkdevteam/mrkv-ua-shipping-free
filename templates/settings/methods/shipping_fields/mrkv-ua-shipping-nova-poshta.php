@@ -584,12 +584,181 @@
 		?>
 		<?php echo '<span class="mrkv-ua-ship-only-pro">' . __('Only in the Pro version', 'mrkv-ua-shipping') . '</span>'; ?>
 	</div>
-	<div class="admin_ua_ship_morkva_settings_line mrkv-field-disabled">
+	<h3><img src="<?php echo MRKV_UA_SHIPPING_ASSETS_URL . '/images/global/routing-icon.svg'; ?>" alt="Auto" title="Auto"><?php echo __('Cron Automation settings', 'mrkv-ua-shipping'); ?></h3>
+	<p><?php echo __('Set up a cron task to change order statuses by TTN status', 'mrkv-ua-shipping'); ?></p>
+	<hr class="mrkv-ua-ship__hr">
+	<div class="admin_ua_ship_morkva_settings_line">
 		<?php
-			$data = '';
-			echo wp_kses( $mrkv_global_option_generator->get_input_checkbox(__('Automatically change order status', 'mrkv-ua-shipping'), MRKV_OPTION_OBJECT_NAME . '[automation][status][enabled]', $data, MRKV_OPTION_OBJECT_NAME . '_automation_status_enabled', '', 'disabled' ), MRKV_UA_SHIPPING_ALLOW_TAGS);
+			$data = isset(MRKV_SHIPPING_SETTINGS['automation']['status']['enabled']) ? MRKV_SHIPPING_SETTINGS['automation']['status']['enabled'] : '';
+			echo wp_kses($mrkv_global_option_generator->get_input_checkbox(__('Automatically change order status', 'mrkv-ua-shipping'), MRKV_OPTION_OBJECT_NAME . '[automation][status][enabled]', $data, MRKV_OPTION_OBJECT_NAME . '_automation_status_enabled', ), MRKV_UA_SHIPPING_ALLOW_TAGS);
 		?>
-		<?php echo '<span class="mrkv-ua-ship-only-pro">' . __('Only in the Pro version', 'mrkv-ua-shipping') . '</span>'; ?>
+		<div class="admin_ua_ship_morkva_settings_line__inner inner-align">
+			<div class="admin_ua_ship_morkva_settings_row">
+				<div class="col-mrkv-5">
+					<h4><?php echo __('Tracking status of Nova Poshta', 'mrkv-ua-shipping'); ?></h4>
+				</div>
+				<div class="col-mrkv-5">
+					<h4><?php echo __('WooCommerce order status', 'mrkv-ua-shipping'); ?></h4>
+				</div>
+			</div>
+			<div class="admin_ua_ship_morkva_settings_row">
+				<div class="col-mrkv-5">
+					<p><?php echo __('The shipment has been received', 'mrkv-ua-shipping'); ?></p>
+				</div>
+				<div class="col-mrkv-5">
+					<?php 
+						$data = isset(MRKV_SHIPPING_SETTINGS['automation']['status']['received']) ? MRKV_SHIPPING_SETTINGS['automation']['status']['received'] : '';
+						echo wp_kses($mrkv_global_option_generator->get_select_simple('', MRKV_OPTION_OBJECT_NAME . '[automation][status][received]', $all_order_statuses, $data, MRKV_OPTION_OBJECT_NAME . '_automation_status_received' , __('Choose a status', 'mrkv-ua-shipping')), MRKV_UA_SHIPPING_ALLOW_TAGS);
+					?>
+				</div>
+			</div>
+			<div class="admin_ua_ship_morkva_settings_row">
+				<div class="col-mrkv-5">
+					<p><?php echo __('The transfer has been received. Within a day you will receive an SMS message about the receipt of the money transfer.', 'mrkv-ua-shipping'); ?></p>
+				</div>
+				<div class="col-mrkv-5">
+					<?php 
+						$data = isset(MRKV_SHIPPING_SETTINGS['automation']['status']['moneysms']) ? MRKV_SHIPPING_SETTINGS['automation']['status']['moneysms'] : '';
+						echo wp_kses($mrkv_global_option_generator->get_select_simple('', MRKV_OPTION_OBJECT_NAME . '[automation][status][moneysms]', $all_order_statuses, $data, MRKV_OPTION_OBJECT_NAME . '_automation_status_moneysms' , __('Choose a status', 'mrkv-ua-shipping')), MRKV_UA_SHIPPING_ALLOW_TAGS);
+					?>
+				</div>
+			</div>
+			<div class="admin_ua_ship_morkva_settings_row">
+				<div class="col-mrkv-5">
+					<p><?php echo __('The money transfer is issued to the recipient', 'mrkv-ua-shipping'); ?></p>
+				</div>
+				<div class="col-mrkv-5">
+					<?php 
+						$data = isset(MRKV_SHIPPING_SETTINGS['automation']['status']['money']) ? MRKV_SHIPPING_SETTINGS['automation']['status']['money'] : '';
+						echo wp_kses($mrkv_global_option_generator->get_select_simple('', MRKV_OPTION_OBJECT_NAME . '[automation][status][money]', $all_order_statuses, $data, MRKV_OPTION_OBJECT_NAME . '_automation_status_money' , __('Choose a status', 'mrkv-ua-shipping')), MRKV_UA_SHIPPING_ALLOW_TAGS);
+					?>
+				</div>
+			</div>
+			<div class="admin_ua_ship_morkva_settings_row">
+				<div class="col-mrkv-5">
+					<p><?php echo __('Recipient\'s refusal to receive', 'mrkv-ua-shipping'); ?></p>
+				</div>
+				<div class="col-mrkv-5">
+					<?php 
+						$data = isset(MRKV_SHIPPING_SETTINGS['automation']['status']['refused']) ? MRKV_SHIPPING_SETTINGS['automation']['status']['refused'] : '';
+						echo wp_kses($mrkv_global_option_generator->get_select_simple('', MRKV_OPTION_OBJECT_NAME . '[automation][status][refused]', $all_order_statuses, $data, MRKV_OPTION_OBJECT_NAME . '_automation_status_refused' , __('Choose a status', 'mrkv-ua-shipping')), MRKV_UA_SHIPPING_ALLOW_TAGS);
+					?>
+				</div>
+			</div>
+			<div class="admin_ua_ship_morkva_settings_row">
+				<div class="col-mrkv-5">
+					<p><?php echo __('Unsuccessful delivery attempt due to the Recipient\'s absence at the address or lack of communication with him/her', 'mrkv-ua-shipping'); ?></p>
+				</div>
+				<div class="col-mrkv-5">
+					<?php 
+						$data = isset(MRKV_SHIPPING_SETTINGS['automation']['status']['canceled']) ? MRKV_SHIPPING_SETTINGS['automation']['status']['canceled'] : '';
+						echo wp_kses($mrkv_global_option_generator->get_select_simple('', MRKV_OPTION_OBJECT_NAME . '[automation][status][canceled]', $all_order_statuses, $data, MRKV_OPTION_OBJECT_NAME . '_automation_status_canceled' , __('Choose a status', 'mrkv-ua-shipping')), MRKV_UA_SHIPPING_ALLOW_TAGS);
+					?>					
+				</div>
+			</div>
+			<div class="admin_ua_ship_morkva_settings_row">
+				<div class="col-mrkv-5">
+					<p><?php echo __('The shipment is sent to..', 'mrkv-ua-shipping'); ?></p>
+				</div>
+				<div class="col-mrkv-5">
+					<?php 
+						$data = isset(MRKV_SHIPPING_SETTINGS['automation']['status']['shipping']) ? MRKV_SHIPPING_SETTINGS['automation']['status']['shipping'] : '';
+						echo wp_kses($mrkv_global_option_generator->get_select_simple('', MRKV_OPTION_OBJECT_NAME . '[automation][status][shipping]', $all_order_statuses, $data, MRKV_OPTION_OBJECT_NAME . '_automation_status_shipping' , __('Choose a status', 'mrkv-ua-shipping')), MRKV_UA_SHIPPING_ALLOW_TAGS);
+					?>					
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="admin_ua_ship_morkva_settings_row">
+		<div class="col-mrkv-5">
+			<div class="admin_ua_ship_morkva_settings_line">
+				<h4 style="margin-top: 0;"><?php echo __('Cron type', 'mrkv-ua-shipping'); ?></h4>
+				<div class="admin_ua_ship_morkva_settings_row">
+					<?php
+						$data = isset(MRKV_SHIPPING_SETTINGS['automation']['cron']['type']) ? MRKV_SHIPPING_SETTINGS['automation']['cron']['type'] : 'wp_cron';
+						echo wp_kses($mrkv_global_option_generator->get_input_radio(__('WP Cron', 'mrkv-ua-shipping'), MRKV_OPTION_OBJECT_NAME . '[automation][cron][type]', 'wp_cron', $data, MRKV_OPTION_OBJECT_NAME . '_automation_cron_type_wp_cron', 'wp_cron'), MRKV_UA_SHIPPING_ALLOW_TAGS);
+						echo wp_kses($mrkv_global_option_generator->get_input_radio(__('Server Cron', 'mrkv-ua-shipping'), MRKV_OPTION_OBJECT_NAME . '[automation][cron][type]', 'server_cron', $data, MRKV_OPTION_OBJECT_NAME . '_automation_cron_type_server_cron', 'wp_cron'), MRKV_UA_SHIPPING_ALLOW_TAGS);
+					?>
+				</div>
+				<p>
+					<?php echo __('Select the type of crown that you will use to update order statuses', 'mrkv-ua-shipping'); ?>
+				</p>
+			</div>
+		</div>
+		<div class="col-mrkv-5">
+			<div class="admin_ua_ship_morkva_settings_line">
+				<label for="nova-poshta_m_ua_settings_api_key"><?php echo __('Server Cron URL', 'mrkv-ua-shipping'); ?></label>
+				<input style="width: 100%; max-width: 100%;" type="text" value="<?php echo rest_url('mrkv_ua_shipping/v1/check_ttn'); ?>" readonly="">
+				<p><?php echo __('Create a cron on the server to this link and set it to execute at your discretion. Recommended for every 2 minutes', 'mrkv-ua-shipping'); ?></p>
+			</div>
+		</div>
+	</div>
+	<div class="admin_ua_ship_morkva_settings_row">
+		<div class="col-mrkv-5">
+			<div class="admin_ua_ship_morkva_settings_line">
+				<?php 
+					$data = isset(MRKV_SHIPPING_SETTINGS['automation']['cron']['status']) ? MRKV_SHIPPING_SETTINGS['automation']['cron']['status'] : 'wc-shipped';
+					$description = __('Select the order status for which the bill of lading will be checked', 'mrkv-ua-shipping');
+
+					echo wp_kses($mrkv_global_option_generator->get_select_simple(__('Cron order status check', 'mrkv-ua-shipping'), MRKV_OPTION_OBJECT_NAME . '[automation][cron][status]', $all_order_statuses, $data, MRKV_OPTION_OBJECT_NAME . '_automation_cron_status' , __('Choose a order status', 'mrkv-ua-shipping'), $description), MRKV_UA_SHIPPING_ALLOW_TAGS);
+				?>
+			</div>
+		</div>
+		<div class="col-mrkv-5">
+			<div class="admin_ua_ship_morkva_settings_line">
+				<?php 
+					$data = isset(MRKV_SHIPPING_SETTINGS['automation']['cron']['max_count']) ? MRKV_SHIPPING_SETTINGS['automation']['cron']['max_count'] : '10000';
+
+					echo wp_kses($mrkv_global_option_generator->get_input_number(__('Number of orders to check', 'mrkv-ua-shipping'), MRKV_OPTION_OBJECT_NAME . '[automation][cron][max_count]', $data, MRKV_OPTION_OBJECT_NAME. '_automation_cron_max_count' , '', '', ''), MRKV_UA_SHIPPING_ALLOW_TAGS);
+				?>
+			</div>
+		</div>
+	</div>
+	<div class="admin_ua_ship_morkva_settings_row">
+		<div class="col-mrkv-5">
+			<div class="admin_ua_ship_morkva_settings_line">
+				<?php 
+					$data = isset(MRKV_SHIPPING_SETTINGS['automation']['cron']['frequency']) ? MRKV_SHIPPING_SETTINGS['automation']['cron']['frequency'] : '1440';
+
+					echo wp_kses($mrkv_global_option_generator->get_input_number(__('Request frequency (minutes)', 'mrkv-ua-shipping') . ' (хв)', MRKV_OPTION_OBJECT_NAME . '[automation][cron][frequency]', $data, MRKV_OPTION_OBJECT_NAME. '_automation_cron_frequency' , '', '', ''), MRKV_UA_SHIPPING_ALLOW_TAGS);
+				?>
+			</div>
+		</div>
+		<div class="col-mrkv-5">
+			<div class="admin_ua_ship_morkva_settings_line">
+				<?php 
+					$data = isset(MRKV_SHIPPING_SETTINGS['automation']['cron']['count_step']) ? MRKV_SHIPPING_SETTINGS['automation']['cron']['count_step'] : '300';
+
+					echo wp_kses($mrkv_global_option_generator->get_input_number(__('Number of processing of the CTD in one step', 'mrkv-ua-shipping'), MRKV_OPTION_OBJECT_NAME . '[automation][cron][count_step]', $data, MRKV_OPTION_OBJECT_NAME. '_automation_cron_count_step' , '', '', ''), MRKV_UA_SHIPPING_ALLOW_TAGS);
+				?>
+			</div>
+		</div>
+	</div>
+	<div class="admin_ua_ship_morkva_settings_row">
+		<div class="col-mrkv-5">
+			<div class="admin_ua_ship_morkva_settings_line">
+				<?php 
+					$data = isset(MRKV_SHIPPING_SETTINGS['automation']['cron']['days']) ? MRKV_SHIPPING_SETTINGS['automation']['cron']['days'] : '30';
+
+					echo wp_kses($mrkv_global_option_generator->get_input_number(__('Verification period (days)', 'mrkv-ua-shipping'), MRKV_OPTION_OBJECT_NAME . '[automation][cron][days]', $data, MRKV_OPTION_OBJECT_NAME. '_automation_cron_days' , '', '', ''), MRKV_UA_SHIPPING_ALLOW_TAGS);
+				?>
+			</div>
+		</div>
+		<div class="col-mrkv-5">
+			<div class="admin_ua_ship_morkva_settings_line">
+				<?php 
+					$data = isset(MRKV_SHIPPING_SETTINGS['automation']['cron']['wp_frequency']) ? MRKV_SHIPPING_SETTINGS['automation']['cron']['wp_frequency'] : 'hourly';
+					$description = __('Choose the frequency of execution wp cron event', 'mrkv-ua-shipping');
+					$schedules = wp_get_schedules();
+					$cron_list = [];
+					foreach ( $schedules as $slug => $schedule ) {
+					    $cron_list[$slug] = $schedule['display'];
+					}
+
+					echo wp_kses($mrkv_global_option_generator->get_select_simple(__('Frequency of execution (WP Cron)', 'mrkv-ua-shipping'), MRKV_OPTION_OBJECT_NAME . '[automation][cron][wp_frequency]', $cron_list, $data, MRKV_OPTION_OBJECT_NAME . '_automation_cron_wp_frequency' , __('Choose a period', 'mrkv-ua-shipping'), $description), MRKV_UA_SHIPPING_ALLOW_TAGS);
+				?>
+			</div>
+		</div>
 	</div>
 </section>
 <section id="checkout_settings" class="mrkv_up_ship_shipping_tab_block">

@@ -522,6 +522,16 @@ jQuery(window).on('load', function()
 
  	function checkPaymentMethod() 
  	{
+ 		if(mrkv_ua_ship_helper.up_middlename_exclude == 'yes')
+ 		{
+ 			jQuery('#mrkv_ua_shipping_ukr-poshta_patronymic_field').hide();
+ 		}
+ 		if(mrkv_ua_ship_helper.up_middlename_required == 'no')
+ 		{
+ 			jQuery('#mrkv_ua_shipping_ukr-poshta_patronymic_enabled').val('off');
+ 			jQuery('label[for="mrkv_ua_shipping_ukr-poshta_patronymic"] abbr').hide();
+ 		}
+ 		
 	    var selected = jQuery('input[name="payment_method"]:checked').val();
 
 	    if (selected === 'cod') 

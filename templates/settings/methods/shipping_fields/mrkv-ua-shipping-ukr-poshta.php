@@ -674,7 +674,7 @@
 					$data = isset(MRKV_SHIPPING_SETTINGS['checkout']['middlename']['enabled']) ? MRKV_SHIPPING_SETTINGS['checkout']['middlename']['enabled'] : '';
 					echo wp_kses( $mrkv_global_option_generator->get_input_checkbox(__('Enable patronymic (Warehouse)', 'mrkv-ua-shipping'), MRKV_OPTION_OBJECT_NAME . '[checkout][middlename][enabled]', $data, MRKV_OPTION_OBJECT_NAME . '_checkout_middlename_enabled', ), MRKV_UA_SHIPPING_ALLOW_TAGS);
 				?>
-				<?php echo '<p class="mrkv-ua-ship-description">' . __('Remove the patronymic field from the checkout page', 'mrkv-ua-shipping') . '</p>'; ?>
+				<?php echo '<p class="mrkv-ua-ship-description">' . __('If the buyer has chosen cash on delivery, the "middle name" field will be displayed automatically, regardless of this setting (requirement of Ukrposhta API).', 'mrkv-ua-shipping') . '</p>'; ?>
 			</div>
 		</div>
 		<div class="col-mrkv-5">
