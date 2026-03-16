@@ -322,6 +322,25 @@ jQuery(window).on('load', function()
 	  }
 
 	  autoSelectCityPo();
+	  mrkvUaShipNpCronSettings();
+
+	 jQuery('input[name="nova-poshta_m_ua_settings[automation][cron][type]"]').change(function(){ mrkvUaShipNpCronSettings(); });
+
+	function mrkvUaShipNpCronSettings()
+	{
+		var cron_type = jQuery('input[name="nova-poshta_m_ua_settings[automation][cron][type]"]:checked').val();
+
+		if(cron_type == 'wp_cron')
+		{
+			jQuery('.mrkv-ua-shipping-server').hide();
+			jQuery('.mrkv-ua-shipping-wpcron').show();
+		}
+		else
+		{
+			jQuery('.mrkv-ua-shipping-server').show();
+			jQuery('.mrkv-ua-shipping-wpcron').hide();
+		}
+	}
 
 	function mrkvUaShipNpClearCity()
 	{

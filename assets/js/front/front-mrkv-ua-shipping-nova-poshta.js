@@ -897,11 +897,51 @@ jQuery(window).on('load', function()
  			jQuery('#mrkv_ua_shipping_nova-poshta_address_patronymic_enabled').val('off');
  			jQuery('label[for="mrkv_ua_shipping_nova-poshta_address_patronymic"] abbr').hide();
  		}
+ 		else
+ 		{
+ 			var $label = jQuery('label[for="mrkv_ua_shipping_nova-poshta_address_patronymic"]');
+
+		    if ($label.length && !$label.find('.require').length) {
+		        $label.append(' <span class="require" aria-hidden="true">*</span>');
+		    }
+ 		}
  		if(mrkv_ua_ship_helper.nova_warehouse_text != '')
  		{
  			jQuery('label[for="mrkv_ua_shipping_nova-poshta_warehouse"]').text(mrkv_ua_ship_helper.nova_warehouse_text);
  		}
  	}
+
+ 	function npCheckPaymentMethod() 
+ 	{
+ 		if(mrkv_ua_ship_helper.up_middlename_exclude == 'yes')
+ 		{
+ 			jQuery('#mrkv_ua_shipping_nova-poshta_address_patronymic_field').hide();
+ 		}
+ 		if(mrkv_ua_ship_helper.up_middlename_required == 'no')
+ 		{
+ 			jQuery('#mrkv_ua_shipping_nova-poshta_address_patronymic_enabled').val('off');
+ 			jQuery('label[for="mrkv_ua_shipping_nova-poshta_address_patronymic"] abbr').hide();
+ 			jQuery('label[for="mrkv_ua_shipping_nova-poshta_address_patronymic"]').find('.required').remove();
+ 		}
+ 		else
+ 		{
+ 			var $label = jQuery('label[for="mrkv_ua_shipping_nova-poshta_address_patronymic"]');
+
+		    if ($label.length && !$label.find('.require').length) {
+		        $label.append(' <span class="require" aria-hidden="true">*</span>');
+		    }
+ 		}
+	}
+
+ 	npCheckPaymentMethod();
+
+ 	jQuery('form.checkout').on('change', 'input[name="payment_method"]', function(){
+        npCheckPaymentMethod();
+    });
+
+    jQuery(document.body).on('updated_checkout', function(){
+        npCheckPaymentMethod();
+    });
 
  	function mrkvUaShipUpdateCart()
  	{

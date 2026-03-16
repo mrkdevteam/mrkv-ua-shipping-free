@@ -686,16 +686,19 @@
 			</div>
 		</div>
 		<div class="col-mrkv-5">
-			<div class="admin_ua_ship_morkva_settings_line">
+			<div class="admin_ua_ship_morkva_settings_line mrkv-ua-shipping-server">
 				<label for="nova-poshta_m_ua_settings_api_key"><?php echo __('Server Cron URL', 'mrkv-ua-shipping'); ?></label>
 				<input style="width: 100%; max-width: 100%;" type="text" value="<?php echo rest_url('mrkv_ua_shipping/v1/check_ttn'); ?>" readonly="">
 				<p><?php echo __('Create a cron on the server to this link and set it to execute at your discretion. Recommended for every 2 minutes', 'mrkv-ua-shipping'); ?></p>
+			</div>
+			<div class="admin_ua_ship_morkva_settings_line mrkv-ua-shipping-wpcron">
+				<p><?php echo __('The script checks the last 100 orders from the past 30 days. Need more granular settings? Use a server-side cron job.', 'mrkv-ua-shipping'); ?></p>
 			</div>
 		</div>
 	</div>
 	<div class="admin_ua_ship_morkva_settings_row">
 		<div class="col-mrkv-5">
-			<div class="admin_ua_ship_morkva_settings_line">
+			<div class="admin_ua_ship_morkva_settings_line mrkv-ua-shipping-server">
 				<?php 
 					$data = isset(MRKV_SHIPPING_SETTINGS['automation']['cron']['status']) ? MRKV_SHIPPING_SETTINGS['automation']['cron']['status'] : 'wc-shipped';
 					$description = __('Select the order status for which the bill of lading will be checked', 'mrkv-ua-shipping');
@@ -705,7 +708,7 @@
 			</div>
 		</div>
 		<div class="col-mrkv-5">
-			<div class="admin_ua_ship_morkva_settings_line">
+			<div class="admin_ua_ship_morkva_settings_line mrkv-ua-shipping-server">
 				<?php 
 					$data = isset(MRKV_SHIPPING_SETTINGS['automation']['cron']['max_count']) ? MRKV_SHIPPING_SETTINGS['automation']['cron']['max_count'] : '10000';
 
@@ -716,7 +719,7 @@
 	</div>
 	<div class="admin_ua_ship_morkva_settings_row">
 		<div class="col-mrkv-5">
-			<div class="admin_ua_ship_morkva_settings_line">
+			<div class="admin_ua_ship_morkva_settings_line mrkv-ua-shipping-server">
 				<?php 
 					$data = isset(MRKV_SHIPPING_SETTINGS['automation']['cron']['frequency']) ? MRKV_SHIPPING_SETTINGS['automation']['cron']['frequency'] : '1440';
 
@@ -725,7 +728,7 @@
 			</div>
 		</div>
 		<div class="col-mrkv-5">
-			<div class="admin_ua_ship_morkva_settings_line">
+			<div class="admin_ua_ship_morkva_settings_line mrkv-ua-shipping-server">
 				<?php 
 					$data = isset(MRKV_SHIPPING_SETTINGS['automation']['cron']['count_step']) ? MRKV_SHIPPING_SETTINGS['automation']['cron']['count_step'] : '300';
 
@@ -735,8 +738,8 @@
 		</div>
 	</div>
 	<div class="admin_ua_ship_morkva_settings_row">
-		<div class="col-mrkv-5">
-			<div class="admin_ua_ship_morkva_settings_line">
+		<div class="col-mrkv-5 mrkv-ua-shipping-server">
+			<div class="admin_ua_ship_morkva_settings_line ">
 				<?php 
 					$data = isset(MRKV_SHIPPING_SETTINGS['automation']['cron']['days']) ? MRKV_SHIPPING_SETTINGS['automation']['cron']['days'] : '30';
 
@@ -744,7 +747,7 @@
 				?>
 			</div>
 		</div>
-		<div class="col-mrkv-5">
+		<div class="col-mrkv-5 mrkv-ua-shipping-wpcron">
 			<div class="admin_ua_ship_morkva_settings_line">
 				<?php 
 					$data = isset(MRKV_SHIPPING_SETTINGS['automation']['cron']['wp_frequency']) ? MRKV_SHIPPING_SETTINGS['automation']['cron']['wp_frequency'] : 'hourly';
