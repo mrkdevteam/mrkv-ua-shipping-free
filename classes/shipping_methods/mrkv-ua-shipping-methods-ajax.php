@@ -546,7 +546,9 @@ if (!class_exists('MRKV_UA_SHIPPING_METHODS_AJAX'))
 					{
 						require_once MRKV_UA_SHIPPING_PLUGIN_PATH . 'classes/shipping_methods/' . $current_ship_key . '/api/mrkv-ua-shipping-api-' . $current_ship_key . '.php';
 						$api_class = MRKV_UA_SHIPPING_LIST[$current_ship_key]['api_class'];
-						$settings_shipping = get_option($current_ship_key . '_m_ua_settings');
+
+						$settings_shipping = apply_filters('mrkv_ua_shipping_invoice_settings', get_option($current_ship_key . '_m_ua_settings'), $order, $current_ship_key, 'handle');
+
 						$mrkv_object_shipping = new $api_class($settings_shipping);
 
 						require_once MRKV_UA_SHIPPING_PLUGIN_PATH . 'classes/shipping_methods/' . $current_ship_key . '/invoice/mrkv-ua-shipping-' . $current_ship_key . '-invoice.php';

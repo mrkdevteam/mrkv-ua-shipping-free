@@ -2,11 +2,13 @@
 <section id="basic_settings" class="mrkv_up_ship_shipping_tab_block active">
 	<h2><img src="<?php echo MRKV_UA_SHIPPING_ASSETS_URL . '/images/global/settings-icon.svg'; ?>" alt="Basic settings" title="Basic settings"><?php echo __('Basic settings', 'mrkv-ua-shipping'); ?></h2>
 	<p><?php echo __('There are currently no settings. The delivery method works without entering API keys.', 'mrkv-ua-shipping'); ?></p>
+	<?php do_action('mrkv_ua_shipping_settings_page_row', 'rozetka-delivery', 'basic_first'); ?>
 </section>
 <section id="checkout_settings" class="mrkv_up_ship_shipping_tab_block">
 	<h2><img src="<?php echo MRKV_UA_SHIPPING_ASSETS_URL . '/images/global/clapperboard-edit-icon.svg'; ?>" alt="Sending email from TTN" title="Sending email from TTN"><?php echo __('Checkout settings', 'mrkv-ua-shipping'); ?></h2>
 	<p><?php echo __('Customize the output of the plugin fields in relation to your theme', 'mrkv-ua-shipping'); ?></p>
 	<hr class="mrkv-ua-ship__hr">
+	<?php do_action('mrkv_ua_shipping_settings_page_row', 'rozetka-delivery', 'checkout_first'); ?>
 	<div class="admin_ua_ship_morkva_settings_row">
 		<div class="col-mrkv-5">
 			<div class="admin_ua_ship_morkva_settings_line">
@@ -24,6 +26,7 @@
 			</div>
 		</div>
 	</div>
+	<?php do_action('mrkv_ua_shipping_settings_page_row', 'rozetka-delivery', 'checkout_middle_1'); ?>
 	<div class="admin_ua_ship_morkva_settings_row">
 		<div class="col-mrkv-5">
 			<div class="admin_ua_ship_morkva_settings_line">
@@ -37,11 +40,13 @@
 		<div class="col-mrkv-5">
 		</div>
 	</div>
+	<?php do_action('mrkv_ua_shipping_settings_page_row', 'rozetka-delivery', 'checkout_last'); ?>
 </section>
 <section id="log_settings" class="mrkv_up_ship_shipping_tab_block">
 	<h2><img src="<?php echo MRKV_UA_SHIPPING_ASSETS_URL . '/images/global/clipboard-list-icon.svg'; ?>" alt="Debug Log" title="Debug Log"><?php echo __('Debug Log', 'mrkv-ua-shipping'); ?></h2>
 	<p><?php echo __('To keep an error log, enable it in the settings', 'mrkv-ua-shipping'); ?></p>
 	<hr class="mrkv-ua-ship__hr">
+	<?php do_action('mrkv_ua_shipping_settings_page_row', 'rozetka-delivery', 'log_first'); ?>
 	<div class="admin_ua_ship_morkva_settings_row">
 		<div class="col-mrkv-5">
 			<div class="admin_ua_ship_morkva_settings_line">
@@ -62,6 +67,7 @@
 			</div>
 		</div>
 	</div>
+	<?php do_action('mrkv_ua_shipping_settings_page_row', 'rozetka-delivery', 'log_middle_1'); ?>
 	<div class="admin_ua_ship_morkva_settings_line">
 		<h3><?php echo __('Log', 'mrkv-ua-shipping'); ?></h3>
 		<pre class="mrkv_log_file_content">
@@ -69,4 +75,5 @@
 		</pre>
 		<div class="mrkv_btn_log_clean"><img src="<?php echo MRKV_UA_SHIPPING_ASSETS_URL . '/images/global/trash-icon.svg'; ?>" alt="Debug Log" title="Debug Log"><?php echo __('Clear log', 'mrkv-ua-shipping'); ?></div>
 	</div>
+	<?php do_action('mrkv_ua_shipping_settings_page_row', 'rozetka-delivery', 'log_last'); ?>
 </section>

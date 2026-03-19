@@ -1,6 +1,7 @@
 <section id="basic_settings" class="mrkv_up_ship_shipping_tab_block active">
 	<h2><img src="<?php echo MRKV_UA_SHIPPING_ASSETS_URL . '/images/global/settings-icon.svg'; ?>" alt="Basic settings" title="Basic settings"><?php echo __('Basic settings', 'mrkv-ua-shipping'); ?></h2>
 	<hr class="mrkv-ua-ship__hr">
+	<?php do_action('mrkv_ua_shipping_settings_page_row', 'nova-poshta', 'basic_first'); ?>
 	<div class="admin_ua_ship_morkva_settings_line">
 		<?php 
 			$data = isset(MRKV_SHIPPING_SETTINGS['api_key']) ? MRKV_SHIPPING_SETTINGS['api_key'] : '';
@@ -22,11 +23,13 @@
 			echo wp_kses( $mrkv_global_option_generator->get_input_text($label, MRKV_OPTION_OBJECT_NAME . '[api_key]', $data, MRKV_OPTION_OBJECT_NAME. '_api_key' , '', __('Enter the key...', 'mrkv-ua-shipping'), $description), MRKV_UA_SHIPPING_ALLOW_TAGS);
 		?>
 	</div>
+	<?php do_action('mrkv_ua_shipping_settings_page_row', 'nova-poshta', 'basic_last'); ?>
 </section>
 <section id="sender_settings" class="mrkv_up_ship_shipping_tab_block">
 	<h2><img src="<?php echo MRKV_UA_SHIPPING_ASSETS_URL . '/images/global/user-icon.svg'; ?>" alt="Sender settings" title="Sender settings"><?php echo __('Sender Settings', 'mrkv-ua-shipping'); ?></h2>
 	<p><?php echo __('Fill in the data for the sender, which will be used to create shipment', 'mrkv-ua-shipping'); ?></p>
 	<hr class="mrkv-ua-ship__hr">
+	<?php do_action('mrkv_ua_shipping_settings_page_row', 'nova-poshta', 'sender_first'); ?>
 	<div class="admin_ua_ship_morkva_settings_line">
 		<?php
 			$data = isset(MRKV_SHIPPING_SETTINGS['sender']['ref']) ? MRKV_SHIPPING_SETTINGS['sender']['ref'] : '';
@@ -59,9 +62,11 @@
 			echo wp_kses( $mrkv_global_option_generator->get_input_hidden(MRKV_OPTION_OBJECT_NAME . '[sender][list]', base64_encode(wp_json_encode(MRKV_OPTION_NOVA_SENDER)), MRKV_OPTION_OBJECT_NAME . '_sender_list'), MRKV_UA_SHIPPING_ALLOW_TAGS);
 		?>
 	</div>
+	<?php do_action('mrkv_ua_shipping_settings_page_row', 'nova-poshta', 'sender_middle_1'); ?>
 	<h3><img src="<?php echo MRKV_UA_SHIPPING_ASSETS_URL . '/images/global/routing-icon.svg'; ?>" alt="Sender address" title="Sender address"><?php echo __('Sender address', 'mrkv-ua-shipping'); ?></h3>
 	<p><?php echo __('Specify the sender\'s address from which the goods will be sent', 'mrkv-ua-shipping'); ?></p>
 	<hr class="mrkv-ua-ship__hr">
+	<?php do_action('mrkv_ua_shipping_settings_page_row', 'nova-poshta', 'sender_middle_2'); ?>
 	<div class="admin_ua_ship_morkva_settings_row">
 		<div class="admin_ua_ship_morkva_settings_line col-mrkv-5">
 			<?php 
@@ -76,6 +81,7 @@
 		<div class="admin_ua_ship_morkva_settings_line col-mrkv-5">
 		</div>
 	</div>
+	<?php do_action('mrkv_ua_shipping_settings_page_row', 'nova-poshta', 'sender_middle_3'); ?>
 	<div class="admin_ua_ship_morkva_settings_row">
 		<div class="admin_ua_ship_morkva_settings_line col-mrkv-5">
 			<?php
@@ -129,10 +135,12 @@
 			</div>
 		</div>
 	</div>
+	<?php do_action('mrkv_ua_shipping_settings_page_row', 'nova-poshta', 'sender_last'); ?>
 </section>
 <section id="default_settings" class="mrkv_up_ship_shipping_tab_block">
 	<h2><img src="<?php echo MRKV_UA_SHIPPING_ASSETS_URL . '/images/global/box-icon.svg'; ?>" alt="Default values" title="Default values"><?php echo __('Default values', 'mrkv-ua-shipping'); ?></h2>
 	<hr class="mrkv-ua-ship__hr">
+	<?php do_action('mrkv_ua_shipping_settings_page_row', 'nova-poshta', 'default_first'); ?>
 	<div class="admin_ua_ship_morkva_settings_row">
 		<div class="col-mrkv-5">
 			<div class="admin_ua_ship_morkva_settings_line">
@@ -160,6 +168,7 @@
 			</div>
 		</div>
 	</div>
+	<?php do_action('mrkv_ua_shipping_settings_page_row', 'nova-poshta', 'default_middle_1'); ?>
 	<div class="admin_ua_ship_morkva_settings_line admin_ua_ship_morkva_one_data mrkv-field-disabled">
 		<?php 
 			$data = '';
@@ -168,9 +177,11 @@
 			echo wp_kses( $mrkv_global_option_generator->get_input_number(__('Prepayment', 'mrkv-ua-shipping'), MRKV_OPTION_OBJECT_NAME . '[shipment][prepayment]', $data, MRKV_OPTION_OBJECT_NAME. '_shipment_prepayment' , '', '', $description, 'readonly'), MRKV_UA_SHIPPING_ALLOW_TAGS);
 		?>
 	</div>
+	<?php do_action('mrkv_ua_shipping_settings_page_row', 'nova-poshta', 'default_middle_2'); ?>
 	<h3><img src="<?php echo MRKV_UA_SHIPPING_ASSETS_URL . '/images/global/tuning-icon.svg'; ?>" alt="Shipment" title="Shipment"><?php echo __('Shipment', 'mrkv-ua-shipping'); ?></h3>
 	<p><?php echo __('Fill in the default shipping data for the shipment', 'mrkv-ua-shipping'); ?></p>
 	<hr class="mrkv-ua-ship__hr">
+	<?php do_action('mrkv_ua_shipping_settings_page_row', 'nova-poshta', 'default_middle_3'); ?>
 	<div class="admin_ua_ship_morkva_settings_line">
 		<h4><?php echo __('Global Cargo Type', 'mrkv-ua-shipping'); ?></h4>
 		<div class="admin_ua_ship_morkva_settings_row">
@@ -183,6 +194,7 @@
 			?>
 		</div>
 	</div>
+	<?php do_action('mrkv_ua_shipping_settings_page_row', 'nova-poshta', 'default_middle_4'); ?>
 	<div class="admin_ua_ship_morkva_settings_line admin_ua_shipping_classes">
 		<?php
 			$classes_enabled = isset(MRKV_SHIPPING_SETTINGS['shipment']['class']['enabled']) ? MRKV_SHIPPING_SETTINGS['shipment']['class']['enabled'] : '';
@@ -250,6 +262,7 @@
 			</div>
 		</div>
 	</div>
+	<?php do_action('mrkv_ua_shipping_settings_page_row', 'nova-poshta', 'default_middle_5'); ?>
 	<div class="admin_ua_ship_morkva_settings_row">
 		<div class="col-mrkv-5">
 			<div class="admin_ua_ship_morkva_settings_line">
@@ -266,6 +279,7 @@
 			</div>
 		</div>
 	</div>
+	<?php do_action('mrkv_ua_shipping_settings_page_row', 'nova-poshta', 'default_middle_6'); ?>
 	<div class="admin_ua_ship_morkva_settings_row">
 		<div class="col-mrkv-5">
 			<div class="admin_ua_ship_morkva_settings_line">
@@ -312,6 +326,7 @@
 			</div>
 		</div>
 	</div>
+	<?php do_action('mrkv_ua_shipping_settings_page_row', 'nova-poshta', 'default_middle_7'); ?>
 	<div class="admin_ua_ship_morkva_settings_line admin_ua_ship_morkva_one_data">
 		<?php 
 			$data = isset(MRKV_SHIPPING_SETTINGS['shipment']['volume']) ? MRKV_SHIPPING_SETTINGS['shipment']['volume'] : '';
@@ -321,6 +336,7 @@
 		?>
 		<p><strong><?php echo __('These standard weight and dimensions apply when products do not have ones of their own', 'mrkv-ua-shipping'); ?></strong></p>
 	</div>
+	<?php do_action('mrkv_ua_shipping_settings_page_row', 'nova-poshta', 'default_middle_8'); ?>
 	<div class="admin_ua_ship_morkva_settings_row">
 		<div class="col-mrkv-5">
 			<div class="admin_ua_ship_morkva_settings_line">
@@ -340,6 +356,7 @@
 		<div class="col-mrkv-5">
 		</div>
 	</div>
+	<?php do_action('mrkv_ua_shipping_settings_page_row', 'nova-poshta', 'default_middle_9'); ?>
 	<div class="admin_ua_ship_morkva_settings_line">
 		<?php
 			$data = isset(MRKV_SHIPPING_SETTINGS['shipment']['description']) ? MRKV_SHIPPING_SETTINGS['shipment']['description'] : '';
@@ -357,10 +374,12 @@
 			<div data-added="[quantity_p]" class="button button-primary adm-textarea-btn"><?php echo __(' Number of positions', 'mrkv-ua-shipping'); ?></div>
 		</div>
 	</div>
+	<?php do_action('mrkv_ua_shipping_settings_page_row', 'nova-poshta', 'default_last'); ?>
 </section>
 <section id="international_settings" class="mrkv_up_ship_shipping_tab_block">
 	<h2><img src="<?php echo MRKV_UA_SHIPPING_ASSETS_URL . '/images/global/map-icon.svg'; ?>" alt="International shipping settings" title="International shipping settings"><?php echo __('International shipping settings', 'mrkv-ua-shipping'); ?></h2>
 	<hr class="mrkv-ua-ship__hr">
+	<?php do_action('mrkv_ua_shipping_settings_page_row', 'nova-poshta', 'international_first'); ?>
 	<div class="admin_ua_ship_morkva_settings_row">
 		<div class="col-mrkv-5">
 			<div class="admin_ua_ship_morkva_settings_line">
@@ -375,6 +394,7 @@
 			</div>
 		</div>
 	</div>
+	<?php do_action('mrkv_ua_shipping_settings_page_row', 'nova-poshta', 'international_middle_1'); ?>
 	<div class="admin_ua_ship_morkva_settings_line">
 		<?php 
 			$data = isset(MRKV_SHIPPING_SETTINGS['internal_api_key']) ? MRKV_SHIPPING_SETTINGS['internal_api_key'] : '';
@@ -397,9 +417,11 @@
 			echo wp_kses( $mrkv_global_option_generator->get_input_text($label, MRKV_OPTION_OBJECT_NAME . '[internal_api_key]', $data, MRKV_OPTION_OBJECT_NAME. '_internal_api_key' , '', __('Enter the key...', 'mrkv-ua-shipping'), $description), MRKV_UA_SHIPPING_ALLOW_TAGS);
 		?>
 	</div>
+	<?php do_action('mrkv_ua_shipping_settings_page_row', 'nova-poshta', 'international_middle_2'); ?>
 	<h3><img src="<?php echo MRKV_UA_SHIPPING_ASSETS_URL . '/images/global/user-icon.svg'; ?>" alt="Sender settings" title="Sender settings"><?php echo __('Sender settings', 'mrkv-ua-shipping'); ?></h3>
 	<p><?php echo __('Fill in the default shipping data sender', 'mrkv-ua-shipping'); ?></p>
 	<hr class="mrkv-ua-ship__hr">
+	<?php do_action('mrkv_ua_shipping_settings_page_row', 'nova-poshta', 'international_middle_3'); ?>
 	<div class="admin_ua_ship_morkva_settings_row">
 		<div class="col-mrkv-5">
 			<div class="admin_ua_ship_morkva_settings_line">
@@ -425,6 +447,7 @@
 			</div>
 		</div>
 	</div>
+	<?php do_action('mrkv_ua_shipping_settings_page_row', 'nova-poshta', 'international_middle_4'); ?>
 	<div class="admin_ua_ship_morkva_settings_line">
 		<?php 
 			$data = isset(MRKV_SHIPPING_SETTINGS['inter']['division_address']) ? MRKV_SHIPPING_SETTINGS['inter']['division_address'] : '';
@@ -441,9 +464,11 @@
 			echo wp_kses( $mrkv_global_option_generator->get_input_hidden(MRKV_OPTION_OBJECT_NAME . '[inter][division_number]', $data, MRKV_OPTION_OBJECT_NAME . '_inter_division_number'), MRKV_UA_SHIPPING_ALLOW_TAGS);
 		?>
 	</div>
+	<?php do_action('mrkv_ua_shipping_settings_page_row', 'nova-poshta', 'international_middle_5'); ?>
 	<h3><img src="<?php echo MRKV_UA_SHIPPING_ASSETS_URL . '/images/global/tuning-icon.svg'; ?>" alt="Shipment" title="Shipment"><?php echo __('Shipment', 'mrkv-ua-shipping'); ?></h3>
 	<p><?php echo __('Fill in the default shipping data for the shipment', 'mrkv-ua-shipping'); ?></p>
 	<hr class="mrkv-ua-ship__hr">
+	<?php do_action('mrkv_ua_shipping_settings_page_row', 'nova-poshta', 'international_middle_6'); ?>
 	<div class="admin_ua_ship_morkva_settings_row">
 		<div class="col-mrkv-5">
 			<div class="admin_ua_ship_morkva_settings_line">
@@ -461,6 +486,7 @@
 		</div>
 		<div class="col-mrkv-5"></div>
 	</div>
+	<?php do_action('mrkv_ua_shipping_settings_page_row', 'nova-poshta', 'international_middle_7'); ?>
 	<div class="admin_ua_ship_morkva_settings_row">
 		<div class="col-mrkv-5">
 			<div class="admin_ua_ship_morkva_settings_line">
@@ -507,6 +533,7 @@
 			</div>
 		</div>
 	</div>
+	<?php do_action('mrkv_ua_shipping_settings_page_row', 'nova-poshta', 'international_middle_8'); ?>
 	<div class="admin_ua_ship_morkva_settings_line admin_ua_ship_morkva_one_data">
 		<?php 
 			$data = isset(MRKV_SHIPPING_SETTINGS['inter']['volume']) ? MRKV_SHIPPING_SETTINGS['inter']['volume'] : '';
@@ -516,11 +543,13 @@
 		?>
 		<p><strong><?php echo __('These standard weight and dimensions apply when products do not have ones of their own', 'mrkv-ua-shipping'); ?></strong></p>
 	</div>
+	<?php do_action('mrkv_ua_shipping_settings_page_row', 'nova-poshta', 'international_last'); ?>
 </section>
 <section id="email_settings" class="mrkv_up_ship_shipping_tab_block">
 	<h2><img src="<?php echo MRKV_UA_SHIPPING_ASSETS_URL . '/images/global/mention-square-icon.svg'; ?>" alt="Sending email from TTN" title="Sending email from TTN"><?php echo __('Email settings', 'mrkv-ua-shipping'); ?></h2>
 	<p><?php echo __('Create a custom message that will be sent after creating the shipment', 'mrkv-ua-shipping'); ?></p>
 	<hr class="mrkv-ua-ship__hr">
+	<?php do_action('mrkv_ua_shipping_settings_page_row', 'nova-poshta', 'email_first'); ?>
 	<div class="admin_ua_ship_morkva_settings_row">
 		<div class="col-mrkv-5">
 			<div class="admin_ua_ship_morkva_settings_line mrkv-field-disabled">
@@ -543,6 +572,7 @@
 			</div>
 		</div>
 	</div>
+	<?php do_action('mrkv_ua_shipping_settings_page_row', 'nova-poshta', 'email_middle_1'); ?>
 	<div class="admin_ua_ship_morkva_settings_line mrkv-field-disabled">
 		<?php
 			$data = '';
@@ -554,11 +584,13 @@
 			<div class="button button-primary adm-textarea-btn"><?php echo __('Default email template', 'mrkv-ua-shipping'); ?></div>
 		</div>
 	</div>
+	<?php do_action('mrkv_ua_shipping_settings_page_row', 'nova-poshta', 'email_last'); ?>
 </section>
 <section id="automation_settings" class="mrkv_up_ship_shipping_tab_block">
 	<h2><img src="<?php echo MRKV_UA_SHIPPING_ASSETS_URL . '/images/global/automation-icon.svg'; ?>" alt="Automation Settings" title="Automation Settings"><?php echo __('Automation Settings', 'mrkv-ua-shipping'); ?></h2>
 	<p><?php echo __('Connect automation when working with shipments', 'mrkv-ua-shipping'); ?></p>
 	<hr class="mrkv-ua-ship__hr">
+	<?php do_action('mrkv_ua_shipping_settings_page_row', 'nova-poshta', 'automation_first'); ?>
 	<div class="admin_ua_ship_morkva_settings_line mrkv-field-disabled">
 		<?php
 			$data = '';
@@ -566,6 +598,7 @@
 		?>
 		<?php echo '<span class="mrkv-ua-ship-only-pro">' . __('Only in the Pro version', 'mrkv-ua-shipping') . '</span>'; ?>
 	</div>
+	<?php do_action('mrkv_ua_shipping_settings_page_row', 'nova-poshta', 'automation_middle_1'); ?>
 	<div class="admin_ua_ship_morkva_settings_line mrkv-field-disabled">
 		<?php
 			$all_order_statuses = wc_get_order_statuses();
@@ -584,9 +617,11 @@
 		?>
 		<?php echo '<span class="mrkv-ua-ship-only-pro">' . __('Only in the Pro version', 'mrkv-ua-shipping') . '</span>'; ?>
 	</div>
+	<?php do_action('mrkv_ua_shipping_settings_page_row', 'nova-poshta', 'automation_middle_2'); ?>
 	<h3><img src="<?php echo MRKV_UA_SHIPPING_ASSETS_URL . '/images/global/routing-icon.svg'; ?>" alt="Auto" title="Auto"><?php echo __('Cron Automation settings', 'mrkv-ua-shipping'); ?></h3>
 	<p><?php echo __('Set up a cron task to change order statuses by TTN status', 'mrkv-ua-shipping'); ?></p>
 	<hr class="mrkv-ua-ship__hr">
+	<?php do_action('mrkv_ua_shipping_settings_page_row', 'nova-poshta', 'automation_middle_3'); ?>
 	<div class="admin_ua_ship_morkva_settings_line">
 		<?php
 			$data = isset(MRKV_SHIPPING_SETTINGS['automation']['status']['enabled']) ? MRKV_SHIPPING_SETTINGS['automation']['status']['enabled'] : '';
@@ -669,6 +704,7 @@
 			</div>
 		</div>
 	</div>
+	<?php do_action('mrkv_ua_shipping_settings_page_row', 'nova-poshta', 'automation_middle_4'); ?>
 	<div class="admin_ua_ship_morkva_settings_row">
 		<div class="col-mrkv-5">
 			<div class="admin_ua_ship_morkva_settings_line">
@@ -696,6 +732,7 @@
 			</div>
 		</div>
 	</div>
+	<?php do_action('mrkv_ua_shipping_settings_page_row', 'nova-poshta', 'automation_middle_5'); ?>
 	<div class="admin_ua_ship_morkva_settings_row">
 		<div class="col-mrkv-5">
 			<div class="admin_ua_ship_morkva_settings_line mrkv-ua-shipping-server">
@@ -717,6 +754,7 @@
 			</div>
 		</div>
 	</div>
+	<?php do_action('mrkv_ua_shipping_settings_page_row', 'nova-poshta', 'automation_middle_6'); ?>
 	<div class="admin_ua_ship_morkva_settings_row">
 		<div class="col-mrkv-5">
 			<div class="admin_ua_ship_morkva_settings_line mrkv-ua-shipping-server">
@@ -737,6 +775,7 @@
 			</div>
 		</div>
 	</div>
+	<?php do_action('mrkv_ua_shipping_settings_page_row', 'nova-poshta', 'automation_middle_7'); ?>
 	<div class="admin_ua_ship_morkva_settings_row">
 		<div class="col-mrkv-5 mrkv-ua-shipping-server">
 			<div class="admin_ua_ship_morkva_settings_line ">
@@ -763,11 +802,13 @@
 			</div>
 		</div>
 	</div>
+	<?php do_action('mrkv_ua_shipping_settings_page_row', 'nova-poshta', 'automation_last'); ?>
 </section>
 <section id="checkout_settings" class="mrkv_up_ship_shipping_tab_block">
 	<h2><img src="<?php echo MRKV_UA_SHIPPING_ASSETS_URL . '/images/global/clapperboard-edit-icon.svg'; ?>" alt="Sending email from TTN" title="Sending email from TTN"><?php echo __('Checkout settings', 'mrkv-ua-shipping'); ?></h2>
 	<p><?php echo __('Customize the output of the plugin fields in relation to your theme', 'mrkv-ua-shipping'); ?></p>
 	<hr class="mrkv-ua-ship__hr">
+	<?php do_action('mrkv_ua_shipping_settings_page_row', 'nova-poshta', 'checkout_first'); ?>
 	<div class="admin_ua_ship_morkva_settings_row">
 		<div class="col-mrkv-5">
 			<div class="admin_ua_ship_morkva_settings_line">
@@ -785,6 +826,7 @@
 			</div>
 		</div>
 	</div>
+	<?php do_action('mrkv_ua_shipping_settings_page_row', 'nova-poshta', 'checkout_middle_1'); ?>
 	<div class="admin_ua_ship_morkva_settings_row">
 		<div class="col-mrkv-5">
 			<div class="admin_ua_ship_morkva_settings_line">
@@ -805,6 +847,7 @@
 			</div>
 		</div>
 	</div>
+	<?php do_action('mrkv_ua_shipping_settings_page_row', 'nova-poshta', 'checkout_middle_2'); ?>
 	<div class="admin_ua_ship_morkva_settings_row">
 		<div class="col-mrkv-5">
 			<div class="admin_ua_ship_morkva_settings_line">
@@ -832,11 +875,13 @@
 			</div>
 		</div>
 	</div>
+	<?php do_action('mrkv_ua_shipping_settings_page_row', 'nova-poshta', 'checkout_last'); ?>
 </section>
 <section id="log_settings" class="mrkv_up_ship_shipping_tab_block">
 	<h2><img src="<?php echo MRKV_UA_SHIPPING_ASSETS_URL . '/images/global/clipboard-list-icon.svg'; ?>" alt="Debug Log" title="Debug Log"><?php echo __('Debug Log', 'mrkv-ua-shipping'); ?></h2>
 	<p><?php echo __('To keep an error log, enable it in the settings', 'mrkv-ua-shipping'); ?></p>
 	<hr class="mrkv-ua-ship__hr">
+	<?php do_action('mrkv_ua_shipping_settings_page_row', 'nova-poshta', 'log_first'); ?>
 	<div class="admin_ua_ship_morkva_settings_row">
 		<div class="col-mrkv-5">
 			<div class="admin_ua_ship_morkva_settings_line">
@@ -857,11 +902,13 @@
 			</div>
 		</div>
 	</div>
+	<?php do_action('mrkv_ua_shipping_settings_page_row', 'nova-poshta', 'log_middle_1'); ?>
 	<div class="admin_ua_ship_morkva_settings_line">
 		<h3><?php echo __('Log', 'mrkv-ua-shipping'); ?></h3>
 		<pre class="mrkv_log_file_content">
 			<?php echo file_get_contents(MRKV_UA_SHIPPING_PLUGIN_DIR . 'logs/' . SETTINGS_MRKV_UA_SHIPPING_SLUG . '/debug-' . SETTINGS_MRKV_UA_SHIPPING_SLUG . '.log'); ?>
 		</pre>
 		<div class="mrkv_btn_log_clean"><img src="<?php echo MRKV_UA_SHIPPING_ASSETS_URL . '/images/global/trash-icon.svg'; ?>" alt="Debug Log" title="Debug Log"><?php echo __('Clear log', 'mrkv-ua-shipping'); ?></div>
-	</div>	
+	</div>
+	<?php do_action('mrkv_ua_shipping_settings_page_row', 'nova-poshta', 'log_last'); ?>
 </section>

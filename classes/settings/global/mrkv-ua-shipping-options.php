@@ -240,6 +240,8 @@ if (!class_exists('MRKV_UA_SHIPPING_OPTIONS'))
 		        ];
 		    }
 
+		    $output = apply_filters('mrkv_ua_shipping_option_serialize', $output, 'nova-poshta', $input );
+
 		    return $output;
 		}
 
@@ -391,6 +393,8 @@ if (!class_exists('MRKV_UA_SHIPPING_OPTIONS'))
 		        ];
 		    }
 
+		    $output = apply_filters('mrkv_ua_shipping_option_serialize', $output, 'ukr-poshta', $input );
+
 		    return $output;
 		}
 
@@ -421,6 +425,8 @@ if (!class_exists('MRKV_UA_SHIPPING_OPTIONS'))
 		            'query' => isset( $debug['query'] ) ? sanitize_text_field( $debug['query'] ) : 'off',
 		        ];
 		    }
+
+		    $output = apply_filters('mrkv_ua_shipping_option_serialize', $output, 'rozetka-delivery', $input );
 
 		    return $output;
 		}
@@ -475,6 +481,8 @@ if (!class_exists('MRKV_UA_SHIPPING_OPTIONS'))
 	                'query' => isset( $debug['query'] ) ? sanitize_text_field( $debug['query'] ) : 'off',
 	            ];
 	        }
+
+	        $output = apply_filters('mrkv_ua_shipping_option_serialize', $output, 'nova-global', $input );
 
 	        return $output;
 	    }

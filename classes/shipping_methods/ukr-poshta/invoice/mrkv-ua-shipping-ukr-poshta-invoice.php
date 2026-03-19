@@ -37,7 +37,7 @@ if (!class_exists('MRKV_UA_SHIPPING_UKR_POSHTA_INVOICE'))
 		{
 			# Set all variable
 			$this->order = $order;
-			$this->post_fields = $post_fields;
+			$this->post_fields = apply_filters('mrkv_ua_shipping_invoice_post_data', $post_fields,$order,$settings_shipping, 'ukr-poshta');
 			$this->shipping_api = $shipping_api;
 			$this->settings_shipping = $settings_shipping;
 		}
