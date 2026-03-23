@@ -276,6 +276,10 @@ if (!class_exists('MRKV_UA_SHIPPING_AJAX_NOVA'))
 	        {
 	        	$args['methodProperties']['Limit'] = '20';
 	        }
+	        else
+	        {
+	        	$args['methodProperties']['Limit'] = '10000';
+	        }
 
 	        # Send request
 	        $obj = $mrkv_object_nova_poshta->send_post_request( $args );

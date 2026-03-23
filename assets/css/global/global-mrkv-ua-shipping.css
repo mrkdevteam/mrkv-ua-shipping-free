@@ -163,9 +163,17 @@
     width: 15px;
     height: 15px;
 }
+#mrkv_ua_invoice, #mrkv_ua_shipping{
+    text-align: center;
+}
 .mrkv_ua_ship_global_create__invoice .mrkv_ua_ship_create_invoice__loader::before,
 .mrkv_ua_shipping_change_field_address .mrkv_ua_ship_create_invoice__loader:before{
     border: 2px solid #000;
+}
+.mrkv_ua_shipping_change_field_address .mrkv_ua_ship_create_invoice__loader{
+    top: 25%;
+    left: 48%;
+    transform: translate(-50%, -50%) !important;
 }
 .mrkv_ua_ship_global_create__invoice img{
     width: 20px !important;
