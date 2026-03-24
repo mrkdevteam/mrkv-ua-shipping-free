@@ -184,6 +184,7 @@ let latinRegex = /[A-Za-z]/;
 		{
 			jQuery('form[data-ship="' + current_ship_key + '"] textarea[name="mrkv_ua_ship_invoice_shipment_description"]').css('border-color', 'red').focus();
 			jQuery(loading_create).hide();
+			isProcessingCreateInvoice = false;
 		}
 		else
 		{
