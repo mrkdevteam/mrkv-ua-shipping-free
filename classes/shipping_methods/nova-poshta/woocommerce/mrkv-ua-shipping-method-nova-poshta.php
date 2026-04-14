@@ -133,6 +133,27 @@ if (!class_exists('MRKV_UA_SHIPPING_NOVA_POSHTA'))
                 'calc_tax' => 'per_item'
             );
 
+            $should_calculate = true;
+            
+            if (WC()->session) {
+                $is_on_product_page = WC()->session->get('mrkv_is_on_product_page');
+                
+                if ($is_on_product_page === true) {
+                    $should_calculate = false;
+                }
+            }
+
+            if (isset($_REQUEST['action']) && $_REQUEST['action'] === 'woocommerce_update_order_review') {
+                $should_calculate = true;
+            }
+
+            $should_calculate = apply_filters('mrkv_ua_shipping_calculation_condtion', $should_calculate, $package);
+
+            if (!$should_calculate) {
+                $this->add_rate($rate);
+                return;
+            }
+
             if($this->get_option('enable_fix_cost') && $this->get_option('enable_fix_cost') == 'yes')
             {
                 $rate['cost'] = $this->get_option('fix_cost_total');

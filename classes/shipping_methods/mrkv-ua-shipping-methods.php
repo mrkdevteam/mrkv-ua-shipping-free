@@ -29,6 +29,25 @@ if (!class_exists('MRKV_UA_SHIPPING_METHODS'))
 
 			# Load settings page constants
 			add_action( 'wp_loaded', array($this, 'get_shipping_admin_settings'));
+			add_filter('template_redirect', array($this, 'mrkv_save_page_context_to_session'), 10, 2);
+		}
+
+		public function mrkv_save_page_context_to_session() {
+
+			if (is_admin() || !WC()->session) return;
+
+			$url = $_SERVER['REQUEST_URI'];
+			$is_forbidden = (strpos($url, '/product/') !== false || strpos($url, '/shop/') !== false);
+			$is_safe = (strpos($url, '/cart/') !== false || strpos($url, '/checkout/') !== false);
+
+			if ($is_forbidden) {
+				WC()->session->set('mrkv_is_on_product_page', true);
+			} elseif ($is_safe) {
+				WC()->session->set('mrkv_is_on_product_page', false);
+			}
+
+			WC()->session->save_data();
+
 		}
 
 		/**
