@@ -23,46 +23,58 @@ if (!class_exists('MRKV_UA_SHIPPING_WOO_PRODUCT'))
 			add_action('woocommerce_process_product_meta', [$this, 'admin_mrkv_ua_shipping_add_new_tab_data_save']);
 		}
 
-		public function admin_mrkv_ua_shipping_add_new_tab($tabs)
-		{
-			$tabs['mrkv_ua_shipping'] = [
-		        'label'    => __('MRKV UA Shipping', 'mrkv-ua-shipping'),
-		        'target'   => 'mrkv_ua_shipping_options',
-		        'class'    => [],
-		        'priority' => 50,
-		    ];
-		    return $tabs;
+		private function get_all_shipping_settings_html() {
+			$m_ua_active_plugins = get_option('m_ua_active_plugins');
+			if (empty($m_ua_active_plugins) || !is_array($m_ua_active_plugins)) {
+				return '';
+			}
+
+			ob_start(); 
+			
+			global $post;
+			$product = wc_get_product($post->ID);
+
+			foreach (MRKV_UA_SHIPPING_LIST as $slug => $shipping) {
+				if (isset($m_ua_active_plugins[$slug]['enabled']) && $m_ua_active_plugins[$slug]['enabled'] == 'on') {
+					$settings_shipping = get_option($slug . '_m_ua_settings');
+					$file_path = MRKV_UA_SHIPPING_PLUGIN_PATH . 'classes/shipping_methods/' . $slug . '/product/mrkv-ua-shipping-product.php';
+					
+					if (file_exists($file_path)) {
+						include $file_path;
+					}
+				}
+			}
+
+			$output = ob_get_clean();
+			return trim($output);
 		}
 
-		public function admin_mrkv_ua_shipping_add_new_tab_content()
-		{
-			global $post;
-    		$product = wc_get_product($post->ID);
+		public function admin_mrkv_ua_shipping_add_new_tab($tabs) {
+			$settings_html = $this->get_all_shipping_settings_html();
 
-    		if($product)
-    		{
-    			?>
-    				<div id="mrkv_ua_shipping_options" class="panel woocommerce_options_panel">
-        				<h3 style="padding: 0px 20px;"><?php _e('MRKV UA Shipping', 'mrkv-ua-shipping'); ?></h3>
-        				<?php
-        					$m_ua_active_plugins = get_option('m_ua_active_plugins');
+			if (!empty($settings_html)) {
+				$tabs['mrkv_ua_shipping'] = [
+					'label'    => __('morkva UA Shipping', 'mrkv-ua-shipping'),
+					'target'   => 'mrkv_ua_shipping_options',
+					'class'    => [],
+					'priority' => 50,
+				];
+			}
+			return $tabs;
+		}
 
-        					foreach(MRKV_UA_SHIPPING_LIST as $slug => $shipping)
-							{
-								if(isset($m_ua_active_plugins[$slug]['enabled']) && $m_ua_active_plugins[$slug]['enabled'] == 'on')
-								{
-									# Get settings 
-									$settings_shipping = get_option($slug . '_m_ua_settings');
+		public function admin_mrkv_ua_shipping_add_new_tab_content() {
+			$settings_html = $this->get_all_shipping_settings_html();
 
-									# Include settings checkout by shipping
-									include MRKV_UA_SHIPPING_PLUGIN_PATH . 'classes/shipping_methods/' . $slug . '/product/mrkv-ua-shipping-product.php';
-								}
-							}
-        				?>
-        				<hr>
-        			</div>
-    			<?php
-    		}
+			if (!empty($settings_html)) {
+				?>
+				<div id="mrkv_ua_shipping_options" class="panel woocommerce_options_panel">
+					<h3 style="padding: 0px 20px;"><?php _e('morkva UA Shipping', 'mrkv-ua-shipping'); ?></h3>
+					<?php echo $settings_html; ?>
+					<hr>
+				</div>
+				<?php
+			}
 		}
 
 		public function admin_mrkv_ua_shipping_add_new_tab_data_save($post_id)

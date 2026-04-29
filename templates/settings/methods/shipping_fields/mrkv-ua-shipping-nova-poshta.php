@@ -761,7 +761,7 @@
 				<?php 
 					$data = isset(MRKV_SHIPPING_SETTINGS['automation']['cron']['frequency']) ? MRKV_SHIPPING_SETTINGS['automation']['cron']['frequency'] : '1440';
 
-					echo wp_kses($mrkv_global_option_generator->get_input_number(__('Request frequency (minutes)', 'mrkv-ua-shipping') . ' (хв)', MRKV_OPTION_OBJECT_NAME . '[automation][cron][frequency]', $data, MRKV_OPTION_OBJECT_NAME. '_automation_cron_frequency' , '', '', ''), MRKV_UA_SHIPPING_ALLOW_TAGS);
+					echo wp_kses($mrkv_global_option_generator->get_input_number(__('Request frequency (minutes)', 'mrkv-ua-shipping'), MRKV_OPTION_OBJECT_NAME . '[automation][cron][frequency]', $data, MRKV_OPTION_OBJECT_NAME. '_automation_cron_frequency' , '', '', ''), MRKV_UA_SHIPPING_ALLOW_TAGS);
 				?>
 			</div>
 		</div>

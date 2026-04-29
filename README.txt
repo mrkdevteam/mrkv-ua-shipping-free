@@ -1,9 +1,9 @@
-=== Morkva UA Shipping ===
+=== morkva UA Shipping ===
 Contributors: bandido, dpmine
 Tags: Nova Poshta, Нова Пошта, Укрпошта
 Tested up to: 6.9
 Requires PHP: 7.4
-Stable tag: 1.8.8
+Stable tag: 1.9.0
 License: GPLv2
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -18,7 +18,7 @@ License URI: http://www.gnu.org/licenses/gpl-2.0.html
 * Підтримка зон доставки WooCommerce
 * Підтримка PHP 8.0+
 * Підтримка WPML та Polylang
-* Сумісність з плагінами Morkva Plata by Mono, Morkva LiqPay, Morkva Dilovod, Morkva KeyCRM, Freelancevip Turbo SMS
+* Сумісність з плагінами morkva Plata by Mono, morkva LiqPay, morkva Dilovod, morkva KeyCRM, Freelancevip Turbo SMS
 
 [База знань](https://docs.morkva.co.ua/uk/plugins)
 [Про-версія](https://morkva.co.ua/shop/morkva-ua-shipping/)
@@ -170,6 +170,9 @@ https://youtu.be/47-VrH_QJAE
 
 
 == Changelog ==
+
+= 1.9.0 =
+* [new] змінили UI налаштувань на сторінці товару
 
 = 1.8.8 =
 * [new] додали перевірку сторінки розрахунку вартості доставки

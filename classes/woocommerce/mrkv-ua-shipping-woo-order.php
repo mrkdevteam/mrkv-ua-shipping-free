@@ -73,7 +73,7 @@ if (!class_exists('MRKV_UA_SHIPPING_WOO_ORDER'))
 		            }
 		            else
 		            {
-		            	add_meta_box('mrkv_ua_shipping_data_box', __('MRKV UA Shipping', 'mrkv-ua-shipping'), array( $this, 'mrkv_ua_shipping_changer_add_plugin_meta_box' ), $screen, 'side', 'core');
+		            	add_meta_box('mrkv_ua_shipping_data_box', __('morkva UA Shipping', 'mrkv-ua-shipping'), array( $this, 'mrkv_ua_shipping_changer_add_plugin_meta_box' ), $screen, 'side', 'core');
 		            }
 	            }
 	        }
@@ -194,6 +194,8 @@ if (!class_exists('MRKV_UA_SHIPPING_WOO_ORDER'))
 		    			{
 		    				$mrkv_ua_ship_invoice = $order->get_meta(MRKV_UA_SHIPPING_LIST[$key]['old_ttn_slug']);
 		    			}
+
+						do_action( 'mrkv_ua_shipping_metabox_start', $key, $order);
 
 			            if($mrkv_ua_ship_invoice){
 			            	?>
@@ -340,6 +342,7 @@ if (!class_exists('MRKV_UA_SHIPPING_WOO_ORDER'))
 					            </div>
 			            	</div>
 			            <?php
+						do_action( 'mrkv_ua_shipping_metabox_end', $key, $order);
 		    		}
 		    		else
 		    		{
