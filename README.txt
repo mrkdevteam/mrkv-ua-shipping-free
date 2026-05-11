@@ -3,7 +3,7 @@ Contributors: bandido, dpmine
 Tags: Nova Poshta, Нова Пошта, Укрпошта
 Tested up to: 6.9
 Requires PHP: 7.4
-Stable tag: 1.9.1
+Stable tag: 1.9.2
 License: GPLv2
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -170,6 +170,10 @@ https://youtu.be/47-VrH_QJAE
 
 
 == Changelog ==
+
+= 1.9.2 =
+* [new] додали друк накладних на сторінці замовлень
+* [fix] виправили помилку sender does not belong to this address
 
 = 1.9.1 =
 * [new] додали перевірку адреси відправника в налаштуваннях

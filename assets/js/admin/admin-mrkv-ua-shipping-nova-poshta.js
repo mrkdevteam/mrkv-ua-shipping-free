@@ -1,5 +1,17 @@
 jQuery(window).on('load', function() 
 {
+	jQuery('#nova-poshta_m_ua_settings_api_key').on('keyup change', function() {
+		jQuery('#nova-poshta_m_ua_settings_sender_list').val('');
+		jQuery('#nova-poshta_m_ua_settings_sender_counterparty_ref').val('');
+		jQuery('#nova-poshta_m_ua_settings_sender_middlename').val('');
+		jQuery('#nova-poshta_m_ua_settings_sender_firstname').val('');
+		jQuery('#nova-poshta_m_ua_settings_sender_lastname').val('');
+		jQuery('#nova-poshta_m_ua_settings_sender_email').val('');
+		jQuery('#nova-poshta_m_ua_settings_sender_phones').val('');
+		jQuery('#nova-poshta_m_ua_settings_sender_description').val('');
+		jQuery('#nova-poshta_m_ua_settings_sender_ref').val('');
+	});
+
  	jQuery('#nova-poshta_m_ua_settings_sender_ref').change(function()
 	{
 		var option_selected = jQuery(this).find('option:selected');

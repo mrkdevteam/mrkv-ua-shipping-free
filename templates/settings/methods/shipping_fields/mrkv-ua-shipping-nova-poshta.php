@@ -155,6 +155,10 @@
 			</div>
 		</div>
 		<div class="col-mrkv-5">
+		</div>
+	</div>
+	<div class="admin_ua_ship_morkva_settings_row">
+		<div class="col-mrkv-5">
 			<div class="admin_ua_ship_morkva_settings_line mrkv-field-disabled">
 				<h4><?php echo __('Payer for the cash on delivery function', 'mrkv-ua-shipping'); ?></h4>
 				<p class="mrkv-ua-ship-only-pro"><?php echo __('Only in the Pro version', 'mrkv-ua-shipping'); ?></p>
@@ -163,6 +167,19 @@
 						$data = '';
 						echo wp_kses( $mrkv_global_option_generator->get_input_radio(__('Recipient', 'mrkv-ua-shipping'), MRKV_OPTION_OBJECT_NAME . '[payer][cash]', 'Recipient', $data, MRKV_OPTION_OBJECT_NAME . '_payer_cash_recipient', 'Recipient', 'disabled'), MRKV_UA_SHIPPING_ALLOW_TAGS);
 						echo wp_kses( $mrkv_global_option_generator->get_input_radio(__('Sender', 'mrkv-ua-shipping'), MRKV_OPTION_OBJECT_NAME . '[payer][cash]', 'Sender', $data, MRKV_OPTION_OBJECT_NAME . '_payer_cash_sender', 'Recipient', 'disabled'), MRKV_UA_SHIPPING_ALLOW_TAGS);
+					?>
+				</div>
+			</div>
+		</div>
+		<div class="col-mrkv-5">
+			<div class="admin_ua_ship_morkva_settings_line mrkv-field-disabled">
+				<h4><?php echo __('Payer for the cash on delivery (Free shipping)', 'mrkv-ua-shipping'); ?></h4>
+				<p class="mrkv-ua-ship-only-pro"><?php echo __('Only in the Pro version', 'mrkv-ua-shipping'); ?></p>
+				<div class="admin_ua_ship_morkva_settings_row">
+					<?php
+						$data = '';
+						echo wp_kses( $mrkv_global_option_generator->get_input_radio(__('Recipient', 'mrkv-ua-shipping'), MRKV_OPTION_OBJECT_NAME . '[payer][cash_free]', 'Recipient', $data, MRKV_OPTION_OBJECT_NAME . '_payer_cash_recipient', 'Recipient', 'disabled'), MRKV_UA_SHIPPING_ALLOW_TAGS);
+						echo wp_kses( $mrkv_global_option_generator->get_input_radio(__('Sender', 'mrkv-ua-shipping'), MRKV_OPTION_OBJECT_NAME . '[payer][cash_free]', 'Sender', $data, MRKV_OPTION_OBJECT_NAME . '_payer_cash_sender', 'Recipient', 'disabled'), MRKV_UA_SHIPPING_ALLOW_TAGS);
 					?>
 				</div>
 			</div>
