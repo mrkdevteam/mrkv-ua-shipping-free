@@ -10,11 +10,11 @@ if (!class_exists('MRKV_UA_SHIPPING_NOVA_POSHTA_ADDRESS'))
      */
     class MRKV_UA_SHIPPING_NOVA_POSHTA_ADDRESS extends WC_Shipping_Method
     {
-        public function __construct($instance_id = 0)
+        public function __construct($mrkv_ua_shipping_instance_id = 0)
         {
             # Set instance id
-            $this->instance_id = absint( $instance_id );
-            parent::__construct( $instance_id );
+            $this->instance_id = absint( $mrkv_ua_shipping_instance_id );
+            parent::__construct( $mrkv_ua_shipping_instance_id );
 
             # Set main fields
             $this->id = 'mrkv_ua_shipping_nova-poshta_address';
@@ -129,7 +129,10 @@ if (!class_exists('MRKV_UA_SHIPPING_NOVA_POSHTA_ADDRESS'))
                 }
             }
 
-            if (isset($_REQUEST['action']) && $_REQUEST['action'] === 'woocommerce_update_order_review') {
+            // phpcs:ignore WordPress.Security.NonceVerification.Recommended
+            $action = isset( $_REQUEST['action'] ) ? sanitize_text_field( wp_unslash( $_REQUEST['action'] ) ) : '';
+
+            if ( 'woocommerce_update_order_review' === $action ) {
                 $should_calculate = true;
             }
 

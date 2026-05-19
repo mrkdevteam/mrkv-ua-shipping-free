@@ -66,11 +66,28 @@ if (!class_exists('MRKV_UA_SHIPPING_WOO_PRODUCT'))
 		public function admin_mrkv_ua_shipping_add_new_tab_content() {
 			$settings_html = $this->get_all_shipping_settings_html();
 
-			if (!empty($settings_html)) {
+			if (!empty($settings_html)) 
+			{
+				$allowed_form_html = array(
+					'hr'    => array(),
+					'h3'    => array( 'style' => array() ),
+					'p'     => array( 'class' => array() ),
+					'label' => array( 'for' => array() ),
+					'select'=> array(
+						'id'    => array(),
+						'name'  => array(),
+						'class' => array(),
+					),
+					'option'=> array(
+						'value'    => array(),
+						'selected' => array(),
+					),
+					'span'  => array( 'class' => array() ),
+				);
 				?>
 				<div id="mrkv_ua_shipping_options" class="panel woocommerce_options_panel">
-					<h3 style="padding: 0px 20px;"><?php _e('morkva UA Shipping', 'mrkv-ua-shipping'); ?></h3>
-					<?php echo $settings_html; ?>
+					<h3 style="padding: 0px 20px;"><?php esc_html_e('morkva UA Shipping', 'mrkv-ua-shipping'); ?></h3>
+					<?php echo wp_kses( $settings_html, $allowed_form_html ); ?>
 					<hr>
 				</div>
 				<?php
@@ -79,12 +96,29 @@ if (!class_exists('MRKV_UA_SHIPPING_WOO_PRODUCT'))
 
 		public function admin_mrkv_ua_shipping_add_new_tab_data_save($post_id)
 		{
-			if (isset($_POST['_mrkv_tire_type'])) {
-		        update_post_meta($post_id, '_mrkv_tire_type', sanitize_text_field($_POST['_mrkv_tire_type']));
-		    }
-		    if (isset($_POST['_mrkv_document_weight'])) {
-		        update_post_meta($post_id, '_mrkv_document_weight', sanitize_text_field($_POST['_mrkv_document_weight']));
-		    }
+			if ( ! isset( $_POST['woocommerce_meta_nonce'] ) || ! wp_verify_nonce( sanitize_text_field( wp_unslash( $_POST['woocommerce_meta_nonce'] ) ), 'woocommerce_save_data' ) ) {
+				return;
+			}
+
+			if ( ! current_user_can( 'edit_post', $post_id ) ) {
+				return;
+			}
+
+			if ( isset( $_POST['_mrkv_tire_type'] ) ) {
+				update_post_meta(
+					$post_id, 
+					'_mrkv_tire_type', 
+					sanitize_text_field( wp_unslash( $_POST['_mrkv_tire_type'] ) )
+				);
+			}
+
+		    if ( isset( $_POST['_mrkv_document_weight'] ) ) {
+				update_post_meta(
+					$post_id, 
+					'_mrkv_document_weight', 
+					sanitize_text_field( wp_unslash( $_POST['_mrkv_document_weight'] ) )
+				);
+			}
 		}
 	}
 }

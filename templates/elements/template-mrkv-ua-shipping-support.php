@@ -1,3 +1,4 @@
+<?php if ( ! defined( 'ABSPATH' ) ) exit; ?>
 <div class="admin_mrkv_ua_shipping__plugin-info mrkv_block_rounded">
 	<div class="admin_mrkv_ua_shipping__plugin__support">
 		<h2><?php echo esc_html__('Like this plugin?', 'mrkv-ua-shipping'); ?></h2>
@@ -103,7 +104,7 @@
 												? ($mrkv_ua_shipping_plugin_data['description'] ?? '') 
 												: ($mrkv_ua_shipping_plugin_data['description_en'] ?? '');
 												
-											echo $mrkv_ua_shipping_current_desc; 
+											echo esc_attr($mrkv_ua_shipping_current_desc); 
 										?>
 										</span>
 									</li>

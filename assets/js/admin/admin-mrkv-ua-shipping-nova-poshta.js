@@ -229,21 +229,6 @@ jQuery(window).on('load', function()
         width: '100%',
     });
 
-    jQuery('.mrkv_btn_log_clean').click(function(){
-        jQuery.ajax({
-            url: mrkv_ua_ship_helper.ajax_url,
-            type: 'POST',
-            data: {
-                action: 'mrkv_ua_ship_clear_log',
-                shipping: 'nova-poshta',
-                nonce: mrkv_ua_ship_helper.nonce,
-            }, 
-            success: function( data ) {
-                jQuery('.mrkv_log_file_content').text('');
-            }
-        });
-    });
-
     var mrkv_typing_timer;
     var done_typing_interval = 2000;
 
