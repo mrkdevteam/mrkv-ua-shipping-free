@@ -16,7 +16,7 @@
         <?php 
             require_once MRKV_UA_SHIPPING_PLUGIN_PATH . 'classes/settings/global/mrkv-ua-shipping-option-fields.php';
             global $mrkv_global_option_generator;
-            $mrkv_global_option_generator = new MRKV_UA_SHIPPING_OPTION_FILEDS();
+            $mrkv_global_option_generator = new MRKV_UA_SHIPPING_OPTION_FIELDS();
         ?>
         <div class="mrkv_ua_ship_modal-content__inner">
             <?php 

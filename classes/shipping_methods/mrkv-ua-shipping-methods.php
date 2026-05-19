@@ -55,6 +55,7 @@ if (!class_exists('MRKV_UA_SHIPPING_METHODS'))
 			}
 
 			WC()->session->save_data();
+
 		}
 
 		/**
@@ -80,7 +81,7 @@ if (!class_exists('MRKV_UA_SHIPPING_METHODS'))
 							. '/api/mrkv-ua-shipping-api-' . MRKV_UA_SHIPPING_SETTINGS_SLUG . '.php';
 
 						global $mrkv_global_option_generator;
-						$mrkv_global_option_generator = new MRKV_UA_SHIPPING_OPTION_FILEDS();
+						$mrkv_global_option_generator = new MRKV_UA_SHIPPING_OPTION_FIELDS();
 						define('MRKV_OPTION_OBJECT_NAME', MRKV_UA_SHIPPING_SETTINGS_SLUG . '_m_ua_settings');
 						define('MRKV_SHIPPING_SETTINGS', get_option(MRKV_OPTION_OBJECT_NAME));
 						
