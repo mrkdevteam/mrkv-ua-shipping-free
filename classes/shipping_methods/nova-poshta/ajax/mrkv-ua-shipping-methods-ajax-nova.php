@@ -217,123 +217,138 @@ if (!class_exists('MRKV_UA_SHIPPING_AJAX_NOVA'))
 		 * Get Nova poshta Warehouse
 		 * */
 		public function get_nova_poshta_warehouse()
-		{
-			$start_time = microtime(true);
+        {
+            $start_time = microtime(true);
 
-			if (!isset($_POST['nonce']) || !wp_verify_nonce(sanitize_text_field(wp_unslash($_POST['nonce'])), 'mrkv_ua_ship_nonce')) {
-				wp_send_json_error(__('Invalid nonce.', 'mrkv-ua-shipping'), 403);
-			}
+            if (!isset($_POST['nonce']) || !wp_verify_nonce(sanitize_text_field(wp_unslash($_POST['nonce'])), 'mrkv_ua_ship_nonce')) {
+                wp_send_json_error(__('Invalid nonce.', 'mrkv-ua-shipping'), 403);
+            }
 
-			$city_ref = isset($_POST['ref']) ? sanitize_text_field(wp_unslash($_POST['ref'])) : '';
-			$key_search = isset($_POST['name']) ? sanitize_text_field(wp_unslash($_POST['name'])) : '';
-			$warehouse_type = isset($_POST['warehouse_type']) ? sanitize_text_field(wp_unslash($_POST['warehouse_type'])) : '';
-			$source_query = isset($_POST['source_query']) ? sanitize_text_field(wp_unslash($_POST['source_query'])) : '';
-			$search_by = isset($_POST['search_by']) ? sanitize_text_field(wp_unslash($_POST['search_by'])) : '';
-			$default_type = isset($_POST['default_content']) ? sanitize_text_field(wp_unslash($_POST['default_content'])) : '';
-			$search_by_number = isset($_POST['search_by_number']) ? sanitize_text_field(wp_unslash($_POST['search_by_number'])) : '';
+            $city_ref         = isset($_POST['ref']) ? sanitize_text_field(wp_unslash($_POST['ref'])) : '';
+            $key_search       = isset($_POST['name']) ? sanitize_text_field(wp_unslash($_POST['name'])) : '';
+            $warehouse_type   = isset($_POST['warehouse_type']) ? sanitize_text_field(wp_unslash($_POST['warehouse_type'])) : '';
+            $source_query     = isset($_POST['source_query']) ? sanitize_text_field(wp_unslash($_POST['source_query'])) : '';
+            $search_by        = isset($_POST['search_by']) ? sanitize_text_field(wp_unslash($_POST['search_by'])) : '';
+            $default_type     = isset($_POST['default_content']) ? sanitize_text_field(wp_unslash($_POST['default_content'])) : '';
+            $search_by_number = isset($_POST['search_by_number']) ? sanitize_text_field(wp_unslash($_POST['search_by_number'])) : '';
+            $page  = isset($_POST['page']) ? absint($_POST['page']) : 1;
+            $limit = 20; 
 
-			if(!$key_search)
-			{
-				$transient_key = 'mrkv_np_wh_' . md5($city_ref . $warehouse_type . $default_type);
-				$cached_response = get_transient($transient_key);
+            $label = ($warehouse_type && $warehouse_type != 'none') ? __('Choose the poshtomat', 'mrkv-ua-shipping') : 
+                        (($search_by_number == 'yes') ? __('Please enter warehouse number', 'mrkv-ua-shipping') : __('Choose the warehouse', 'mrkv-ua-shipping'));
 
-				if (false !== $cached_response) {
-					echo wp_json_encode($cached_response);
-					wp_die();
-				}	
-			}
+            $placeholder_item = array('value' => '', 'label' => $label, 'number' => '', 'zipcode' => '');
 
-			$settings_method = get_option('nova-poshta_m_ua_settings');
-			require_once MRKV_UA_SHIPPING_PLUGIN_PATH . 'classes/shipping_methods/nova-poshta/api/mrkv-ua-shipping-api-nova-poshta.php';
-			$mrkv_object_nova_poshta = new MRKV_UA_SHIPPING_API_NOVA_POSHTA($settings_method);
+            if(!$key_search)
+            {
+                $current_locale = get_locale();
+                $transient_key = 'mrkv_np_wh_' . md5($city_ref . $warehouse_type . $default_type . $page . $current_locale);
+                $cached_response = get_transient($transient_key);
 
-			$mrkv_ua_shipping_args = array(
-				'apiKey' => $mrkv_object_nova_poshta->get_api_key(),
-				'modelName' => 'AddressGeneral',
-				'calledMethod' => 'getWarehouses',
-				'methodProperties' => array(
-					'CityRef' => $city_ref,
-					'Limit' => ($default_type == 'part') ? '20' : '10000',
-					'FindByString' => $search_by ? '' : '%' . $key_search . '%',
-				)
-			);
+                if (false !== $cached_response) {
+                    if ($page === 1 && !empty($cached_response)) {
+                        array_unshift($cached_response, $placeholder_item);
+                    }
+                    echo wp_json_encode($cached_response);
+                    wp_die();
+                }   
+            }
 
-			if ($search_by) {
-				$mrkv_ua_shipping_args['methodProperties']['WarehouseId'] = $key_search;
-			}
+            $settings_method = get_option('nova-poshta_m_ua_settings');
+            require_once MRKV_UA_SHIPPING_PLUGIN_PATH . 'classes/shipping_methods/nova-poshta/api/mrkv-ua-shipping-api-nova-poshta.php';
+            $mrkv_object_nova_poshta = new MRKV_UA_SHIPPING_API_NOVA_POSHTA($settings_method);
 
-			if ($mrkv_object_nova_poshta->active_api !== true) {
-				$mrkv_ua_shipping_args['modelName'] = 'Address';
-				unset($mrkv_ua_shipping_args['apiKey']);
-			}
+            $mrkv_ua_shipping_args = array(
+                'apiKey' => $mrkv_object_nova_poshta->get_api_key(),
+                'modelName' => 'AddressGeneral',
+                'calledMethod' => 'getWarehouses',
+                'methodProperties' => array(
+                    'CityRef' => $city_ref,
+                    'Limit' => (string) $limit,
+                    'Page' => (string) $page,
+                    'FindByString' => $search_by ? '' : '%' . $key_search . '%',
+                )
+            );
 
-			$exclude_post = false;
-			if ($warehouse_type == 'none') {
-				$exclude_post = true;
-			} elseif ($warehouse_type) {
-				$mrkv_ua_shipping_args['methodProperties']['TypeOfWarehouseRef'] = $warehouse_type;
-			}
+            if ($search_by) {
+                $mrkv_ua_shipping_args['methodProperties']['WarehouseId'] = $key_search;
+                unset($mrkv_ua_shipping_args['methodProperties']['Page']);
+                $mrkv_ua_shipping_args['methodProperties']['Limit'] = '50';
+            }
 
-			$obj = $mrkv_object_nova_poshta->send_post_request($mrkv_ua_shipping_args);
+            if ($mrkv_object_nova_poshta->active_api !== true) {
+                $mrkv_ua_shipping_args['modelName'] = 'Address';
+                unset($mrkv_ua_shipping_args['apiKey']);
+            }
 
-			if ($mrkv_object_nova_poshta->active_api !== true) {
-				if (!isset($obj['data']) || !isset($obj['data'][0])) {
-					$response = wp_remote_get('https://np.morkva.co.ua/api.php', [
-						'timeout' => 10,
-						'body' => [
-							'query_type' => 'warehouse_poshtomat',
-							'city_ref' => $city_ref,
-						]
-					]);
+            $exclude_post = false;
+            if ($warehouse_type == 'none') {
+                $exclude_post = true;
+            } elseif ($warehouse_type) {
+                $mrkv_ua_shipping_args['methodProperties']['TypeOfWarehouseRef'] = $warehouse_type;
+            }
 
-					if (!is_wp_error($response)) {
-						$obj['data'] = json_decode(wp_remote_retrieve_body($response), true);
-					}
-				}
-			}
+            $obj = $mrkv_object_nova_poshta->send_post_request($mrkv_ua_shipping_args);
 
-			$areas = array();
-			if (isset($obj['data'][0])) {
-				$label = ($warehouse_type && $warehouse_type != 'none') ? __('Choose the poshtomat', 'mrkv-ua-shipping') : 
-						(($search_by_number == 'yes') ? __('Please enter warehouse number', 'mrkv-ua-shipping') : __('Choose the warehouse', 'mrkv-ua-shipping'));
+            if ($mrkv_object_nova_poshta->active_api !== true) {
+                if (!isset($obj['data']) || !isset($obj['data'][0])) {
+                    $response = wp_remote_get('https://np.morkva.co.ua/api.php', [
+                        'timeout' => 10,
+                        'body' => [
+                            'query_type' => 'warehouse_poshtomat',
+                            'city_ref' => $city_ref,
+                        ]
+                    ]);
 
-				$areas[] = array('value' => '', 'label' => $label, 'number' => '', 'zipcode' => '');
+                    if (!is_wp_error($response)) {
+                        $obj['data'] = json_decode(wp_remote_retrieve_body($response), true);
+                    }
+                }
+            }
 
-				$cart_weight = 0;
-				if ($source_query == 'front') {
-					$volume_weight = 0;
-					$dimension_unit = get_option('woocommerce_dimension_unit');
-					foreach (WC()->cart->get_cart() as $cart_item) {
-						$p = $cart_item['data'];
-						$volume_weight += (($p->get_length() ?: 0) * ($p->get_width() ?: 0) * ($p->get_height() ?: 0) / 4000) * $cart_item['quantity'];
-					}
-					$weight_unit = get_option('woocommerce_weight_unit');
-					$weight_coef = array('g' => 0.001, 'kg' => 1, 'lbs' => 0.45359, 'oz' => 0.02834)[$weight_unit] ?? 1;
-					$cart_weight = max((WC()->cart->cart_contents_weight * $weight_coef), $volume_weight);
-				}
+            $areas = array();
+            if (isset($obj['data'][0])) {
+                $cart_weight = 0;
+                if ($source_query == 'front') {
+                    $volume_weight = 0;
+                    $dimension_unit = get_option('woocommerce_dimension_unit');
+                    foreach (WC()->cart->get_cart() as $cart_item) {
+                        $p = $cart_item['data'];
+                        $volume_weight += (($p->get_length() ?: 0) * ($p->get_width() ?: 0) * ($p->get_height() ?: 0) / 4000) * $cart_item['quantity'];
+                    }
+                    $weight_unit = get_option('woocommerce_weight_unit');
+                    $weight_coef = array('g' => 0.001, 'kg' => 1, 'lbs' => 0.45359, 'oz' => 0.02834)[$weight_unit] ?? 1;
+                    $cart_weight = max((WC()->cart->cart_contents_weight * $weight_coef), $volume_weight);
+                }
 
-				foreach ($obj['data'] as $area) {
-					if ($cart_weight > 0) {
-						if (intval($area['TotalMaxWeightAllowed']) > 0 && $cart_weight > $area['TotalMaxWeightAllowed']) continue;
-						if (intval($area['PlaceMaxWeightAllowed']) > 0 && $cart_weight > $area['PlaceMaxWeightAllowed']) continue;
-					}
+                foreach ($obj['data'] as $area) {
+                    if ($cart_weight > 0) {
+                        if (intval($area['TotalMaxWeightAllowed']) > 0 && $cart_weight > $area['TotalMaxWeightAllowed']) continue;
+                        if (intval($area['PlaceMaxWeightAllowed']) > 0 && $cart_weight > $area['PlaceMaxWeightAllowed']) continue;
+                    }
 
-					if ($exclude_post && $area['TypeOfWarehouse'] == 'f9316480-5f2d-425d-bc2c-ac7cd29decf0') continue;
+                    if ($exclude_post && $area['TypeOfWarehouse'] == 'f9316480-5f2d-425d-bc2c-ac7cd29decf0') continue;
 
-					$areas[] = array(
-						'value' => $area['Ref'],
-						'label' => $area['Description'],
-						'number' => $area['Number'],
-						'zipcode' => $area['PostalCodeUA']
-					);
-				}
-			}
+                    $areas[] = array(
+                        'value' => $area['Ref'],
+                        'label' => $area['Description'],
+                        'number' => $area['Number'],
+                        'zipcode' => $area['PostalCodeUA']
+                    );
+                }
+            }
 
-			set_transient($transient_key, $areas, WEEK_IN_SECONDS);
+            if(!$key_search) {
+                set_transient($transient_key, $areas, WEEK_IN_SECONDS);
+            }
 
-			echo wp_json_encode($areas);
-			wp_die();
-		}
+            if ($page === 1 && !empty($areas)) {
+                array_unshift($areas, $placeholder_item);
+            }
+
+            echo wp_json_encode($areas);
+            wp_die();
+        }
 
 		/**
 		 * Get Nova poshta Street

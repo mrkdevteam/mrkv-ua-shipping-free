@@ -45,8 +45,16 @@ if (!class_exists('MRKV_UA_SHIPPING_METHODS'))
 				return;
 			}
 
-			$is_forbidden = (strpos($url, '/product/') !== false || strpos($url, '/shop/') !== false);
-			$is_safe = (strpos($url, '/cart/') !== false || strpos($url, '/checkout/') !== false);
+			$cart_id     = wc_get_page_id( 'cart' );
+            $checkout_id = wc_get_page_id( 'checkout' );
+            $shop_id     = wc_get_page_id( 'shop' );
+			$cart_slug     = $cart_id > 0 ? wp_make_link_relative( get_permalink( $cart_id ) ) : '/cart';
+            $checkout_slug = $checkout_id > 0 ? wp_make_link_relative( get_permalink( $checkout_id ) ) : '/checkout';
+            $shop_slug     = $shop_id > 0 ? wp_make_link_relative( get_permalink( $shop_id ) ) : '/shop';
+
+
+			$is_forbidden = ( strpos( $url, '/product/' ) !== false || strpos( $url, $shop_slug ) !== false );
+            $is_safe      = ( strpos( $url, $cart_slug ) !== false || strpos( $url, $checkout_slug ) !== false );
 
 			if ($is_forbidden) {
 				WC()->session->set('mrkv_is_on_product_page', true);
