@@ -1,7 +1,7 @@
 === morkva UA Shipping ===
 Contributors: bandido, dpmine
 Tags: Nova Poshta, Нова Пошта, Укрпошта
-Tested up to: 6.9
+Tested up to: 7.0
 Requires PHP: 7.4
 Stable tag: 1.10.2
 License: GPLv2
@@ -172,7 +172,12 @@ https://youtu.be/47-VrH_QJAE
 == Changelog ==
 
 = 1.10.2 =
+* [new] змінили метод отримання PDF накладної УП
+* [new] змінили метод завантаження відділень НП
+* [new] переробили метод збереження полів користувача
 * [fix] виправили отримання відділень НП Міжнародна
+* [fix] виправили створення замовлення з увімкнутим створенням користувача
+* WP 7.0 - сумісний
 
 = 1.10.1 =
 * [hotfix] виправили помилку option fields

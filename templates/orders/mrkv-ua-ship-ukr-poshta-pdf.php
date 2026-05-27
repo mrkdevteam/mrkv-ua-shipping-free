@@ -29,19 +29,6 @@ if(isset($_POST['bearer']) && isset($_POST['cp_token']) && isset($_POST['invoice
     $mrkv_ua_shipping_url = 'https://www.ukrposhta.ua/ecom/0.0.1/shipments/' . $mrkv_ua_shipping_ttn . '/sticker?token=' . $mrkv_ua_shipping_cptoken . $mrkv_ua_shipping_size;
   
     $mrkv_ua_shipping_formurl = 'https://www.ukrposhta.ua/forms/ecom/0.0.1/';
-  
-      if(isset($_POST['fs1']))
-      {
-        $mrkv_ua_shipping_fs = sanitize_text_field( wp_unslash($_POST['fs1']));
-          if($mrkv_ua_shipping_fs == 'forms' || $mrkv_ua_shipping_fs == '100x100')
-          {
-            $mrkv_ua_shipping_url = $mrkv_ua_shipping_formurl . '/international/shipments/' . $mrkv_ua_shipping_ttn . '/' . 'forms' . '?token=' . $mrkv_ua_shipping_cptoken . '&size=SIZE_10X10';
-          }
-          else
-          {
-            $mrkv_ua_shipping_url = $mrkv_ua_shipping_formurl . '/international/shipments/' . $mrkv_ua_shipping_ttn .' /' . $mrkv_ua_shipping_fs . '?token=' . $mrkv_ua_shipping_cptoken;
-          }
-    }
 
     $mrkv_ua_shipping_args = array(
       'headers' => array(

@@ -15,6 +15,8 @@ if (!class_exists('MRKV_UA_SHIPPING_AJAX_UKR'))
 		 * */
 		function __construct()
 		{
+			add_action( 'admin_post_mrkv_ua_print_ukrposhta_pdf', [$this, 'mrkv_ua_handle_pdf_printing'] );
+
 			add_action( 'wp_ajax_mrkv_ua_ship_ukr_poshta_city', array($this, 'get_ukr_poshta_city') );
 			add_action( 'wp_ajax_nopriv_mrkv_ua_ship_ukr_poshta_city', array($this, 'get_ukr_poshta_city') );
 
@@ -251,6 +253,25 @@ if (!class_exists('MRKV_UA_SHIPPING_AJAX_UKR'))
        		}
 
        		wp_die();
+		}
+
+		public function mrkv_ua_handle_pdf_printing() {
+			if ( ! current_user_can( 'manage_woocommerce' ) ) {
+				wp_die( esc_html__( 'You do not have permission to access this page.', 'mrkv-ua-shipping' ) );
+			}
+
+			$nonce_value = isset( $_POST['mrkv_ua_shipping_nonce'] ) ? sanitize_text_field( wp_unslash( $_POST['mrkv_ua_shipping_nonce'] ) ) : '';
+			if ( empty( $nonce_value ) || ! wp_verify_nonce( $nonce_value, 'mrkv_ua_print_pdf_action' ) ) {
+				wp_die( esc_html__( 'Security check failed. Please refresh the page and try again.', 'mrkv-ua-shipping' ) );
+			}
+
+			$template_path = MRKV_UA_SHIPPING_PLUGIN_PATH . 'templates/orders/mrkv-ua-ship-ukr-poshta-pdf.php';
+
+			if ( file_exists( $template_path ) ) {
+				include $template_path;
+			}
+			
+			exit;
 		}
 	}
 }

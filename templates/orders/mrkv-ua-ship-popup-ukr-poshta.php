@@ -336,7 +336,8 @@
 	        	$mrkv_ua_shipping_production_cp_token = isset($mrkv_ua_shipping_ukr_settings['production_cp_token']) ? $mrkv_ua_shipping_ukr_settings['production_cp_token'] : '';
 	        	$mrkv_ua_shipping_sticker_default_inter = isset($mrkv_ua_shipping_ukr_settings['international']['sticker']) ? $mrkv_ua_shipping_ukr_settings['international']['sticker'] : '';
 	        	?>
-	        		<form class="form-ukr-poshta-ttn" action="<?php echo esc_url(MRKV_UA_SHIPPING_PLUGIN_DIR . 'templates/orders/mrkv-ua-ship-ukr-poshta-pdf.php'); ?>" method="post" target="_blank" style="display: none;">
+	        		<form class="form-ukr-poshta-ttn" action="<?php echo esc_url( admin_url( 'admin-post.php' ) ); ?>" method="post" target="_blank" style="display: none;">
+						<input type="hidden" name="action" value="mrkv_ua_print_ukrposhta_pdf">
 						<?php wp_nonce_field( 'mrkv_ua_print_pdf_action', 'mrkv_ua_shipping_nonce' ); ?>
 						<input type="hidden" name="invoice_number" value="<?php echo esc_attr($mrkv_ua_ship_invoice); ?>">
 						<input type="hidden" name="type" value="<?php echo esc_attr($mrkv_ua_shipping_sticker_default); ?>">
@@ -354,7 +355,8 @@
 		$mrkv_ua_shipping_production_cp_token = isset($mrkv_ua_shipping_ukr_settings['production_cp_token']) ? $mrkv_ua_shipping_ukr_settings['production_cp_token'] : '';
 		$mrkv_ua_shipping_sticker_default_inter = isset($mrkv_ua_shipping_ukr_settings['international']['sticker']) ? $mrkv_ua_shipping_ukr_settings['international']['sticker'] : '';
 		?>
-			<form class="form-ukr-poshta-ttn form-ukr-poshta-ttn-orders" action="<?php echo esc_url(MRKV_UA_SHIPPING_PLUGIN_DIR . 'templates/orders/mrkv-ua-ship-ukr-poshta-pdf.php'); ?>" method="post" target="_blank" style="display: none;">
+			<form class="form-ukr-poshta-ttn form-ukr-poshta-ttn-orders" action="<?php echo esc_url( admin_url( 'admin-post.php' ) ); ?>" method="post" target="_blank" style="display: none;">
+				<input type="hidden" name="action" value="mrkv_ua_print_ukrposhta_pdf">
 				<?php wp_nonce_field( 'mrkv_ua_print_pdf_action', 'mrkv_ua_shipping_nonce' ); ?>
 				<input type="hidden" name="invoice_number" value="">
 				<input type="hidden" name="type" value="<?php echo esc_attr($mrkv_ua_shipping_sticker_default); ?>">

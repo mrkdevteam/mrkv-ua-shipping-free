@@ -7,7 +7,7 @@
  * Author: morkva
  * Text Domain: mrkv-ua-shipping
  * Domain Path: /i18n/
- * Tested up to: 6.9
+ * Tested up to: 7.0
  * Requires at least: 5.0
  * WC requires at least: 3.8
  * WC tested up to: 10.0
