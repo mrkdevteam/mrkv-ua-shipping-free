@@ -396,7 +396,7 @@
 }
 .mrkv_up_ship_tab_btn:hover,
 .mrkv_up_ship_tab_btn.active{
-	background: #ed6230;
+	background: #ed6230;border-radius: 10px;
 	color: #fff !important;
 	opacity: 1 !important;
 }

@@ -128,7 +128,7 @@ if (!class_exists('MRKV_UA_SHIPPING_WOO_ORDERS'))
 		{
 			$screen = get_current_screen();
 
-	    	if($screen && ( $screen->id === 'shop_order' || $screen->id === 'woocommerce_page_wc-orders' ))
+	    	if($screen && ( $screen->id === 'shop_order' || $screen->id === 'woocommerce_page_wc-orders' ) || $screen->id === 'edit-shop_order')
 	    	{
 				# Include template
 				include MRKV_UA_SHIPPING_PLUGIN_PATH_TEMP . '/orders/mrkv-ua-ship-popup.php';

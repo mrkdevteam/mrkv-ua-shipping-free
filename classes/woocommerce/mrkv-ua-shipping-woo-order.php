@@ -37,7 +37,13 @@ if (!class_exists('MRKV_UA_SHIPPING_WOO_ORDER'))
 	            $screen = 'shop_order';
 	        }
 
-	        $order_id = $post->ID;
+	        if ( $post instanceof \WP_Post ) {
+                $order_id = $post->ID;
+            } elseif ( $post instanceof \WC_Order ) {
+                $order_id = $post->get_id();
+            } else {
+                $order_id = false;
+            }
 
 	        if ($order_id) 
 	        {
@@ -81,7 +87,14 @@ if (!class_exists('MRKV_UA_SHIPPING_WOO_ORDER'))
 
 		public function mrkv_ua_shipping_changer_add_plugin_meta_box($post)
 		{
-			$order_id = $post->ID;
+			if ( $post instanceof \WP_Post ) {
+                $order_id = $post->ID;
+            } elseif ( $post instanceof \WC_Order ) {
+                $order_id = $post->get_id();
+            } else {
+                $order_id = false;
+            }
+
 			if ($order_id) 
 	        {
 	            $order = wc_get_order($order_id);
@@ -154,7 +167,14 @@ if (!class_exists('MRKV_UA_SHIPPING_WOO_ORDER'))
 
 		public function mrkv_ua_shipping_add_plugin_meta_box($post)
 		{
-			$order_id = $post->ID;
+			if ( $post instanceof \WP_Post ) {
+                $order_id = $post->ID;
+            } elseif ( $post instanceof \WC_Order ) {
+                $order_id = $post->get_id();
+            } else {
+                $order_id = false;
+            }
+			
 			if ($order_id) 
 	        {
             	$order = wc_get_order($order_id);
