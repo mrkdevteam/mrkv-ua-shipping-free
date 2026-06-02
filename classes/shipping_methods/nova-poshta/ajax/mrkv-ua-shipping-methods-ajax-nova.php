@@ -239,21 +239,6 @@ if (!class_exists('MRKV_UA_SHIPPING_AJAX_NOVA'))
 
             $placeholder_item = array('value' => '', 'label' => $label, 'number' => '', 'zipcode' => '');
 
-            if(!$key_search)
-            {
-                $current_locale = get_locale();
-                $transient_key = 'mrkv_np_wh_' . md5($city_ref . $warehouse_type . $default_type . $page . $current_locale);
-                $cached_response = get_transient($transient_key);
-
-                if (false !== $cached_response) {
-                    if ($page === 1 && !empty($cached_response)) {
-                        array_unshift($cached_response, $placeholder_item);
-                    }
-                    echo wp_json_encode($cached_response);
-                    wp_die();
-                }   
-            }
-
             $settings_method = get_option('nova-poshta_m_ua_settings');
             require_once MRKV_UA_SHIPPING_PLUGIN_PATH . 'classes/shipping_methods/nova-poshta/api/mrkv-ua-shipping-api-nova-poshta.php';
             $mrkv_object_nova_poshta = new MRKV_UA_SHIPPING_API_NOVA_POSHTA($settings_method);
@@ -269,12 +254,6 @@ if (!class_exists('MRKV_UA_SHIPPING_AJAX_NOVA'))
                     'FindByString' => $search_by ? '' : '%' . $key_search . '%',
                 )
             );
-
-            if ($search_by) {
-                $mrkv_ua_shipping_args['methodProperties']['WarehouseId'] = $key_search;
-                unset($mrkv_ua_shipping_args['methodProperties']['Page']);
-                $mrkv_ua_shipping_args['methodProperties']['Limit'] = '50';
-            }
 
             if ($mrkv_object_nova_poshta->active_api !== true) {
                 $mrkv_ua_shipping_args['modelName'] = 'Address';
